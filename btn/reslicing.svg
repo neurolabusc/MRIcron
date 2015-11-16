@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="reslicing.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="C:\Documents and Settings\Admin\Desktop\image.png"
+   inkscape:export-xdpi="200"
+   inkscape:export-ydpi="200">
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <inkscape:perspective
+       id="perspective2467"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.1394642"
+     inkscape:cx="333.03081"
+     inkscape:cy="664.38863"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="740"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.26454818;stroke-linecap:square;stroke-linejoin:bevel;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3325"
+       width="756.53131"
+       height="369.50735"
+       x="-14.937018"
+       y="178.24945" />
+    <g
+       id="g3280"
+       transform="translate(-8.7760542,1.1538605e-6)">
+      <rect
+         ry="48.268299"
+         y="194.79956"
+         x="13.899533"
+         height="298.67014"
+         width="231.09453"
+         id="rect2475"
+         style="opacity:1;fill:#0000ff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:6.22613287;stroke-linecap:square;stroke-linejoin:bevel;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <rect
+         ry="0"
+         y="259.4205"
+         x="13.138862"
+         height="169.42827"
+         width="232.61589"
+         id="rect3260"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:4.70479012;stroke-linecap:square;stroke-linejoin:bevel;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <image
+         transform="matrix(0.9925462,0.1218693,-0.1218693,0.9925462,0,0)"
+         xlink:href="C:\Documents and Settings\Admin\Desktop\resx2.png"
+         sodipodi:absref="C:\Documents and Settings\Admin\Desktop\resx2.png"
+         width="166.48691"
+         height="123.87494"
+         id="image2469"
+         x="86.945564"
+         y="265.15503" />
+    </g>
+    <image
+       y="285.70758"
+       x="252.0018"
+       id="image3262"
+       height="123.87494"
+       width="166.48691"
+       sodipodi:absref="C:\Documents and Settings\Admin\Desktop\resx2.png"
+       xlink:href="C:\Documents and Settings\Admin\Desktop\resx2.png" />
+    <image
+       y="435.22598"
+       x="-423.86765"
+       id="image3264"
+       height="123.87494"
+       width="166.48691"
+       sodipodi:absref="C:\Documents and Settings\Admin\Desktop\resx2.png"
+       xlink:href="C:\Documents and Settings\Admin\Desktop\resx2.png"
+       transform="matrix(0,-1,1,0,0,0)" />
+    <g
+       id="g3301">
+      <rect
+         y="245.90759"
+         x="587.1828"
+         height="182.41235"
+         width="143.79771"
+         id="rect3268"
+         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.42956602999999990;stroke-linecap:square;stroke-linejoin:bevel;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <image
+         style="stroke:#0000ff;stroke-opacity:1;fill:#00d8ff;fill-opacity:1;stroke-width:1.3;stroke-miterlimit:4;stroke-dasharray:none"
+         transform="matrix(0.1218693,-0.9925462,0.9925462,0.1218693,0,0)"
+         xlink:href="C:\Documents and Settings\Admin\Desktop\resx2.png"
+         sodipodi:absref="C:\Documents and Settings\Admin\Desktop\resx2.png"
+         width="166.48691"
+         height="123.87495"
+         id="image3266"
+         x="-337.52261"
+         y="633.31537" />
+    </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3272"
+       style="font-size:36px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       transform="translate(57.044353,-35.135272)"><flowRegion
+         id="flowRegion3274"><rect
+           id="rect3276"
+           width="202.72685"
+           height="78.10688"
+           x="27.205769"
+           y="531.06458"
+           style="font-size:36px" /></flowRegion><flowPara
+         id="flowPara3278">Scan</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3285"
+       style="font-size:36px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       transform="translate(256.87221,-35.574725)"><flowRegion
+         id="flowRegion3287"><rect
+           id="rect3289"
+           width="202.72685"
+           height="78.10688"
+           x="27.205769"
+           y="531.06458"
+           style="font-size:36px" /></flowRegion><flowPara
+         id="flowPara3291">Raw</flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="435.41766"
+       y="528.93951"
+       id="text3293"><tspan
+         sodipodi:role="line"
+         id="tspan3295"
+         x="435.41766"
+         y="528.93951">Ortho</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="573.07635"
+       y="528.4317"
+       id="text3297"><tspan
+         sodipodi:role="line"
+         id="tspan3299"
+         x="573.07635"
+         y="528.4317">Resliced</tspan></text>
+  </g>
+</svg>

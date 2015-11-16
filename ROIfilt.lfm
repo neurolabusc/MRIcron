@@ -1,0 +1,92 @@
+object FilterROIform: TFilterROIform
+  Left = 569
+  Height = 190
+  Top = 107
+  Width = 240
+  HorzScrollBar.Page = 209
+  VertScrollBar.Page = 196
+  ActiveControl = MinROIfilt
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsToolWindow
+  Caption = 'Intensity filter'
+  ClientHeight = 190
+  ClientWidth = 240
+  Constraints.MaxHeight = 190
+  Constraints.MaxWidth = 240
+  Constraints.MinHeight = 190
+  OnClose = FormClose
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '0.9.29'
+  object Label42: TLabel
+    Left = 4
+    Height = 17
+    Top = 14
+    Width = 89
+    Caption = 'Min. Threshold'
+    ParentColor = False
+  end
+  object FilterROIBtn: TSpeedButton
+    Left = 4
+    Height = 25
+    Top = 143
+    Width = 221
+    Caption = 'Filter VOI with highlighted'
+    Color = clBtnFace
+    NumGlyphs = 0
+    OnClick = FilterROIBtnClick
+    ShowHint = True
+    ParentShowHint = False
+  end
+  object Label43: TLabel
+    Left = 4
+    Height = 14
+    Top = 49
+    Width = 75
+    Caption = 'Max. Threshold'
+    Font.CharSet = 13
+    ParentColor = False
+    ParentFont = False
+  end
+  object Filter2NIfTIBtn: TSpeedButton
+    Tag = 128
+    Left = 4
+    Height = 25
+    Top = 107
+    Width = 221
+    Caption = 'Save highlighted as NIfTI or VOI'
+    Color = clBtnFace
+    NumGlyphs = 0
+    OnClick = Filter2NIfTIBtnClick
+    ShowHint = True
+    ParentShowHint = False
+  end
+  object FiltROILabel: TLabel
+    Left = 8
+    Height = 17
+    Top = 81
+    Width = 22
+    Caption = '       '
+    ParentColor = False
+  end
+  object MinROIfilt: TSpinEdit
+    Left = 120
+    Height = 24
+    Top = 7
+    Width = 52
+    MaxValue = 254
+    OnChange = MinROIfiltChange
+    TabOrder = 0
+    Value = 100
+  end
+  object MaxROIfilt: TSpinEdit
+    Left = 120
+    Height = 24
+    Top = 42
+    Width = 52
+    MaxValue = 255
+    OnChange = MinROIfiltChange
+    TabOrder = 1
+    Value = 255
+  end
+end

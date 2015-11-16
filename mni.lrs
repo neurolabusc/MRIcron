@@ -1,0 +1,16 @@
+LazarusResources.Add('TMNIForm','FORMDATA',[
+  'TPF0'#8'TMNIForm'#7'MNIForm'#4'Left'#3#188#1#6'Height'#2' '#3'Top'#3','#1#5
+  +'Width'#3#8#1#18'HorzScrollBar.Page'#3#7#1#18'VertScrollBar.Page'#2'5'#13'Ac'
+  +'tiveControl'#7#5'XEdit'#11'BorderIcons'#11#12'biSystemMenu'#0#11'BorderStyl'
+  +'e'#7#8'bsDialog'#7'Caption'#6#12'MNI position'#12'ClientHeight'#2' '#11'Cli'
+  +'entWidth'#3#8#1#21'Constraints.MaxHeight'#2' '#20'Constraints.MaxWidth'#3#8
+  +#1#21'Constraints.MinHeight'#2' '#20'Constraints.MinWidth'#3#8#1#8'OnCreate'
+  +#7#10'FormCreate'#8'Position'#7#14'poScreenCenter'#10'LCLVersion'#6#6'0.9.29'
+  +#0#9'TSpinEdit'#5'XEdit'#4'Left'#2#16#6'Height'#2#21#3'Top'#2#4#5'Width'#2'B'
+  +#8'MaxValue'#3#200#0#8'MinValue'#3'8'#255#8'OnChange'#7#11'XEditChange'#8'Ta'
+  +'bOrder'#2#0#0#0#9'TSpinEdit'#5'YEdit'#4'Left'#2'`'#6'Height'#2#21#3'Top'#2#4
+  +#5'Width'#2'B'#8'MaxValue'#3#200#0#8'MinValue'#3'8'#255#8'OnChange'#7#11'XEd'
+  +'itChange'#8'TabOrder'#2#1#0#0#9'TSpinEdit'#5'ZEdit'#4'Left'#3#176#0#6'Heigh'
+  +'t'#2#21#3'Top'#2#4#5'Width'#2'B'#8'MaxValue'#3#200#0#8'MinValue'#3'8'#255#8
+  +'OnChange'#7#11'XEditChange'#8'TabOrder'#2#2#0#0#0
+]);

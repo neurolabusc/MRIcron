@@ -1,0 +1,76 @@
+object BETForm: TBETForm
+  Left = 485
+  Height = 313
+  Top = 539
+  Width = 545
+  ActiveControl = Panel1
+  Caption = 'Brain extraction'
+  ClientHeight = 313
+  ClientWidth = 545
+  Constraints.MaxHeight = 313
+  Constraints.MaxWidth = 545
+  Constraints.MinHeight = 313
+  Constraints.MinWidth = 545
+  Position = poScreenCenter
+  LCLVersion = '0.9.28.2'
+  object Memo1: TMemo
+    Left = 0
+    Height = 281
+    Top = 32
+    Width = 545
+    Align = alClient
+    TabOrder = 0
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 32
+    Top = 0
+    Width = 545
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 32
+    ClientWidth = 545
+    TabOrder = 1
+    object GoBtn: TSpeedButton
+      Left = 8
+      Height = 25
+      Top = 2
+      Width = 88
+      Caption = 'Go'
+      Color = clBtnFace
+      NumGlyphs = 0
+      OnClick = GoBtnClick
+    end
+    object AboutBtn: TSpeedButton
+      Left = 100
+      Height = 25
+      Top = 2
+      Width = 88
+      Caption = 'About'
+      Color = clBtnFace
+      NumGlyphs = 0
+      OnClick = SpeedButton2Click
+    end
+    object CropBtn: TSpeedButton
+      Left = 192
+      Height = 25
+      Top = 2
+      Width = 88
+      Caption = 'Crop Edges'
+      Color = clBtnFace
+      NumGlyphs = 0
+      OnClick = CropBtnClick
+    end
+    object SmoothnessEdit: TFloatSpinEdit
+      Left = 308
+      Height = 27
+      Top = 5
+      Width = 93
+      Increment = 1
+      MaxValue = 1
+      MinValue = 0
+      TabOrder = 0
+      Value = 0.5
+    end
+  end
+end

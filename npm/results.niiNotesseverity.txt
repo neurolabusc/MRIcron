@@ -1,0 +1,72 @@
+Threads: 2
+Factor = severity
+c:\mri\anacom\n01.voi = 4.00
+c:\mri\anacom\n02.voi = 4.50
+c:\mri\anacom\n03.voi = 0.00
+c:\mri\anacom\n04.voi = 2.50
+c:\mri\anacom\n05.voi = 5.00
+c:\mri\anacom\n06.voi = 4.00
+c:\mri\anacom\n07.voi = 3.25
+c:\mri\anacom\n08.voi = 0.75
+c:\mri\anacom\n09.voi = 4.50
+c:\mri\anacom\n10.voi = 4.50
+c:\mri\anacom\n11.voi = 0.50
+c:\mri\anacom\n12.voi = 1.63
+c:\mri\anacom\n13.voi = 0.00
+c:\mri\anacom\n14.voi = 3.50
+c:\mri\anacom\n15.voi = 3.00
+c:\mri\anacom\n17.voi = 4.00
+c:\mri\anacom\n18.voi = 2.00
+c:\mri\anacom\n19.voi = 4.50
+c:\mri\anacom\n20.voi = 5.00
+c:\mri\anacom\n21.voi = 0.00
+c:\mri\anacom\n22.voi = 1.50
+c:\mri\anacom\n23.voi = 5.00
+c:\mri\anacom\n24.voi = 2.50
+c:\mri\anacom\n25.voi = 5.00
+c:\mri\anacom\n26.voi = 4.00
+c:\mri\anacom\n27.voi = 0.00
+c:\mri\anacom\n28.voi = 0.00
+c:\mri\anacom\n29.voi = 2.00
+c:\mri\anacom\n30.voi = 1.50
+c:\mri\anacom\n31.voi = 1.75
+c:\mri\anacom\n32.voi = 0.00
+c:\mri\anacom\n33.voi = 2.50
+c:\mri\anacom\n34.voi = 5.00
+c:\mri\anacom\n35.voi = 0.00
+c:\mri\anacom\n37.voi = 0.00
+c:\mri\anacom\n38.voi = 3.25
+c:\mri\anacom\n39.voi = 4.38
+c:\mri\anacom\n40.voi = 0.00
+c:\mri\anacom\n41.voi = 3.75
+c:\mri\anacom\n42.voi = 0.25
+c:\mri\anacom\n43.voi = 0.00
+c:\mri\anacom\n44.voi = 2.00
+c:\mri\anacom\n45.voi = 5.00
+c:\mri\anacom\n46.voi = 0.00
+c:\mri\anacom\n47.voi = 0.50
+c:\mri\anacom\n48.voi = 0.00
+c:\mri\anacom\n49.voi = 2.25
+c:\mri\anacom\n50.voi = 0.00
+c:\mri\anacom\n51.voi = 2.25
+c:\mri\anacom\n52.voi = 2.00
+c:\mri\anacom\n53.voi = 0.00
+c:\mri\anacom\n54.voi = 0.25
+c:\mri\anacom\n55.voi = 0.00
+Total voxels = 7109137
+Only testing voxels damaged in at least 5 individual[s]
+Number of Lesion maps = 53
+Permutations = 0
+Analysis began = 2008-Mar-24 14:41:02
+Memory planks = 0.701815434883711
+Max voxels per Plank = 10129639
+Computing plank = 1
+Voxels tested = 40826
+Only tested voxels with more than 5 lesions
+40826 test Std Bonferroni FWE Z 0.050=4.712, 0.025=4.852, 0.01=5.030
+n=,53,minN=,5,unique overlap patterns,9785,voxels tested,20016
+9785 test Unique overlap Bonferroni FWE Z 0.050=4.412, 0.025=4.560, 0.01=4.749
+ttest Range -3.936...5.118
+ttest +FDR Z 0.050=2.085, 0.01=3.152 
+ttest -FDR Z 0.050=-3.440, 0.01=9.200 
+Analysis finished = 2008-Mar-24 14:41:50

@@ -1,0 +1,49 @@
+package DelphiZlib;
+
+{$R *.RES}
+{$R 'DelphiZlib.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$DESCRIPTION 'DelphiZlib: TGzip, TCrc32, TAdler32, TUnTar'}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl30,
+  VCLX30;
+
+contains
+  DelphiGzip,trees,Crc,zDeflate,InfCodes,
+  InfBlock,Adler,zInflate,Zlib,
+  InfTrees,
+  infutil,
+  InfFast,
+  ZUtil,
+  Unzip,
+  ziputils,
+  Crc_32,
+  utils,
+  gzIO,
+  Adler_32,
+  UnTar,
+  tarfile;
+
+end.

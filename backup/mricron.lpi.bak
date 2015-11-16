@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="9"/>
+    <PathDelim Value="\"/>
+    <General>
+      <Flags>
+        <LRSInOutputDirectory Value="False"/>
+      </Flags>
+      <MainUnit Value="0"/>
+      <Title Value="MRIcron"/>
+      <Icon Value="0"/>
+    </General>
+    <BuildModes Count="1">
+      <Item1 Name="default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="\usr\X11R6\bin\xterm -T 'Lazarus Run Output' -e $(LazarusDir)\tools\runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="2">
+      <Item1>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="LCL"/>
+      </Item2>
+    </RequiredPackages>
+    <Units Count="53">
+      <Unit0>
+        <Filename Value="mricron.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <WindowIndex Value="1"/>
+        <CursorPos X="129" Y="3"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="nifti_hdr_view.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="HdrForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="150"/>
+        <CursorPos X="57" Y="165"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="define_types.pas"/>
+        <TopLine Value="410"/>
+        <CursorPos X="23" Y="420"/>
+        <UsageCount Value="74"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="about.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="AboutForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="19"/>
+        <CursorPos X="65" Y="40"/>
+        <UsageCount Value="200"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="text.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="TextForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <TopLine Value="36"/>
+        <CursorPos Y="61"/>
+        <UsageCount Value="200"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="render.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="RenderForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="527"/>
+        <CursorPos X="76" Y="534"/>
+        <UsageCount Value="200"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="ROIfilt.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FilterROIform"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <CursorPos X="58" Y="13"/>
+        <UsageCount Value="200"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="nifti_img_view.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="ImgForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="3129"/>
+        <CursorPos X="30" Y="3154"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="nifti_img.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="4565"/>
+        <CursorPos X="38" Y="4569"/>
+        <UsageCount Value="100"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="cutout.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="CutoutForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="161"/>
+        <CursorPos X="29" Y="166"/>
+        <UsageCount Value="200"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="MultiSlice.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MultiSliceForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="430"/>
+        <CursorPos X="28" Y="452"/>
+        <UsageCount Value="200"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="autoroi.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="AutoROIForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="534"/>
+        <CursorPos X="68" Y="537"/>
+        <UsageCount Value="200"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="spread.pas"/>
+        <ComponentName Value="SpreadForm"/>
+        <HasResources Value="True"/>
+        <TopLine Value="83"/>
+        <CursorPos X="47" Y="93"/>
+        <UsageCount Value="173"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="design.pas"/>
+        <ComponentName Value="DesignForm"/>
+        <HasResources Value="True"/>
+        <CursorPos X="45" Y="167"/>
+        <UsageCount Value="173"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="histoform.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="HistogramForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="6"/>
+        <CursorPos X="105" Y="19"/>
+        <UsageCount Value="200"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="logistic.pas"/>
+        <TopLine Value="1075"/>
+        <CursorPos Y="1100"/>
+        <UsageCount Value="3"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="ReadInt.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="ReadIntForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <WindowIndex Value="1"/>
+        <CursorPos X="77" Y="2"/>
+        <UsageCount Value="200"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="nifti_hdr.pas"/>
+        <TopLine Value="172"/>
+        <CursorPos X="5" Y="188"/>
+        <UsageCount Value="66"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="gzio2.pas"/>
+        <TopLine Value="278"/>
+        <CursorPos X="11" Y="282"/>
+        <UsageCount Value="18"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="cropedges.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="CropEdgeForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="CropEdges"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="81"/>
+        <CursorPos X="3" Y="83"/>
+        <UsageCount Value="200"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="bet.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="BETForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="4"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="73"/>
+        <CursorPos X="48" Y="86"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="mni.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MNIForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <TopLine Value="20"/>
+        <CursorPos X="3" Y="53"/>
+        <UsageCount Value="200"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="ugraphics.pas"/>
+        <CursorPos X="15"/>
+        <UsageCount Value="66"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="fx8.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="549"/>
+        <CursorPos X="24" Y="552"/>
+        <UsageCount Value="22"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="voismooth.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="voismoothform"/>
+        <ResourceBaseClass Value="Form"/>
+        <TopLine Value="385"/>
+        <CursorPos X="36" Y="391"/>
+        <UsageCount Value="200"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="prefs.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="PrefForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <CursorPos X="55" Y="63"/>
+        <UsageCount Value="200"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="perisettings.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="PSForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <TopLine Value="81"/>
+        <CursorPos X="38" Y="96"/>
+        <UsageCount Value="224"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="graphx.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Graph4DForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <TopLine Value="1043"/>
+        <CursorPos X="29" Y="1055"/>
+        <UsageCount Value="224"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="render_composite.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="184"/>
+        <CursorPos X="80" Y="193"/>
+        <UsageCount Value="56"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="ReadFloat.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="ReadFloatForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <TopLine Value="38"/>
+        <CursorPos X="38" Y="53"/>
+        <UsageCount Value="201"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="common\nifti_hdr.pas"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="639"/>
+        <CursorPos X="29" Y="645"/>
+        <UsageCount Value="59"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="common\define_types.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="28"/>
+        <CursorPos X="69" Y="32"/>
+        <UsageCount Value="100"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="common\dicomhdr.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="402"/>
+        <CursorPos X="26" Y="415"/>
+        <UsageCount Value="32"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="landmarks.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="AnatForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="166"/>
+        <CursorPos X="50" Y="175"/>
+        <UsageCount Value="200"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="batchstatselect.pas"/>
+        <IsPartOfProject Value="True"/>
+        <CursorPos X="43" Y="6"/>
+        <UsageCount Value="201"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="otsu2.pas"/>
+        <IsPartOfProject Value="True"/>
+        <CursorPos X="13" Y="98"/>
+        <UsageCount Value="210"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit35>
+      <Unit36>
+        <Filename Value="fastsmooth.pas"/>
+        <IsPartOfProject Value="True"/>
+        <TopLine Value="16"/>
+        <CursorPos X="17" Y="28"/>
+        <UsageCount Value="210"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="common\gzio2.pas"/>
+        <TopLine Value="111"/>
+        <CursorPos X="81" Y="119"/>
+        <UsageCount Value="21"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit37>
+      <Unit38>
+        <Filename Value="nii_label.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="122"/>
+        <CursorPos X="55" Y="128"/>
+        <UsageCount Value="200"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit38>
+      <Unit39>
+        <Filename Value="common\nifti_types.pas"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="135"/>
+        <CursorPos X="67" Y="146"/>
+        <UsageCount Value="73"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit39>
+      <Unit40>
+        <Filename Value="common\nifti_foreign.pas"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="886"/>
+        <CursorPos X="7" Y="886"/>
+        <UsageCount Value="21"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit40>
+      <Unit41>
+        <Filename Value="C:\usr\local\share\fpcsrc\rtl\objpas\sysutils\sysstrh.inc"/>
+        <TopLine Value="157"/>
+        <CursorPos X="38" Y="170"/>
+        <UsageCount Value="6"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit41>
+      <Unit42>
+        <Filename Value="C:\Developer\lazarus\lcl\include\customform.inc"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="2527"/>
+        <CursorPos Y="2536"/>
+        <UsageCount Value="12"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit42>
+      <Unit43>
+        <Filename Value="C:\Developer\lazarus\components\lazutils\ttgload.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="119"/>
+        <CursorPos X="77" Y="125"/>
+        <UsageCount Value="2"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit43>
+      <Unit44>
+        <Filename Value="isthreaded.inc"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <CursorPos X="18" Y="17"/>
+        <UsageCount Value="56"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit44>
+      <Unit45>
+        <Filename Value="..\..\..\..\..\Developer\lazarus\lcl\interfaces\cocoa\cocoawsstdctrls.pp"/>
+        <UnitName Value="CocoaWSStdCtrls"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="256"/>
+        <CursorPos X="32" Y="272"/>
+        <UsageCount Value="55"/>
+      </Unit45>
+      <Unit46>
+        <Filename Value="..\..\..\..\..\Developer\lazarus\lcl\interfaces\cocoa\cocoaint.pas"/>
+        <UnitName Value="CocoaInt"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="165"/>
+        <CursorPos X="42" Y="176"/>
+        <UsageCount Value="55"/>
+      </Unit46>
+      <Unit47>
+        <Filename Value="..\..\..\Desktop\c4\unit1.pas"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Unit1"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <UsageCount Value="36"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit47>
+      <Unit48>
+        <Filename Value="..\..\..\..\..\Developer\lazarus\lcl\lclintf.pas"/>
+        <UnitName Value="LCLIntf"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="60"/>
+        <CursorPos X="10" Y="72"/>
+        <UsageCount Value="6"/>
+      </Unit48>
+      <Unit49>
+        <Filename Value="..\..\..\..\..\Developer\lazarus\lcl\interfaces\cocoa\cocoawsmenus.pas"/>
+        <UnitName Value="CocoaWSMenus"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="46"/>
+        <CursorPos X="20" Y="56"/>
+        <UsageCount Value="10"/>
+      </Unit49>
+      <Unit50>
+        <Filename Value="..\raycast\shaderu.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="113"/>
+        <CursorPos X="19" Y="127"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit50>
+      <Unit51>
+        <Filename Value="..\raycast\shaderui.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="277"/>
+        <CursorPos X="24" Y="300"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit51>
+      <Unit52>
+        <Filename Value="reslice_img.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="329"/>
+        <CursorPos X="5" Y="333"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit52>
+    </Units>
+    <JumpHistory Count="5" HistoryIndex="4">
+      <Position1>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="594" Column="71" TopLine="569"/>
+      </Position1>
+      <Position2>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="731" Column="80" TopLine="706"/>
+      </Position2>
+      <Position3>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="732" Column="52" TopLine="707"/>
+      </Position3>
+      <Position4>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="1754" Column="16" TopLine="1729"/>
+      </Position4>
+      <Position5>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="3157" Column="22" TopLine="3130"/>
+      </Position5>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <PathDelim Value="\"/>
+    <Target>
+      <Filename Value="mricron"/>
+    </Target>
+    <SearchPaths>
+      <Libraries Value="rgb;fpmath"/>
+      <OtherUnitFiles Value="rgb;fpmath;common"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <SyntaxMode Value="Delphi"/>
+        <UseAnsiStrings Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
+    <CodeGeneration>
+      <SmartLinkUnit Value="True"/>
+      <Optimizations>
+        <OptimizationLevel Value="2"/>
+      </Optimizations>
+    </CodeGeneration>
+    <Linking>
+      <Debugging>
+        <StripSymbols Value="True"/>
+      </Debugging>
+      <LinkSmart Value="True"/>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <WriteFPCLogo Value="False"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="2">
+      <Item1>
+        <Name Value="ECodetoolError"/>
+      </Item1>
+      <Item2>
+        <Name Value="EFOpenError"/>
+      </Item2>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

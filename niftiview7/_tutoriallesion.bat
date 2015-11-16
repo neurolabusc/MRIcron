@@ -1,0 +1,1 @@
+start mricron .\tutorial\lesion.nii.gz -s 3 -c gold -l 60 -h 240 -v .\tutorial\lesion.voi -r .\tutorial\lesionr.ini -m .\tutorial\lesionm.ini

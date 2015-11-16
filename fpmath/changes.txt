@@ -1,0 +1,24 @@
+Version 0.50
+------------
+
+* Added a compilation script for Linux (fpcompil.sh)
+
+* A graphic library (tpgraph) has been added, with two versions: one for Delphi, one for the Graph unit. The Linux version requires SVGAlib installed and functional.
+
+* With FPC, the libraries are now compiled in Delphi mode (option -Mdelphi) to ensure that the Integer type is 32 bits. The calling programs should be compiled with the same option (modify the FPC configuration file if necessary).
+
+* The number of points which can be handled by the FFT procedures has been increased (up to 2^26 in double precision)
+
+* More statistical methods in the main library :
+
+  - Comparison of means and variances
+  - Analysis of variance
+  - Non-parametric tests (Wilcoxon, Mann-Whitney, Kruskal-Wallis)
+  - Histograms
+  - Comparison of distributions (Khi-2 and Woolf tests)
+  - Linear, multilinear and nonlinear regressions
+  - Monte-Carlo simulation of the distribution of regression parameters
+  - Principal component analysis
+
+* Added some string functions
+

@@ -1,0 +1,115 @@
+object CropEdgeForm: TCropEdgeForm
+  Left = 562
+  Height = 142
+  Top = 209
+  Width = 398
+  ActiveControl = DEdit
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'Crop Edges'
+  ClientHeight = 142
+  ClientWidth = 398
+  Constraints.MaxHeight = 321
+  Constraints.MaxWidth = 398
+  Constraints.MinHeight = 12
+  Constraints.MinWidth = 398
+  OnCreate = FormCreate
+  OnHide = FormHide
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '1.0.2.0'
+  object CancelBtn: TSpeedButton
+    Left = 320
+    Height = 25
+    Top = 104
+    Width = 65
+    Caption = 'Cancel'
+    NumGlyphs = 0
+    OnClick = CancelBtnClick
+  end
+  object ApplyBtn: TSpeedButton
+    Left = 256
+    Height = 25
+    Top = 104
+    Width = 65
+    Caption = 'Apply'
+    NumGlyphs = 0
+    OnClick = ApplyBtnClick
+  end
+  object CropFileSzBtn: TSpeedButton
+    Left = 136
+    Height = 25
+    Top = 104
+    Width = 105
+    Caption = 'Save Cropped'
+    NumGlyphs = 0
+    OnClick = CropFileSzBtnClick
+  end
+  object DEdit: TSpinEdit
+    Left = 57
+    Height = 21
+    Top = 8
+    Width = 72
+    MaxValue = 255
+    OnChange = CropEditChange
+    TabOrder = 0
+    Value = 8
+  end
+  object PEdit: TSpinEdit
+    Left = 8
+    Height = 21
+    Top = 41
+    Width = 72
+    MaxValue = 255
+    OnChange = CropEditChange
+    TabOrder = 1
+    Value = 8
+  end
+  object AEdit: TSpinEdit
+    Left = 104
+    Height = 21
+    Top = 41
+    Width = 72
+    MaxValue = 255
+    OnChange = CropEditChange
+    TabOrder = 2
+    Value = 8
+  end
+  object VEdit: TSpinEdit
+    Left = 57
+    Height = 21
+    Top = 73
+    Width = 72
+    MaxValue = 255
+    OnChange = CropEditChange
+    TabOrder = 3
+    Value = 8
+  end
+  object REdit: TSpinEdit
+    Left = 311
+    Height = 21
+    Top = 41
+    Width = 72
+    MaxValue = 255
+    OnChange = CropEditChange
+    TabOrder = 4
+    Value = 8
+  end
+  object LEdit: TSpinEdit
+    Left = 224
+    Height = 21
+    Top = 41
+    Width = 72
+    MaxValue = 255
+    OnChange = CropEditChange
+    TabOrder = 5
+    Value = 8
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 150
+    OnTimer = Timer1Timer
+    left = 328
+    top = 72
+  end
+end

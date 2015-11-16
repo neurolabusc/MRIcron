@@ -1,0 +1,52 @@
+Chris Rorden's 32-bit NPM: 28 August 2013 32bit; Threads used = 4  plankSize: 512mb
+Single Linear Regression [Weighted Least Squares]
+Mask = /Users/rorden/Downloads/dazhou_npm_glitch/BinaryLesionMask.nii
+Total voxels = 510340
+Number of observations = 35
+Image,FLU
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrTW_T2.nii,0
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrRH_T2.nii,5
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrRW_T2.nii,9
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrDE_T2.nii,4
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrJR_T2.nii,5
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrFJ_T2.nii,0
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrAC_T2.nii,7
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrMJ_T2.nii,4
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrAS_T2.nii,8
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrSH_T2.nii,1
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrDV_T2.nii,1
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrLO_T2.nii,10
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrMB_T2.nii,9
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrAS2_T2.nii,7
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrJR2_T2.nii,9
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrSF_T2.nii,1
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrTC_T2.nii,7
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrTR2_T2.nii,2
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrGK2_T2.nii,8
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrMH_T2.nii,1
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrTM_T2.nii,3
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrRS_T2.nii,9
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrAH_T2.nii,4
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrMB2_T2.nii,6
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrJM2_T2.nii,2
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrRC2_T2.nii,7
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrLM_T2.nii,4
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrMK_T2.nii,1
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrPC_T2.nii,7
+/Users/rorden/Downloads/dazhou_npm_glitch/zwr125_T2.nii,4
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrJE_T2.nii,9
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrJY_T2.nii,4
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrJA_T2.nii,9
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrMW_T2.nii,5
+/Users/rorden/Downloads/dazhou_npm_glitch/zwrML_T2.nii,9
+Analysis began = 2013-22-08 13:22:21
+Mask has voxels from 4080..468678
+Memory planks = 0.121153637537577
+Max voxels per Plank = 3834792
+Computing plank = 1
+Voxels tested = 75335
+75335 test Std Bonferroni FWE Z 0.050=4.836, 0.025=4.972, 0.01=5.146
+wlsFLU Range -5.551...3.209
+wlsFLU +FDR Z 0.050=9.20000000, 0.01=9.20000000 
+wlsFLU -FDR Z 0.050=-2.31827721, 0.01=-3.42041674 
+Analysis finished = 2013-22-08 13:22:31

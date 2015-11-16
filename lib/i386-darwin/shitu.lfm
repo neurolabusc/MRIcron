@@ -1,0 +1,107 @@
+object Form1: TForm1
+  Left = 563
+  Height = 595
+  Top = 152
+  Width = 1157
+  Caption = 'Form1'
+  ClientHeight = 595
+  ClientWidth = 1157
+  Color = clWindow
+  Menu = MainMenu1
+  OnCreate = FormCreate
+  OnDropFiles = FormDropFiles
+  OnResize = FormResize
+  LCLVersion = '1.4.2.0'
+  object Label1: TLabel
+    Left = 48
+    Height = 16
+    Top = 24
+    Width = 42
+    Caption = 'Label1'
+    ParentColor = False
+  end
+  object Button1: TButton
+    Left = 208
+    Height = 25
+    Top = 32
+    Width = 75
+    Caption = 'Button1'
+    OnClick = Button1Click
+    TabOrder = 0
+  end
+  object ComboBox1: TComboBox
+    Left = 135
+    Height = 21
+    Top = 112
+    Width = 100
+    ItemHeight = 0
+    Items.Strings = (
+      '1'
+      '2'
+      '3'
+    )
+    OnChange = ComboBox1Change
+    TabOrder = 1
+    Text = 'ComboBox1'
+  end
+  object SpinEdit1: TSpinEdit
+    Left = 16
+    Height = 16
+    Top = 69
+    Width = 175
+    MinValue = 1
+    OnChange = SpinEdit1Change
+    TabOrder = 2
+    Value = 2
+  end
+  object SpeedButton1: TSpeedButton
+    Left = 405
+    Height = 102
+    Top = 52
+    Width = 111
+    Caption = '1'
+    Flat = True
+  end
+  object SpeedButton2: TSpeedButton
+    Left = 528
+    Height = 102
+    Top = 52
+    Width = 111
+    Caption = '2'
+  end
+  object SpeedButton3: TSpeedButton
+    Left = 440
+    Height = 103
+    Top = 176
+    Width = 151
+    Color = 15758710
+  end
+  object Image1: TImage
+    Left = 47
+    Height = 274
+    Top = 180
+    Width = 322
+    OnMouseDown = Image1MouseDown
+    OnMouseMove = Image1MouseMove
+  end
+  object MainMenu1: TMainMenu
+    left = 322
+    top = 84
+    object MenuItem1: TMenuItem
+      Caption = ''
+      object MenuItem2: TMenuItem
+        Caption = 'Preferences'
+        OnClick = MenuItem2Click
+      end
+    end
+  end
+  object SelectDirectoryDialog1: TSelectDirectoryDialog
+    left = 76
+    top = 117
+  end
+  object OpenDialog1: TOpenDialog
+    OnSelectionChange = OpenDialog1SelectionChange
+    left = 125
+    top = 13
+  end
+end

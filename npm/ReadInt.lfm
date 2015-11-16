@@ -1,0 +1,48 @@
+object ReadIntForm: TReadIntForm
+  Left = 306
+  Height = 80
+  Top = 554
+  Width = 469
+  HorzScrollBar.Page = 468
+  VertScrollBar.Page = 79
+  ActiveControl = ReadIntEdit
+  BorderStyle = bsDialog
+  Caption = 'Integer required'
+  ClientHeight = 80
+  ClientWidth = 469
+  Constraints.MaxHeight = 80
+  Constraints.MaxWidth = 469
+  Constraints.MinHeight = 80
+  Constraints.MinWidth = 469
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '0.9.28.2'
+  object ReadIntLabel: TLabel
+    Left = 16
+    Height = 14
+    Top = 12
+    Width = 336
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Enter a number'
+    ParentColor = False
+  end
+  object ReadIntEdit: TSpinEdit
+    Left = 360
+    Height = 27
+    Top = 12
+    Width = 93
+    MaxValue = 0
+    TabOrder = 0
+  end
+  object OKBtn: TButton
+    Left = 368
+    Height = 25
+    Top = 44
+    Width = 75
+    BorderSpacing.InnerBorder = 4
+    Caption = 'OK'
+    OnClick = OKBtnClick
+    TabOrder = 1
+  end
+end

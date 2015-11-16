@@ -1,0 +1,9 @@
+del /S *.dcu
+del /S *.~*
+del /S *.obj
+del /S *.hpp
+del /S *.ddp
+del /S *.mps
+del /S *.mpt
+del /S *.dsm
+C:\strip /B "C:\pas\Delphi\niftiview7\MRIcroN.exe"

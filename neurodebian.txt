@@ -1,0 +1,2 @@
+This project is described by BSD license - please see the file license.txt. This was written by Chris Rorden, with the exceptions of DiskSpaceKludge and GraphicsMathLibrary: The author of those units gave written permission to distribute this file under the same licensing terms as MRICRON.
+

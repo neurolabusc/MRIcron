@@ -1,0 +1,291 @@
+Unit          Routines                 Description
+-----------------------------------------------------------------------
+utypes        SetErrCode               Sets error code
+*             DefaultVal               Sets error code and default function value
+*             MathErr                  Returns the error code
+*             SetAutoInit              Sets the auto-initialization of arrays
+*             DimVector                Allocates a real vector
+*             DimIntVector             Allocates an integer vector
+*             DimCompVector            Allocates a complex vector
+*             DimBoolVector            Allocates a boolean vector
+*             DimStrVector             Allocates a string vector
+*             DimMatrix                Allocates a real matrix
+*             DimIntMatrix             Allocates an integer matrix
+*             DimCompMatrix            Allocates a complex matrix
+*             DimBoolMatrix            Allocates a boolean matrix
+*             DimStrMatrix             Allocates a string matrix
+*             DelVector                Deallocates a real vector
+*             DelIntVector             Deallocates an integer vector
+*             DelCompVector            Deallocates a complex vector
+*             DelBoolVector            Deallocates a boolean vector
+*             DelStrVector             Deallocates a string vector
+*             DelMatrix                Deallocates a real matrix
+*             DelIntMatrix             Deallocates an integer matrix
+*             DelCompMatrix            Deallocates a complex matrix
+*             DelBoolMatrix            Deallocates a boolean matrix
+*             DelStrMatrix             Deallocates a string matrix
+uminmax       FMin                     Minimum of 2 reals
+*             FMax                     Maximum of 2 reals
+*             IMin                     Minimum of 2 integers
+*             IMax                     Maximum of 2 integers
+*             Sgn                      Sign, Sgn(0) = 1
+*             Sgn0                     Sign, Sgn(0) = 0
+*             DSgn                     DSgn(A, B) = Sgn(B) * |A|
+*             FSwap                    Exchanges 2 reals
+*             ISwap                    Exchanges 2 integers
+uround        RoundN                   Rounds a number to N decimal places
+*             Ceil                     Ceiling function
+*             Floor                    Floor function
+umath         Expo                     Exponential (with bound checking)
+*             Exp2                     Exponential, base 2
+*             Exp10                    Exponential, base 10
+*             Log                      Natural log (with bound checking)
+*             Log2                     Log, base 2
+*             Log10                    Log, base 10
+*             LogA                     Log, base A
+*             IntPower                 Power (integer exponent)
+*             Power                    Power (real exponent)
+utrigo        Pythag                   Sqrt(X^2 + Y^2)
+*             FixAngle                 Set argument in -Pi..Pi
+*             Tan                      Tangent
+*             ArcSin                   Arc sinus
+*             ArcCos                   Arc cosinus
+*             ArcTan2                  Angle (Ox, OM) with M(X,Y)
+uhyper        Sinh                     Hyperbolic sine
+*             Cosh                     Hyperbolic cosine
+*             Tanh                     Hyperbolic tangent
+*             ArcSinh                  Inverse hyperbolic sine
+*             ArcCosh                  Inverse hyperbolic cosine
+*             ArcTanh                  Inverse hyperbolic tangent
+*             SinhCosh                 Sinh and Cosh
+upolev        PolEvl                   Polynomial evaluation (coeff. of x^n <> 1)
+*             P1Evl                    Polynomial evaluation (coeff. of x^n = 1)
+ugamma        Gamma                    Gamma function
+*             LnGamma                  Logarithm of Gamma function
+*             SgnGamma                 Sign of Gamma function
+*             Stirling                 Stirling's formula for Gamma
+*             StirLog                  Stirling's formula for LnGamma
+udigamma      DiGamma                  DiGamma function
+*             TriGamma                 TriGamma function
+uigamma       IGamma                   Incomplete Gamma function
+*             JGamma                   Complement of incomplete Gamma function
+*             Erf                      Error function
+*             Erfc                     Complement of error function
+ubeta         Beta                     Beta function
+uibeta        IBeta                    Incomplete Beta function
+ulambert      LambertW                 Lambert's W-function
+ufact         Fact                     Factorial
+ubinom        Binomial                 Binomial coefficient
+*             PBinom                   Probability of binomial distribution
+upoidist      PPoisson                 Probability of Poisson distribution
+uexpdist      DExpo                    Density of exponential distribution
+*             FExpo                    Cumulative prob. of exponential dist.
+unormal       DNorm                    Density of standard normal distribution
+ugamdist      DBeta                    Density of Beta distribution
+*             DGamma                   Density of Gamma distribution
+*             DKhi2                    Density of Khi-2 distribution
+*             DStudent                 Density of Student's distribution
+*             DSnedecor                Density of Fisher-Snedecor distribution
+uibtdist      FBeta                    Cumulative prob. of Beta distribution
+*             FBinom                   Cumulative prob. of Binomial distribution
+*             FStudent                 Cumulative prob. of Student's distribution
+*             PStudent                 Prob(|t| > X) for Student's distribution
+*             FSnedecor                Cumulative prob. of Fisher-Snedecor distribution
+*             PSnedecor                Prob(F > X) for Fisher-Snedecor distribution
+uigmdist      FGamma                   Cumulative prob. of Gamma distribution
+*             FPoisson                 Cumulative prob. of Poisson distribution
+*             FNorm                    Cumulative prob. of standard normal distribution
+*             PNorm                    Prob(|U| > X) for standard normal distribution
+*             FKhi2                    Cumulative prob. of Khi-2 distribution
+*             PKhi2                    Prob(Khi2 > X) for Khi-2 distribution
+uinvnorm      InvNorm                  Inverse of normal distribution
+uinvgam       InvGamma                 Inverse of incomplete Gamma function
+*             InvKhi2                  Inverse of khi-2 distribution
+uinvbeta      InvBeta                  Inverse of incomplete Beta function
+*             InvStudent               Inverse of Student's t-distribution
+*             InvSnedecor              Inverse of Snedecor's F-distribution
+ucompvec      CompVec                  Comparison of two vectors
+ugausjor      GaussJordan              Linear equation system (Gauss-Jordan method)
+ulineq        LinEq                    Linear equation system (Gauss-Jordan method)
+ucholesk      Cholesky                 Cholesky factorization
+ulu           LU_Decomp                LU decomposition
+*             LU_Solve                 Solves a system of equations after LU decomposition
+uqr           QR_Decomp                QR decomposition
+*             QR_Solve                 Solves a system of equations after QR decomposition
+usvd          SV_Decomp                Singular value decomposition
+*             SV_Solve                 Solves a system of equations after SV decomposition
+*             SV_SetZero               Sets the lowest singular values to zero
+*             SV_Approx                Approximates a matrix from its SV decomposition
+ubalance      Balance                  Balances a matrix and tries to isolate eigenvalues
+ubalbak       BalBak                   Back transformation of eigenvectors
+uelmhes       ElmHes                   Reduction of a square matrix to upper Hessenberg form
+ueltran       Eltran                   Save transformations used by ElmHes
+uhqr          Hqr                      Eigenvalues of a real upper Hessenberg matrix by the QR method
+uhqr2         Hqr2                     Eigenvalues and eigenvectors of a real upper Hessenberg matrix
+ueigval       EigenVals                Eigenvalues of a general square matrix
+ueigvec       EigenVect                Eigenvalues and eigenvectors of a general square matrix
+ujacobi       Jacobi                   Eigenvalues and eigenvectors of a symmetric matrix
+uminbrak      MinBrack                 Brackets a minimum of a function
+ugoldsrc      GoldSearch               Minimization of a function of 1 variable (Golden Search method)
+ulinmin       LinMin                   Minimization of a function of several variables along a line
+unewton       Newton                   Minimization of a function of several var. (Newton's method)
+*             SaveNewton               Save Newton iterations in a file
+umarq         Marquardt                Minimization of a function of several var. (Marquardt's method)
+*             SaveMarquardt            Save Marquardt iterations in a file
+ubfgs         BFGS                     Minimization of a function of several var. (BFGS method)
+*             SaveBFGS                 Save BFGS iterations in a file
+usimplex      Simplex                  Minimization of a function of several var. (simplex method)
+*             SaveSimplex              Save simplex iterations in a file
+ulinminq      LinMinEq                 Minimization of a sum of squared functions along a line
+ubisect       RootBrack                Brackets solution of equation
+*             Bisect                   Nonlinear equation (bisection method)
+unewteq       NewtEq                   Nonlinear equation (Newton-Raphson method)
+usecant       Secant                   Nonlinear equation (secant method)
+unewteqs      NewtEqs                  Nonlinear equation system (Newton-Raphson method)
+ubroyden      Broyden                  Nonlinear equation system (Broyden's method)
+upolynom      Poly                     Evaluates a polynomial
+*             RFrac                    Evaluates a rational fraction
+urtpol1       RootPol1                 Root of linear equation
+urtpol2       RootPol2                 Roots of quadratic equation
+urtpol3       RootPol3                 Roots of cubic equation
+urtpol4       RootPol4                 Roots of quartic equation
+urootpol      RootPol                  Roots of polynomial from companion matrix
+upolutil      SetRealRoots             Set the imaginary part of a root to zero
+*             SortRoots                Sorts the roots of a polynomial
+utrapint      TrapInt                  Integration by trapezoidal rule
+ugausleg      GausLeg                  Gauss-Legendre integration
+*             GausLeg0                 Gauss-Legendre integration (lower bound=0)
+*             Convol                   Convolution product
+urkf          RKF45                    Integration of a system of differential equations
+ufft          FFT                      Fast Fourier Transform
+*             IFFT                     Inverse Fast Fourier Transform
+*             FFT_Integer              Fast Fourier Transform for integer data
+*             FFT_Integer_Cleanup      Clear memory after a call to FFT_Integer
+*             CalcFrequency            Direct computation of Fourier Transform
+urandom       SetRNG                   Select random number generator
+*             InitGen                  Initialize random number generator
+*             IRanGen                  32-bit random integer in [-2^31 .. 2^31 - 1]
+*             IRanGen31                31-bit random integer in [0 .. 2^31 - 1]
+*             RanGen1                  32-bit random real in [0,1]
+*             RanGen2                  32-bit random real in [0,1)
+*             RanGen3                  32-bit random real in (0,1)
+*             RanGen53                 53-bit random real in [0,1)
+uranmwc       InitMWC                  Initialize Multiply-With-Carry generator
+*             IRanMWC                  32-bit random integer from MWC generator
+uranmt        InitMT                   Initialize Mersenne Twister generator with a seed
+*             InitMTbyArray            Initialize MT generator with an array
+*             IRanMT                   32-bit random integer from MT generator
+uranuvag      InitUVAG                 Initialize UVAG generator with a seed
+*             InitUVAGbyString         Initialize UVAG generator with a string
+*             IRanUVAG                 32-bit random integer from UVAG generator
+urangaus      RanGaussStd              Random number from standard normal distribution
+*             RanGauss                 Random number from normal distribution
+uranmult      RanMult                  Random vector from multinormal distrib. (correlated)
+*             RanMultIndep             Random vector from multinormal distrib. (uncorrelated)
+umcmc         InitMHParams             Initialize Metropolis-Hastings parameters
+*             GetMHParams              Returns Metropolis-Hastings parameters
+*             Hastings                 Simulation of a p.d.f. by Metropolis-Hastings
+usimann       InitSAParams             Initialize Simulated Annealing parameters
+*             SA_CreateLogFile         Initialize log file for Simulated Annealing
+*             SimAnn                   Minimization of a function of several var. by Simulated Annealing
+ugenalg       InitGAParams             Initialize Genetic Algorithm parameters
+*             GA_CreateLogFile         Initialize log file for Genetic Algorithm
+*             GenAlg                   Minimization of a function of several var. by Genetic Algorithm
+umeansd       Mean                     Sample mean
+*             StDev                    Standard deviation estimated from sample
+*             StDevP                   Standard deviation of population
+ucorrel       Correl                   Correlation coefficient
+umedian       Median                   Sample median
+uskew         Skewness                 Sample skewness
+*             Kurtosis                 Sample kurtosis
+uqsort        QSort                    Quick sort (ascending order)
+*             DQSort                   Quick sort (descending order)
+uinterv       Interval                 Determines an interval for a set of values
+ustudind      StudIndep                Student t-test for independent samples
+ustdpair      StudPaired               Student t-test for paired samples
+uanova1       AnOVa1                   One-way analysis of variance
+uanova2       AnOVa2                   Two-way analysis of variance
+usnedeco      Snedecor                 Comparison of two variances
+ubartlet      Bartlett                 Comparison of several variances
+ukhi2         Khi2_Conform             Khi-2 test for conformity
+*             Khi2_Indep               Khi-2 test for independence
+uwoolf        Woolf_Conform            Woolf's test for conformity
+*             Woolf_Indep              Woolf's test for independence
+unonpar       Mann_Whitney             Mann-Whitney test
+*             Wilcoxon                 Wilcoxon test
+*             Kruskal_Wallis           Kruskal-Wallis test
+udistrib      DimStatClassVector       Allocates an array of statistical classes
+*             DelStatClassVector       Deallocates an array of statistical classes
+*             Distrib                  Distributes an array into statistical classes
+ulinfit       LinFit                   Linear regression
+*             WLinFit                  Weighted linear regression
+upolfit       PolFit                   Polynomial regression
+*             WPolFit                  Weighted polynomial regression
+umulfit       MulFit                   Multiple regression (Gauss-Jordan method)
+*             WMulFit                  Weighted multiple regression (Gauss-Jordan method)
+usvdfit       SVDFit                   Multiple regression (SVD method)
+*             WSVDFit                  Weighted multiple regression (SVD method)
+unlfit        SetOptAlgo               Selects optimization algorithm for nonlinear regression
+*             SetMaxParam              Sets the maximal number of regression parameters
+*             SetParamBounds           Sets the bounds on a regression parameter
+*             SetMCFile                Set file for saving MCMC simulations
+*             NLFit                    Nonlinear regression
+*             WNLFit                   Weighted nonlinear regression
+*             SimFit                   Simulation of unweighted nonlinear regression by MCMC
+*             WSimFit                  Simulation of weighted nonlinear regression by MCMC
+uregtest      RegTest                  Test of unweighted regression
+*             WRegTest                 Test of weighted regression
+upca          VecMean                  Computes mean vector }
+*             VecSD                    Computes vector of standard deviations }
+*             MatVarCov                Computes variance-covariance matrix }
+*             MatCorrel                Computes correlation matrix }
+*             PCA                      Principal component analysis of correlation matrix }
+*             ScaleVar                 Scales a set of variables }
+*             PrinFac                  Computes principal factors }
+ustrings      LTrim                    Remove leading blanks
+*             RTrim                    Remove trailing blanks
+*             Trim                     Remove leading and trailing blanks
+*             StrChar                  Generate string by repeating a character
+*             RFill                    Complete string with trailing blanks
+*             LFill                    Complete string with leading blanks
+*             CFill                    Center string
+*             Replace                  Replace a character
+*             Extract                  Extract field from string
+*             Parse                    Parse string into several fields
+*             SetFormat                Set numeric format
+*             FloatStr                 Convert real number to string
+*             IntStr                   Convert integer to string
+*             CompStr                  Convert complex number to string
+uplot         InitGraphics             Initializes the graphic
+*             SetWindow                Sets the graphic window
+*             AutoScale                Automatic scale determination
+*             SetOxScale               Sets the scale on the Ox axis
+*             SetOyScale               Sets the scale on the Oy axis
+*             SetGraphTitle            Sets the graph title
+*             SetOxTitle               Sets the title for the Ox axis
+*             SetOyTitle               Sets the title for the Oy axis
+*             SetTitleFont             Sets the font for the main graph title
+*             SetOxFont                Sets the font for the Ox axis
+*             SetOyFont                Sets the font for the Oy axis
+*             SetLgdFont               Sets the font for the legends
+*             PlotOxAxis               Plots the Ox axis
+*             PlotOyAxis               Plots the Oy axis
+*             WriteGraphTitle          Writes title of graph
+*             PlotGrid                 Plots a grid on the graph
+*             SetClipping              Limits the graphic to the current viewport
+*             SetMaxCurv               Sets maximum number of curves
+*             SetPointParam            Sets point parameters
+*             SetLineParam             Sets line parameters
+*             SetCurvLegend            Sets curve legend
+*             SetCurvStep              Sets curve step
+*             PlotPoint                Plots a point
+*             PlotCurve                Plots a curve
+*             PlotCurveWithErrorBars   Plots a curve with error bars
+*             PlotFunc                 Plots a function
+*             WriteLegend              Writes the legends for the plotted curves
+*             ConRec                   Contour plot
+*             Xpixel                   Converts user abscissa X to screen coordinate
+*             Ypixel                   Converts user ordinate Y to screen coordinate
+*             Xuser                    Converts screen coordinate X to user abscissa
+*             Yuser                    Converts screen coordinate Y to user ordinate
+*             LeaveGraphics            Quits the graphic mode

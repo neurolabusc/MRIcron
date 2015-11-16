@@ -1,0 +1,288 @@
+object MainForm: TMainForm
+  Left = 468
+  Height = 418
+  Top = 213
+  Width = 542
+  ActiveControl = Memo1
+  Caption = 'Non-Parametric Mapping'
+  ClientHeight = 418
+  ClientWidth = 542
+  Menu = MainMenu1
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '1.0.12.0'
+  object Memo1: TMemo
+    Left = 0
+    Height = 393
+    Top = 0
+    Width = 542
+    Align = alClient
+    ScrollBars = ssAutoBoth
+    TabOrder = 0
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 25
+    Top = 393
+    Width = 542
+    Align = alBottom
+    ClientHeight = 25
+    ClientWidth = 542
+    TabOrder = 1
+    object ProgressBar1: TProgressBar
+      Left = 1
+      Height = 23
+      Top = 1
+      Width = 540
+      Align = alClient
+      TabOrder = 0
+    end
+  end
+  object MainMenu1: TMainMenu
+    left = 8
+    top = 8
+    object File1: TMenuItem
+      Caption = 'File'
+      object SaveText1: TMenuItem
+        Caption = 'Save text...'
+        OnClick = Savetext1Click
+      end
+      object Exit1: TMenuItem
+        Caption = 'Exit'
+        OnClick = Exit1Click
+      end
+    end
+    object Edit1: TMenuItem
+      Caption = 'Edit'
+      object Copy1: TMenuItem
+        Caption = 'Copy'
+        OnClick = Copy1Click
+      end
+    end
+    object VLSM1: TMenuItem
+      Caption = 'VLSM'
+      object BinomialAnalysislesions1: TMenuItem
+        Caption = 'Binary images, binary groups (lesions) '
+        ShortCut = 16450
+        OnClick = LesionBtnClick
+      end
+      object Binaryimagescontinuousgroupsfast1: TMenuItem
+        Tag = 1
+        Caption = 'Binary images, continuous groups (vlsm)'
+        ShortCut = 16460
+        OnClick = LesionBtnClick
+      end
+      object PenalizedLogisticRegerssion1: TMenuItem
+        Caption = 'Binary images, multiple factors'
+        OnClick = PenalizedLogisticRegerssion1Click
+      end
+      object ROIanalysis1: TMenuItem
+        Caption = 'ROI analysis'
+        OnClick = ROIanalysis1Click
+      end
+      object Design1: TMenuItem
+        Caption = 'Design...'
+        ShortCut = 16452
+        OnClick = Design1Click
+      end
+    end
+    object VBM1: TMenuItem
+      Caption = 'VBM'
+      object ContinuousanalysisVBM1: TMenuItem
+        Caption = 'Continuous images, binary groups (VBM)'
+        ShortCut = 16470
+        OnClick = NPMclick
+      end
+      object PairedTMenu: TMenuItem
+        Caption = 'Paired Measures T-test'
+        OnClick = PairedTMenuClick
+      end
+      object MultipleRegress: TMenuItem
+        Caption = 'Multiple WLS Regression'
+        Visible = False
+        OnClick = MultipleRegressClick
+      end
+      object SingleRegress: TMenuItem
+        Caption = 'Single WLS Regression'
+        Visible = False
+        OnClick = SingleRegressClick
+      end
+      object DualImageCorrelation1: TMenuItem
+        Caption = 'Dual image correlation'
+        Visible = False
+        OnClick = DualImageCorrelation1Click
+      end
+    end
+    object Options1: TMenuItem
+      Caption = 'Options'
+      object Permutations1: TMenuItem
+        Caption = 'Permutations'
+        object N0: TMenuItem
+          AutoCheck = True
+          Caption = 'None'
+          Checked = True
+          GroupIndex = 123
+          RadioItem = True
+          OnClick = radiomenuclick
+        end
+        object N1000: TMenuItem
+          Tag = 1000
+          AutoCheck = True
+          Caption = '1000'
+          GroupIndex = 123
+          RadioItem = True
+          OnClick = radiomenuclick
+        end
+        object N2000: TMenuItem
+          Tag = 2000
+          AutoCheck = True
+          Caption = '2000'
+          GroupIndex = 123
+          RadioItem = True
+          OnClick = radiomenuclick
+        end
+        object N3000: TMenuItem
+          Tag = 3000
+          AutoCheck = True
+          Caption = '3000'
+          GroupIndex = 123
+          RadioItem = True
+          OnClick = radiomenuclick
+        end
+        object N4000: TMenuItem
+          Tag = 4000
+          AutoCheck = True
+          Caption = '4000'
+          GroupIndex = 123
+          RadioItem = True
+          OnClick = radiomenuclick
+        end
+      end
+      object Tests1: TMenuItem
+        Caption = 'Tests'
+        object ttestmenu: TMenuItem
+          Caption = 't-test'
+          OnClick = testmenuclick
+        end
+        object BMmenu: TMenuItem
+          Caption = 'Brunner Munzel'
+          Checked = True
+          OnClick = testmenuclick
+        end
+      end
+      object Threads1: TMenuItem
+        Caption = 'Threads'
+        object T1: TMenuItem
+          AutoCheck = True
+          Caption = '1'
+          Checked = True
+          GroupIndex = 131
+          RadioItem = True
+          OnClick = threadChange
+        end
+        object T2: TMenuItem
+          AutoCheck = True
+          Caption = '2'
+          GroupIndex = 131
+          RadioItem = True
+          OnClick = threadChange
+        end
+        object T3: TMenuItem
+          AutoCheck = True
+          Caption = '3'
+          GroupIndex = 131
+          RadioItem = True
+          OnClick = threadChange
+        end
+        object T4: TMenuItem
+          AutoCheck = True
+          Caption = '4'
+          GroupIndex = 131
+          RadioItem = True
+          OnClick = threadChange
+        end
+        object T7: TMenuItem
+          AutoCheck = True
+          Caption = '7'
+          GroupIndex = 131
+          RadioItem = True
+          OnClick = threadChange
+        end
+        object T8: TMenuItem
+          AutoCheck = True
+          Caption = '8'
+          GroupIndex = 131
+          RadioItem = True
+          OnClick = threadChange
+        end
+        object T15: TMenuItem
+          AutoCheck = True
+          Caption = '15'
+          GroupIndex = 131
+          RadioItem = True
+          OnClick = threadChange
+        end
+        object T16: TMenuItem
+          AutoCheck = True
+          Caption = '16'
+          GroupIndex = 131
+          RadioItem = True
+          OnClick = threadChange
+        end
+      end
+      object PlankSzMenuItem1: TMenuItem
+        Caption = 'Plank Size'
+        OnClick = PlankSzMenuItem1Click
+      end
+    end
+    object Utilities1: TMenuItem
+      Caption = 'Utilities'
+      object Variance1: TMenuItem
+        Caption = 'Variance image'
+        OnClick = Variance1Click
+      end
+      object Makemeanimage2: TMenuItem
+        Tag = 1
+        Caption = 'Make binarized mean'
+        OnClick = Makemeanimage1Click
+      end
+      object Makemeanimage1: TMenuItem
+        Caption = 'Make mean/StDev image'
+        OnClick = Makemeanimage1Click
+      end
+      object SingleSubjectZScores1: TMenuItem
+        Caption = 'Single Subject Z-Score'
+        OnClick = SingleSubjectZScores1Click
+      end
+      object IntensitynormalizationA1: TMenuItem
+        Tag = 1
+        Caption = 'Intensity normalization A'
+        OnClick = Balance1Click
+      end
+      object Balance1: TMenuItem
+        Caption = 'Intensity normalization B'
+        OnClick = Balance1Click
+      end
+    end
+    object Help1: TMenuItem
+      Caption = 'Help'
+      Visible = False
+      object About1: TMenuItem
+        Caption = 'About'
+        OnClick = About1Click
+      end
+    end
+  end
+  object SaveHdrDlg: TSaveDialog
+    FilterIndex = 0
+    left = 8
+    top = 40
+  end
+  object OpenHdrDlg: TOpenDialog
+    FilterIndex = 0
+    left = 8
+    top = 72
+  end
+end

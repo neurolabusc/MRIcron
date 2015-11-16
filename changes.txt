@@ -1,0 +1,40 @@
+2/2010
+ +dcm2niigui: help/preferences allows you to specifiy output folder. This can be a fixed location, or the user can be prompted with each conversion.
+ +dcm2nii: option to process only specified files rather than searching all in folder.
+ +MRIcron: Unix version: improved peristimulus plot data export (previous version only saved up to 255 characters per row)
+ +MRIcron: Windows7 64-bit no longer reports floating point error.
+ +dcm2niigui: Ability to select export directory. Previous version saved data to input directory. If you select Help/Preferences you can now select three modes: "Save to source folder" (default), "Prompt user for output folder", "Always save to...".
+   -- "Prompt user for output folder" every time a series of images is dropped onto dcm2niigui, the user is requested to specify the output folder.
+   -- "Always save to..." when this option is selected the user is requested to select an output folder. All future conversions are sent to this folder.
+ +dcm2niigui: The ini files (stored in ~/.dcm2niigui for Unix and in the application directory for Windows) include two new properties: OutDirMode and OutDir
+   -- "OutDirMode" this can have three values: 0="Save to source folder", 1="Prompt user for output folder", 2="Always save to..."
+   -- "OutDir" This string lists the location for saving files if OutDirMode=2, and the starting location for selecting a folder for OutDirMode=1. If this is blank or a non-existent folder, it reverts to the users home directory (for Windows, this is the Documents folder).
+ +dcm2niigui: If dcm2niigui is unable to find a ini file in ~/.dcm2niigui, it will open up the defaults file dcm2niigui.ini located in the same folder as the application. This allows Unix administrators give all users consistent settings tuned for their site (e.g. defaulting to SPM or FSL style files, etc).
+ +dcm2niigui: Previous Linux 64-bit versions of dcm2niigui could have problems if the user did not have write permissions to the input images. This has been fixed.
+ +dcm2niigui: now checks whether the user has write permission to the output directory, and gives the user a clear description of the problem if the output folder is read-only. 
+
+
+----
+2009
+MRIcron
+ +Images now shown with 2x2 row column format, with Coronal, Sagital on top row and Axial on second row. To return to old horizontal layout, choose Help/Preferences and select "All slices on single row"
+ +Improved load of overlays on images with very few slices (I suggest you make sure View/3DSmoothOverlays is UNCHECKED if your background image only has a few slices).
+ +The .ini file now includes the option "FlipAx=0", if you change this with a text-editor to read "FlipAx=1" and relaunch MRIcron the axial images will be displayed upside down (emulating ImageJ when viewing Analyze images).
+ +Draw/Statistics/BatchProbMaps now reports mean instead of sum (with header text now saying "mean" instead of "filename). This ensures that one gets the same values as Draw/Descriptive (which reports mean, not sum). This also means that units are easier to interpret (as you do not have to divide the sum by the VOI's volume).
+ +Removed View/Magnify tool from Windows version (I think there are better screen magnifiers).
+dcm2nii
+ +4D par/rec files can now have different scaling factors
+ +Philips has a new value in the ini file - use "PhilipsPrecise=0" to convert the DV (display values), use "PhilipsPrecise=1" for the FP (Floating point) values. Note that the raw image data is identical, this simply adjusts the scaling factor applied to the data. The "PhilipsPrecise=1" gives the correct values for Phase maps (from -Pi..+Pi) and diffusion images, but many people complain about the huge values generated for T1/T2 images where the scaling factor is arbitrary. In most cases, your selection will not influence data processing in any way (as fMRI/T1/T2 values are relative).
+ +GE. Some GE scanners will interpolate images to simulate higher-resolution. If you set "UseGE_0021_104F=0" then you will get one image for the actual slices and one for the interpolated slices. If you set "UseGE_0021_104F=1" you will get a single large volume that combines the interpolated and actual slices.
+ +Philips 4D DICOM image conversion is improved, but this format is changing very rapidly. My software assume all images in a 4D image have the same scaling factors. This is fine form images where signal is relative. However, when you have a image where the 4th dimesion is between modalities (e.g. some images have modulus and some have phase) then the scaling factor may not be preserved. The raw data is correct, but some images with absolute values (phase or diffusion) images may need rescaling.
+ +When run from the command line, specifying folders is now case sensitive. This fix is specific for Linux users.
+NPM
+ +VLSM commands - Previous version did not always conduct statistical tests on all the voxels (some ventral voxels might show Z=0).
+MRIcroGL
+ +Render/Clip is now viewpoint independent. Previous version always cut slices from viewer's location, new version includes sliders to specify the elevation and azimuth of the clip plane. The scripting includes the new command "CLIPAZIMUTHELEVATION" as well as the old view-point dependent "clip" command.
+ +Program should not crash if your video card can not support the input image (you will get a polite message describing the problem).
+ +Help/Preferences adds a new rendering pull-down menu that allows you to choose between three rendering modes: standard (best quality, but slow), fast but blurry, and disabled. In the disabled mode you see orthogonal slices instead of a rendering, which is useful for slow video cards. 
+ +Better display of statistical images as background image (SPM uses 'Not A Number' values for areas where no statistics are calculated).
+ +More significant digits for statistcal outputs.
+ 
+--------------------------------

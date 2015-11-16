@@ -1,0 +1,61 @@
+object HistogramForm: THistogramForm
+  Left = 889
+  Height = 336
+  Top = 234
+  Width = 465
+  Caption = 'Histogram'
+  ClientHeight = 336
+  ClientWidth = 465
+  Font.Height = -11
+  Menu = MainMenu1
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '1.5'
+  object HistoPanel: TScrollBox
+    Left = 0
+    Height = 336
+    Top = 0
+    Width = 465
+    HorzScrollBar.Page = 90
+    VertScrollBar.Page = 90
+    Align = alClient
+    ClientHeight = 321
+    ClientWidth = 450
+    TabOrder = 0
+    object HistoImage: TImage
+      Cursor = crCross
+      Left = 0
+      Height = 321
+      Top = 0
+      Width = 450
+      Align = alClient
+      AutoSize = True
+      Center = True
+    end
+  end
+  object MainMenu1: TMainMenu
+    left = 113
+    top = 51
+    object File1: TMenuItem
+      Caption = 'File'
+      object Saveasbitmap1: TMenuItem
+        Caption = 'Save as bitmap...'
+        ShortCut = 16467
+        OnClick = Saveasbitmap1Click
+      end
+      object Closewindow1: TMenuItem
+        Caption = 'Close window'
+        ShortCut = 16471
+        OnClick = Closewindow1Click
+      end
+    end
+    object Edit1: TMenuItem
+      Caption = 'Edit'
+      object Copy1: TMenuItem
+        Caption = 'Copy'
+        ShortCut = 16451
+        OnClick = Copy1Click
+      end
+    end
+  end
+end

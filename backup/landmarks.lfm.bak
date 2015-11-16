@@ -1,0 +1,91 @@
+object AnatForm: TAnatForm
+  Left = 400
+  Height = 27
+  Top = 606
+  Width = 438
+  BorderStyle = bsDialog
+  Caption = 'Landmarks'
+  ClientHeight = 27
+  ClientWidth = 438
+  Constraints.MaxHeight = 27
+  Constraints.MaxWidth = 438
+  Constraints.MinHeight = 27
+  Constraints.MinWidth = 438
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  FormStyle = fsStayOnTop
+  Position = poScreenCenter
+  LCLVersion = '0.9.29'
+  object ToolBar1: TToolBar
+    Left = 0
+    Height = 29
+    Top = 0
+    Width = 438
+    ButtonHeight = 21
+    Caption = 'ToolBar1'
+    Font.Name = 'MS Sans Serif'
+    ParentFont = False
+    TabOrder = 0
+    object OpenBtn: TSpeedButton
+      Left = 1
+      Height = 21
+      Top = 2
+      Width = 56
+      Caption = 'Open'
+      Color = clBtnFace
+      NumGlyphs = 0
+      OnClick = OpenBtnClick
+    end
+    object SaveBtn: TSpeedButton
+      Left = 57
+      Height = 21
+      Top = 2
+      Width = 56
+      Caption = 'Save'
+      Color = clBtnFace
+      NumGlyphs = 0
+      OnClick = SaveBtnClick
+    end
+    object ComboBox1: TComboBox
+      Left = 113
+      Height = 24
+      Top = 2
+      Width = 145
+      DropDownCount = 24
+      ItemHeight = 16
+      OnChange = ComboBox1Change
+      Style = csDropDownList
+      TabOrder = 0
+    end
+    object AddBtn: TSpeedButton
+      Left = 258
+      Height = 21
+      Top = 2
+      Width = 56
+      Caption = 'Add'
+      Color = clBtnFace
+      NumGlyphs = 0
+      OnClick = AddBtnClick
+    end
+    object UpdateBtn: TSpeedButton
+      Left = 314
+      Height = 21
+      Top = 2
+      Width = 56
+      Caption = 'Update'
+      Color = clBtnFace
+      NumGlyphs = 0
+      OnClick = UpdateBtnClick
+    end
+    object DeleteBtn: TSpeedButton
+      Left = 370
+      Height = 21
+      Top = 2
+      Width = 56
+      Caption = 'Delete'
+      Color = clBtnFace
+      NumGlyphs = 0
+      OnClick = DeleteBtnClick
+    end
+  end
+end

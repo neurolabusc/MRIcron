@@ -1,0 +1,229 @@
+object NIfTIForm: TNIfTIForm
+  Left = 797
+  Height = 266
+  Top = 32
+  Width = 400
+  ActiveControl = OKBtn
+  BiDiMode = bdRightToLeft
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'Convert NIfTI File'
+  ClientHeight = 266
+  ClientWidth = 400
+  Constraints.MaxHeight = 266
+  Constraints.MaxWidth = 400
+  Constraints.MinHeight = 266
+  Constraints.MinWidth = 400
+  OnCreate = FormCreate
+  ParentBiDiMode = False
+  LCLVersion = '1.0.12.0'
+  object Label1: TLabel
+    Left = 8
+    Height = 17
+    Top = 168
+    Width = 102
+    Alignment = taCenter
+    Caption = 'Output Format: '
+    ParentColor = False
+  end
+  object Label4: TLabel
+    Left = 8
+    Height = 17
+    Top = 16
+    Width = 35
+    Alignment = taCenter
+    Caption = 'Task:'
+    ParentColor = False
+  end
+  object OKBtn: TButton
+    Left = 200
+    Height = 25
+    Top = 208
+    Width = 75
+    BorderSpacing.InnerBorder = 4
+    Caption = 'OK'
+    ModalResult = 1
+    OnClick = OKBtnClick
+    TabOrder = 0
+  end
+  object CancelBtn: TButton
+    Left = 104
+    Height = 25
+    Top = 208
+    Width = 75
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 1
+  end
+  object TypeCombo: TComboBox
+    Left = 118
+    Height = 20
+    Top = 163
+    Width = 209
+    ItemHeight = 0
+    Items.Strings = (
+      'SPM2 (3D Anlyze hdr/img)'
+      'SPM5 (3D NIfTI hdr/img)'
+      'SPM8 (3D NIfTI nii)'
+      '4D NIfTI hdr/img'
+      'FSL (4D NIfTI nii)'
+      'Compressed FSL (4D NIfTI nii)'
+      'MRIcron drawing (voi)'
+    )
+    Style = csDropDownList
+    TabOrder = 2
+  end
+  object Panel1: TPanel
+    Left = 8
+    Height = 103
+    Top = 59
+    Width = 312
+    BevelOuter = bvNone
+    ClientHeight = 103
+    ClientWidth = 312
+    TabOrder = 3
+    object Label2: TLabel
+      Left = 8
+      Height = 17
+      Top = 15
+      Width = 190
+      Caption = 'Volumes to remove from start'
+      ParentColor = False
+    end
+    object Label3: TLabel
+      Left = 7
+      Height = 17
+      Top = 55
+      Width = 185
+      Caption = 'Volumes to remove from end'
+      ParentColor = False
+    end
+    object StartEdit: TSpinEdit
+      Left = 224
+      Height = 15
+      Top = 13
+      Width = 74
+      MaxValue = 9999999
+      TabOrder = 0
+    end
+    object EndEdit: TSpinEdit
+      Left = 224
+      Height = 15
+      Top = 53
+      Width = 74
+      MaxValue = 9999999
+      TabOrder = 1
+    end
+  end
+  object Combo4D: TComboBox
+    Left = 47
+    Height = 20
+    Top = 11
+    Width = 337
+    ItemHeight = 0
+    Items.Strings = (
+      'Change format'
+      'Flip dimensions 3 and 4'
+      'Clip 1st/Last Volumes'
+      'Export as 32-bit real'
+      'Apply formula'
+      'ASL conversion'
+    )
+    OnChange = Combo4DChange
+    Style = csDropDownList
+    TabOrder = 4
+  end
+  object Combo3D: TComboBox
+    Left = 48
+    Height = 20
+    Top = 11
+    Width = 336
+    ItemHeight = 0
+    Items.Strings = (
+      'Change format'
+      'Reorient to orthogonal'
+      'Reorient and crop'
+    )
+    Style = csDropDownList
+    TabOrder = 5
+  end
+  object ASLPanel: TPanel
+    Left = 40
+    Height = 50
+    Top = 24
+    Width = 275
+    BevelOuter = bvNone
+    ClientHeight = 50
+    ClientWidth = 275
+    TabOrder = 6
+    object ASLCombo: TComboBox
+      Left = 16
+      Height = 20
+      Top = 11
+      Width = 250
+      ItemHeight = 0
+      Items.Strings = (
+        'Subtract pairs - first image tagged'
+        'Subtract pairs - first image control'
+        'Subtract Custom'
+        'Add (odd+even) BOLD'
+      )
+      Style = csDropDownList
+      TabOrder = 0
+    end
+  end
+  object FormulaPanel: TPanel
+    Left = 47
+    Height = 114
+    Top = 56
+    Width = 273
+    BevelOuter = bvNone
+    BorderStyle = bsSingle
+    ClientHeight = 114
+    ClientWidth = 273
+    TabOrder = 7
+    object Label5: TLabel
+      Left = 31
+      Height = 17
+      Top = 17
+      Width = 33
+      Alignment = taCenter
+      Caption = 'Scale'
+      ParentColor = False
+    end
+    object Label6: TLabel
+      Left = 31
+      Height = 17
+      Top = 59
+      Width = 39
+      Alignment = taCenter
+      Caption = 'Power'
+      ParentColor = False
+    end
+    object ScaleEdit: TFloatSpinEdit
+      Left = 127
+      Height = 15
+      Top = 11
+      Width = 130
+      DecimalPlaces = 8
+      Increment = 1
+      MaxValue = 100
+      MinValue = 0
+      TabOrder = 0
+      Value = 1.2E-6
+    end
+    object PowerEdit: TFloatSpinEdit
+      Left = 127
+      Height = 15
+      Top = 56
+      Width = 130
+      DecimalPlaces = 8
+      Increment = 1
+      MaxValue = 100
+      MinValue = 0
+      TabOrder = 1
+      Value = 1.2E-6
+    end
+  end
+end

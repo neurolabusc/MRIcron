@@ -1,0 +1,59 @@
+{ This is an automatically generated lazarus resource file }
+
+LazarusResources.Add('TPrefsForm','FORMDATA',[
+  'TPF0'#10'TPrefsForm'#9'PrefsForm'#4'Left'#3#210#1#6'Height'#3'L'#1#3'Top'#3
+  +#176#0#5'Width'#3'X'#2#18'HorzScrollBar.Page'#3#207#1#18'VertScrollBar.Page'
+  +#3'C'#1#13'ActiveControl'#7#9'DateCheck'#11'BorderIcons'#11#12'biSystemMenu'
+  +#0#7'Caption'#6#11'Preferences'#12'ClientHeight'#3'L'#1#11'ClientWidth'#3'X'
+  +#2#21'Constraints.MaxHeight'#3'L'#1#20'Constraints.MaxWidth'#3'X'#2#21'Const'
+  +'raints.MinHeight'#3'L'#1#20'Constraints.MinWidth'#3'X'#2#8'Position'#7#15'p'
+  +'oDesktopCenter'#10'LCLVersion'#6#8'1.0.12.0'#0#6'TLabel'#6'Label1'#4'Left'#2
+  +'p'#6'Height'#2#17#3'Top'#3#200#0#5'Width'#3#188#0#7'Caption'#6#29'Recursive'
+  +' folder search depth'#11'ParentColor'#8#0#0#6'TLabel'#11'OutDirLabel'#4'Lef'
+  +'t'#2#16#6'Height'#2#17#3'Top'#3#8#1#5'Width'#2#19#7'Caption'#6#3'c:\'#11'Pa'
+  +'rentColor'#8#0#0#9'TGroupBox'#11'FilenameBox'#4'Left'#2#8#6'Height'#3#176#0
+  +#3'Top'#2#8#5'Width'#3#232#0#7'Caption'#6#15'Output Filename'#12'ClientHeigh'
+  +'t'#3#154#0#11'ClientWidth'#3#224#0#8'TabOrder'#2#0#0#9'TCheckBox'#9'DateChe'
+  +'ck'#4'Left'#2#22#6'Height'#2#18#3'Top'#2#8#5'Width'#2'|'#7'Caption'#6#16'Ac'
+  +'quisition Date'#8'OnChange'#7#14'FilenameChecks'#8'TabOrder'#2#0#0#0#9'TChe'
+  +'ckBox'#14'InputNameCheck'#4'Left'#2#22#6'Height'#2#18#3'Top'#2'!'#5'Width'#2
+  +'r'#7'Caption'#6#14'Input Filename'#8'OnChange'#7#14'FilenameChecks'#8'TabOr'
+  +'der'#2#1#0#0#9'TCheckBox'#13'ProtocolCheck'#4'Left'#2#22#6'Height'#2#18#3'T'
+  +'op'#2'9'#5'Width'#2'q'#7'Caption'#6#13'Protocol Name'#8'OnChange'#7#14'File'
+  +'nameChecks'#8'TabOrder'#2#2#0#0#9'TCheckBox'#16'PatientNameCheck'#4'Left'#2
+  +#22#6'Height'#2#18#3'Top'#2'Q'#5'Width'#2'h'#7'Caption'#6#12'Patient Name'#8
+  +'OnChange'#7#14'FilenameChecks'#8'TabOrder'#2#3#0#0#9'TCheckBox'#11'SeriesCh'
+  +'eck'#4'Left'#2#22#6'Height'#2#18#3'Top'#2'i'#5'Width'#3#131#0#7'Caption'#6
+  +#18'Acquisition Series'#8'OnChange'#7#14'FilenameChecks'#8'TabOrder'#2#4#0#0
+  +#0#7'TButton'#5'OKbtn'#4'Left'#3#232#1#6'Height'#2#25#3'Top'#3' '#1#5'Width'
+  +#2'K'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#2'OK'#11'ModalResult'#2
+  +#1#8'TabOrder'#2#1#0#0#7'TButton'#9'CancelBtn'#4'Left'#3#144#1#6'Height'#2#25
+  +#3'Top'#3' '#1#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#6
+  +'Cancel'#11'ModalResult'#2#2#8'TabOrder'#2#2#0#0#9'TCheckBox'#17'NotAnonymiz'
+  +'eCheck'#4'Left'#3#248#0#6'Height'#2#18#3'Top'#2#24#5'Width'#3#233#0#7'Capti'
+  +'on'#6'!Save patient name in NIfTI header'#8'TabOrder'#2#3#0#0#9'TCheckBox'
+  +#13'ReorientCheck'#4'Left'#3#248#0#6'Height'#2#18#3'Top'#2'X'#5'Width'#3'P'#1
+  +#7'Caption'#6'1Reorient large images to nearest orthogonal plane'#8'TabOrder'
+  +#2#4#0#0#9'TSpinEdit'#13'RecursiveSpin'#4'Left'#2#16#6'Height'#2#16#3'Top'#3
+  +#200#0#5'Width'#2'M'#8'MaxValue'#2#10#8'TabOrder'#2#5#0#0#9'TComboBox'#11'Ou'
+  +'tputCombo'#4'Left'#2#16#6'Height'#2#20#3'Top'#3#232#0#5'Width'#3'('#1#10'It'
+  +'emHeight'#2#0#13'Items.Strings'#1#6#21'Save to source folder'#6#29'Prompt u'
+  +'ser for output folder'#6#17'Always save to...'#0#8'OnChange'#7#17'OutputCom'
+  +'boChange'#9'OnMouseUp'#7#18'OutputComboMouseUp'#5'Style'#7#14'csDropDownLis'
+  +'t'#8'TabOrder'#2#6#0#0#9'TCheckBox'#13'CollapseCheck'#4'Left'#3#248#0#6'Hei'
+  +'ght'#2#18#4'Hint'#6'_Sort images regardless of source directory. Slower, re'
+  +'quired if series segmented across folders'#3'Top'#2'x'#5'Width'#2'y'#7'Capt'
+  +'ion'#6#16'Collapse folders'#8'TabOrder'#2#7#0#0#9'TCheckBox'#27'Stack3DImag'
+  +'esWithSameAcqNum'#4'Left'#3#248#0#6'Height'#2#18#4'Hint'#6'_Sort images reg'
+  +'ardless of source directory. Slower, required if series segmented across fo'
+  +'lders'#3'Top'#3#152#0#5'Width'#3':'#1#7'Caption'#6'+Stack 3D images with sa'
+  +'me acquistion number'#8'TabOrder'#2#8#0#0#7'TButton'#13'TextEditorBtn'#4'Le'
+  +'ft'#2#8#6'Height'#2#25#3'Top'#3' '#1#5'Width'#2'{'#25'BorderSpacing.InnerBo'
+  +'rder'#2#4#7'Caption'#6#9'Text Edit'#7'OnClick'#7#18'TextEditorBtnClick'#8'T'
+  +'abOrder'#2#9#0#0#9'TCheckBox'#16'WritePrefsOnQuit'#4'Left'#3#134#1#6'Height'
+  +#2#18#3'Top'#2'x'#5'Width'#3#138#0#7'Caption'#6#19'Write prefs on quit'#7'Ch'
+  +'ecked'#9#5'State'#7#9'cbChecked'#8'TabOrder'#2#10#7'Visible'#8#0#0#9'TCheck'
+  +'Box'#14'TxtReportCheck'#4'Left'#3#248#0#6'Height'#2#18#3'Top'#2'8'#5'Width'
+  +#3#26#1#7'Caption'#6'+Save text report (scan and patient details)'#8'TabOrde'
+  +'r'#2#11#0#0#0
+]);

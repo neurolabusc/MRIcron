@@ -1,0 +1,174 @@
+object AutoROIForm: TAutoROIForm
+  Left = 785
+  Height = 355
+  Top = 200
+  Width = 265
+  HorzScrollBar.Page = 264
+  VertScrollBar.Page = 354
+  ActiveControl = VarianceEdit
+  Caption = 'Create ROI'
+  ClientHeight = 355
+  ClientWidth = 265
+  Constraints.MaxHeight = 355
+  Constraints.MaxWidth = 265
+  Constraints.MinHeight = 355
+  Constraints.MinWidth = 265
+  Font.Name = 'MS Sans Serif'
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnHide = FormHide
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '0.9.28.2'
+  object OriginLabel: TLabel
+    Left = 4
+    Height = 18
+    Top = 42
+    Width = 48
+    Caption = 'Origin: '
+    ParentColor = False
+  end
+  object OriginBtn: TSpeedButton
+    Left = 7
+    Height = 25
+    Hint = 'You can also double-click on the image'
+    Top = 5
+    Width = 114
+    Caption = 'Reset origin'
+    Color = clBtnFace
+    NumGlyphs = 0
+    OnClick = OriginBtnClick
+    ShowHint = True
+    ParentShowHint = False
+  end
+  object DiffLabel: TLabel
+    Left = 12
+    Height = 18
+    Top = 98
+    Width = 147
+    Caption = 'Difference from origin'
+    ParentColor = False
+  end
+  object Label1: TLabel
+    Left = 12
+    Height = 18
+    Top = 132
+    Width = 130
+    Caption = 'Difference at edge'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 12
+    Height = 18
+    Top = 167
+    Width = 85
+    Caption = 'Radius (mm)'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 12
+    Height = 18
+    Top = 202
+    Width = 129
+    Caption = 'Erode/dilate cycles'
+    ParentColor = False
+  end
+  object AutoROIBtn: TSpeedButton
+    Left = 56
+    Height = 25
+    Top = 304
+    Width = 65
+    Caption = 'Apply'
+    Color = clBtnFace
+    NumGlyphs = 0
+    OnClick = AutoROIBtnClick
+  end
+  object CancelBtn: TSpeedButton
+    Left = 120
+    Height = 25
+    Top = 304
+    Width = 65
+    Caption = 'Cancel'
+    Color = clBtnFace
+    NumGlyphs = 0
+    OnClick = CancelBtnClick
+  end
+  object Label4: TLabel
+    Left = 4
+    Height = 18
+    Top = 74
+    Width = 79
+    Caption = 'Constraints'
+    ParentColor = False
+  end
+  object ExcludeBlackCheck: TCheckBox
+    Left = 12
+    Height = 21
+    Top = 236
+    Width = 230
+    Caption = 'Zero intensity constrains edge'
+    OnClick = AutoROIchange
+    TabOrder = 0
+  end
+  object VarianceEdit: TSpinEdit
+    Left = 173
+    Height = 27
+    Top = 90
+    Width = 72
+    MaxValue = 255
+    OnChange = AutoROIchange
+    TabOrder = 1
+    Value = 16
+  end
+  object EdgeEdit: TSpinEdit
+    Left = 173
+    Height = 27
+    Top = 126
+    Width = 72
+    MaxValue = 255
+    OnChange = AutoROIchange
+    TabOrder = 2
+    Value = 16
+  end
+  object RadiusEdit: TSpinEdit
+    Left = 173
+    Height = 27
+    Top = 161
+    Width = 72
+    MaxValue = 9999
+    OnChange = AutoROIchange
+    TabOrder = 3
+    Value = 32
+  end
+  object ErodeEdit: TSpinEdit
+    Left = 173
+    Height = 27
+    Top = 196
+    Width = 72
+    MaxValue = 12
+    OnChange = AutoROIchange
+    TabOrder = 4
+  end
+  object ROIconstraint: TComboBox
+    Left = 12
+    Height = 31
+    Top = 268
+    Width = 212
+    ItemHeight = 0
+    Items.Strings = (
+      'Append to current VOI'
+      'Delete from current VOI'
+      'Constain with current VOI'
+    )
+    OnChange = AutoROIchange
+    Style = csDropDownList
+    TabOrder = 5
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 400
+    OnTimer = Timer1Timer
+    left = 40
+    top = 34
+  end
+end

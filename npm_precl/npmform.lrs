@@ -1,0 +1,86 @@
+{ This is an automatically generated lazarus resource file }
+
+LazarusResources.Add('TMainForm','FORMDATA',[
+  'TPF0'#9'TMainForm'#8'MainForm'#4'Left'#3#5#2#6'Height'#3#162#1#3'Top'#3'A'#1
+  +#5'Width'#3#30#2#13'ActiveControl'#7#5'Memo1'#7'Caption'#6#22'Non-Parametric'
+  +' Mapping'#12'ClientHeight'#3#162#1#11'ClientWidth'#3#30#2#4'Menu'#7#9'MainM'
+  +'enu1'#7'OnClose'#7#9'FormClose'#8'OnCreate'#7#10'FormCreate'#6'OnShow'#7#8
+  +'FormShow'#8'Position'#7#14'poScreenCenter'#10'LCLVersion'#6#8'0.9.30.2'#0#5
+  +'TMemo'#5'Memo1'#4'Left'#2#0#6'Height'#3#137#1#3'Top'#2#0#5'Width'#3#30#2#5
+  +'Align'#7#8'alClient'#10'ScrollBars'#7#10'ssAutoBoth'#8'TabOrder'#2#0#0#0#6
+  +'TPanel'#6'Panel1'#4'Left'#2#0#6'Height'#2#25#3'Top'#3#137#1#5'Width'#3#30#2
+  +#5'Align'#7#8'alBottom'#12'ClientHeight'#2#25#11'ClientWidth'#3#30#2#8'TabOr'
+  +'der'#2#1#0#12'TProgressBar'#12'ProgressBar1'#4'Left'#2#1#6'Height'#2#23#3'T'
+  +'op'#2#1#5'Width'#3#28#2#5'Align'#7#8'alClient'#8'TabOrder'#2#0#0#0#0#9'TMai'
+  +'nMenu'#9'MainMenu1'#4'left'#2#8#3'top'#2#8#0#9'TMenuItem'#5'File1'#7'Captio'
+  +'n'#6#4'File'#0#9'TMenuItem'#9'SaveText1'#7'Caption'#6#12'Save text...'#7'On'
+  +'Click'#7#14'Savetext1Click'#0#0#9'TMenuItem'#5'Exit1'#7'Caption'#6#4'Exit'#7
+  +'OnClick'#7#10'Exit1Click'#0#0#0#9'TMenuItem'#5'Edit1'#7'Caption'#6#4'Edit'#0
+  +#9'TMenuItem'#5'Copy1'#7'Caption'#6#4'Copy'#7'OnClick'#7#10'Copy1Click'#0#0#0
+  +#9'TMenuItem'#5'VLSM1'#7'Caption'#6#4'VLSM'#0#9'TMenuItem'#24'BinomialAnalys'
+  +'islesions1'#7'Caption'#6'''Binary images, binary groups (lesions) '#8'Short'
+  +'Cut'#3'B@'#7'OnClick'#7#14'LesionBtnClick'#0#0#9'TMenuItem!Binaryimagescont'
+  +'inuousgroupsfast1'#3'Tag'#2#1#7'Caption'#6'(Binary images, continuous groou'
+  +'ps (vlsm)'#8'ShortCut'#3'L@'#7'OnClick'#7#14'LesionBtnClick'#0#0#9'TMenuIte'
+  +'m'#28'PenalizedLogisticRegerssion1'#7'Caption'#6#31'Binary images, multiple'
+  +' factors'#7'OnClick'#7'!PenalizedLogisticRegerssion1Click'#0#0#9'TMenuItem'
+  +#12'ROIanalysis1'#7'Caption'#6#12'ROI analysis'#7'OnClick'#7#17'ROIanalysis1'
+  +'Click'#0#0#9'TMenuItem'#7'Design1'#7'Caption'#6#9'Design...'#8'ShortCut'#3
+  +'D@'#7'OnClick'#7#12'Design1Click'#0#0#0#9'TMenuItem'#4'VBM1'#7'Caption'#6#3
+  +'VBM'#0#9'TMenuItem'#22'ContinuousanalysisVBM1'#7'Caption'#6'&Continuous ima'
+  +'ges, binary groups (VBM)'#8'ShortCut'#3'V@'#7'OnClick'#7#8'NPMclick'#0#0#9
+  +'TMenuItem'#11'PairedTMenu'#7'Caption'#6#22'Paired Measures T-test'#7'OnClic'
+  +'k'#7#16'PairedTMenuClick'#0#0#9'TMenuItem'#15'MultipleRegress'#7'Caption'#6
+  +#23'Multiple WLS Regression'#7'OnClick'#7#20'MultipleRegressClick'#0#0#9'TMe'
+  +'nuItem'#13'SingleRegress'#7'Caption'#6#21'Single WLS Regression'#7'OnClick'
+  +#7#18'SingleRegressClick'#0#0#9'TMenuItem'#9'MenuItem3'#7'Caption'#6#22'Dual'
+  +' image correlation'#7'OnClick'#7#26'DualImageCorrelation1Click'#0#0#0#9'TMe'
+  +'nuItem'#8'Options1'#7'Caption'#6#7'Options'#0#9'TMenuItem'#13'Permutations1'
+  +#7'Caption'#6#12'Permutations'#0#9'TMenuItem'#2'N0'#9'AutoCheck'#9#7'Caption'
+  +#6#4'None'#7'Checked'#9#10'GroupIndex'#2'{'#9'RadioItem'#9#7'OnClick'#7#14'r'
+  +'adiomenuclick'#0#0#9'TMenuItem'#5'N1000'#3'Tag'#3#232#3#9'AutoCheck'#9#7'Ca'
+  +'ption'#6#4'1000'#10'GroupIndex'#2'{'#9'RadioItem'#9#7'OnClick'#7#14'radiome'
+  +'nuclick'#0#0#9'TMenuItem'#5'N2000'#3'Tag'#3#208#7#9'AutoCheck'#9#7'Caption'
+  +#6#4'2000'#10'GroupIndex'#2'{'#9'RadioItem'#9#7'OnClick'#7#14'radiomenuclick'
+  +#0#0#9'TMenuItem'#5'N3000'#3'Tag'#3#184#11#9'AutoCheck'#9#7'Caption'#6#4'300'
+  +'0'#10'GroupIndex'#2'{'#9'RadioItem'#9#7'OnClick'#7#14'radiomenuclick'#0#0#9
+  +'TMenuItem'#5'N4000'#3'Tag'#3#160#15#9'AutoCheck'#9#7'Caption'#6#4'4000'#10
+  +'GroupIndex'#2'{'#9'RadioItem'#9#7'OnClick'#7#14'radiomenuclick'#0#0#0#9'TMe'
+  +'nuItem'#6'Tests1'#7'Caption'#6#5'Tests'#0#9'TMenuItem'#9'ttestmenu'#7'Capti'
+  +'on'#6#6't-test'#7'OnClick'#7#13'testmenuclick'#0#0#9'TMenuItem'#6'BMmenu'#7
+  +'Caption'#6#14'Brunner Munzel'#7'Checked'#9#7'OnClick'#7#13'testmenuclick'#0
+  +#0#0#9'TMenuItem'#8'Threads1'#7'Caption'#6#7'Threads'#0#9'TMenuItem'#2'T1'#9
+  +'AutoCheck'#9#7'Caption'#6#1'1'#7'Checked'#9#10'GroupIndex'#3#131#0#9'RadioI'
+  +'tem'#9#7'OnClick'#7#12'threadChange'#0#0#9'TMenuItem'#2'T2'#9'AutoCheck'#9#7
+  +'Caption'#6#1'2'#10'GroupIndex'#3#131#0#9'RadioItem'#9#7'OnClick'#7#12'threa'
+  +'dChange'#0#0#9'TMenuItem'#2'T3'#9'AutoCheck'#9#7'Caption'#6#1'3'#10'GroupIn'
+  +'dex'#3#131#0#9'RadioItem'#9#7'OnClick'#7#12'threadChange'#0#0#9'TMenuItem'#2
+  +'T4'#9'AutoCheck'#9#7'Caption'#6#1'4'#10'GroupIndex'#3#131#0#9'RadioItem'#9#7
+  +'OnClick'#7#12'threadChange'#0#0#9'TMenuItem'#2'T7'#9'AutoCheck'#9#7'Caption'
+  +#6#1'7'#10'GroupIndex'#3#131#0#9'RadioItem'#9#7'OnClick'#7#12'threadChange'#0
+  +#0#9'TMenuItem'#2'T8'#9'AutoCheck'#9#7'Caption'#6#1'8'#10'GroupIndex'#3#131#0
+  +#9'RadioItem'#9#7'OnClick'#7#12'threadChange'#0#0#9'TMenuItem'#3'T15'#9'Auto'
+  +'Check'#9#7'Caption'#6#2'15'#10'GroupIndex'#3#131#0#9'RadioItem'#9#7'OnClick'
+  +#7#12'threadChange'#0#0#9'TMenuItem'#3'T16'#9'AutoCheck'#9#7'Caption'#6#2'16'
+  +#10'GroupIndex'#3#131#0#9'RadioItem'#9#7'OnClick'#7#12'threadChange'#0#0#0#0
+  +#9'TMenuItem'#10'Utilities1'#7'Caption'#6#9'Utilities'#0#9'TMenuItem'#9'niin'
+  +'iigz1'#7'Caption'#6#14'nii -> .nii.gz'#7'OnClick'#7#14'niiniigz1Click'#0#0#9
+  ,'TMenuItem'#9'Variance1'#7'Caption'#6#14'Variance image'#7'OnClick'#7#14'Var'
+  +'iance1Click'#0#0#9'TMenuItem'#14'Makemeanimage2'#3'Tag'#2#1#7'Caption'#6#19
+  +'Make binarized mean'#7'OnClick'#7#19'Makemeanimage1Click'#0#0#9'TMenuItem'
+  +#14'Makemeanimage1'#7'Caption'#6#21'Make mean/StDev image'#7'OnClick'#7#19'M'
+  +'akemeanimage1Click'#0#0#9'TMenuItem'#21'SingleSubjectZScores1'#7'Caption'#6
+  +#22'Single Subject Z-Score'#7'OnClick'#7#26'SingleSubjectZScores1Click'#0#0#9
+  +'TMenuItem'#24'IntensitynormalizationA1'#3'Tag'#2#1#7'Caption'#6#25'Intensit'
+  +'y normalization A'#7'OnClick'#7#13'Balance1Click'#0#0#9'TMenuItem'#8'Balanc'
+  +'e1'#7'Caption'#6#25'Intensity normalization B'#7'OnClick'#7#13'Balance1Clic'
+  +'k'#0#0#9'TMenuItem PhysiologicalArtifactCorrection1'#7'Caption'#6#24'Physio'
+  +'logical Correction'#7'OnClick'#7'%PhysiologicalArtifactCorrection1Click'#0#0
+  +#9'TMenuItem'#20'Countlesionoverlaps1'#7'Caption'#6#21'Count lesion overlaps'
+  +#7'OnClick'#7#25'Countlesionoverlaps1Click'#0#0#9'TMenuItem'#4'FCE1'#7'Capti'
+  +'on'#6#4'TFCE'#7'OnClick'#7#9'FCE1Click'#0#0#0#9'TMenuItem'#5'Help1'#7'Capti'
+  +'on'#6#4'Help'#7'Visible'#8#0#9'TMenuItem'#6'About1'#7'Caption'#6#5'About'#7
+  +'OnClick'#7#11'About1Click'#0#0#0#0#11'TSaveDialog'#10'SaveHdrDlg'#11'Filter'
+  +'Index'#2#0#4'left'#2#8#3'top'#2'('#0#0#11'TOpenDialog'#10'OpenHdrDlg'#11'Fi'
+  +'lterIndex'#2#0#4'left'#2#8#3'top'#2'H'#0#0#0
+]);

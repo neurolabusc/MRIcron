@@ -1,0 +1,88 @@
+******************************************************************************
+*                                                                            *
+*                                 TPMATH                                     *
+*                                                                            *
+*                MATHEMATICAL LIBRARY FOR PASCAL COMPILERS                   *
+*                                                                            *
+*                       Version 0.50 (December 2007)                         *
+*                                                                            *
+******************************************************************************
+
+
+
+                           AUTHOR : Dr Jean DEBORD
+
+               Laboratoire de Pharmacologie, Faculte de Medecine
+               2 Rue du Docteur Marcland, 87025 Limoges (France)
+                            debord.jean@orange.fr
+                            jean.debord@unilim.fr                         
+
+
+******************************************************************************
+ This library is distributed under the terms of the GNU Lesser General Public
+ License (LGPL). See file LGPL.TXT for details.
+******************************************************************************
+
+
+INTRODUCTION
+============
+
+TPMath is a mathematical library for Pascal compilers. 
+It is entirely written in Pascal and does not depend on external libraries. 
+TPMath provides routines and demo programs for numerical analysis, including 
+mathematical functions, probabilities, matrices, optimization, linear and nonlinear
+equations, integration, Fast Fourier Transform, random numbers, statistics and graphics.
+
+
+CONTENTS
+========
+
+Main directory
+--------------
+
+TPMATH.TXT : This file
+LGPL.TXT   : License
+TPMATH.PDF : Documentation of TPMath in PDF format
+
+DLL directory
+-------------
+
+Source files of the library.
+
+UNITS directory
+---------------
+
+Source files of individual units.
+
+DEMO directory
+--------------
+
+Source of demo programs.
+
+
+SYSTEM REQUIREMENTS
+===================
+
+* PC computer with Windows or Linux
+* Delphi (32 bits) or Free Pascal. 
+* Should also work (with some restrictions) with Turbo Pascal, Delphi 16 bits or GNU Pascal
+
+
+INSTALLATION AND COMPILATION
+============================
+
+See the instructions in file TPMATH.PDF (chapter 1)
+
+
+WEB LINKS
+=========
+
+TPMath web page:
+http://www.unilim.fr/pages_perso/jean.debord/tpmath/tpmath.htm
+
+SourceForge project page:
+http://sourceforge.net/projects/tpmath/
+
+Mailing list:
+http://groups.yahoo.com/group/tpmathlib/
+

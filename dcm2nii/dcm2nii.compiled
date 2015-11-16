@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Compiler Value="/usr/local/bin/ppcx64" Date="1393445780"/>
+  <Params Value=" -Px86_64 -MObjFPC -Scgi -O2 -Xs -XX -l -vewnhibq -Fu/Users/rorden/Documents/pas/mricron/common -Fu/Users/rorden/Documents/pas/mricron/dcm2nii/ dcm2nii.lpr"/>
+</CONFIG>

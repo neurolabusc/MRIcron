@@ -1,0 +1,672 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="9"/>
+    <PathDelim Value="\"/>
+    <General>
+      <Flags>
+        <LRSInOutputDirectory Value="False"/>
+      </Flags>
+      <MainUnit Value="0"/>
+      <ActiveWindowIndexAtStart Value="0"/>
+    </General>
+    <VersionInfo>
+      <StringTable ProductVersion=""/>
+    </VersionInfo>
+    <BuildModes Count="1">
+      <Item1 Name="default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="\usr\X11R6\bin\xterm -T 'Lazarus Run Output' -e $(LazarusDir)\tools\runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="1">
+      <Item1>
+        <PackageName Value="LCL"/>
+      </Item1>
+    </RequiredPackages>
+    <Units Count="57">
+      <Unit0>
+        <Filename Value="npm.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="npm"/>
+        <EditorIndex Value="0"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="8" Y="13"/>
+        <UsageCount Value="45"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="npmform.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MainForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="npmform"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="4"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="224"/>
+        <CursorPos X="7" Y="250"/>
+        <UsageCount Value="45"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="nifti_hdr.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="nifti_hdr"/>
+        <TopLine Value="358"/>
+        <CursorPos X="49" Y="368"/>
+        <UsageCount Value="41"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="define_types.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="define_types"/>
+        <TopLine Value="945"/>
+        <CursorPos X="38" Y="959"/>
+        <UsageCount Value="41"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="GraphicsMathLibrary.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GraphicsMathLibrary"/>
+        <TopLine Value="681"/>
+        <CursorPos X="1" Y="738"/>
+        <UsageCount Value="41"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="distr.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="distr"/>
+        <TopLine Value="99"/>
+        <CursorPos X="1" Y="107"/>
+        <UsageCount Value="41"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="statcr.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="statcr"/>
+        <TopLine Value="1"/>
+        <CursorPos X="34" Y="6"/>
+        <UsageCount Value="41"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="stats.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="stats"/>
+        <TopLine Value="369"/>
+        <CursorPos X="41" Y="370"/>
+        <UsageCount Value="41"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="brunner.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="brunner"/>
+        <TopLine Value="500"/>
+        <CursorPos X="29" Y="517"/>
+        <UsageCount Value="41"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="StatThdsUtil.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="StatThdsUtil"/>
+        <TopLine Value="1"/>
+        <CursorPos X="69" Y="6"/>
+        <UsageCount Value="41"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="StatThds.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="StatThds"/>
+        <EditorIndex Value="9"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="17"/>
+        <CursorPos X="11" Y="127"/>
+        <UsageCount Value="41"/>
+        <Loaded Value="True"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="valformat.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="valformat"/>
+        <TopLine Value="64"/>
+        <CursorPos X="1" Y="91"/>
+        <UsageCount Value="41"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="design.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="DesignForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="design"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="37"/>
+        <CursorPos X="24" Y="52"/>
+        <UsageCount Value="40"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="spread.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="SpreadForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="spread"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="557"/>
+        <CursorPos X="1" Y="584"/>
+        <UsageCount Value="40"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="gzio2.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="gzio2"/>
+        <TopLine Value="774"/>
+        <CursorPos X="22" Y="793"/>
+        <UsageCount Value="41"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="part.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="part"/>
+        <TopLine Value="91"/>
+        <CursorPos X="38" Y="108"/>
+        <UsageCount Value="41"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="markorder.pas"/>
+        <UnitName Value="markorder"/>
+        <TopLine Value="8"/>
+        <CursorPos X="44" Y="23"/>
+        <UsageCount Value="10"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="ztopform.pas"/>
+        <ComponentName Value="ZForm"/>
+        <UnitName Value="ztopform"/>
+        <TopLine Value="9"/>
+        <CursorPos X="18" Y="23"/>
+        <UsageCount Value="22"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="..\examples\opendialogcrash\unit1.pas"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <UnitName Value="Unit1"/>
+        <TopLine Value="19"/>
+        <CursorPos X="40" Y="14"/>
+        <UsageCount Value="10"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="nifti_img.pas"/>
+        <UnitName Value="nifti_img"/>
+        <TopLine Value="52"/>
+        <CursorPos X="28" Y="54"/>
+        <UsageCount Value="11"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="lesion_pattern.pas"/>
+        <UnitName Value="lesion_pattern"/>
+        <TopLine Value="76"/>
+        <CursorPos X="25" Y="86"/>
+        <UsageCount Value="10"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="ReadInt.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="ReadIntForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="ReadInt"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="33"/>
+        <CursorPos X="9" Y="50"/>
+        <UsageCount Value="39"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="ReadInt.lrs"/>
+        <IsPartOfProject Value="True"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="3"/>
+        <UsageCount Value="37"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="LesionStatThds.pas"/>
+        <UnitName Value="LesionStatThds"/>
+        <EditorIndex Value="8"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="414"/>
+        <CursorPos X="77" Y="439"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="power.pas"/>
+        <UnitName Value="power"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="11"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="Mat.pas"/>
+        <UnitName Value="Mat"/>
+        <TopLine Value="225"/>
+        <CursorPos X="18" Y="239"/>
+        <UsageCount Value="11"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="Vector.pas"/>
+        <UnitName Value="Vector"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="10"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="firth.pas"/>
+        <UnitName Value="firth"/>
+        <TopLine Value="382"/>
+        <CursorPos X="19" Y="383"/>
+        <UsageCount Value="10"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="overlap.pas"/>
+        <UnitName Value="overlap"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="6"/>
+        <UsageCount Value="10"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="firthThds.pas"/>
+        <UnitName Value="firthThds"/>
+        <TopLine Value="312"/>
+        <CursorPos X="123" Y="315"/>
+        <UsageCount Value="10"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="design.lfm"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="options.inc"/>
+        <TopLine Value="1"/>
+        <CursorPos X="21" Y="3"/>
+        <UsageCount Value="11"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="userdir.pas"/>
+        <UnitName Value="userdir"/>
+        <TopLine Value="1"/>
+        <CursorPos X="64" Y="45"/>
+        <UsageCount Value="11"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="..\..\lcl\forms.pp"/>
+        <UnitName Value="Forms"/>
+        <TopLine Value="642"/>
+        <CursorPos X="14" Y="661"/>
+        <UsageCount Value="11"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="..\gzio2.pas"/>
+        <UnitName Value="gzio2"/>
+        <TopLine Value="627"/>
+        <CursorPos X="22" Y="635"/>
+        <UsageCount Value="10"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="..\..\fpc\2.0.4\source\rtl\objpas\sysutils\finah.inc"/>
+        <TopLine Value="17"/>
+        <CursorPos X="22" Y="27"/>
+        <UsageCount Value="10"/>
+      </Unit35>
+      <Unit36>
+        <Filename Value="..\define_types.pas"/>
+        <UnitName Value="define_types"/>
+        <TopLine Value="1"/>
+        <CursorPos X="31" Y="5"/>
+        <UsageCount Value="10"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="..\..\fpc\2.0.4\source\rtl\win32\wininc\messages.inc"/>
+        <TopLine Value="1191"/>
+        <CursorPos X="6" Y="1201"/>
+        <UsageCount Value="10"/>
+      </Unit37>
+      <Unit38>
+        <Filename Value="regression.pas"/>
+        <UnitName Value="regression"/>
+        <EditorIndex Value="10"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="725"/>
+        <CursorPos X="37" Y="731"/>
+        <UsageCount Value="14"/>
+        <Loaded Value="True"/>
+      </Unit38>
+      <Unit39>
+        <Filename Value="Regmult.pas"/>
+        <UnitName Value="RegMult"/>
+        <TopLine Value="30"/>
+        <CursorPos X="27" Y="43"/>
+        <UsageCount Value="10"/>
+      </Unit39>
+      <Unit40>
+        <Filename Value="..\fpmath\regmult.pas"/>
+        <UnitName Value="regmult"/>
+        <TopLine Value="39"/>
+        <CursorPos X="69" Y="45"/>
+        <UsageCount Value="10"/>
+      </Unit40>
+      <Unit41>
+        <Filename Value="..\common\distr.pas"/>
+        <UnitName Value="distr"/>
+        <TopLine Value="296"/>
+        <CursorPos X="1" Y="308"/>
+        <UsageCount Value="11"/>
+      </Unit41>
+      <Unit42>
+        <Filename Value="..\common\define_types.pas"/>
+        <UnitName Value="define_types"/>
+        <EditorIndex Value="11"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="24" Y="21"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+      </Unit42>
+      <Unit43>
+        <Filename Value="hdr.pas"/>
+        <UnitName Value="hdr"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="3"/>
+        <UsageCount Value="10"/>
+      </Unit43>
+      <Unit44>
+        <Filename Value="..\common\gzio2.pas"/>
+        <UnitName Value="gzio2"/>
+        <TopLine Value="223"/>
+        <CursorPos X="16" Y="236"/>
+        <UsageCount Value="10"/>
+      </Unit44>
+      <Unit45>
+        <Filename Value="..\common\nifti_hdr.pas"/>
+        <UnitName Value="nifti_hdr"/>
+        <TopLine Value="119"/>
+        <CursorPos X="1" Y="121"/>
+        <UsageCount Value="11"/>
+      </Unit45>
+      <Unit46>
+        <Filename Value="..\common\GraphicsMathLibrary.pas"/>
+        <UnitName Value="GraphicsMathLibrary"/>
+        <TopLine Value="1"/>
+        <CursorPos X="17" Y="8"/>
+        <UsageCount Value="10"/>
+      </Unit46>
+      <Unit47>
+        <Filename Value="..\fpmath\utypes.pas"/>
+        <UnitName Value="utypes"/>
+        <TopLine Value="470"/>
+        <CursorPos X="41" Y="482"/>
+        <UsageCount Value="12"/>
+      </Unit47>
+      <Unit48>
+        <Filename Value="lesion.pas"/>
+        <UnitName Value="lesion"/>
+        <TopLine Value="299"/>
+        <CursorPos X="64" Y="313"/>
+        <UsageCount Value="10"/>
+      </Unit48>
+      <Unit49>
+        <Filename Value="anacom.pas"/>
+        <UnitName Value="anacom"/>
+        <TopLine Value="579"/>
+        <CursorPos X="32" Y="593"/>
+        <UsageCount Value="10"/>
+      </Unit49>
+      <Unit50>
+        <Filename Value="filename.pas"/>
+        <UnitName Value="filename"/>
+        <TopLine Value="1"/>
+        <CursorPos X="6" Y="4"/>
+        <UsageCount Value="10"/>
+      </Unit50>
+      <Unit51>
+        <Filename Value="montecarlo.pas"/>
+        <UnitName Value="montecarlo"/>
+        <EditorIndex Value="7"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="6" Y="3"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit51>
+      <Unit52>
+        <Filename Value="roc.pas"/>
+        <UnitName Value="roc"/>
+        <TopLine Value="317"/>
+        <CursorPos X="33" Y="344"/>
+        <UsageCount Value="10"/>
+      </Unit52>
+      <Unit53>
+        <Filename Value="..\fpmath\types.inc"/>
+        <EditorIndex Value="12"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="112"/>
+        <CursorPos X="3" Y="174"/>
+        <UsageCount Value="13"/>
+        <Loaded Value="True"/>
+      </Unit53>
+      <Unit54>
+        <Filename Value="C:\Developer\lazarus\lcl\interfaces\carbon\carbonprivatecommon.inc"/>
+        <TopLine Value="170"/>
+        <CursorPos X="1" Y="184"/>
+        <UsageCount Value="10"/>
+      </Unit54>
+      <Unit55>
+        <Filename Value="tfce_clustering.pas"/>
+        <UnitName Value="tfce_clustering"/>
+        <EditorIndex Value="6"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="27" Y="3"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit55>
+      <Unit56>
+        <Filename Value="..\..\..\..\..\..\Developer\lazarus\lcl\include\menuitem.inc"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1288"/>
+        <CursorPos X="1" Y="1317"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit56>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="regression.pas"/>
+        <Caret Line="714" Column="16" TopLine="696"/>
+      </Position1>
+      <Position2>
+        <Filename Value="regression.pas"/>
+        <Caret Line="454" Column="25" TopLine="428"/>
+      </Position2>
+      <Position3>
+        <Filename Value="regression.pas"/>
+        <Caret Line="663" Column="24" TopLine="470"/>
+      </Position3>
+      <Position4>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="94" Column="7" TopLine="75"/>
+      </Position4>
+      <Position5>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="99" Column="11" TopLine="80"/>
+      </Position5>
+      <Position6>
+        <Filename Value="tfce_clustering.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position6>
+      <Position7>
+        <Filename Value="spread.pas"/>
+        <Caret Line="591" Column="34" TopLine="587"/>
+      </Position7>
+      <Position8>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="2" Column="1" TopLine="1"/>
+      </Position8>
+      <Position9>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="1521" Column="28" TopLine="1502"/>
+      </Position9>
+      <Position10>
+        <Filename Value="spread.pas"/>
+        <Caret Line="584" Column="3" TopLine="557"/>
+      </Position10>
+      <Position11>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="1516" Column="14" TopLine="1502"/>
+      </Position11>
+      <Position12>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="1521" Column="17" TopLine="1502"/>
+      </Position12>
+      <Position13>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="1518" Column="20" TopLine="1502"/>
+      </Position13>
+      <Position14>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="37" Column="40" TopLine="13"/>
+      </Position14>
+      <Position15>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="25" Column="22" TopLine="1"/>
+      </Position15>
+      <Position16>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="30" Column="28" TopLine="1"/>
+      </Position16>
+      <Position17>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="89" Column="30" TopLine="43"/>
+      </Position17>
+      <Position18>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="18" Column="79" TopLine="1"/>
+      </Position18>
+      <Position19>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="183" Column="43" TopLine="156"/>
+      </Position19>
+      <Position20>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="1434" Column="1" TopLine="1429"/>
+      </Position20>
+      <Position21>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="1511" Column="8" TopLine="1476"/>
+      </Position21>
+      <Position22>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="5" Column="152" TopLine="1"/>
+      </Position22>
+      <Position23>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="144" Column="23" TopLine="98"/>
+      </Position23>
+      <Position24>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="32" Column="5" TopLine="18"/>
+      </Position24>
+      <Position25>
+        <Filename Value="regression.pas"/>
+        <Caret Line="671" Column="129" TopLine="661"/>
+      </Position25>
+      <Position26>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="3" Column="170" TopLine="1"/>
+      </Position26>
+      <Position27>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="145" Column="22" TopLine="99"/>
+      </Position27>
+      <Position28>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="147" Column="26" TopLine="121"/>
+      </Position28>
+      <Position29>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="239" Column="40" TopLine="205"/>
+      </Position29>
+      <Position30>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="241" Column="29" TopLine="214"/>
+      </Position30>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="9"/>
+    <PathDelim Value="\"/>
+    <SearchPaths>
+      <OtherUnitFiles Value="..\fpmath;..\common"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <UseAnsiStrings Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
+    <Linking>
+      <Debugging>
+        <UseLineInfoUnit Value="False"/>
+        <StripSymbols Value="True"/>
+      </Debugging>
+      <LinkSmart Value="True"/>
+      <Options>
+        <LinkerOptions Value=" -macosx_version_min 10.4 "/>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <CompilerMessages>
+        <UseMsgFile Value="True"/>
+      </CompilerMessages>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="2">
+      <Item1>
+        <Name Value="ECodetoolError"/>
+      </Item1>
+      <Item2>
+        <Name Value="EFOpenError"/>
+      </Item2>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

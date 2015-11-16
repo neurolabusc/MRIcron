@@ -1,0 +1,162 @@
+object MainForm: TMainForm
+  Left = 532
+  Height = 363
+  Top = 105
+  Width = 598
+  ActiveControl = Panel1
+  AllowDropFiles = True
+  BorderWidth = 1
+  Caption = 'dcm2nii'
+  ClientHeight = 363
+  ClientWidth = 598
+  Menu = MainMenu1
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDropFiles = FormDropFiles
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '1.4.2.0'
+  object Memo1: TMemo
+    Left = 5
+    Height = 321
+    Top = 37
+    Width = 588
+    Align = alClient
+    BorderSpacing.Left = 4
+    BorderSpacing.Top = 2
+    BorderSpacing.Right = 4
+    BorderSpacing.Bottom = 4
+    ScrollBars = ssAutoVertical
+    TabOrder = 0
+  end
+  object Panel1: TPanel
+    Left = 1
+    Height = 34
+    Top = 1
+    Width = 596
+    Align = alTop
+    BevelOuter = bvNone
+    BorderWidth = 2
+    BorderStyle = bsSingle
+    ClientHeight = 34
+    ClientWidth = 596
+    TabOrder = 1
+    object Label1: TLabel
+      Left = 1
+      Height = 26
+      Top = 5
+      Width = 140
+      Alignment = taRightJustify
+      Anchors = [akLeft]
+      AutoSize = False
+      Caption = 'Output Format:  '
+      ParentColor = False
+    end
+    object TypeCombo: TComboBox
+      Left = 160
+      Height = 20
+      Top = 3
+      Width = 264
+      ItemHeight = 0
+      Items.Strings = (
+        'SPM2 (3D Anlyze hdr/img)'
+        'SPM5 (3D NIfTI hdr/img)'
+        'SPM8 (3D NIfTI nii)'
+        '4D NIfTI hdr/img'
+        'FSL/SPM8 (4D NIfTI nii)'
+        'Compressed FSL (4D NIfTI nii)'
+      )
+      Style = csDropDownList
+      TabOrder = 0
+    end
+  end
+  object OpenHdrDlg: TOpenDialog
+    FilterIndex = 0
+    left = 24
+    top = 48
+  end
+  object MainMenu1: TMainMenu
+    left = 88
+    top = 48
+    object AppleMenu: TMenuItem
+      Caption = ''
+      Visible = False
+      object ApplePrefs: TMenuItem
+        Caption = 'Preferences'
+        OnClick = Preferences1Click
+      end
+    end
+    object File1: TMenuItem
+      Caption = 'File'
+      object DICOMtoNIfTI1: TMenuItem
+        Caption = 'DICOM to NIfTI'
+        ShortCut = 16452
+        OnClick = dcm2niiBtnClick
+      end
+      object ModifyNIfTI1: TMenuItem
+        Caption = 'Modify NIfTI'
+        OnClick = ModifyNIfTI1Click
+      end
+      object NIfTI3D4D1: TMenuItem
+        Caption = 'NIfTI 3D -> 4D'
+        OnClick = NIfTI3D4D1Click
+      end
+      object AnonymizeDICOM1: TMenuItem
+        Caption = 'Anonymize DICOM'
+        OnClick = AnonymizeDICOM1Click
+      end
+      object Exit1: TMenuItem
+        Caption = 'Exit'
+        OnClick = Exit1Click
+      end
+    end
+    object Edit1: TMenuItem
+      Caption = 'Edit'
+      object Copy1: TMenuItem
+        Caption = 'Copy'
+        OnClick = Copy1Click
+      end
+    end
+    object UntestedMenu: TMenuItem
+      Caption = 'Untested'
+      object MirrorXdimension1: TMenuItem
+        Caption = 'Mirror X-dimension'
+        OnClick = MirrorXdimension1Click
+      end
+      object SumTPM1: TMenuItem
+        Caption = 'Sum TPM'
+        OnClick = SumTPM1Click
+      end
+      object ExtractDICOMdims1: TMenuItem
+        Caption = 'Extract DICOM dims'
+        OnClick = ExtractDICOMdims1Click
+      end
+      object ExtractDICOMhdr1: TMenuItem
+        Caption = 'Extract DICOM header'
+        OnClick = ExtractDICOMhdr1Click
+      end
+      object ExtractNIfTIhdrs1: TMenuItem
+        Caption = 'Extract NIfTI header'
+        OnClick = ExtractNIfTIhdrs1Click
+      end
+      object HalveMenu1: TMenuItem
+        Caption = 'Halve dimensions in-plane'
+        OnClick = HalveMenu1Click
+      end
+    end
+    object Help1: TMenuItem
+      Caption = 'Help'
+      object Preferences1: TMenuItem
+        Caption = 'Preferences'
+        OnClick = Preferences1Click
+      end
+      object About1: TMenuItem
+        Caption = 'Help'
+        OnClick = About1Click
+      end
+    end
+  end
+  object SelectDirectoryDialog1: TSelectDirectoryDialog
+    left = 472
+  end
+end

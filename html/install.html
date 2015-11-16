@@ -1,0 +1,472 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta name="GENERATOR" content="cr">
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <title>MRIcron Installation Page</title>
+</head>
+
+
+<body bgcolor="#ffffff">
+
+
+
+
+
+
+
+
+ 
+<table bgcolor="#000050" border="0" width="100%">
+
+
+
+
+
+
+
+
+ <tbody>
+
+
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+
+
+ <td><a href="index.html"><img src="images/icon.png" border="0" height="86" width="128"></a></td>
+
+
+
+
+
+
+
+
+ <td width="100%"><font color="#ffffff" size="5">MRIcron Installation</font></td>
+
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+<p><b>Introduction</b></p>
+
+MRIcron can run on Windows, Macintosh OSX and Linux computers. Because Macintosh and Linux builds require a beta-release compiler, installation on these operating systems may be somewhat
+tricky. This software is covered under a variation of the BSD license. In theory, 
+this software should work well on any of these platforms with recent hardware. 
+However, currently Windows offers the optimal platform for four reasons:
+<ul>
+  <li>Graphics are more fluid in the Windows version: uses direct Windows API routines.</li>
+  <li>Rendering is faster with the Windows version if you are using a multi-CPU system: Windows version multi-threads rendering, so rendering is twice as fast on a dual-core system.</li>
+  <li>Windows version recognizes tablets, making it easier to draw volumes of interest (as it can detect stylus pressure, and can detect whether you are using the stylus tip or eraser).</li>
+  <li>Windows version is the most popular, so it has received the most testing from users.</li>
+</ul>
+Hopefully, MRIcron should offer reasonable performance on any modern machine. There are a few ways to increase the performance of MRIcron, though <b>these techniques necessarily reduce the quality of the images</b>.
+<ul>
+  <li>In the main MRIcron window, make sure that the option '2D smooth all' in the 'View' menu is unchecked. This displays images with the rapid nearest-neighbor interpolation instead of the much slower bilinear interpolation.</li>
+  <li>In the rendering window, make sure that the option 'Precise interpolation' in the 'View' menu is unchecked. This generates 3D renderings using nearest-neighbor interpolation instead of the slower trilinear interpolation. Renderings are typically three times faster.</li>
+  <li>In the rendering window, you may want to turn off the 'Smooth background' option in the 'View' menu. This displays the raw rendering, instead of applying a 2D blur to the image. Note that this change has much less influence on rendering times than the 'precise interpolation' option (as the precise interpolation is done in all 3 dimensions, while the smooth is only computed in 2 dimensions). </li>
+</ul>
+
+
+<table style="text-align: left; background-color: rgb(192, 192, 192); width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      
+      <td><b>License</b><br>Chris Rorden's MRIcron, copyright 2007, all rights reserved.<br>
+      <br>
+Redistribution and use in binary forms, with or without modification,
+are permitted provided inclusion of the copyright notice, this
+list of conditions and the following disclaimer is provided with the
+distribution. Neither the name of the copyright owner nor the name of
+this project (MRIcron) may be used to endorse or promote products
+derived from this software without specific prior written permission.<br>
+      <br>
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER "AS IS" AND ANY
+EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</td>
+    </tr>
+  </tbody>
+</table>
+<p></p>
+
+
+
+<p><span style="font-weight: bold;">Windows</span></p>
+
+<ol>
+
+  <li>Download the <a href="mricrond.zip">installer</a>.</li>
+
+  <li>Unzip and run the installer (double click on the .zip file and run the program InstallMR.exe).</li>
+
+  <li>By default, the installer places the programs in C:\program
+files\mricron, simply double click on mricron.exe to run the software.</li>
+
+  <li>You may also double-click on the .bat files, which load example
+images, for example 'examplefmri.bat' shows two statistical maps on top
+of a high resolution anatomical scan.</li>
+
+
+  <li>Note: The file dcm2nii.exe is compressed using <a href="http://upx.sourceforge.net/">UPX</a>, which can lead some virus software to <a href="http://forum.antivir-pe.de/thread.php?threadid=15453&sid=3abd073e228f9ba1c61f51e5960abfc6">generate false alarms (AntiVir PE Premium)</a>. This software is generated on a computer that always has the latest update's for Trend Micro's OfficeScan virus detection software.</li>
+
+</ol>
+
+<p><span style="font-weight: bold;">Linux x86  32bit </span>If
+anyone finds an easier way to distribute this software for Linux,
+please contact me. I am still finding it tricky to develop a universal
+protocol for dealing with the dependencies of different distributions.<span style="font-weight: bold;"></span> 
+<br>&nbsp;<b>Note</b>The Linux-native version of MRIcron was created using a beta release compiler. In many cases the best solution is to run the Windows-native version of MRIcron using <a href="http://www.winehq.org/">Wine</a> or a virtualized Windows environment (e.g. <a href="http://www.vmware.com/products/player/">VMware player</a>, QEMU or Xen).<p>
+
+<ol>
+
+  <li>Download the <a href="mricronlx.zip">software</a>.</li>
+
+  <li>Unzip the software (for modern Linux systems, right click on the file mricronlx.zip and choose to 'extract here').</li>
+
+  <li>Open a terminal window.</li>
+
+  <li>Change to the folder where you installed mricron, e.g. cd ~/mricron</li>
+
+  <li>Launch mricron by typing ./mricron (note you must be in the same folder as the mricron executable.</li>
+
+  <li>You can also run the example .bat files, for example ./xfmri.bat
+shows two statistical maps on top of a high resolution anatomical scan.</li>
+
+  
+  <ol>
+
+    <li>In case you receive error messages, check if all the dependencies of the program are installed. In particular, you need</li>
+
+    
+    <ol>
+
+      <li>GTK 1.2 (this is called GTK+ by some distributions, and gtk by others)</li>
+
+      <li>libgdk_lixbuf2.0</li>
+
+    
+    </ol>
+
+    <li>You can see a complete list of .so files needed by the software using the command:<br>
+
+&nbsp; ldd ./mricron</li>
+
+    <li>In case you cannot run the program and it displays a message
+saying it cannot find one of these libraries (you must run the program
+from the command line to see error messages), you need to download and
+install a package for the necessary library:
+      
+      <ul>
+
+        
+        <ul>
+
+          <li>On RPM-based distributions you can find packages here: http://rpm.pbone.net/</li>
+
+          <li>On Debian-based distributions you can find packages here: http://www.debian.org/distrib/packages<br>
+
+          </li>
+
+        
+        </ul>
+
+      
+      </ul>
+
+    </li>
+
+  
+  </ol>
+
+</ol>
+
+<p><span style="font-weight: bold;">Macintosh PowerPC</span>
+<br>&nbsp;<b>Note</b>The Macintosh:PPC -native version of MRIcron was created using a beta release compiler. In many cases the best solution is to run the Windows-native version of MRIcron using <a href="http://www.microsoft.com/mac/products/virtualpc/virtualpc.aspx?pid=virtualpc">VirtualPC</a>.<p>
+
+<ol>
+
+  <li>Download the&nbsp;<a href="mricronppc.zip">software</a>.</li>
+
+  <li>Unzip the software (double click on the .zip file - a new folder called mricron will be created).</li>
+
+  <li>You will need to install X11.&nbsp;</li>
+
+  
+  <ol>
+
+    <li>Check to see if X11 is in the applications\utilities folder.</li>
+
+    <li>If X11 is not installed:</li>
+
+    
+    <ol>
+
+      <li>OSX 10.4 user can install X11 by using the DVD installer disk</li>
+
+      <li>Alternatively, download and run the <a href="http://www.apple.com/downloads/macosx/apple/x11formacosx.html">X11 installer</a> distributed by Apple.</li>
+
+    
+    </ol>
+
+  
+  </ol>
+
+  <li>Download and install the correct version of <a href="http://fink.sourceforge.net/download/index.php?phpLang=en">fink</a>
+for your version of OS X and let it download and install the additional
+29 GTK and related packages needed. Here's the required command for my
+software (all on one line):&nbsp;</li>
+
+  
+  <ul>
+
+    <li>sudo fink install gdk-pixbuf gtk+ gtk+-data gtk+-shlibs gtk-doc-1.2-13 gtkglarea gtk-engines</li>
+
+  
+  </ul>
+
+  <li>Launch X11 (double click on the X11 icon in the applications\utilitiesfolder).&nbsp;</li>
+
+  <li>Launch an X11 terminal &nbsp;(from the keyboard, type Apple-N). From the terminal you can do the following</li>
+
+  
+  <ol>
+
+    <li>Change to the folder where you installed mricron, e.g. cd ~/Documents/mricron</li>
+
+    <li>Launch mricron by typing ./mricron (note you must be in the same folder as the mricron executable.</li>
+
+    <li>You can also run the example .bat files, for example
+./xfmri.bat shows two statistical maps on top of a high resolution
+anatomical scan.</li>
+
+  
+  </ol>
+
+</ol>
+
+
+
+<p><span style="font-weight: bold;">Macintosh Intel</span>
+<br>&nbsp;<b>Note</b>The Macintosh:Intel -native version of MRIcron was created using a beta release compiler. In many cases the best solution is to run the Windows-native version of MRIcron using <a href="http://www.vmware.com/products/beta/fusion/">VMware Fusion</a> or 
+<a href="http://www.parallels.com/en/products/desktop/">Parallels Desktop for Mac</a>.
+.<p>
+
+<ol>
+
+  <li>Download the&nbsp;<a href="mricronosx86.zip">software</a>.</li>
+
+  <li>Unzip the software (double click on the .zip file - a new folder called mricron will be created).</li>
+
+  <li>You will need to install X11.&nbsp;</li>
+
+  
+  <ol>
+
+    <li>Check to see if X11 is in the applications\utilities folder.</li>
+
+    <li>If X11 is not installed:</li>
+
+    
+    <ol>
+
+      <li>OSX 10.4 user can install X11 by using the DVD installer disk</li>
+
+      <li>Alternatively, download and run the <a href="http://www.apple.com/downloads/macosx/apple/x11formacosx.html">X11 installer</a> distributed by Apple.</li>
+
+    
+    </ol>
+
+  
+  </ol>
+
+  <li>Download and install the correct version of <a href="http://fink.sourceforge.net/download/index.php?phpLang=en">fink</a>
+for your version of OS X and let it download and install the additional
+29 GTK and related packages needed. Here's the required command for my
+software (all on one line):&nbsp;</li>
+
+  
+  <ul>
+
+    <li>sudo fink install gdk-pixbuf gtk+ gtk+-data gtk+-shlibs gtk-doc-1.2-13 gtkglarea gtk-engines</li>
+
+  
+  </ul>
+
+  <li>Launch X11 (double click on the X11 icon in the applications\utilitiesfolder).&nbsp;</li>
+
+  <li>Launch an X11 terminal &nbsp;(from the keyboard, type Apple-N). From the terminal you can do the following</li>
+
+  
+  <ol>
+
+    <li>Change to the folder where you installed mricron, e.g. cd ~/Documents/mricron</li>
+
+    <li>Launch mricron by typing ./mricron (note you must be in the same folder as the mricron executable.</li>
+
+    <li>You can also run the example .bat files, for example
+./xfmri.bat shows two statistical maps on top of a high resolution
+anatomical scan.</li>
+
+  
+  </ol>
+
+</ol>
+
+
+<br>
+
+<b>Linux x86 64bit</b> While the x86-32bit version may run, in theory it should be possible to create a 64-bit native version by recompiling the <a href="http://www.sph.sc.edu/comd/rorden/mricron/source.html">source code</a>.
+<br>&nbsp;<b>Note</b>The Linux-native version of MRIcron was created using a beta release compiler. In many cases the best solution is to run the Windows-native version of MRIcron using <a href="http://www.winehq.org/">Wine</a> or a virtualized Windows environment (e.g. <a href="http://www.vmware.com/products/player/">VMware player</a>, QEMU or Xen).<p>
+
+<ol>
+
+
+
+  <li>Install the compiler.&nbsp;To compile this software, you will need a build of Lazarus created on
+or after May 1, 2006. This software requires some recent patches that
+are not available on the current stable release. To get the latest
+developmental snapshot of Lazarus, click <a href="http://www.hu.freepascal.org/lazarus/">here</a>. </li>
+
+
+
+  <li>Get the source code. The source code is available <a href="mricron.zip">here</a>. The source
+file includes sample images in the Templates and Example folders. To
+test this software, compile mricron.lpr. Next use the File/templates
+menu to open sample images. Alternatively, after compiling the
+software, you can click on the included .bat files to see sample
+renderings.</li>
+
+
+  <li>Linux users:You need to have write access to the folder where you
+run MRIcron (it will want to create .ini files) I suggest placing this
+software in your home directory.</li>
+
+
+
+
+</ol>
+
+
+
+
+<table style="text-align: left; background-color: rgb(0, 0, 80); width: 100%;" border="0" cellpadding="0" cellspacing="0">
+
+  <tbody>
+
+    <tr>
+
+      <td><img style="width: 367px; height: 109px;" alt="logo" src="images/meld.jpg">
+      &nbsp;&nbsp;
+      
+      <a href="http://www.lazarus.freepascal.org/"><img src="images/lazarus.gif" alt="Lazarus" height="57" width="125"></a>
+      </td>
+
+    </tr>
+
+  
+  </tbody>
+</table>
+
+
+
+
+</body>
+</html>

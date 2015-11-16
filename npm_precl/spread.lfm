@@ -1,0 +1,195 @@
+object SpreadForm: TSpreadForm
+  Left = 401
+  Height = 538
+  Top = 183
+  Width = 326
+  ActiveControl = DataGrid
+  Caption = 'Voxelwise Analysis of Lesions'
+  ClientHeight = 538
+  ClientWidth = 326
+  Menu = MainMenu1
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnResize = FormResize
+  Position = poScreenCenter
+  LCLVersion = '0.9.30.2'
+  object DataGrid: TStringGrid
+    Left = 0
+    Height = 498
+    Top = 25
+    Width = 326
+    Align = alClient
+    FixedRows = 2
+    Options = [goFixedVertLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goTabs, goThumbTracking]
+    RowCount = 12
+    TabOrder = 0
+    OnDrawCell = DataGridDrawCell
+    OnKeyPress = DataGridKeyPress
+    OnMouseDown = DataGridMouseDown
+    OnMouseMove = DataGridMouseMove
+    OnSelectCell = DataGridSelectCell
+  end
+  object ToolBar1: TToolBar
+    Left = 0
+    Height = 25
+    Top = 0
+    Width = 326
+    EdgeBorders = []
+    TabOrder = 1
+    object DesignBtn: TSpeedButton
+      Left = 1
+      Height = 22
+      Hint = 'ANOVA'
+      Top = 0
+      Width = 120
+      Caption = 'Design'
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        0400000000000001000000000000000000001000000010000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00337333733373
+        3373337F3F7F3F7F3F7F33737373737373733F7F7F7F7F7F7F7F770000000000
+        00007777777777777777330333333C333333337FFF3337F3333F370993333C33
+        3399377773F337F33377330339333C3339333F7FF7FFF7FFF7FF770777977C77
+        97777777777777777777330333933C339333337F3373F7F37333370333393C39
+        3333377F333737F7333333033333999333333F7FFFFF777FFFFF770777777C77
+        77777777777777777777330333333C330333337F333337FF7FF3370333333C00
+        003C377F333337777737330333333C3303333F7FFFFFF7FF7FFF770777777777
+        7777777777777777777733333333333333333333333333333333
+      }
+      NumGlyphs = 2
+      OnClick = DesignBtnClick
+      ShowHint = True
+      ParentShowHint = False
+    end
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 15
+    Top = 523
+    Width = 326
+    Panels = <    
+      item
+        Width = 140
+      end    
+      item
+        Width = 50
+      end>
+    SimplePanel = False
+  end
+  object MainMenu1: TMainMenu
+    left = 108
+    top = 44
+    object File1: TMenuItem
+      Caption = '&File'
+      object New1: TMenuItem
+        Caption = 'New...'
+        ShortCut = 16462
+        OnClick = NewBtnClick
+      end
+      object Open1: TMenuItem
+        Caption = 'Open...'
+        ShortCut = 16463
+        OnClick = OpenBtnClick
+      end
+      object Save1: TMenuItem
+        Caption = 'Save'
+        ShortCut = 16467
+        OnClick = SaveBtnClick
+      end
+      object Quit1: TMenuItem
+        Caption = 'Close window'
+        ShortCut = 16471
+        OnClick = Quit1Click
+      end
+    end
+    object Edit1: TMenuItem
+      Caption = 'Edit'
+      object Copy1: TMenuItem
+        Caption = 'Copy'
+        ShortCut = 16451
+        OnClick = Copy1Click
+      end
+      object Paste1: TMenuItem
+        Caption = 'Paste'
+        ShortCut = 16470
+        OnClick = Paste1Click
+      end
+      object Selectall1: TMenuItem
+        Caption = 'Select all cells'
+        ShortCut = 16449
+        OnClick = Selectall1Click
+      end
+      object Clearallcells1: TMenuItem
+        Caption = 'Clear all cells...'
+        OnClick = Clearallcells1Click
+      end
+      object DescriptiveMenu: TMenuItem
+        Caption = 'Descriptives'
+        OnClick = DescriptiveClick
+      end
+    end
+    object View: TMenuItem
+      Caption = 'View'
+      object Font1: TMenuItem
+        Caption = 'Font'
+        object N81: TMenuItem
+          Tag = 8
+          Caption = '8'
+          Checked = True
+          GroupIndex = 111
+          RadioItem = True
+          OnClick = FontSizeChange
+        end
+        object N101: TMenuItem
+          Tag = 10
+          Caption = '10'
+          GroupIndex = 111
+          RadioItem = True
+          OnClick = FontSizeChange
+        end
+        object N121: TMenuItem
+          Tag = 12
+          Caption = '12'
+          GroupIndex = 111
+          RadioItem = True
+          OnClick = FontSizeChange
+        end
+        object N141: TMenuItem
+          Tag = 14
+          Caption = '14'
+          GroupIndex = 111
+          RadioItem = True
+          OnClick = FontSizeChange
+        end
+      end
+      object Design1: TMenuItem
+        Caption = 'Design'
+        ShortCut = 16452
+        OnClick = DesignBtnClick
+      end
+    end
+    object Help1: TMenuItem
+      Caption = '&Help'
+      object Aboutthissoftware1: TMenuItem
+        Caption = '&About this software'
+        OnClick = Aboutthissoftware1Click
+      end
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    DefaultExt = '.val'
+    Filter = 'Native [val]|.val|Tab delimited text [txt]|.txt|All files|.*'
+    FilterIndex = 0
+    left = 36
+    top = 44
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.val'
+    Filter = 'Native format [val]|*.val|Tab delimited text [txt]|*.txt'
+    FilterIndex = 0
+    Options = [ofOverwritePrompt, ofHideReadOnly]
+    left = 74
+    top = 44
+  end
+end

@@ -1,0 +1,202 @@
+object CutoutForm: TCutoutForm
+  Left = 384
+  Height = 334
+  Top = 175
+  Width = 334
+  HorzScrollBar.Page = 335
+  VertScrollBar.Page = 316
+  ActiveControl = RenderCutoutCheck
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = 'Cutouts'
+  ClientHeight = 334
+  ClientWidth = 334
+  Constraints.MaxHeight = 334
+  Constraints.MaxWidth = 334
+  Constraints.MinHeight = 334
+  Constraints.MinWidth = 334
+  OnClose = FormClose
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '0.9.29'
+  object RenderCutoutCheck: TCheckBox
+    Left = 16
+    Height = 17
+    Top = 8
+    Width = 80
+    Caption = 'Show cutout'
+    OnClick = RenderCutoutCheckClick
+    TabOrder = 0
+  end
+  object CutoutBox: TGroupBox
+    Left = 16
+    Height = 224
+    Top = 32
+    Width = 304
+    ClientHeight = 206
+    ClientWidth = 300
+    TabOrder = 5
+    object Label1: TLabel
+      Left = 14
+      Height = 14
+      Top = 8
+      Width = 58
+      Caption = 'X [low=left]'
+      ParentColor = False
+    end
+    object Label2: TLabel
+      Left = 14
+      Height = 14
+      Top = 48
+      Width = 85
+      Caption = 'Y [low=posterior]'
+      ParentColor = False
+    end
+    object Label3: TLabel
+      Left = 14
+      Height = 14
+      Top = 88
+      Width = 76
+      Caption = 'Z [low=ventral]'
+      ParentColor = False
+    end
+    object Label4: TLabel
+      Left = 14
+      Height = 14
+      Top = 135
+      Width = 55
+      Caption = 'Cutout Tint'
+      ParentColor = False
+    end
+    object Label5: TLabel
+      Left = 14
+      Height = 14
+      Top = 175
+      Width = 62
+      Caption = 'Cutout Color'
+      ParentColor = False
+    end
+    object XLo: TSpinEdit
+      Left = 118
+      Height = 21
+      Top = 0
+      Width = 82
+      MaxValue = 1000
+      OnChange = PreviewClick
+      TabOrder = 0
+    end
+    object XHi: TSpinEdit
+      Left = 206
+      Height = 21
+      Top = 0
+      Width = 82
+      MaxValue = 1000
+      OnChange = PreviewClick
+      TabOrder = 1
+    end
+    object YLo: TSpinEdit
+      Left = 118
+      Height = 21
+      Top = 40
+      Width = 82
+      MaxValue = 1000
+      OnChange = PreviewClick
+      TabOrder = 2
+    end
+    object YHi: TSpinEdit
+      Left = 206
+      Height = 21
+      Top = 40
+      Width = 82
+      MaxValue = 1000
+      OnChange = PreviewClick
+      TabOrder = 3
+    end
+    object ZLo: TSpinEdit
+      Left = 118
+      Height = 21
+      Top = 88
+      Width = 82
+      MaxValue = 1000
+      OnChange = PreviewClick
+      TabOrder = 4
+    end
+    object ZHi: TSpinEdit
+      Left = 206
+      Height = 21
+      Top = 88
+      Width = 82
+      MaxValue = 1000
+      OnChange = PreviewClick
+      TabOrder = 5
+    end
+    object CutoutBiasDrop: TComboBox
+      Left = 118
+      Height = 19
+      Top = 128
+      Width = 170
+      ItemHeight = 13
+      Items.Strings = (
+        '0.1 Dark'
+        '0.2'
+        '0.3'
+        '0.4'
+        '0.5'
+        '0.6'
+        '0.7'
+        '0.8'
+        '0.9 Light'
+      )
+      OnChange = PreviewClick
+      Style = csOwnerDrawFixed
+      TabOrder = 6
+    end
+    object CutoutLUTDrop: TComboBox
+      Left = 118
+      Height = 19
+      Top = 168
+      Width = 170
+      ItemHeight = 13
+      OnChange = PreviewClick
+      Style = csOwnerDrawFixed
+      TabOrder = 7
+    end
+  end
+  object PreviewBtn: TButton
+    Left = 128
+    Height = 25
+    Top = 304
+    Width = 75
+    Caption = 'Preview'
+    OnClick = PreviewClick
+    TabOrder = 2
+    Visible = False
+  end
+  object DefBtn: TButton
+    Left = 128
+    Height = 25
+    Top = 272
+    Width = 75
+    Caption = 'Defaults'
+    OnClick = DefBtnClick
+    TabOrder = 3
+  end
+  object OKBtn: TButton
+    Left = 237
+    Height = 25
+    Top = 272
+    Width = 75
+    Caption = 'OK'
+    OnClick = OKBtnClick
+    TabOrder = 4
+  end
+  object PreviewBtn1: TButton
+    Left = 16
+    Height = 25
+    Top = 272
+    Width = 75
+    Caption = 'Preview'
+    OnClick = PreviewBtn1Click
+    TabOrder = 1
+  end
+end

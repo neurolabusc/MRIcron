@@ -1,0 +1,66 @@
+{ This is an automatically generated lazarus resource file }
+
+LazarusResources.Add('TSpreadForm','FORMDATA',[
+  'TPF0'#11'TSpreadForm'#10'SpreadForm'#4'Left'#3#145#1#6'Height'#3#26#2#3'Top'
+  +#3#183#0#5'Width'#3'F'#1#13'ActiveControl'#7#8'DataGrid'#7'Caption'#6#29'Vox'
+  +'elwise Analysis of Lesions'#12'ClientHeight'#3#26#2#11'ClientWidth'#3'F'#1#9
+  +'Font.Name'#6#13'MS Sans Serif'#4'Menu'#7#9'MainMenu1'#7'OnClose'#7#9'FormCl'
+  +'ose'#8'OnCreate'#7#10'FormCreate'#8'OnResize'#7#10'FormResize'#8'Position'#7
+  +#14'poScreenCenter'#10'LCLVersion'#6#8'0.9.30.2'#0#11'TStringGrid'#8'DataGri'
+  +'d'#4'Left'#2#0#6'Height'#3#242#1#3'Top'#2#25#5'Width'#3'F'#1#5'Align'#7#8'a'
+  +'lClient'#9'FixedRows'#2#2#7'Options'#11#15'goFixedVertLine'#10'goVertLine'
+  +#10'goHorzLine'#13'goRangeSelect'#19'goDrawFocusSelected'#6'goTabs'#15'goThu'
+  +'mbTracking'#0#8'RowCount'#2#12#8'TabOrder'#2#0#14'TitleFont.Name'#6#13'MS S'
+  +'ans Serif'#10'OnDrawCell'#7#16'DataGridDrawCell'#10'OnKeyPress'#7#16'DataGr'
+  +'idKeyPress'#11'OnMouseDown'#7#17'DataGridMouseDown'#11'OnMouseMove'#7#17'Da'
+  +'taGridMouseMove'#12'OnSelectCell'#7#18'DataGridSelectCell'#0#0#8'TToolBar'#8
+  +'ToolBar1'#4'Left'#2#0#6'Height'#2#25#3'Top'#2#0#5'Width'#3'F'#1#11'EdgeBord'
+  +'ers'#11#0#8'TabOrder'#2#1#0#12'TSpeedButton'#9'DesignBtn'#4'Left'#2#1#6'Hei'
+  +'ght'#2#22#4'Hint'#6#5'ANOVA'#3'Top'#2#0#5'Width'#2'x'#7'Caption'#6#6'Design'
+  +#10'Glyph.Data'#10'z'#1#0#0'v'#1#0#0'BMv'#1#0#0#0#0#0#0'v'#0#0#0'('#0#0#0' '
+  +#0#0#0#16#0#0#0#1#0#4#0#0#0#0#0#0#1#0#0#0#0#0#0#0#0#0#0#16#0#0#0#16#0#0#0#0#0
+  +#0#0#0#0#128#0#0#128#0#0#0#128#128#0#128#0#0#0#128#0#128#0#128#128#0#0#127
+  +#127#127#0#191#191#191#0#0#0#255#0#0#255#0#0#0#255#255#0#255#0#0#0#255#0#255
+  +#0#255#255#0#0#255#255#255#0'3s3s3s3s3'#127'?'#127'?'#127'?'#127'3sssssss?'
+  +#127#127#127#127#127#127#127'w'#0#0#0#0#0#0#0'wwwwwwww3'#3'33<3333'#127#255
+  +'37'#243'3?7'#9#147'3<33'#153'7ws'#243'7'#243'3w3'#3'93<393?'#127#247#255#247
+  +#255#247#255'w'#7'w'#151'|w'#151'wwwwwwwww3'#3'3'#147'<3'#147'33'#127'3s'#247
+  +#243's37'#3'39<9337'#127'377'#247'333'#3'33'#153#147'33?'#127#255#255'w'#127
+  +#255#255'w'#7'ww|wwwwwwwwwww3'#3'33<3'#3'33'#127'337'#255#127#243'7'#3'33<'#0
+  +#0'<7'#127'337ww73'#3'33<3'#3'3?'#127#255#255#247#255#127#255'w'#7'wwwwwwwww'
+  +'wwwww3333333333333333'#9'NumGlyphs'#2#2#7'OnClick'#7#14'DesignBtnClick'#8'S'
+  +'howHint'#9#14'ParentShowHint'#8#0#0#0#10'TStatusBar'#10'StatusBar1'#4'Left'
+  +#2#0#6'Height'#2#15#3'Top'#3#11#2#5'Width'#3'F'#1#6'Panels'#14#1#5'Width'#3
+  +#140#0#0#1#5'Width'#2'2'#0#0#11'SimplePanel'#8#0#0#9'TMainMenu'#9'MainMenu1'
+  +#4'left'#2'l'#3'top'#2','#0#9'TMenuItem'#5'File1'#7'Caption'#6#5'&File'#0#9
+  +'TMenuItem'#4'New1'#7'Caption'#6#6'New...'#8'ShortCut'#3'N@'#7'OnClick'#7#11
+  +'NewBtnClick'#0#0#9'TMenuItem'#5'Open1'#7'Caption'#6#7'Open...'#8'ShortCut'#3
+  +'O@'#7'OnClick'#7#12'OpenBtnClick'#0#0#9'TMenuItem'#5'Save1'#7'Caption'#6#4
+  +'Save'#8'ShortCut'#3'S@'#7'OnClick'#7#12'SaveBtnClick'#0#0#9'TMenuItem'#5'Qu'
+  +'it1'#7'Caption'#6#12'Close window'#8'ShortCut'#3'W@'#7'OnClick'#7#10'Quit1C'
+  +'lick'#0#0#0#9'TMenuItem'#5'Edit1'#7'Caption'#6#4'Edit'#0#9'TMenuItem'#5'Cop'
+  +'y1'#7'Caption'#6#4'Copy'#8'ShortCut'#3'C@'#7'OnClick'#7#10'Copy1Click'#0#0#9
+  +'TMenuItem'#6'Paste1'#7'Caption'#6#5'Paste'#8'ShortCut'#3'V@'#7'OnClick'#7#11
+  +'Paste1Click'#0#0#9'TMenuItem'#10'Selectall1'#7'Caption'#6#16'Select all cel'
+  +'ls'#8'ShortCut'#3'A@'#7'OnClick'#7#15'Selectall1Click'#0#0#9'TMenuItem'#14
+  +'Clearallcells1'#7'Caption'#6#18'Clear all cells...'#7'OnClick'#7#19'Clearal'
+  +'lcells1Click'#0#0#9'TMenuItem'#15'DescriptiveMenu'#7'Caption'#6#12'Descript'
+  +'ives'#7'OnClick'#7#16'DescriptiveClick'#0#0#0#9'TMenuItem'#4'View'#7'Captio'
+  +'n'#6#4'View'#0#9'TMenuItem'#5'Font1'#7'Caption'#6#4'Font'#0#9'TMenuItem'#3
+  +'N81'#3'Tag'#2#8#7'Caption'#6#1'8'#7'Checked'#9#10'GroupIndex'#2'o'#9'RadioI'
+  +'tem'#9#7'OnClick'#7#14'FontSizeChange'#0#0#9'TMenuItem'#4'N101'#3'Tag'#2#10
+  +#7'Caption'#6#2'10'#10'GroupIndex'#2'o'#9'RadioItem'#9#7'OnClick'#7#14'FontS'
+  +'izeChange'#0#0#9'TMenuItem'#4'N121'#3'Tag'#2#12#7'Caption'#6#2'12'#10'Group'
+  +'Index'#2'o'#9'RadioItem'#9#7'OnClick'#7#14'FontSizeChange'#0#0#9'TMenuItem'
+  +#4'N141'#3'Tag'#2#14#7'Caption'#6#2'14'#10'GroupIndex'#2'o'#9'RadioItem'#9#7
+  +'OnClick'#7#14'FontSizeChange'#0#0#0#9'TMenuItem'#7'Design1'#7'Caption'#6#6
+  +'Design'#8'ShortCut'#3'D@'#7'OnClick'#7#14'DesignBtnClick'#0#0#0#9'TMenuItem'
+  +#5'Help1'#7'Caption'#6#5'&Help'#0#9'TMenuItem'#18'Aboutthissoftware1'#7'Capt'
+  +'ion'#6#20'&About this software'#7'OnClick'#7#23'Aboutthissoftware1Click'#0#0
+  +#0#0#11'TOpenDialog'#11'OpenDialog1'#10'DefaultExt'#6#4'.val'#6'Filter'#6'<N'
+  +'ative [val]|.val|Tab delimited text [txt]|.txt|All files|.*'#11'FilterIndex'
+  +#2#0#4'left'#2'$'#3'top'#2','#0#0#11'TSaveDialog'#11'SaveDialog1'#10'Default'
+  +'Ext'#6#4'.val'#6'Filter'#6'8Native format [val]|*.val|Tab delimited text [t'
+  +'xt]|*.txt'#11'FilterIndex'#2#0#7'Options'#11#17'ofOverwritePrompt'#14'ofHid'
+  +'eReadOnly'#0#4'left'#2'J'#3'top'#2','#0#0#0
+]);

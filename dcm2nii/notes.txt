@@ -1,0 +1,180 @@
+Siemens DICOM always uses scanner coordinates to specify diffusion directions according to Michael Harms [mharms@conte.wustl.edu]
+
+
+We to specify a custom set of directions using entries in a DiffusionVectors.txt file even for the VB13 and VB17 product ep2d_diff sequence, although I think this capability requires a separately purchased license.  (What at one point was probably a WIP-only feature got built into the product sequence already by the time of VB13).
+
+Within that DiffusionVectors.txt file, one can specify whether the values are interpreted in a "xyz" or "prs" coordinate system.
+
+>From old WIP_ep2d_diff documentation I have the following:
+------
+For the directive CoordinateSystem two different values are allowed:
+• "xyz" specifies that this vector set is to be played out in the magnet coordinate system.
+• "prs" makes the sequence to use the rotation matrix of the current slice, i.e. the phase-read-slice gradient axis system is used.
+------
+
+Everyone here at WU that uses custom directions always plays them out in the XYZ coordinate system.  HOWEVER, the coordinate system used in playing out the gradients should be irrelevant if one is reading the directions out of the **DICOM**.  That is, even if someone specified a custom gradient set to play out in the PRS coordinate system, the directions in the DICOM should still be STORED in the +LPS DICOM coordinate system, meaning that they would still need to be rotated for an oblique acquisition.
+
+If your Siemen's contact, or your VD11 Skyra user indicates otherwise, then I think I'll pull my hair out!!
+
+
+Hi Chris, Jolinda,
+
+Ok, you guys are really not going to like me, but now that we seem to be reaching a consensus on the issue of rotation for VB13-VB17, I wanted to make sure you were aware of the issue of possibly incorrect bvecs under VB13, which is a completely orthogonal issue.
+
+First, I should note that the B_matrix entry in the CSA field of the DICOM is correct for VB13-VB17 (according to Siemens -- see below).
+These B_matrix entries include the impact of the imaging gradients on the B matrix.
+
+Unfortunately, the algorithm that Siemen's used to convert the B_matrix entry into an "equivalent" principle eigendirection yields incorrect results in some instances for VB13.  You may have noticed that the 2- norm of DiffusionGradientDirections (thenceforth DGD, as stored in the
+DICOM) are not necessarily 1.000 for VB13 data.  Both dcm2nii and MRIConvert return directions with a norm of exactly 1.0000, so both programs must be re-norming to exactly 1 behind the scenes as a final step prior to output.  
+
+HOWEVER, norming the magnitude of the direction to 1 is NOT sufficient to recover from the error in Siemen's algorithm.  For example, I have a case from a VB13 dataset (using a custom 30 direction set) where the norm for one of the DGD was only 0.16.  For that case, I computed the first eigenvector of the B_matrix (using Matlab's 'princomp' function).
+The resulting direction (which should be the "correct" one) differed from the DGD entry in the DICOM by 12.5 degrees, which indicates that simply re-norming the reported DGD values to 1.0 is indeed NOT SUFFICIENT to guarantee "correct" bvecs for VB13 data.
+
+This is a semi-known issue, and is presumably the reason that the DicomToNrrd and Nipy converters include options to re-derive the direction from the B_matrix.
+
+i.e.,
+http://mail.scipy.org/pipermail/nipy-devel/2010-September/004768.html
+
+and this snippet of email passed on to me by Darren Gitelman:
+
+-------
+3) When I corresponded with Mark Scully and Hans Johnson who wrote the dicom2nrrd convertor they suggested that there are standard Siemens tags for the gradients and there are gradients that one obtains from the B matrix. They say the former is wrong. I had written to them that when DTIstudio extracted the gradients from the mosaic image it agreed with dicom2nrrd but only if I did not use the dicom2nrrd option "useBMatrixGradientDirections" which they told me to use.  There response was as follows:
+
+        As to DTIstudio agreeing with the output of DicomToNrrd when run
+        without useBMatrixGradientDirections, I assume DTIstudio is
+        reading the standard tags for direction?  If that's the case,
+        it's getting the same wrong data as DicomToNrrd gets when it
+        doesn't use the BMatrix.  The whole reason we made it possible
+        to use the BMatrix to calculate the gradients and B values is
+        because the standard tags were wrong in a subset of our Siemens
+        scans.
+
+--------
+
+Unfortunately, I have no idea how frequently the DGD entries may be wrong under VB13, and whether or not custom gradient sets are more likely to be affected by the bug than "built-in" gradient sets.  I'm actually going to email Mark and Hans next to see if they have a sense for that.
+
+Also, I should mention that I was told by Siemen's that the DGD for VB17 are correct, and for VB15 are "correct" up to polarity.  Specifically, here is what Stefan Huwer of Siemen's emailed to me regarding this
+issue:
+
+---------
+regarding software versions and issues with the diffusion gradient
+direction:
+
+VB13: B_matrix field correct, diffusion_direction sometimes wrong. 
+VB15: B_matrix field correct, diffusion_direction correct (up to polarity). 
+VB17: B_matrix correct, diffusion_direction correct
+
+--------
+
+So, why do I bring this all up?  First, you (and others) should be aware of the issue, and perhaps I should make some additions to your Word document to explain the issue.  That said, I'm not expecting that either MRIConvert or dcm2nii would be modified to include an option to derive the directions from the B_matrix, as that is a rather major software addition.  However, it might be appropriate to include a warning message along the lines of the following for VB13 data:
+
+"Warning: bvecs are sometimes wrong for VB13 data, due to a bug in the algorithm by which Siemen's converted the B_matrix to a principle eigendirection.  The frequency and extent of this problem is unknown at this time".
+
+And for VB15 data:
+"Warning: Polarity of the bvecs may possibly be wrong for VB15 data."
+
+cheers,
+-MH
+
+--
+Michael Harms, Ph.D.
+--------------------------------------------------------------------
+Conte Center for the Neuroscience of Mental Disorders Washington University School of Medicine Department of Psychiatry, Box 8134
+Renard Hospital, Room 6604           Tel: 314-747-6173
+660 South Euclid Ave.                Fax: 314-747-2182
+St. Louis, MO 63110                  Email: mharms@wustl.edu
+--------------------------------------------------------------------
+
+
+FYI: It sounds like Hans Johnson and Mark Scully (emails in header
+below) have probably seen just about every "modern" vendor/software combination possible.  So, they might be a resource if you wanted to understand GE and Philips better, although it sounds like they might not have much experience with the oblique acquisition issue.
+
+cheers,
+-MH
+
+-------- Forwarded Message --------
+From: Johnson, Hans J <hans-johnson@uiowa.edu>
+To: Michael Harms <mharms@conte.wustl.edu>, Scully, Mark S <mark- scully@uiowa.edu>
+Cc: Joy Matsui <joy-matsui@uiowa.edu>
+Subject: Re: DicomToNrrd specifics
+Date: Thu, 31 Mar 2011 21:30:26 +0000
+Michael,
+
+We feel your pain.  We are working on a 32 site study, and we see just about every kind of data possible.
+
+I'm getting this from memory, so take that into consideration.
+
+I believe that VB13 had 2 gradients incorrect (gradient 14,15 in our 30 direction scan).
+
+The "useBMatrixGradientDirections" does not take scan obliquenss into account, it simply recomputes the values that should have been in the public dicom tags in the first place.  I am saying this without every having dealt with oblique DWI scans.
+
+====
+Just wait until you get to deal with phillips data :)  It is really fun!
+
+
+--
+Hans J. Johnson, Ph.D.
+hans-johnson@uiowa.edu
+Assistant Professor of Psychiatry
+University of Iowa Carver College of Medicine
+W278 GH, 200 Hawkins Drive
+
+Iowa City, Iowa 52242
+Phone:  319-353-8587
+
+
+
+
+
+
+
+-----Original Message-----
+From: Michael Harms <mharms@conte.wustl.edu>
+Date: Thu, 31 Mar 2011 15:29:47 -0500
+To: Mark Scully <mark-scully@uiowa.edu>, Hans Johnson <hans-johnson@uiowa.edu>
+Cc: <mharms@conte.wustl.edu>
+Subject: DicomToNrrd specifics
+
+
+Hello Mark and Hans,
+
+I've been conversing with Jolinda Smith (MRIConvert), Chris Rorden
+(dcm2nii) and others (Darren Gittelman, Fred Tam) regarding some issues with getting bvecs from Siemens VB13, VB15, and VB17 DICOMs.
+
+Darren indicated to me that he had the following correspondence with you
+previously:
+
+----------
+3) When I corresponded with Mark Scully and Hans Johnson who wrote the dicom2nrrd convertor they suggested that there are standard Siemens tags for the gradients and there are gradients that one obtains from the B matrix. They say the former is wrong. I had written to them that when DTIstudio extracted the gradients from the mosaic image it agreed with dicom2nrrd but only if I did not use the dicom2nrrd option "useBMatrixGradientDirections" which they told me to use.  There response was as follows:
+
+        As to DTIstudio agreeing with the output of DicomToNrrd when run
+        without useBMatrixGradientDirections, I assume DTIstudio is
+        reading the standard tags for direction?  If that's the case,
+        it's getting the same wrong data as DicomToNrrd gets when it
+        doesn't use the BMatrix.  The whole reason we made it possible
+        to use the BMatrix to calculate the gradients and B values is
+        because the standard tags were wrong in a subset of our Siemens
+        scans.
+
+--------
+
+It is my understanding, in emails with Stefan Huwer at Siemens, that the issue of possibly incorrect entries in the DiffusionGradientDirection
+("DGD") entry in the CSA portion of the Siemen's DICOM, is only for VB13 (although the polarity of the DGD's can be off by 180 degrees for VB15 data).  Is that your understanding and experience as well?
+
+Do you have any empirical sense of the frequency and extent of this problem under VB13?  e.g., What percentage of directions are affected on average?  And are certain directions consistently affected across different sessions?
+
+Also, on a different different issue, does DicomToNrrd rotate the DGD entries (or alternatively the B_matrix if using the "useBMatrixGradientDirections" option) for oblique acquisitions for VB13-VB17?
+
+[I know this latter issue would be easy enough to test, but I've already spent a ton of time on this annoying issue, so I hope you don't mind me just asking you directly, so that I don't have to learn another dicom converter.  I'm trying to see if I can't get agreement among various converter developers regarding the necessity of rotating the DGD entries (or B_matrix) for oblique VB13-VB17 acquisitions -- just today I brought Jolinda and Chris around to this position, so I wanted to see what your understanding was of the Siemens/ oblique acquisition/ bvec rotation issue].
+
+Thanks!
+-MH
+
+--
+Michael Harms, Ph.D.
+--------------------------------------------------------------------
+Conte Center for the Neuroscience of Mental Disorders Washington University School of Medicine Department of Psychiatry, Box 8134
+Renard Hospital, Room 6604           Tel: 314-747-6173
+660 South Euclid Ave.                Fax: 314-747-2182
+St. Louis, MO 63110                  Email: mharms@wustl.edu
+--------------------------------------------------------------------

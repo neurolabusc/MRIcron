@@ -1,0 +1,51 @@
+object MNIForm: TMNIForm
+  Left = 444
+  Height = 32
+  Top = 300
+  Width = 264
+  HorzScrollBar.Page = 263
+  VertScrollBar.Page = 53
+  ActiveControl = XEdit
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'MNI position'
+  ClientHeight = 32
+  ClientWidth = 264
+  Constraints.MaxHeight = 32
+  Constraints.MaxWidth = 264
+  Constraints.MinHeight = 32
+  Constraints.MinWidth = 264
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '0.9.29'
+  object XEdit: TSpinEdit
+    Left = 16
+    Height = 21
+    Top = 4
+    Width = 66
+    MaxValue = 200
+    MinValue = -200
+    OnChange = XEditChange
+    TabOrder = 0
+  end
+  object YEdit: TSpinEdit
+    Left = 96
+    Height = 21
+    Top = 4
+    Width = 66
+    MaxValue = 200
+    MinValue = -200
+    OnChange = XEditChange
+    TabOrder = 1
+  end
+  object ZEdit: TSpinEdit
+    Left = 176
+    Height = 21
+    Top = 4
+    Width = 66
+    MaxValue = 200
+    MinValue = -200
+    OnChange = XEditChange
+    TabOrder = 2
+  end
+end

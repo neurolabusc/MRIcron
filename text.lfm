@@ -1,0 +1,47 @@
+object TextForm: TTextForm
+  Left = 417
+  Height = 480
+  Top = 195
+  Width = 696
+  HorzScrollBar.Page = 695
+  VertScrollBar.Page = 459
+  ActiveControl = MemoT
+  Caption = 'Descriptive Statistics'
+  ClientHeight = 480
+  ClientWidth = 696
+  Font.Height = -11
+  Menu = MainMenu1
+  OnCreate = FormCreate
+  LCLVersion = '0.9.30.2'
+  object MemoT: TMemo
+    Left = 0
+    Height = 480
+    Top = 0
+    Width = 696
+    Align = alClient
+    ScrollBars = ssVertical
+    TabOrder = 0
+  end
+  object MainMenu1: TMainMenu
+    left = 112
+    top = 10
+    object File1: TMenuItem
+      Caption = 'File'
+      object Save1: TMenuItem
+        Caption = 'Save'
+        OnClick = Save1Click
+      end
+      object Closewindow1: TMenuItem
+        Caption = 'Close window'
+        OnClick = Closewindow1Click
+      end
+    end
+    object Copy1: TMenuItem
+      Caption = 'Edit'
+      object Copy2: TMenuItem
+        Caption = 'Copy'
+        OnClick = Copy2Click
+      end
+    end
+  end
+end

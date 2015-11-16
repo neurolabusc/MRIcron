@@ -1,0 +1,50 @@
+{ This is an automatically generated lazarus resource file }
+
+LazarusResources.Add('TMainForm','FORMDATA',[
+  'TPF0'#9'TMainForm'#8'MainForm'#4'Left'#3#20#2#6'Height'#3'k'#1#3'Top'#2'i'#5
+  +'Width'#3'V'#2#13'ActiveControl'#7#6'Panel1'#14'AllowDropFiles'#9#11'BorderW'
+  +'idth'#2#1#7'Caption'#6#7'dcm2nii'#12'ClientHeight'#3'k'#1#11'ClientWidth'#3
+  +'V'#2#4'Menu'#7#9'MainMenu1'#7'OnClose'#7#9'FormClose'#8'OnCreate'#7#10'Form'
+  +'Create'#11'OnDropFiles'#7#13'FormDropFiles'#6'OnShow'#7#8'FormShow'#8'Posit'
+  +'ion'#7#14'poScreenCenter'#10'LCLVersion'#6#7'1.4.2.0'#0#5'TMemo'#5'Memo1'#4
+  +'Left'#2#5#6'Height'#3'A'#1#3'Top'#2'%'#5'Width'#3'L'#2#5'Align'#7#8'alClien'
+  +'t'#18'BorderSpacing.Left'#2#4#17'BorderSpacing.Top'#2#2#19'BorderSpacing.Ri'
+  +'ght'#2#4#20'BorderSpacing.Bottom'#2#4#10'ScrollBars'#7#14'ssAutoVertical'#8
+  +'TabOrder'#2#0#0#0#6'TPanel'#6'Panel1'#4'Left'#2#1#6'Height'#2'"'#3'Top'#2#1
+  +#5'Width'#3'T'#2#5'Align'#7#5'alTop'#10'BevelOuter'#7#6'bvNone'#11'BorderWid'
+  +'th'#2#2#11'BorderStyle'#7#8'bsSingle'#12'ClientHeight'#2'"'#11'ClientWidth'
+  +#3'T'#2#8'TabOrder'#2#1#0#6'TLabel'#6'Label1'#4'Left'#2#1#6'Height'#2#26#3'T'
+  +'op'#2#5#5'Width'#3#140#0#9'Alignment'#7#14'taRightJustify'#7'Anchors'#11#6
+  +'akLeft'#0#8'AutoSize'#8#7'Caption'#6#16'Output Format:  '#11'ParentColor'#8
+  +#0#0#9'TComboBox'#9'TypeCombo'#4'Left'#3#160#0#6'Height'#2#20#3'Top'#2#3#5'W'
+  +'idth'#3#8#1#10'ItemHeight'#2#0#13'Items.Strings'#1#6#24'SPM2 (3D Anlyze hdr'
+  +'/img)'#6#23'SPM5 (3D NIfTI hdr/img)'#6#19'SPM8 (3D NIfTI nii)'#6#16'4D NIfT'
+  +'I hdr/img'#6#23'FSL/SPM8 (4D NIfTI nii)'#6#29'Compressed FSL (4D NIfTI nii)'
+  +#0#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#0#0#0#0#11'TOpenDialog'#10'Op'
+  +'enHdrDlg'#11'FilterIndex'#2#0#4'left'#2#24#3'top'#2'0'#0#0#9'TMainMenu'#9'M'
+  +'ainMenu1'#4'left'#2'X'#3'top'#2'0'#0#9'TMenuItem'#9'AppleMenu'#7'Caption'#6
+  +#3#239#163#191#7'Visible'#8#0#9'TMenuItem'#10'ApplePrefs'#7'Caption'#6#11'Pr'
+  +'eferences'#7'OnClick'#7#17'Preferences1Click'#0#0#0#9'TMenuItem'#5'File1'#7
+  +'Caption'#6#4'File'#0#9'TMenuItem'#13'DICOMtoNIfTI1'#7'Caption'#6#14'DICOM t'
+  +'o NIfTI'#8'ShortCut'#3'D@'#7'OnClick'#7#15'dcm2niiBtnClick'#0#0#9'TMenuItem'
+  +#12'ModifyNIfTI1'#7'Caption'#6#12'Modify NIfTI'#7'OnClick'#7#17'ModifyNIfTI1'
+  +'Click'#0#0#9'TMenuItem'#10'NIfTI3D4D1'#7'Caption'#6#14'NIfTI 3D -> 4D'#7'On'
+  +'Click'#7#15'NIfTI3D4D1Click'#0#0#9'TMenuItem'#15'AnonymizeDICOM1'#7'Caption'
+  +#6#15'Anonymize DICOM'#7'OnClick'#7#20'AnonymizeDICOM1Click'#0#0#9'TMenuItem'
+  +#5'Exit1'#7'Caption'#6#4'Exit'#7'OnClick'#7#10'Exit1Click'#0#0#0#9'TMenuItem'
+  +#5'Edit1'#7'Caption'#6#4'Edit'#0#9'TMenuItem'#5'Copy1'#7'Caption'#6#4'Copy'#7
+  +'OnClick'#7#10'Copy1Click'#0#0#0#9'TMenuItem'#12'UntestedMenu'#7'Caption'#6#8
+  +'Untested'#0#9'TMenuItem'#17'MirrorXdimension1'#7'Caption'#6#18'Mirror X-dim'
+  +'ension'#7'OnClick'#7#22'MirrorXdimension1Click'#0#0#9'TMenuItem'#7'SumTPM1'
+  +#7'Caption'#6#7'Sum TPM'#7'OnClick'#7#12'SumTPM1Click'#0#0#9'TMenuItem'#17'E'
+  +'xtractDICOMdims1'#7'Caption'#6#18'Extract DICOM dims'#7'OnClick'#7#22'Extra'
+  +'ctDICOMdims1Click'#0#0#9'TMenuItem'#16'ExtractDICOMhdr1'#7'Caption'#6#20'Ex'
+  +'tract DICOM header'#7'OnClick'#7#21'ExtractDICOMhdr1Click'#0#0#9'TMenuItem'
+  +#17'ExtractNIfTIhdrs1'#7'Caption'#6#20'Extract NIfTI header'#7'OnClick'#7#22
+  +'ExtractNIfTIhdrs1Click'#0#0#9'TMenuItem'#10'HalveMenu1'#7'Caption'#6#25'Hal'
+  +'ve dimensions in-plane'#7'OnClick'#7#15'HalveMenu1Click'#0#0#0#9'TMenuItem'
+  +#5'Help1'#7'Caption'#6#4'Help'#0#9'TMenuItem'#12'Preferences1'#7'Caption'#6
+  +#11'Preferences'#7'OnClick'#7#17'Preferences1Click'#0#0#9'TMenuItem'#6'About'
+  +'1'#7'Caption'#6#4'Help'#7'OnClick'#7#11'About1Click'#0#0#0#0#22'TSelectDire'
+  +'ctoryDialog'#22'SelectDirectoryDialog1'#4'left'#3#216#1#0#0#0
+]);

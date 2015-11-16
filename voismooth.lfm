@@ -1,0 +1,127 @@
+object voismoothform: Tvoismoothform
+  Left = 650
+  Height = 222
+  Top = 241
+  Width = 252
+  ActiveControl = XROIfwhm
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'Blur VOI'
+  ClientHeight = 222
+  ClientWidth = 252
+  Constraints.MaxHeight = 222
+  Constraints.MaxWidth = 252
+  Constraints.MinHeight = 222
+  Constraints.MinWidth = 252
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '0.9.29'
+  object Label37: TLabel
+    Left = 12
+    Height = 17
+    Top = 46
+    Width = 62
+    Caption = 'Threshold'
+    Font.CharSet = ANSI_CHARSET
+    ParentColor = False
+    ParentFont = False
+  end
+  object CancelBtn: TSpeedButton
+    Left = 94
+    Height = 25
+    Hint = 'Save to small-endian [Intel] format'
+    Top = 167
+    Width = 66
+    Caption = 'Cancel'
+    Color = clBtnFace
+    NumGlyphs = 0
+    OnClick = BtnClick
+    ShowHint = True
+    ParentShowHint = False
+  end
+  object OKBtn: TSpeedButton
+    Tag = 1
+    Left = 165
+    Height = 25
+    Hint = 'Save to big-endian [Sun] format'
+    Top = 167
+    Width = 66
+    Caption = 'OK'
+    Color = clBtnFace
+    NumGlyphs = 0
+    OnClick = BtnClick
+    ShowHint = True
+    ParentShowHint = False
+  end
+  object HelpBtn: TSpeedButton
+    Tag = 2
+    Left = 21
+    Height = 25
+    Top = 167
+    Width = 66
+    Caption = 'Help'
+    Color = clBtnFace
+    NumGlyphs = 0
+    OnClick = HelpBtnClick
+    ParentShowHint = False
+  end
+  object Label38: TLabel
+    Left = 12
+    Height = 17
+    Top = 9
+    Width = 143
+    Caption = 'Smoothing (FWHM mm)'
+    Font.CharSet = ANSI_CHARSET
+    ParentColor = False
+    ParentFont = False
+  end
+  object ScaleSides: TComboBox
+    Left = 12
+    Height = 21
+    Top = 84
+    Width = 229
+    ItemHeight = 13
+    Items.Strings = (
+      'Adjust sides in Z-plane only [SPM]'
+      'Adjust sides in X,Y and Z planes'
+    )
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object xROIoutput: TComboBox
+    Left = 12
+    Height = 21
+    Top = 117
+    Width = 229
+    ItemHeight = 13
+    Items.Strings = (
+      'ROI is 1 [reslice ROI]'
+      'ROI is 0 [SPM object mask]'
+    )
+    Style = csDropDownList
+    TabOrder = 1
+  end
+  object XROIthresh: TFloatSpinEdit
+    Left = 175
+    Height = 21
+    Top = 41
+    Width = 70
+    DecimalPlaces = 4
+    Increment = 0.00100000004749
+    MaxValue = 1
+    MinValue = 0
+    TabOrder = 2
+    Value = 1
+  end
+  object XROIfwhm: TSpinEdit
+    Left = 175
+    Height = 21
+    Top = 4
+    Width = 70
+    MaxValue = 40
+    MinValue = 1
+    TabOrder = 3
+    Value = 1
+  end
+end

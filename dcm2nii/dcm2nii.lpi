@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="9"/>
+    <PathDelim Value="\"/>
+    <General>
+      <Flags>
+        <LRSInOutputDirectory Value="False"/>
+      </Flags>
+      <MainUnit Value="0"/>
+    </General>
+    <BuildModes Count="1">
+      <Item1 Name="default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="\usr\X11R6\bin\xterm -T 'Lazarus Run Output' -e $(LazarusDir)\tools\runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <Units Count="36">
+      <Unit0>
+        <Filename Value="dcm2nii.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <TopLine Value="36"/>
+        <CursorPos X="28" Y="38"/>
+        <UsageCount Value="122"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="convert.pas"/>
+        <UnitName Value="convert"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="1438"/>
+        <CursorPos X="3" Y="1440"/>
+        <UsageCount Value="57"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="define_types.pas"/>
+        <TopLine Value="317"/>
+        <CursorPos Y="330"/>
+        <UsageCount Value="57"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="gzio2.pas"/>
+        <TopLine Value="1765"/>
+        <CursorPos X="7" Y="1784"/>
+        <UsageCount Value="57"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="dicom.pas"/>
+        <UnitName Value="dicom"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="41" Y="2"/>
+        <UsageCount Value="57"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="nodialogs.pas"/>
+        <CursorPos X="10" Y="5"/>
+        <UsageCount Value="54"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="lsjpeg.pas"/>
+        <TopLine Value="393"/>
+        <CursorPos X="20" Y="518"/>
+        <UsageCount Value="56"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="GraphicsMathLibrary.pas"/>
+        <TopLine Value="61"/>
+        <CursorPos Y="66"/>
+        <UsageCount Value="54"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="sortdicom.pas"/>
+        <TopLine Value="172"/>
+        <CursorPos X="24" Y="188"/>
+        <UsageCount Value="57"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="filename.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="122"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="dicomtypes.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="dicomtypes"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="306"/>
+        <CursorPos X="102" Y="310"/>
+        <UsageCount Value="122"/>
+        <Loaded Value="True"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="parconvert.pas"/>
+        <UnitName Value="parconvert"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="689"/>
+        <CursorPos X="28" Y="707"/>
+        <UsageCount Value="57"/>
+        <Loaded Value="True"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="..\..\junk\unit1.pas"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <CursorPos X="36" Y="7"/>
+        <UsageCount Value="3"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="nii4Dto3D.pas"/>
+        <TopLine Value="114"/>
+        <CursorPos X="53" Y="125"/>
+        <UsageCount Value="11"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="dicomfast.pas"/>
+        <TopLine Value="4"/>
+        <CursorPos X="6" Y="14"/>
+        <UsageCount Value="11"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="dicomcompat.pas"/>
+        <UnitName Value="dicomcompat"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1911"/>
+        <CursorPos X="71" Y="1911"/>
+        <UsageCount Value="11"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="dialogsx.pas"/>
+        <CursorPos X="10" Y="2"/>
+        <UsageCount Value="11"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="nii_4dto3d.pas"/>
+        <TopLine Value="113"/>
+        <CursorPos X="53" Y="124"/>
+        <UsageCount Value="11"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="nii_orient.pas"/>
+        <CursorPos X="39" Y="2"/>
+        <UsageCount Value="11"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="nii_crop.pas"/>
+        <CursorPos X="6" Y="2"/>
+        <UsageCount Value="11"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="paramstrs.pas"/>
+        <UnitName Value="paramstrs"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="178"/>
+        <CursorPos X="20" Y="182"/>
+        <UsageCount Value="11"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="readint.pas"/>
+        <CursorPos X="13" Y="6"/>
+        <UsageCount Value="10"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="userdir.pas"/>
+        <CursorPos X="31" Y="13"/>
+        <UsageCount Value="10"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="..\common\isgui.inc"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="10"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="..\common\define_types.pas"/>
+        <UnitName Value="define_types"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="6"/>
+        <CursorPos X="61" Y="7"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="..\common\gzio2.pas"/>
+        <UnitName Value="gzio2"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="20"/>
+        <CursorPos X="87" Y="33"/>
+        <UsageCount Value="10"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="..\common\GraphicsMathLibrary.pas"/>
+        <TopLine Value="547"/>
+        <CursorPos X="35" Y="552"/>
+        <UsageCount Value="10"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="..\common\dialogsx.pas"/>
+        <TopLine Value="28"/>
+        <CursorPos X="16" Y="44"/>
+        <UsageCount Value="10"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="prefs.pas"/>
+        <UnitName Value="prefs"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="9"/>
+        <CursorPos X="68" Y="21"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="..\common\userdir.pas"/>
+        <UsageCount Value="10"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="niftiutil.pas"/>
+        <TopLine Value="250"/>
+        <CursorPos Y="279"/>
+        <UsageCount Value="10"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="gui.pas"/>
+        <ComponentName Value="MainForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <CursorPos X="13" Y="8"/>
+        <UsageCount Value="10"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="..\..\..\..\..\..\usr\local\share\fpcsrc\packages\fv\src\dialogs.pas"/>
+        <TopLine Value="1025"/>
+        <CursorPos X="41" Y="1052"/>
+        <UsageCount Value="10"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="..\common\dicomhdr.pas"/>
+        <TopLine Value="18"/>
+        <CursorPos X="6" Y="33"/>
+        <UsageCount Value="10"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="..\common\nifti_hdr.pas"/>
+        <TopLine Value="1459"/>
+        <CursorPos X="41" Y="1473"/>
+        <UsageCount Value="10"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="..\..\..\..\..\..\usr\local\share\fpcsrc\rtl\objpas\sysutils\finah.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="15"/>
+        <CursorPos X="24" Y="25"/>
+        <UsageCount Value="10"/>
+      </Unit35>
+    </Units>
+    <JumpHistory Count="27" HistoryIndex="26">
+      <Position1>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="1199" Column="16" TopLine="1331"/>
+      </Position1>
+      <Position2>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="5" Column="11"/>
+      </Position2>
+      <Position3>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="438" Column="6" TopLine="422"/>
+      </Position3>
+      <Position4>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="506" Column="16" TopLine="490"/>
+      </Position4>
+      <Position5>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="507" Column="11" TopLine="491"/>
+      </Position5>
+      <Position6>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="508" Column="25" TopLine="492"/>
+      </Position6>
+      <Position7>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="511" Column="15" TopLine="495"/>
+      </Position7>
+      <Position8>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="517" Column="15" TopLine="501"/>
+      </Position8>
+      <Position9>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="431" Column="89" TopLine="427"/>
+      </Position9>
+      <Position10>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="707" Column="39" TopLine="691"/>
+      </Position10>
+      <Position11>
+        <Filename Value="dicomtypes.pas"/>
+        <Caret Line="191" Column="25" TopLine="184"/>
+      </Position11>
+      <Position12>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="707" Column="39" TopLine="702"/>
+      </Position12>
+      <Position13>
+        <Filename Value="dicomtypes.pas"/>
+        <Caret Line="191" Column="25" TopLine="185"/>
+      </Position13>
+      <Position14>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="4" Column="121"/>
+      </Position14>
+      <Position15>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="387" Column="23" TopLine="370"/>
+      </Position15>
+      <Position16>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="476" Column="25" TopLine="460"/>
+      </Position16>
+      <Position17>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="513" Column="26" TopLine="497"/>
+      </Position17>
+      <Position18>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="644" Column="30" TopLine="628"/>
+      </Position18>
+      <Position19>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="731" Column="23" TopLine="715"/>
+      </Position19>
+      <Position20>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="820" Column="27" TopLine="804"/>
+      </Position20>
+      <Position21>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="831" Column="30" TopLine="815"/>
+      </Position21>
+      <Position22>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="1072" Column="14" TopLine="969"/>
+      </Position22>
+      <Position23>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="387" Column="108" TopLine="377"/>
+      </Position23>
+      <Position24>
+        <Filename Value="parconvert.pas"/>
+        <Caret Line="707" Column="28" TopLine="689"/>
+      </Position24>
+      <Position25>
+        <Filename Value="dicomtypes.pas"/>
+        <Caret Line="191" Column="25" TopLine="181"/>
+      </Position25>
+      <Position26>
+        <Filename Value="prefs.pas"/>
+        <Caret Line="6" Column="70" TopLine="9"/>
+      </Position26>
+      <Position27>
+        <Filename Value="..\common\define_types.pas"/>
+        <Caret Line="5" Column="19"/>
+      </Position27>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <PathDelim Value="\"/>
+    <SearchPaths>
+      <OtherUnitFiles Value="..\common"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <UseAnsiStrings Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
+    <CodeGeneration>
+      <Optimizations>
+        <OptimizationLevel Value="2"/>
+      </Optimizations>
+    </CodeGeneration>
+    <Linking>
+      <Debugging>
+        <GenerateDebugInfo Value="False"/>
+        <UseLineInfoUnit Value="False"/>
+        <StripSymbols Value="True"/>
+      </Debugging>
+      <LinkSmart Value="True"/>
+    </Linking>
+    <Other>
+      <ConfigFile>
+        <ConfigFilePath Value=""/>
+      </ConfigFile>
+    </Other>
+  </CompilerOptions>
+</CONFIG>
