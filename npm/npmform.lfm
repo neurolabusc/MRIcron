@@ -5,17 +5,17 @@ object MainForm: TMainForm
   Width = 542
   ActiveControl = Memo1
   Caption = 'Non-Parametric Mapping'
-  ClientHeight = 418
+  ClientHeight = 393
   ClientWidth = 542
   Menu = MainMenu1
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.5'
+  LCLVersion = '1.6.0.2'
   object Memo1: TMemo
     Left = 0
-    Height = 393
+    Height = 368
     Top = 0
     Width = 542
     Align = alClient
@@ -25,7 +25,7 @@ object MainForm: TMainForm
   object Panel1: TPanel
     Left = 0
     Height = 25
-    Top = 393
+    Top = 368
     Width = 542
     Align = alBottom
     ClientHeight = 25

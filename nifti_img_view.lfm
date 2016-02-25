@@ -1,12 +1,12 @@
 object ImgForm: TImgForm
-  Left = 250
+  Left = 414
   Height = 469
-  Top = 173
+  Top = 250
   Width = 1025
   ActiveControl = ControlPanel
   AllowDropFiles = True
   Caption = 'MRIcroN'
-  ClientHeight = 469
+  ClientHeight = 444
   ClientWidth = 1025
   Menu = MainMenu1
   OnClose = FormClose
@@ -18,7 +18,7 @@ object ImgForm: TImgForm
   OnResize = FormResize
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.5'
+  LCLVersion = '1.6.0.2'
   object ControlPanel: TPanel
     Left = 0
     Height = 40
@@ -35,15 +35,15 @@ object ImgForm: TImgForm
     OnDblClick = ControlPanelDblClick
     object LabelX: TLabel
       Left = 6
-      Height = 16
+      Height = 17
       Top = 12
-      Width = 8
+      Width = 9
       Caption = 'X'
       ParentColor = False
     end
     object LabelY: TLabel
       Left = 81
-      Height = 16
+      Height = 17
       Top = 12
       Width = 8
       Caption = 'Y'
@@ -51,9 +51,9 @@ object ImgForm: TImgForm
     end
     object LabelZ: TLabel
       Left = 153
-      Height = 16
+      Height = 17
       Top = 12
-      Width = 8
+      Width = 9
       Caption = 'Z'
       ParentColor = False
     end
@@ -386,7 +386,7 @@ object ImgForm: TImgForm
       end
       object LayerDrop: TComboBox
         Left = 4
-        Height = 20
+        Height = 27
         Top = 4
         Width = 116
         ItemHeight = 0
@@ -404,10 +404,10 @@ object ImgForm: TImgForm
       end
       object MinWindowEdit: TFloatSpinEdit
         Left = 153
-        Height = 16
+        Height = 27
         Top = 4
         Width = 88
-        DecimalPlaces = 4
+        DecimalPlaces = 5
         Increment = 1
         MaxValue = 9999999
         MinValue = -9999999
@@ -417,10 +417,10 @@ object ImgForm: TImgForm
       end
       object MaxWindowEdit: TFloatSpinEdit
         Left = 245
-        Height = 16
+        Height = 27
         Top = 4
         Width = 88
-        DecimalPlaces = 4
+        DecimalPlaces = 5
         Increment = 1
         MaxValue = 9999999
         MinValue = -9999999
@@ -430,7 +430,7 @@ object ImgForm: TImgForm
       end
       object LUTdrop: TComboBox
         Left = 340
-        Height = 20
+        Height = 31
         Top = 5
         Width = 100
         DropDownCount = 66
@@ -445,7 +445,7 @@ object ImgForm: TImgForm
     end
     object ZoomDrop: TComboBox
       Left = 225
-      Height = 20
+      Height = 31
       Top = 8
       Width = 79
       DropDownCount = 12
@@ -472,7 +472,7 @@ object ImgForm: TImgForm
     end
     object XViewEdit: TSpinEdit
       Left = 24
-      Height = 16
+      Height = 27
       Top = 12
       Width = 52
       MinValue = 1
@@ -482,7 +482,7 @@ object ImgForm: TImgForm
     end
     object YViewEdit: TSpinEdit
       Left = 97
-      Height = 16
+      Height = 27
       Top = 12
       Width = 52
       MinValue = 1
@@ -492,7 +492,7 @@ object ImgForm: TImgForm
     end
     object ZViewEdit: TSpinEdit
       Left = 169
-      Height = 16
+      Height = 27
       Top = 12
       Width = 52
       MinValue = 1
@@ -870,7 +870,7 @@ object ImgForm: TImgForm
   object MagPanel: TPanel
     Left = 0
     Height = 18
-    Top = 451
+    Top = 426
     Width = 1025
     Align = alBottom
     BevelOuter = bvNone
@@ -879,9 +879,9 @@ object ImgForm: TImgForm
     TabOrder = 1
     object StatusLabel: TLabel
       Left = 2
-      Height = 16
+      Height = 17
       Top = 2
-      Width = 133
+      Width = 141
       Caption = '  No Images Loaded  '
       ParentColor = False
     end
@@ -898,25 +898,25 @@ object ImgForm: TImgForm
   end
   object Panel1: TPanel
     Left = 0
-    Height = 411
+    Height = 386
     Top = 40
     Width = 1025
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 411
+    ClientHeight = 386
     ClientWidth = 1025
     TabOrder = 2
     object TriplePanel: TScrollBox
       Tag = 666
       Left = 0
-      Height = 411
+      Height = 386
       Top = 0
       Width = 1025
       HorzScrollBar.Page = 775
       VertScrollBar.Page = 250
       Align = alClient
-      ClientHeight = 396
-      ClientWidth = 1010
+      ClientHeight = 384
+      ClientWidth = 1023
       Constraints.MinWidth = 5
       Color = clBlack
       ParentColor = False
@@ -939,9 +939,9 @@ object ImgForm: TImgForm
       object PGImageSag: TImage
         Tag = 3
         Cursor = crCross
-        Left = 323
+        Left = 32
         Height = 12
-        Top = 110
+        Top = 1
         Width = 12
         AutoSize = True
         OnDblClick = PGImageCorDblClick
@@ -1276,34 +1276,40 @@ object ImgForm: TImgForm
       end
       object Nudge1: TMenuItem
         Caption = 'Nudge'
-        object Up1: TMenuItem
-          Caption = 'Left'
-          OnClick = Up1Click
-        end
         object Left1: TMenuItem
+          Caption = 'Left'
+          ShortCut = 24652
+          OnClick = Left1Click
+        end
+        object Right1: TMenuItem
           Tag = 1
           Caption = 'Right'
-          OnClick = Up1Click
-        end
-        object LeftX1: TMenuItem
-          Tag = 2
-          Caption = 'Posterior'
-          OnClick = Up1Click
-        end
-        object RightX1: TMenuItem
-          Tag = 3
-          Caption = 'Anterior'
-          OnClick = Up1Click
+          ShortCut = 24658
+          OnClick = Left1Click
         end
         object Posterior1: TMenuItem
+          Tag = 2
+          Caption = 'Posterior'
+          ShortCut = 24656
+          OnClick = Left1Click
+        end
+        object Anterior1: TMenuItem
+          Tag = 3
+          Caption = 'Anterior'
+          ShortCut = 24641
+          OnClick = Left1Click
+        end
+        object Inferior1: TMenuItem
           Tag = 4
           Caption = 'Inferior'
-          OnClick = Up1Click
+          ShortCutKey2 = 24649
+          OnClick = Left1Click
         end
-        object Posterior2: TMenuItem
+        object Superior1: TMenuItem
           Tag = 5
           Caption = 'Superior'
-          OnClick = Up1Click
+          ShortCutKey2 = 24659
+          OnClick = Left1Click
         end
       end
       object n5: TMenuItem

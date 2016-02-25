@@ -183,12 +183,12 @@ MNIMenu: TMenuItem;
 	Menu2DSmooth: TMenuItem;
 	VOI2NII: TMenuItem;
 	Nudge1: TMenuItem;
-	Up1: TMenuItem;
 	Left1: TMenuItem;
-	LeftX1: TMenuItem;
-	RightX1: TMenuItem;
+	Right1: TMenuItem;
 	Posterior1: TMenuItem;
-	Posterior2: TMenuItem;
+	Anterior1: TMenuItem;
+	Inferior1: TMenuItem;
+	Superior1: TMenuItem;
         YokeMenu: TMenuItem;
         procedure Extract1Click(Sender: TObject);
         procedure NewWindow1Click(Sender: TObject);
@@ -329,7 +329,7 @@ procedure UpdateColorSchemes;
 	procedure VOI2NIIClick(Sender: TObject);
 	procedure TtoP1Click(Sender: TObject);
 	procedure DesignVALClick(Sender: TObject);
-	procedure Up1Click(Sender: TObject);
+	procedure Left1Click(Sender: TObject);
         procedure SetShareMem (lXmm,lYmm,lZmm: single);
         procedure CreateShareMem;
         procedure CloseShareMem;
@@ -455,11 +455,20 @@ YokeTimer.Enabled := false;
 {$ENDIF}
 end;
 
+{$IFDEF COMPILEYOKE}
+var
+  isNewYoke : boolean = false;
+{$ENDIF}
+
 procedure TImgForm.SetShareMem (lXmm,lYmm,lZmm: single);
 begin
 {$IFDEF COMPILEYOKE}
   if not gYoke then
          exit;
+  if isNewYoke then begin
+     isNewYoke := false;
+     exit;
+  end;
   SetShareFloats(lXmm,lYmm,lZmm);
 
 {$ENDIF}
@@ -482,19 +491,16 @@ begin
   if not gYoke then
      YokeTimer.Enabled := false;
   {$IFDEF COMPILEYOKE}
-  //labelx.caption := inttostr(random(888));
   if not gYoke then
      exit;
-  //LabelX.caption := inttostr(random(888));
   if not GetShareFloats(lXmm,lYmm,lZmm) then
      exit;
-  //LabelY.caption := inttostr(random(888));
   MMToImgCoord(lX,lY,lZ,lXmm,lYmm,lZmm);
   if lX <> XViewEdit.value then XViewEdit.value := lX;
   if lY <> YViewEdit.value then YViewEdit.value := lY;
   if lZ <> ZViewEdit.value then ZViewEdit.value := lZ;
   XViewEditChange(nil);
-
+  isNewYoke := true;
   {$ENDIF}
 end;
 
@@ -581,9 +587,11 @@ begin
   //STR
   //lIniFile.WriteString('STR', 'FSLDIR',gBGImg.FSLDIR);
   //lIniFile.WriteString('STR', 'FSLBETEXE',gBGImg.FSLBETEXE);
+
   lIniFile.WriteString('STR', 'FSLBASE',gBGImg.FSLBASE);
   lIniFile.WriteString('STR', 'FSLOUTPUTTYPE',gBGImg.FSLOUTPUTTYPE);
   //Booleans
+  lIniFile.WriteString('BOOL', 'LoadUInt16asFloat32',Bool2Char(gBGImg.LoadUInt16asFloat32));
   lIniFile.WriteString('BOOL', 'Reslice',Bool2Char(gBGImg.ResliceOnLoad));
   lIniFile.WriteString('BOOL', 'ResliceOrtho',Bool2Char(gBGImg.OrthoReslice));
   lIniFile.WriteString('BOOL', 'ShowDraw',Bool2Char(gBGImg.ShowDraw));
@@ -714,6 +722,7 @@ begin
   //gBGImg.FSLDIR := lIniFile.ReadString('STR', 'FSLDIR', gBGImg.FSLDIR);
   //gBGImg.FSLBETEXE := lIniFile.ReadString('STR', 'FSLBETEXE', gBGImg.FSLBETEXE);
   gBGImg.FSLBASE := lIniFile.ReadString('STR', 'FSLBASE', gBGImg.FSLBASE);
+  gBGImg.LoadUInt16asFloat32 := IniBool(lIniFile,'LoadUInt16asFloat32', gBGImg.LoadUInt16asFloat32);
 
   gBGImg.ResliceOnLoad := IniBool(lIniFile,'Reslice',gBGImg.ResliceOnLoad);
   gBGImg.OrthoReslice := IniBool(lIniFile,'ResliceOrtho',gBGImg.OrthoReslice);
@@ -1437,7 +1446,7 @@ begin
       YViewEdit.Value := Bound ( round(gBGImg.ScrnOri[2]),1,round(YViewEdit.MaxValue));
       ZViewEdit.Value := Bound ( round(gBGImg.ScrnOri[3]),1,round(ZViewEdit.MaxValue));
 	 //ImgForm.Caption := extractfilename(paramstr(0))+' - '+lFilename;
-	 StatusLabel.caption := 'opened: '+lFilename;
+      StatusLabel.caption := 'Opened: '+lFilename;
 
 	 Result := true;
   //LayerDrop.ItemIndex := 0;
@@ -1676,8 +1685,11 @@ begin
         {$ENDIF}
  {$ENDIF}
 {$IFDEF Darwin}
-        {$IFNDEF LCLgtk} //only for Carbon compile
+        {$IFNDEF LCLgtk} //only for Carbon or Cocoa compile
         Exit1.visible := false;//with OSX users quit from application menu
+        {$ENDIF}
+        {$IFDEF LCLcocoa}
+        Application.OnDropFiles := FormDropFiles;
         {$ENDIF}
  {$ENDIF}
      CreateFX8(gUndoImg);
@@ -1720,7 +1732,7 @@ begin
 	 Zoomdrop.SetItemIndex(0);
 	 LayerDrop.SetItemIndex(0);
   {$ELSE}
-  Application.OnDropFiles := FormDropFiles;
+
 	 LUTdrop.ItemIndex:=(0);
 	 Zoomdrop.ItemIndex:=(0);
 	 LayerDrop.ItemIndex:=(0);
@@ -2068,8 +2080,11 @@ begin
    lX := X; lY := Y;
    lImage := Sender as TImage;
    if lImage.Name = PGImageCor.Name {'PGImageCor'} then lPanel := kCoroView0
-   else if lImage.Name = PGImageSag.Name {'PGImageSag'} then lPanel := kSagView0
-   else lPanel := kAxView0;
+   else if lImage.Name = PGImageSag.Name {'PGImageSag'} then begin
+        lPanel := kSagView0;
+        //LabelX.Caption:=inttostr(random(888));
+
+   end else lPanel := kAxView0;
 
 
    //lImage.Canvas.Pen.Width := 1;
@@ -3110,6 +3125,9 @@ procedure TImgForm.AutoContrastBtnClick(Sender: TObject);
 var
 	lLayer: integer;
 begin
+  //ImgForm.PGImageSag.Refresh;
+  //caption := inttostr(ImgForm.PGImageSag.left) +'x'+inttostr(ImgForm.PGImageSag.Top) ;
+  //exit;
 	 lLayer := ActiveLayer;
 	MinWindowEdit.Value := raw2ScaledIntensity(gMRIcroOverlay[lLayer], gMRIcroOverlay[lLayer].AutoBalMinUnscaled);
 	MaxWindowEdit.Value := raw2ScaledIntensity(gMRIcroOverlay[lLayer],gMRIcroOverlay[lLayer].AutoBalMaxUnscaled);{}
@@ -4728,11 +4746,13 @@ begin
   {$ENDIF}
 
  if (ParamCount  < 1) then begin
-  ImgForm.OpenTemplateMRU(nil);
-                RefreshImagesTimer.enabled := true;
-                               exit;
-
-	end;
+    lRender := gBGImg.Prompt4DVolume;
+    gBGImg.Prompt4DVolume := false;
+    ImgForm.OpenTemplateMRU(nil);
+    gBGImg.Prompt4DVolume := lRender;
+    RefreshImagesTimer.enabled := true;
+    exit;
+  end;
 	lMaximize := false;
 	lRender := false;
 	lMultislice := false;
@@ -5009,7 +5029,7 @@ begin
 	//SpreadForm.Show;
 end;
 
-procedure TImgForm.Up1Click(Sender: TObject);
+procedure TImgForm.Left1Click(Sender: TObject);
 var lVolVox,lPos,lShift: integer;
 begin
   if gMRIcroOverlay[kBGOverlayNum].ScrnBufferItems=0 then begin

@@ -3,14 +3,15 @@ unit dialogsx;
 {$H+}
 interface
 uses
-        //,IniFiles
+{$IFDEF GUI}dialogs, {$ENDIF}
 SysUtils;
-                                      
+
+{$IFNDEF GUI}
 type
   TMsgDlgBtn = (mbYes, mbNo, mbOK, mbCancel, mbAbort, mbRetry, mbIgnore, mbAll, mbNoToAll, mbYesToAll, mbHelp);
   TMsgDlgButtons = set of TMsgDlgBtn;
   TMsgDlgType = (mtWarning, mtError, mtInformation, mtConfirmation, mtCustom);
-
+{$ENDIF}
 //procedure Msg (lStr: string);
 procedure ShowMsg (lStr: string);
 procedure msgfx (a,b,c,d: double); overload; //fx used to help debugging - reports number values
@@ -28,7 +29,7 @@ const
  mrAbort = 1;//	idAbort
  mrNo = 0;
 implementation
-{$IFDEF GUI}uses readint,dialogs; {$ENDIF}
+{$IFDEF GUI}uses readint; {$ENDIF}
 
 procedure Msg (lStr: string);
 begin
@@ -151,4 +152,4 @@ end;
 
 
 end.
- 
+ 

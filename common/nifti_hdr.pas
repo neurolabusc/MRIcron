@@ -847,7 +847,6 @@ begin
   end;
   FixDataType(lHdr);
   result := true;
-
   if  IsNifTiMagic(lHdr.niftiHdr) then begin  //must match MAGMA in nifti_img
 	 lOri[1] := (lHdr.NIFTIhdr.dim[1]+1) div 2;
 	 lOri[2] := (lHdr.NIFTIhdr.dim[2]+1) div 2;
@@ -888,8 +887,6 @@ begin
 	 end; //added 4Mar2006 -> corrects for improperly signed offset values...
           lHdr.NIfTItransform := true;//NIfTI 12/2010
   end else begin //not NIFT: Analyze
-
-
           lHdr.NIfTItransform := false;//Analyze
 	  if not lHdr.DiskDataNativeEndian then begin
 		NIFTIhdr_SwapBytes (lHdr.niftiHdr);
@@ -958,6 +955,7 @@ begin
 		0,0,lHdr.NIFTIhdr.pixdim[3],(lOri[3]-1)*-lHdr.NIFTIhdr.pixdim[3],      // 3D "graphics" matrix
 		0,0,0,1);
   end;
+
   FixCrapMat(lHdr.Mat);
   if swapEndian then
     lHdr.DiskDataNativeEndian := false;//foreign data with swapped image data

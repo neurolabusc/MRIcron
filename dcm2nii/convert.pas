@@ -1378,10 +1378,10 @@ begin
 
               if (lDICOMdata.PhaseEncoding[1]='C') then begin//columns
                  lAHdr.pixdim[6] :=  1000/lDICOMdata.BandwidthPerPixelPhaseEncode/lAHdr.dim[2];
-                 lAHdr.slice_duration:= lAHdr.pixdim[6] * lAHdr.dim[2];
+                 lAHdr.slice_duration:= 0;
               end else begin  //rows
                   lAHdr.pixdim[6] :=  1000/lDICOMdata.BandwidthPerPixelPhaseEncode/lAHdr.dim[1];
-                  lAHdr.slice_duration:= lAHdr.pixdim[6] * lAHdr.dim[1];
+                  lAHdr.slice_duration:= 0;
                   //dcmMsg(inttostr(lAHdr.dim[1]));
               end;
               AddNiiDescrip(lAHdr,';dwell='+realtostr( lAHdr.pixdim[6],3));

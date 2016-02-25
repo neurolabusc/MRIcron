@@ -1,16 +1,12 @@
 unit dicomcompat;
 interface
-uses
+{$Include ../Common/isgui.inc}
 //{$Define Troubleshoot}
 {$DEFINE read00189117}  //Support Philips shameful DTI usage
 {$DEFINE read20011003}  //Support Philips Shameful DTI usage
-
-{$IFDEF FPC}
-gzio2,
-{$ELSE}
-gziod,
-{$ENDIF}
-
+uses
+{$IFDEF GUI}dialogs, {$ENDIF}
+{$IFDEF FPC}gzio2,{$ELSE}gziod,{$ENDIF}
   SysUtils,Classes,define_types,filename,dicomtypes,dicomfastread,prefs,convertsimple, csaread,dialogs_msg;
 {$H+}
 var

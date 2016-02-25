@@ -1,22 +1,22 @@
 object HdrForm: THdrForm
-  Left = 607
-  Height = 383
-  Top = 155
-  Width = 560
+  Left = 606
+  Height = 451
+  Top = 154
+  Width = 609
   ActiveControl = PageControl1
   Caption = 'NIfTI Header Information'
-  ClientHeight = 383
-  ClientWidth = 560
+  ClientHeight = 426
+  ClientWidth = 609
   Menu = MainMenu1
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.5'
+  LCLVersion = '1.6.0.2'
   object PageControl1: TPageControl
     Left = 4
-    Height = 360
+    Height = 403
     Top = 4
-    Width = 552
+    Width = 601
     ActivePage = TabRequired
     Align = alClient
     BorderSpacing.Left = 2
@@ -29,100 +29,100 @@ object HdrForm: THdrForm
     OnChange = PageControl1Change
     object TabRequired: TTabSheet
       Caption = 'Dimensions'
-      ClientHeight = 321
-      ClientWidth = 546
+      ClientHeight = 368
+      ClientWidth = 595
       OnContextPopup = TabRequiredContextPopup
       object Label21: TLabel
         Left = 6
-        Height = 16
+        Height = 17
         Top = 6
-        Width = 79
+        Width = 84
         Caption = 'Header Type'
         ParentColor = False
       end
       object Label1: TLabel
         Left = 14
-        Height = 16
+        Height = 17
         Top = 35
-        Width = 268
+        Width = 285
         Caption = 'Dimension   Length     Spacing            Unit'
         ParentColor = False
       end
       object Label2: TLabel
         Left = 16
-        Height = 16
+        Height = 17
         Top = 67
-        Width = 44
+        Width = 50
         Caption = 'I Space'
         ParentColor = False
       end
       object Label3: TLabel
         Left = 16
-        Height = 16
+        Height = 17
         Top = 97
-        Width = 44
+        Width = 50
         Caption = 'J Space'
         ParentColor = False
       end
       object Label4: TLabel
         Left = 16
-        Height = 16
+        Height = 17
         Top = 131
-        Width = 49
+        Width = 55
         Caption = 'K Space'
         ParentColor = False
       end
       object Label8: TLabel
         Left = 6
-        Height = 16
+        Height = 17
         Top = 297
-        Width = 29
+        Width = 32
         Caption = 'Data'
         ParentColor = False
       end
       object Label7: TLabel
         Left = 294
-        Height = 16
+        Height = 17
         Top = 235
-        Width = 38
+        Width = 40
         Caption = 'Offset'
         ParentColor = False
       end
       object Label44: TLabel
         Left = 16
-        Height = 16
+        Height = 17
         Top = 166
-        Width = 31
+        Width = 33
         Caption = 'Time'
         ParentColor = False
       end
       object Label29: TLabel
         Left = 16
-        Height = 16
+        Height = 17
         Top = 198
-        Width = 51
+        Width = 55
         Caption = '5th Dim'
         ParentColor = False
       end
       object Label41: TLabel
         Left = 16
-        Height = 16
+        Height = 17
         Top = 230
-        Width = 51
+        Width = 55
         Caption = '6th Dim'
         ParentColor = False
       end
       object Label42: TLabel
         Left = 16
-        Height = 16
+        Height = 17
         Top = 265
-        Width = 51
+        Width = 55
         Caption = '7th Dim'
         ParentColor = False
       end
       object HeaderMagicDrop: TComboBox
         Left = 108
-        Height = 20
+        Height = 31
         Top = 2
         Width = 239
         ItemHeight = 0
@@ -139,7 +139,7 @@ object HdrForm: THdrForm
       end
       object Endian: TComboBox
         Left = 231
-        Height = 20
+        Height = 31
         Top = 291
         Width = 210
         ItemHeight = 0
@@ -152,7 +152,7 @@ object HdrForm: THdrForm
       end
       object fTypeDrop: TComboBox
         Left = 56
-        Height = 20
+        Height = 31
         Top = 291
         Width = 152
         DropDownCount = 20
@@ -181,7 +181,7 @@ object HdrForm: THdrForm
       end
       object xyzt_sizeDrop: TComboBox
         Left = 262
-        Height = 20
+        Height = 31
         Top = 87
         Width = 128
         ItemHeight = 0
@@ -197,7 +197,7 @@ object HdrForm: THdrForm
       end
       object xyzt_timeDrop: TComboBox
         Left = 262
-        Height = 20
+        Height = 31
         Top = 157
         Width = 128
         ItemHeight = 0
@@ -215,7 +215,7 @@ object HdrForm: THdrForm
       end
       object Xdim: TSpinEdit
         Left = 80
-        Height = 16
+        Height = 27
         Top = 59
         Width = 74
         MaxValue = 9999
@@ -226,7 +226,7 @@ object HdrForm: THdrForm
       end
       object Ydim: TSpinEdit
         Left = 80
-        Height = 16
+        Height = 27
         Top = 89
         Width = 74
         MaxValue = 9999
@@ -238,7 +238,7 @@ object HdrForm: THdrForm
       end
       object Zdim: TSpinEdit
         Left = 80
-        Height = 16
+        Height = 27
         Top = 123
         Width = 74
         MaxValue = 9999
@@ -250,9 +250,10 @@ object HdrForm: THdrForm
       end
       object Xmm: TFloatSpinEdit
         Left = 164
-        Height = 16
+        Height = 27
         Top = 59
-        Width = 74
+        Width = 88
+        DecimalPlaces = 4
         Increment = 1
         MaxValue = 99999999
         MinValue = -99999999
@@ -261,9 +262,10 @@ object HdrForm: THdrForm
       end
       object Ymm: TFloatSpinEdit
         Left = 164
-        Height = 16
+        Height = 27
         Top = 89
-        Width = 74
+        Width = 88
+        DecimalPlaces = 4
         Increment = 1
         MaxValue = 99999999
         MinValue = -99999999
@@ -272,9 +274,10 @@ object HdrForm: THdrForm
       end
       object Zmm: TFloatSpinEdit
         Left = 164
-        Height = 16
+        Height = 27
         Top = 123
-        Width = 74
+        Width = 88
+        DecimalPlaces = 4
         Increment = 1
         MaxValue = 99999999
         MinValue = -99999999
@@ -283,7 +286,7 @@ object HdrForm: THdrForm
       end
       object OffsetEdit: TSpinEdit
         Left = 342
-        Height = 16
+        Height = 27
         Top = 230
         Width = 94
         MaxValue = 999999
@@ -293,7 +296,7 @@ object HdrForm: THdrForm
       end
       object TDim: TSpinEdit
         Left = 80
-        Height = 16
+        Height = 27
         Top = 157
         Width = 74
         MaxValue = 9999
@@ -305,9 +308,9 @@ object HdrForm: THdrForm
       end
       object TSec: TFloatSpinEdit
         Left = 164
-        Height = 16
+        Height = 27
         Top = 157
-        Width = 74
+        Width = 88
         DecimalPlaces = 4
         Increment = 1
         MaxValue = 99999999
@@ -317,7 +320,7 @@ object HdrForm: THdrForm
       end
       object Dim5Edit: TSpinEdit
         Left = 80
-        Height = 16
+        Height = 27
         Top = 191
         Width = 74
         MaxValue = 35000
@@ -329,7 +332,7 @@ object HdrForm: THdrForm
       end
       object Dim6Edit: TSpinEdit
         Left = 80
-        Height = 16
+        Height = 27
         Top = 223
         Width = 74
         MaxValue = 35000
@@ -341,7 +344,7 @@ object HdrForm: THdrForm
       end
       object Dim7Edit: TSpinEdit
         Left = 80
-        Height = 16
+        Height = 27
         Top = 258
         Width = 74
         MaxValue = 35000
@@ -353,9 +356,9 @@ object HdrForm: THdrForm
       end
       object PixDim5: TFloatSpinEdit
         Left = 164
-        Height = 16
+        Height = 27
         Top = 191
-        Width = 74
+        Width = 88
         DecimalPlaces = 4
         Increment = 1
         MaxValue = 99999999
@@ -365,9 +368,9 @@ object HdrForm: THdrForm
       end
       object PixDim6: TFloatSpinEdit
         Left = 164
-        Height = 16
+        Height = 27
         Top = 223
-        Width = 74
+        Width = 88
         DecimalPlaces = 4
         Increment = 1
         MaxValue = 99999999
@@ -377,9 +380,9 @@ object HdrForm: THdrForm
       end
       object PixDim7: TFloatSpinEdit
         Left = 164
-        Height = 16
+        Height = 27
         Top = 258
-        Width = 74
+        Width = 88
         DecimalPlaces = 4
         Increment = 1
         MaxValue = 99999999
@@ -390,11 +393,11 @@ object HdrForm: THdrForm
     end
     object TabSheet4: TTabSheet
       Caption = 'Reorient'
-      ClientHeight = 329
-      ClientWidth = 528
+      ClientHeight = 368
+      ClientWidth = 595
       object Label24: TLabel
         Left = 10
-        Height = 18
+        Height = 17
         Top = 184
         Width = 9
         Caption = 'X'
@@ -402,63 +405,63 @@ object HdrForm: THdrForm
       end
       object Label36: TLabel
         Left = 10
-        Height = 18
+        Height = 17
         Top = 218
-        Width = 9
+        Width = 8
         Caption = 'Y'
         ParentColor = False
       end
       object Label37: TLabel
         Left = 10
-        Height = 18
+        Height = 17
         Top = 251
-        Width = 8
+        Width = 9
         Caption = 'Z'
         ParentColor = False
       end
       object Label39: TLabel
         Left = 10
-        Height = 18
+        Height = 17
         Top = 123
-        Width = 61
+        Width = 62
         Caption = 'Q Offsets'
         ParentColor = False
       end
       object Label40: TLabel
         Left = 10
-        Height = 18
+        Height = 17
         Top = 86
-        Width = 76
+        Width = 84
         Caption = 'Quaternions'
         ParentColor = False
       end
       object Label46: TLabel
         Left = 10
-        Height = 18
+        Height = 17
         Top = 46
-        Width = 109
+        Width = 110
         Caption = 'qFactor [1 or -1]'
         ParentColor = False
       end
       object Label38: TLabel
         Left = 4
-        Height = 18
+        Height = 17
         Top = 9
-        Width = 150
+        Width = 163
         Caption = 'Quaternion parameters '
         ParentColor = False
       end
       object Label47: TLabel
         Left = 4
-        Height = 18
+        Height = 17
         Top = 157
-        Width = 118
+        Width = 125
         Caption = 'Affine parameters '
         ParentColor = False
       end
       object QFormDrop: TComboBox
         Left = 150
-        Height = 20
+        Height = 31
         Top = 5
         Width = 260
         ItemHeight = 0
@@ -476,7 +479,7 @@ object HdrForm: THdrForm
       end
       object SFormDrop: TComboBox
         Left = 145
-        Height = 20
+        Height = 31
         Top = 150
         Width = 204
         ItemHeight = 0
@@ -494,223 +497,223 @@ object HdrForm: THdrForm
       end
       object srow_x0Edit: TFloatSpinEdit
         Left = 34
-        Height = 16
+        Height = 27
         Top = 188
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 9999
-        MinValue = -9999
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 7
         Value = 1
       end
       object srow_x1Edit: TFloatSpinEdit
         Left = 142
-        Height = 16
+        Height = 27
         Top = 188
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 9999
-        MinValue = -9999
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 8
-        Value = 1
+        Value = 0
       end
       object srow_x2Edit: TFloatSpinEdit
         Left = 254
-        Height = 16
+        Height = 27
         Top = 188
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 9999
-        MinValue = -9999
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 9
-        Value = 1
+        Value = 0
       end
       object srow_y0Edit: TFloatSpinEdit
         Left = 34
-        Height = 16
+        Height = 27
         Top = 222
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 9999
-        MinValue = -9999
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 11
-        Value = 1
+        Value = 0
       end
       object srow_y1Edit: TFloatSpinEdit
         Left = 142
-        Height = 16
+        Height = 27
         Top = 222
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 9999
-        MinValue = -9999
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 12
         Value = 1
       end
       object srow_y2Edit: TFloatSpinEdit
         Left = 254
-        Height = 16
+        Height = 27
         Top = 222
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 9999
-        MinValue = -9999
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 13
-        Value = 1
+        Value = 0
       end
       object srow_z0Edit: TFloatSpinEdit
         Left = 34
-        Height = 16
+        Height = 27
         Top = 255
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 9999
-        MinValue = -9999
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 15
-        Value = 1
+        Value = 0
       end
       object srow_z1Edit: TFloatSpinEdit
         Left = 142
-        Height = 16
+        Height = 27
         Top = 255
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 9999
-        MinValue = -9999
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 16
-        Value = 1
+        Value = 0
       end
       object srow_z2Edit: TFloatSpinEdit
         Left = 254
-        Height = 16
+        Height = 27
         Top = 255
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 9999
-        MinValue = -9999
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 17
         Value = 1
       end
       object srow_x3Edit: TFloatSpinEdit
         Left = 366
-        Height = 16
+        Height = 27
         Top = 188
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 9999
-        MinValue = -9999
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 10
-        Value = 1
+        Value = 0
       end
       object srow_y3Edit: TFloatSpinEdit
         Left = 366
-        Height = 16
+        Height = 27
         Top = 222
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 9999
-        MinValue = -9999
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 14
-        Value = 1
+        Value = 0
       end
       object srow_z3Edit: TFloatSpinEdit
         Left = 366
-        Height = 16
+        Height = 27
         Top = 255
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 9999
-        MinValue = -9999
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 18
-        Value = 1
+        Value = 0
       end
       object quatern_bEdit: TFloatSpinEdit
         Left = 94
-        Height = 16
+        Height = 27
         Top = 84
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 100
-        MinValue = 0
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 1
-        Value = 1
+        Value = 0
       end
       object quatern_cEdit: TFloatSpinEdit
         Left = 212
-        Height = 16
+        Height = 27
         Top = 84
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 100
-        MinValue = 0
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 2
-        Value = 1
+        Value = 0
       end
       object quatern_dEdit: TFloatSpinEdit
         Left = 332
-        Height = 16
+        Height = 27
         Top = 84
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 100
-        MinValue = 0
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 3
-        Value = 1
+        Value = 0
       end
-      object qoffset_xEdit: TFloatSpinEdit
+      object qoffset_x_Edit: TFloatSpinEdit
         Left = 94
-        Height = 16
+        Height = 27
         Top = 117
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 100
-        MinValue = 0
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 4
-        Value = 1
+        Value = 0
       end
-      object qoffset_yEdit: TFloatSpinEdit
+      object qoffset_y_Edit: TFloatSpinEdit
         Left = 212
-        Height = 16
+        Height = 27
         Top = 117
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 100
-        MinValue = 0
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 5
-        Value = 1
+        Value = 0
       end
-      object qoffset_zEdit: TFloatSpinEdit
+      object qoffset_z_Edit: TFloatSpinEdit
         Left = 332
-        Height = 16
+        Height = 27
         Top = 117
         Width = 100
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 100
-        MinValue = 0
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 6
-        Value = 1
+        Value = 0
       end
       object QFacEdit: TFloatSpinEdit
         Left = 140
-        Height = 16
+        Height = 27
         Top = 46
         Width = 100
         DecimalPlaces = 5
@@ -723,59 +726,59 @@ object HdrForm: THdrForm
     end
     object TabSheet3: TTabSheet
       Caption = 'Image Intensity'
-      ClientHeight = 321
-      ClientWidth = 546
+      ClientHeight = 368
+      ClientWidth = 595
       object Label12: TLabel
         Left = 24
-        Height = 16
+        Height = 17
         Top = 163
-        Width = 62
+        Width = 67
         Caption = 'Maximum'
         ParentColor = False
       end
       object Label13: TLabel
         Left = 24
-        Height = 16
+        Height = 17
         Top = 129
-        Width = 59
+        Width = 64
         Caption = 'Minimum'
         ParentColor = False
       end
       object Label23: TLabel
         Left = 24
-        Height = 16
+        Height = 17
         Top = 28
-        Width = 34
+        Width = 38
         Caption = 'Slope'
         ParentColor = False
       end
       object Label22: TLabel
         Left = 24
-        Height = 16
+        Height = 17
         Top = 64
-        Width = 56
+        Width = 62
         Caption = 'Intercept'
         ParentColor = False
       end
       object Label30: TLabel
         Left = 6
-        Height = 16
+        Height = 17
         Top = 4
-        Width = 118
+        Width = 130
         Caption = 'Calibration Scaling'
         ParentColor = False
       end
       object Label33: TLabel
         Left = 6
-        Height = 16
+        Height = 17
         Top = 103
-        Width = 199
+        Width = 220
         Caption = 'Display Range (calibrated units)'
         ParentColor = False
       end
       object cmax: TFloatSpinEdit
         Left = 94
-        Height = 16
+        Height = 27
         Top = 165
         Width = 110
         DecimalPlaces = 5
@@ -787,7 +790,7 @@ object HdrForm: THdrForm
       end
       object cmin: TFloatSpinEdit
         Left = 94
-        Height = 16
+        Height = 27
         Top = 129
         Width = 110
         DecimalPlaces = 5
@@ -799,7 +802,7 @@ object HdrForm: THdrForm
       end
       object Scale: TFloatSpinEdit
         Left = 94
-        Height = 16
+        Height = 27
         Top = 28
         Width = 110
         DecimalPlaces = 5
@@ -811,7 +814,7 @@ object HdrForm: THdrForm
       end
       object Intercept: TFloatSpinEdit
         Left = 94
-        Height = 16
+        Height = 27
         Top = 64
         Width = 110
         DecimalPlaces = 5
@@ -824,43 +827,43 @@ object HdrForm: THdrForm
     end
     object TabSheet1: TTabSheet
       Caption = 'Statistics'
-      ClientHeight = 321
-      ClientWidth = 546
+      ClientHeight = 368
+      ClientWidth = 595
       object Label35: TLabel
         Left = 8
-        Height = 16
+        Height = 17
         Top = 14
-        Width = 57
+        Width = 61
         Caption = 'Intention'
         ParentColor = False
       end
       object Label25: TLabel
         Left = 24
-        Height = 16
+        Height = 17
         Top = 46
-        Width = 76
+        Width = 82
         Caption = 'Parameter 1'
         ParentColor = False
       end
       object Label27: TLabel
         Left = 24
-        Height = 16
+        Height = 17
         Top = 83
-        Width = 76
+        Width = 82
         Caption = 'Parameter 2'
         ParentColor = False
       end
       object Label28: TLabel
         Left = 24
-        Height = 16
+        Height = 17
         Top = 118
-        Width = 76
+        Width = 82
         Caption = 'Parameter 3'
         ParentColor = False
       end
       object IntentCodeDrop: TComboBox
         Left = 76
-        Height = 20
+        Height = 27
         Top = 8
         Width = 218
         DropDownCount = 44
@@ -909,7 +912,7 @@ object HdrForm: THdrForm
       end
       object intent_p1Edit: TFloatSpinEdit
         Left = 110
-        Height = 16
+        Height = 27
         Top = 46
         Width = 138
         DecimalPlaces = 5
@@ -921,7 +924,7 @@ object HdrForm: THdrForm
       end
       object intent_p2Edit: TFloatSpinEdit
         Left = 110
-        Height = 16
+        Height = 27
         Top = 83
         Width = 138
         DecimalPlaces = 5
@@ -933,7 +936,7 @@ object HdrForm: THdrForm
       end
       object intent_p3Edit: TFloatSpinEdit
         Left = 110
-        Height = 16
+        Height = 27
         Top = 119
         Width = 138
         DecimalPlaces = 5
@@ -945,39 +948,39 @@ object HdrForm: THdrForm
       end
       object EcodeLabel: TLabel
         Left = 8
-        Height = 16
+        Height = 17
         Top = 144
-        Width = 72
+        Width = 75
         Caption = 'ECode Text'
         ParentColor = False
       end
       object EcodeMemo: TMemo
         Left = 0
         Height = 194
-        Top = 127
-        Width = 546
+        Top = 174
+        Width = 595
         Align = alBottom
         ScrollBars = ssVertical
         TabOrder = 4
       end
       object NoECodeLabel: TLabel
         Left = 24
-        Height = 16
+        Height = 17
         Top = 192
-        Width = 158
+        Width = 167
         Caption = 'No ECode Text In Header'
         ParentColor = False
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'fMRI'
-      ClientHeight = 356
-      ClientWidth = 528
+      ClientHeight = 368
+      ClientWidth = 595
       object Label11: TLabel
         Left = 12
         Height = 17
         Top = 145
-        Width = 68
+        Width = 77
         Caption = 'Slice Order'
         ParentColor = False
       end
@@ -985,7 +988,7 @@ object HdrForm: THdrForm
         Left = 12
         Height = 17
         Top = 8
-        Width = 74
+        Width = 77
         Caption = 'Time Offset'
         ParentColor = False
       end
@@ -993,7 +996,7 @@ object HdrForm: THdrForm
         Left = 14
         Height = 17
         Top = 39
-        Width = 85
+        Width = 95
         Caption = 'Slice duration'
         ParentColor = False
       end
@@ -1001,7 +1004,7 @@ object HdrForm: THdrForm
         Left = 12
         Height = 17
         Top = 74
-        Width = 65
+        Width = 70
         Caption = 'Slice Start'
         ParentColor = False
       end
@@ -1009,7 +1012,7 @@ object HdrForm: THdrForm
         Left = 12
         Height = 17
         Top = 105
-        Width = 56
+        Width = 64
         Caption = 'Slice End'
         ParentColor = False
       end
@@ -1017,7 +1020,7 @@ object HdrForm: THdrForm
         Left = 12
         Height = 17
         Top = 178
-        Width = 133
+        Width = 149
         Caption = 'Frequency Dimension'
         ParentColor = False
       end
@@ -1025,7 +1028,7 @@ object HdrForm: THdrForm
         Left = 12
         Height = 17
         Top = 214
-        Width = 105
+        Width = 117
         Caption = 'Phase Dimension'
         ParentColor = False
       end
@@ -1033,13 +1036,13 @@ object HdrForm: THdrForm
         Left = 12
         Height = 17
         Top = 250
-        Width = 97
+        Width = 110
         Caption = 'Slice Dimension'
         ParentColor = False
       end
       object SliceCodeDrop: TComboBox
         Left = 87
-        Height = 20
+        Height = 31
         Top = 137
         Width = 274
         ItemHeight = 0
@@ -1058,7 +1061,7 @@ object HdrForm: THdrForm
       end
       object FreqDimDrop: TComboBox
         Left = 146
-        Height = 20
+        Height = 31
         Top = 174
         Width = 215
         ItemHeight = 0
@@ -1074,7 +1077,7 @@ object HdrForm: THdrForm
       end
       object PhaseDimDrop: TComboBox
         Left = 146
-        Height = 20
+        Height = 31
         Top = 210
         Width = 215
         ItemHeight = 0
@@ -1090,7 +1093,7 @@ object HdrForm: THdrForm
       end
       object SliceDimDrop: TComboBox
         Left = 146
-        Height = 20
+        Height = 31
         Top = 246
         Width = 215
         ItemHeight = 0
@@ -1106,7 +1109,7 @@ object HdrForm: THdrForm
       end
       object slice_startEdit: TSpinEdit
         Left = 120
-        Height = 16
+        Height = 27
         Top = 73
         Width = 112
         TabOrder = 2
@@ -1114,31 +1117,31 @@ object HdrForm: THdrForm
       end
       object Slice_durationEdit: TFloatSpinEdit
         Left = 120
-        Height = 16
+        Height = 27
         Top = 38
         Width = 112
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 100
-        MinValue = 0
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 1
         Value = 1
       end
       object toffsetEdit: TFloatSpinEdit
         Left = 120
-        Height = 16
+        Height = 27
         Top = 7
         Width = 112
         DecimalPlaces = 5
         Increment = 1
-        MaxValue = 100
-        MinValue = 0
+        MaxValue = 9999999999999
+        MinValue = -9999999999999
         TabOrder = 0
         Value = 1
       end
       object slice_endEdit: TSpinEdit
         Left = 120
-        Height = 16
+        Height = 27
         Top = 104
         Width = 112
         TabOrder = 3
@@ -1147,91 +1150,91 @@ object HdrForm: THdrForm
     end
     object TabUnused: TTabSheet
       Caption = 'Optional'
-      ClientHeight = 337
-      ClientWidth = 738
+      ClientHeight = 368
+      ClientWidth = 595
       object Label34: TLabel
         Left = 3
-        Height = 16
+        Height = 17
         Top = 43
-        Width = 64
+        Width = 67
         Caption = 'Data Type'
         ParentColor = False
       end
       object Label5: TLabel
         Left = 3
-        Height = 16
+        Height = 17
         Top = 8
-        Width = 57
+        Width = 61
         Caption = 'Intention'
         ParentColor = False
       end
       object Label6: TLabel
         Left = 268
-        Height = 16
+        Height = 17
         Top = 116
-        Width = 47
+        Width = 51
         Caption = 'Extents'
         ParentColor = False
       end
       object Label9: TLabel
         Left = 268
-        Height = 16
+        Height = 17
         Top = 76
-        Width = 76
+        Width = 84
         Caption = 'Sesion Error'
         ParentColor = False
       end
       object Label10: TLabel
         Left = 268
-        Height = 16
+        Height = 17
         Top = 148
-        Width = 85
+        Width = 94
         Caption = 'Regular [114]'
         ParentColor = False
       end
       object Label14: TLabel
         Left = 268
-        Height = 16
+        Height = 17
         Top = 8
-        Width = 37
+        Width = 40
         Caption = 'G Min'
         ParentColor = False
       end
       object Label15: TLabel
         Left = 268
-        Height = 16
+        Height = 17
         Top = 43
-        Width = 40
+        Width = 43
         Caption = 'G Max'
         ParentColor = False
       end
       object Label18: TLabel
         Left = 3
-        Height = 16
+        Height = 17
         Top = 148
-        Width = 51
+        Width = 53
         Caption = 'Aux File'
         ParentColor = False
       end
       object Label19: TLabel
         Left = 3
-        Height = 16
+        Height = 17
         Top = 111
-        Width = 57
+        Width = 63
         Caption = 'DB Name'
         ParentColor = False
       end
       object Label26: TLabel
         Left = 3
-        Height = 16
+        Height = 17
         Top = 76
-        Width = 36
+        Width = 38
         Caption = 'Notes'
         ParentColor = False
       end
       object intent_nameEdit: TEdit
         Left = 76
-        Height = 22
+        Height = 27
         Top = 6
         Width = 152
         MaxLength = 16
@@ -1240,7 +1243,7 @@ object HdrForm: THdrForm
       end
       object data_typeEdit: TEdit
         Left = 76
-        Height = 22
+        Height = 27
         Top = 41
         Width = 152
         MaxLength = 10
@@ -1249,7 +1252,7 @@ object HdrForm: THdrForm
       end
       object CommentEdit: TEdit
         Left = 76
-        Height = 22
+        Height = 27
         Top = 74
         Width = 152
         MaxLength = 80
@@ -1258,7 +1261,7 @@ object HdrForm: THdrForm
       end
       object db_: TEdit
         Left = 76
-        Height = 22
+        Height = 27
         Top = 109
         Width = 152
         MaxLength = 18
@@ -1267,7 +1270,7 @@ object HdrForm: THdrForm
       end
       object aux: TEdit
         Left = 76
-        Height = 22
+        Height = 27
         Top = 148
         Width = 152
         MaxLength = 24
@@ -1276,7 +1279,7 @@ object HdrForm: THdrForm
       end
       object gmax: TSpinEdit
         Left = 366
-        Height = 16
+        Height = 27
         Top = 44
         Width = 66
         TabOrder = 6
@@ -1284,7 +1287,7 @@ object HdrForm: THdrForm
       end
       object gmin: TSpinEdit
         Left = 366
-        Height = 16
+        Height = 27
         Top = 9
         Width = 66
         TabOrder = 5
@@ -1292,7 +1295,7 @@ object HdrForm: THdrForm
       end
       object ses: TSpinEdit
         Left = 366
-        Height = 16
+        Height = 27
         Top = 77
         Width = 66
         TabOrder = 7
@@ -1300,7 +1303,7 @@ object HdrForm: THdrForm
       end
       object ext: TSpinEdit
         Left = 366
-        Height = 16
+        Height = 27
         Top = 117
         Width = 66
         TabOrder = 8
@@ -1308,7 +1311,7 @@ object HdrForm: THdrForm
       end
       object reg: TSpinEdit
         Left = 366
-        Height = 16
+        Height = 27
         Top = 151
         Width = 66
         MaxValue = 255
@@ -1320,8 +1323,8 @@ object HdrForm: THdrForm
   object StatusBar1: TStatusBar
     Left = 0
     Height = 15
-    Top = 368
-    Width = 560
+    Top = 411
+    Width = 609
     AutoSize = False
     Constraints.MaxHeight = 15
     Panels = <    

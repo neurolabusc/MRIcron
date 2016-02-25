@@ -2,26 +2,26 @@ object voismoothform: Tvoismoothform
   Left = 650
   Height = 222
   Top = 241
-  Width = 252
+  Width = 272
   ActiveControl = XROIfwhm
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Blur VOI'
   ClientHeight = 222
-  ClientWidth = 252
+  ClientWidth = 272
   Constraints.MaxHeight = 222
-  Constraints.MaxWidth = 252
+  Constraints.MaxWidth = 272
   Constraints.MinHeight = 222
-  Constraints.MinWidth = 252
+  Constraints.MinWidth = 272
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '0.9.29'
+  LCLVersion = '1.6.0.2'
   object Label37: TLabel
     Left = 12
     Height = 17
     Top = 46
-    Width = 62
+    Width = 68
     Caption = 'Threshold'
     Font.CharSet = ANSI_CHARSET
     ParentColor = False
@@ -34,8 +34,6 @@ object voismoothform: Tvoismoothform
     Top = 167
     Width = 66
     Caption = 'Cancel'
-    Color = clBtnFace
-    NumGlyphs = 0
     OnClick = BtnClick
     ShowHint = True
     ParentShowHint = False
@@ -48,8 +46,6 @@ object voismoothform: Tvoismoothform
     Top = 167
     Width = 66
     Caption = 'OK'
-    Color = clBtnFace
-    NumGlyphs = 0
     OnClick = BtnClick
     ShowHint = True
     ParentShowHint = False
@@ -61,8 +57,6 @@ object voismoothform: Tvoismoothform
     Top = 167
     Width = 66
     Caption = 'Help'
-    Color = clBtnFace
-    NumGlyphs = 0
     OnClick = HelpBtnClick
     ParentShowHint = False
   end
@@ -70,7 +64,7 @@ object voismoothform: Tvoismoothform
     Left = 12
     Height = 17
     Top = 9
-    Width = 143
+    Width = 162
     Caption = 'Smoothing (FWHM mm)'
     Font.CharSet = ANSI_CHARSET
     ParentColor = False
@@ -78,10 +72,10 @@ object voismoothform: Tvoismoothform
   end
   object ScaleSides: TComboBox
     Left = 12
-    Height = 21
+    Height = 31
     Top = 84
     Width = 229
-    ItemHeight = 13
+    ItemHeight = 0
     Items.Strings = (
       'Adjust sides in Z-plane only [SPM]'
       'Adjust sides in X,Y and Z planes'
@@ -91,10 +85,10 @@ object voismoothform: Tvoismoothform
   end
   object xROIoutput: TComboBox
     Left = 12
-    Height = 21
+    Height = 31
     Top = 117
     Width = 229
-    ItemHeight = 13
+    ItemHeight = 0
     Items.Strings = (
       'ROI is 1 [reslice ROI]'
       'ROI is 0 [SPM object mask]'
@@ -103,8 +97,8 @@ object voismoothform: Tvoismoothform
     TabOrder = 1
   end
   object XROIthresh: TFloatSpinEdit
-    Left = 175
-    Height = 21
+    Left = 180
+    Height = 27
     Top = 41
     Width = 70
     DecimalPlaces = 4
@@ -115,8 +109,8 @@ object voismoothform: Tvoismoothform
     Value = 1
   end
   object XROIfwhm: TSpinEdit
-    Left = 175
-    Height = 21
+    Left = 180
+    Height = 27
     Top = 4
     Width = 70
     MaxValue = 40

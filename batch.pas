@@ -157,7 +157,7 @@ begin
           lStr := 'mean'+Filename+kSep'Vol';}
 
         for lInc:= 1 to lNumberofFiles do begin
-            ImgForm.StatusLabel.Caption := inttostr(lInc)+'/'+inttostr(lNumberofFiles);
+            ImgForm.StatusLabel.Caption := 'Volume '+inttostr(lInc)+'/'+inttostr(lNumberofFiles);
             IMgForm.refresh;
             if lLoop=3 then
                lStr := 'min10pct'

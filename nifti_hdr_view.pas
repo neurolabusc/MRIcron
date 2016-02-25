@@ -127,9 +127,9 @@ type
     quatern_bEdit: TFloatSpinEdit;
     quatern_cEdit: TFloatSpinEdit;
     quatern_dEdit: TFloatSpinEdit;
-    qoffset_xEdit: TFloatSpinEdit;
-    qoffset_yEdit: TFloatSpinEdit;
-    qoffset_zEdit: TFloatSpinEdit;
+    qoffset_x_Edit: TFloatSpinEdit;
+    qoffset_y_Edit: TFloatSpinEdit;
+    qoffset_z_Edit: TFloatSpinEdit;
     Label39: TLabel;
     Label40: TLabel;
     Label41: TLabel;
@@ -305,6 +305,8 @@ var //lCStr: string[80];
     lInc: Integer;
     s: string;
 begin
+     //showmessage(format('%g %g %g', [lHdr.NIFTIhdr.qoffset_x, lHdr.NIFTIhdr.qoffset_y, lHdr.NIFTIhdr.qoffset_z]));
+
      with lHdr.NIFTIhdr do begin
 		  //numDimEdit.value := dim[0];
           XDim.Value := dim[1];
@@ -412,13 +414,16 @@ begin
           QFormDrop.ItemIndex:= (qform_code);
           SFormDrop.ItemIndex :=(sform_code);
   {$ENDIF}
+          //showmessage(format('%g %g %g', [lHdr.NIFTIhdr.qoffset_x, lHdr.NIFTIhdr.qoffset_y, lHdr.NIFTIhdr.qoffset_z]));
+          //showmessage(format('%g %g %g', [qoffset_x, qoffset_y, qoffset_z]));
 
           quatern_bEdit.value := quatern_b;
           quatern_cEdit.value := quatern_c;
           quatern_dEdit.value := quatern_d;
-          qoffset_xEdit.value := qoffset_x;
-          qoffset_yEdit.value := qoffset_y;
-          qoffset_zEdit.value := qoffset_z;
+          qoffset_x_Edit.value := qoffset_x;
+          qoffset_y_Edit.value := qoffset_y;
+          qoffset_z_Edit.value := qoffset_z;
+          //caption := format('%g %g %g', [srow_x[0], srow_x[1], srow_x[2]]);
 		  srow_x0Edit.value := srow_x[0];//12 affine matrix values
           srow_x1Edit.value := srow_x[1];
           srow_x2Edit.value := srow_x[2];
@@ -600,9 +605,9 @@ begin
           quatern_b := quatern_bEdit.value;
           quatern_c := quatern_cEdit.value;
           quatern_d := quatern_dEdit.value;
-          qoffset_x := qoffset_xEdit.value;
-          qoffset_y := qoffset_yEdit.value;
-          qoffset_z := qoffset_zEdit.value;
+          qoffset_x := qoffset_x_Edit.value;
+          qoffset_y := qoffset_y_Edit.value;
+          qoffset_z := qoffset_z_Edit.value;
           sform_code  :=  SFormDrop.ItemIndex;
           srow_x[0] := srow_x0Edit.value;//12 affine matrix values
           srow_x[1] := srow_x1Edit.value;

@@ -4,6 +4,7 @@ interface
 uses
 {$ifndef fpc}{windows,} {$endif}
 GraphicsMathLibrary,nifti_hdr, nifti_types;
+//function Hdr2Mat (lHdr:  TNIFTIhdr): TMatrix;
 function Reslice_Img_To_Unaligned (var lTargHdr: TNIfTIhdr; var lSrcHdr: TMRIcroHdr; lTrilinearSmoothIn: boolean): boolean;
 function Hdr2InvMat (lHdr: TNiftiHdr; var lOK: boolean): TMatrix;
 procedure Voxel2mm(var X,Y,Z: single; var lHdr: TNIfTIHdr);

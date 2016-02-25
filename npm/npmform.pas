@@ -1051,7 +1051,7 @@ begin
      {$IFNDEF UNIX} {GUILaunch;}{$ENDIF}
      LongTimeFormat := 'YYYY-MMM-DD hh:nn:ss';  //delphi TimeToStr
      ShortTimeFormat := 'YYYY-MMM-DD hh:nn:ss'; //freepascal TimeToStr
-     {$IFDEF FPC}{$IFNDEF UNIX} ReadParamStr; {$ENDIF} {$ENDIF}
+     //{$IFDEF FPC}{$IFNDEF UNIX} ReadParamStr; {$ENDIF} {$ENDIF}
      {$IFDEF benchmark}
      //MonteCarloSimulation1.visible := true;
      {$ENDIF}

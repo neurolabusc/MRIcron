@@ -9,6 +9,7 @@ RXSpin,capmenu,PNGImage,SSE,ShellAPI,Spin,
 {$ELSE}
      //RGBGraphics,rgbroutines,
 {$ENDIF}
+{$DEFINE UINT16ASFLOAT}
 nifti_types,
 SysUtils, Classes, Graphics, Controls, Forms, Dialogs, GraphType,
   Menus, ExtCtrls, NIFTI_hdr,nii_label,
@@ -35,7 +36,7 @@ Type
    ImageSeparation,RenderDim,SigDig,LesionSmooth,LesionDilate,FontSize, SaveImgFilter, SaveVoiFilter: integer;
    //ResizeBeforeRescale - 0=intensity rescale, then resize;  1= nearest neighbor resize, then rescale;1=trilinear resize, then rescale;12:47 PM 7/13/2006
    UseReorientHdr,XBarVisible,ThinPen,Mirror,OverlaySmooth,VOIchanged,VOImirrored,
-   SaveDefaultIni,KnownAlignment,Resliced,
+   SaveDefaultIni,KnownAlignment,Resliced, LoadUInt16asFloat32,
    FlipAx,FlipSag,SingleRow,ResliceOnLoad,Prompt4DVolume,OrthoReslice, ShowDraw: boolean;
    MinChar,MaxChar: array [1..3] of char; //May07
    StretchQuality : TStretchQuality;
@@ -674,7 +675,8 @@ end;
   if lMultiSlice >= 0 then
 	PasteDimension32(lZ,lY,  lBGQuadP,lMultiSlice)//, MultiSliceForm.MultiImage,lMultiSlice)
   else begin
-	SetDimension32(lZ,lY,  lBGQuadP, gBGImg, ImgForm.PGImageSag, ImgForm.TriplePanel);
+        //ImgForm.StatusLabel.Caption:=inttostr(lZ)+'x'+inttostr(lY)+' = '+inttostr(random(888));
+        SetDimension32(lZ,lY,  lBGQuadP, gBGImg, ImgForm.PGImageSag, ImgForm.TriplePanel);
   	FreeMem ( lBGQuadP);
 	if gBGImg.XBarVisible then begin
 
@@ -1085,10 +1087,11 @@ begin
     else
       lH := gBGImg.ScrnDim[3]+1
    end else begin  //show three slices, 2 in top row, one in bottom
+       //ImgForm.StatusLabel.Caption := inttostr( gBGImg.ImageSeparation);
     lW := gBGImg.ScrnDim[1]+gBGImg.ScrnDim[2]+4;
-    lWpanel := lWpanel - 1 - gBGImg.ImageSeparation;
+    lWpanel := lWpanel - 2 - gBGImg.ImageSeparation;
     lH := gBGImg.ScrnDim[3]+gBGImg.ScrnDim[2]+4;
-    lHpanel := lHpanel - 1 - gBGImg.ImageSeparation;
+    lHpanel := lHpanel - 2 - gBGImg.ImageSeparation;
    end;
 
    if (lW<1) or (lH < 1) or (lHpanel < 1) or (lWpanel < 1) then
@@ -1104,6 +1107,7 @@ begin
        if lPrimaryZoom < 1 then
         lPrimaryZoom := 1;
    end;
+   //ImgForm.StatusLabel.Caption := floattostr( lPrimaryZoom);
    SetPct(lPrimaryZoom,lPrimaryZoom,lPrimaryZoom);
 543: //for single slice views, set residual ...
    if gBGImg.SliceView = kMultiView then
@@ -1239,7 +1243,7 @@ begin
   ImgForm.PGImageAx.visible := ImgForm.PGImageAx.tag <> 0;
   ImgForm.PGImageCor.visible := ImgForm.PGImageCor.tag <> 0;
   ImgForm.PGImageSag.visible :=  ImgForm.PGImageSag.tag <> 0;
-   if (gBGImg.SliceView = kMultiView) and (not gBGImg.SingleRow) then begin
+  if (gBGImg.SliceView = kMultiView) and (not gBGImg.SingleRow) then begin
       //Coronal is upper-left
       ImageLT(lL,lT,1,1,ImgForm.PGImageCor);
       //Axial is below Coronal
@@ -1665,6 +1669,15 @@ begin
 			result := true;
 end;
 
+function isSameFloat (a,b: single): boolean;
+const
+     kEps = 0.0001;
+begin
+     result := abs(a-b) < kEps;
+end;
+
+
+
 function SameAsBG(var lBGImg: TBGImg;  var lHdr: TMRIcroHdr): boolean;
 var
   lMatrixBG: TMatrix;
@@ -1674,15 +1687,21 @@ begin
   for i := 1 to 3 do //999
 	if lHdr.NIFTIhdr.dim[i] <>lBGImg.ScrnDim[i] then //999
 		exit; //999
-  lMatrixBG := Matrix3D ( lBGImg.Scrnmm[1],0,0,-lBGImg.Scrnmm[1]*(lBGImg.ScrnOri[1]-1),
-							0,lBGImg.Scrnmm[2],0,-lBGImg.Scrnmm[2]*(lBGImg.ScrnOri[2]-1),
-							0,0,lBGImg.Scrnmm[3],-lBGImg.Scrnmm[3]*(lBGImg.ScrnOri[3]-1),
-						  0,0,0,1);
+
+lMatrixBG := Matrix3D ( lBGImg.Scrnmm[1],0,0,-lBGImg.Scrnmm[1]*(lBGImg.ScrnOri[1]-1),
+            0,lBGImg.Scrnmm[2],0,-lBGImg.Scrnmm[2]*(lBGImg.ScrnOri[2]-1),
+	    0,0,lBGImg.Scrnmm[3],-lBGImg.Scrnmm[3]*(lBGImg.ScrnOri[3]-1),
+	    0,0,0,1);
+
+
   for i := 1 to 3 do
 	for j := 1 to 4 do begin
-		if lMatrixBG.matrix[i,j] <> lHdr.Mat.matrix[i,j] then exit;
-	end;
-	//showmessage('same');
+		if not (isSameFloat(lMatrixBG.matrix[i,j], lHdr.Mat.matrix[i,j])) then begin
+                       // showmessage(format('mat[%d,%d] %g - %g = %g ', [i,j, lMatrixBG.matrix[i,j], lHdr.Mat.matrix[i,j], lMatrixBG.matrix[i,j]-lHdr.Mat.matrix[i,j] ]) );
+                       exit;
+
+                end;
+        end;
   //for i := 1 to 3 do if (lBGIMg.ScrnDim[i])<>lHdr.NIFTIhdr.dim[i] then exit;
   result := true;
 end;
@@ -2425,6 +2444,7 @@ begin
 	SPMDefaultsStatsFmriT0 := 1;
 	SaveDefaultIni := true;
 	ThinPen := true;
+        LoadUInt16asFloat32 := true;
         PlanarRGB := 2;
 	XBarVisible := true;
 	OverlaySmooth := true;
@@ -3175,62 +3195,7 @@ begin
      result.rgbBlue:= mixColor(XloYlo.rgbBlue, XloYhi.rgbBlue, XhiYlo.rgbBlue, XhiYhi.rgbBlue, Xfrac, Yfrac);
 end;
 
-(*procedure DrawBMPZoomLin(lSrcHt,lSrcWid: integer; lZoomFrac: single; var lInBuff: RGBQuadp; var lImage: TImage);
-//About half the speed of the integer version
-const
-     kBitShift = 10; //integer division 1024 = 1
-var
-   lOutBuff: RGBQuadp;
-   lOutWid,lOutHt: integer;
-   lXlo,lXhi,lXfrac,lYlo,lYhi,lYfrac: array of integer;
-   mx, x,y, bitShift, i: integer;
-   lFrac, lZoomReciprocal: single;
-begin
-  lOutwid := round(lSrcWid*lZoomFrac);
-  lOutHt := round(lSrcHt*lZoomFrac);
-  if (lOutwid < 2) or (lOutHt < 2) or (lZoomFrac <= 0) then exit;
-  lZoomReciprocal := 1/lZoomFrac;
-  setlength(lYlo, lOutHt);
-  setlength(lYhi, lOutHt);
-  setlength(lYfrac, lOutHt);
-  bitShift := 1 shl kBitShift;
-  mx := (lSrcHt -1) * lSrcWid;
-  for y := 0 to lOutHt -1 do begin
-      lFrac := (y * lZoomReciprocal) - 0.5;
-      if lFrac < 0 then lFrac := 0;
-      lYfrac[y] := round(frac(lFrac) * bitshift);
-      lYlo[y] := trunc(lFrac);
-      lYlo[y] := lYlo[y]  * lSrcWid;
-      lYhi[y] := lYlo[y] + lSrcWid;
-      if (lYhi[y] > mx) then
-         lYhi[y] :=  mx;
-  end;
-  setlength(lXlo, lOutWid);
-  setlength(lXhi, lOutWid);
-  setlength(lXfrac, lOutWid);
-  mx := lSrcWid; //no -1: indexed from 1 not 0
-  for x := 0 to lOutWid -1 do begin
-      lFrac := (x * lZoomReciprocal) - 0.5;
-      if lFrac < 0 then lFrac := 0;
-      lXlo[x] := trunc(lFrac)+1;
-      lXhi[x] := lXlo[x] + 1;
-      if (lXhi[x] > mx) then
-         lXhi[x] := mx;
-      lXfrac[x] := round(frac(lFrac) * bitshift);
-  end;
-  getmem(lOutBuff, lOutHt*lOutWid*4);
-  i := 0;
-  for y:=0 to lOutHt-1 do begin
-    for x:=0 to lOutWid-1 do begin
-        i := i + 1; //indexex from 1;
-        lOutBuff[i] := mixRGB(lInBuff[lXlo[x]+lYlo[y]],  lInBuff[lXlo[x]+lYhi[y]], lInBuff[lXhi[x]+lYlo[y]], lInBuff[lXhi[x]+lYhi[y]], lXfrac[x], lYfrac[y]) ;
-    end;//for x : columns
-  end; //for y : slices
-  DrawBMP( lOutWid, lOutHt, lOutBuff, lImage);
-  freemem(lOutBuff);
-end;*)
-
-procedure DrawBMPZoomLin(lSrcHt,lSrcWid: integer; lZoomFrac: single; var lRGBBuff: RGBQuadp; var lImage: TImage);
+(*procedure DrawBMPZoomLin(lSrcHt,lSrcWid: integer; lZoomFrac: single; var lRGBBuff: RGBQuadp; var lImage: TImage);
 //Stretch bitmap with bilinear interpolation
 var
    lInBuff,lBuff: ByteP;
@@ -3244,14 +3209,12 @@ begin
   lOutHt := round(lSrcHt*lZoomFrac);
   if (lOutwid < 2) or (lOutHt < 2) then exit;
   xP2:=((lSrcWid)shl 15)div (lOutWid );
-imgform.StatusLabel.Caption := inttostr(xP2);
   yP2:=((lSrcHt) shl 15)div (lOutHt);
   lPos := 1;
   getmem(lBuff, lOutHt*lOutWid*4);
   lInSz := lSrcWid *lSrcHt * 4; //32bytesperpixel
   lSrcWidx4 := lSrcWid * 4;
   yP:= -16384+ (yP2 shr 1);
-  //imgform.statuslabel.caption := inttostr(yP2)+' '+inttostr(lSrcWid)+'->'+inttostr(lOutWid);
   xPmax :=  ((lSrcWid - 1) * 32768)-1;
   for y:=0 to lOutHt-1 do begin
       xP:=  -16384+ (xP2 shr 1);  //16384, e.g. 0.5 voxel
@@ -3278,117 +3241,12 @@ imgform.StatusLabel.Caption := inttostr(xP2);
                     lBuff^[lPos] :=(lInBuff^[lTopPos+2]*iz2+lInBuff^[lBotPos+2]*z2)shr 15; inc(lPos); //greens
                     lBuff^[lPos] :=(lInBuff^[lTopPos+3]*iz2+lInBuff^[lBotPos+3]*z2)shr 15; inc(lPos); //greens
                     lBuff^[lPos] :=(lInBuff^[lTopPos+4]*iz2+lInBuff^[lBotPos+4]*z2)shr 15; inc(lPos); //greens
-        (*
-          if ((lBotPos+t+8) > lInSz) or ((lTopPos+t) < 0) then begin
-            if (xP < 0) and  ((lBotPos+4) < lInSz) then begin
-                    lBuff^[lPos] :=kLUTalpha; inc(lPos); //reds
-                    lBuff^[lPos] :=(lInBuff^[lTopPos+2]*iz2+lInBuff^[lBotPos+2]*z2)shr 15; inc(lPos); //greens
-                    lBuff^[lPos] :=(lInBuff^[lTopPos+3]*iz2+lInBuff^[lBotPos+3]*z2)shr 15; inc(lPos); //greens
-                    lBuff^[lPos] :=(lInBuff^[lTopPos+4]*iz2+lInBuff^[lBotPos+4]*z2)shr 15; inc(lPos); //greens
-
-            end else if  (lPos > 4) then begin
-                lBuff^[lPos] :=kLUTalpha; inc(lPos); //reds
-                lBuff^[lPos] :=lBuff^[lPos-4]; inc(lPos);
-                lBuff^[lPos] :=lBuff^[lPos-4]; inc(lPos);
-                lBuff^[lPos] :=lBuff^[lPos-4]; inc(lPos);
-
-            end else begin
-               lBuff^[lPos] :=kLUTalpha; inc(lPos); //reds
-               lBuff^[lPos] :=0; inc(lPos); //greens
-               lBuff^[lPos] :=0; inc(lPos); //blues
-               lBuff^[lPos] :=kLUTalpha; inc(lPos); //reserved
-            end;     *)
         end else begin
             z:=xP and $7FFF;
             w2:=(z*iz2)shr 15;
             w1:=iz2-w2;
             w4:=(z*z2)shr 15;
             w3:=z2-w4;
-            {$IFDEF Darwin}
-                 //(lInBuff^[lTopPos+t+1]*w1+lInBuff^[lTopPos+t+5]*w2+lInBuff^[lBotPos+t+1]*w3+lInBuff^[lBotPos+t+5]*w4)shr 15;
-                 //ALPHA
-                 lBuff^[lPos] :=  kLUTalpha ;
-                 inc(lPos);
-                 //RED
-                 lBuff^[lPos] := (lInBuff^[lTopPos+t+2]*w1+lInBuff^[lTopPos+t+6]*w2+lInBuff^[lBotPos+t+2]*w3+lInBuff^[lBotPos+t+6]*w4)shr 15; ;//
-                 inc(lPos);
-                 //GREEN
-                 lBuff^[lPos] :=(lInBuff^[lTopPos+t+3]*w1+lInBuff^[lTopPos+t+7]*w2+lInBuff^[lBotPos+t+3]*w3+lInBuff^[lBotPos+t+7]*w4)shr 15;
-                 inc(lPos);
-                 //BLUE
-                 lBuff^[lPos] :=(lInBuff^[lTopPos+t+4]*w1+lInBuff^[lTopPos+t+8]*w2+lInBuff^[lBotPos+t+4]*w3+lInBuff^[lBotPos+t+8]*w4)shr 15;
-                 inc(lPos);
-            {$ELSE}
-            lBuff^[lPos] :=(lInBuff^[lTopPos+t+1]*w1+lInBuff^[lTopPos+t+5]*w2+lInBuff^[lBotPos+t+1]*w3+lInBuff^[lBotPos+t+5]*w4)shr 15;
-            inc(lPos); //red
-            lBuff^[lPos] :=(lInBuff^[lTopPos+t+2]*w1+lInBuff^[lTopPos+t+6]*w2+lInBuff^[lBotPos+t+2]*w3+lInBuff^[lBotPos+t+6]*w4)shr 15;
-            inc(lPos); //green
-            lBuff^[lPos] :=(lInBuff^[lTopPos+t+3]*w1+lInBuff^[lTopPos+t+7]*w2+lInBuff^[lBotPos+t+3]*w3+lInBuff^[lBotPos+t+7]*w4)shr 15;
-            inc(lPos); //blue
-            lBuff^[lPos] :=kLUTalpha;
-            inc(lPos); //reserved   lPos := lPos + 4;
-            {$ENDIF}
-        end;
-        Inc(xP,xP2);
-      end;   //inner loop
-      Inc(yP,yP2);
-    end;
-  lOutRGBBuff := RGBQuadp(@lBuff[1]);
-  DrawBMP( lOutWid, lOutHt, lOutRGBBuff, lImage);
-  freemem(lBuff);
-end;
-
-(*procedure DrawBMPZoomLin(lSrcHt,lSrcWid: integer; lZoomFrac: single; var lRGBBuff: RGBQuadp; var lImage: TImage);
-//Stretch bitmap with bilinear interpolation
-var
-   lInBuff,lBuff: ByteP;
-   lOutRGBBuff: RGBQuadp;
-   lOutWid,lOutHt: integer;
-  lSrcWidx4, lPos,xP,yP,yP2,xP2,z, z2,iz2,w1,w2,w3,w4,lTopPos,lBotPos,
-  lINSz,x,y, t: integer;
-begin
-  lInBuff:= ByteP(lRGBBuff);
-  lOutwid := round(lSrcWid*lZoomFrac);
-  lOutHt := round(lSrcHt*lZoomFrac);
-  if (lOutwid < 2) or (lOutHt < 2) then exit;
-  xP2:=((lSrcWid)shl 15)div (lOutWid );
-  yP2:=((lSrcHt) shl 15)div (lOutHt);
-  lPos := 1;
-  getmem(lBuff, lOutHt*lOutWid*4);
-  lInSz := lSrcWid *lSrcHt * 4; //32bytesperpixel
-  lSrcWidx4 := lSrcWid * 4;
-  yP:= -16384+ (yP2 shr 1);
-  //imgform.statuslabel.caption := inttostr(yP2)+' '+inttostr(lSrcWid)+'->'+inttostr(lOutWid);
-
-  for y:=0 to lOutHt-1 do begin
-      xP:=  -16384+ (xP2 shr 1);  //16384, e.g. 0.5 voxel
-      if yP <= 0 then begin
-         lTopPos := 0;
-         lBotPos := 0;
-      end else begin
-          lTopPos := lSrcWid * (yP shr 15) *4; //top row
-          lBotPos := lTopPos+lSrcWidx4;
-          //if (yP shr 16) < lSrcHt then
-          //inc(lBotPos, lSrcWidx4) //bottom column
-      end;
-      if lBotPos >= lInSz then lBotPos := lBotPos - lSrcWidx4;
-      if lTopPos >= lInSz then lTopPos := lTopPos - lSrcWidx4;
-      z2:=yP and $7FFF;
-      iz2:=$8000-z2;
-      for x:=0 to lOutWid-1 do begin
-        t:= ((xP shr 15) * 4);
-        if ((lBotPos+t+8) > lInSz) or ((lTopPos+t) < 0) then begin
-           lBuff^[lPos] :=0; inc(lPos); //reds
-           lBuff^[lPos] :=0; inc(lPos); //greens
-           lBuff^[lPos] :=0; inc(lPos); //blues
-           lBuff^[lPos] :=0; inc(lPos); //reserved
-        end else begin
-            z:=xP and $7FFF;
-            w2:=(z*iz2)shr 15;
-            w1:=iz2-w2;
-            w4:=(z*z2)shr 15;
-            w3:=z2-w4;
-//burp ScaleStretch 10/2009
             {$IFDEF Darwin}
                  //(lInBuff^[lTopPos+t+1]*w1+lInBuff^[lTopPos+t+5]*w2+lInBuff^[lBotPos+t+1]*w3+lInBuff^[lBotPos+t+5]*w4)shr 15;
                  //ALPHA
@@ -3423,6 +3281,114 @@ begin
   freemem(lBuff);
 end;
 *)
+
+procedure DrawBMPZoomLin(lSrcHt,lSrcWid: integer; lZoomFrac: single; var lRGBBuff: RGBQuadp; var lImage: TImage);
+//Stretch bitmap with bilinear interpolation
+var
+   lInBuff,lBuff: ByteP;
+   lOutRGBBuff: RGBQuadp;
+   lOutWid,lOutHt: integer;
+  lSrcWidx4, lPos,xPmax, xP,yP,yP2,xP2,z, z2,iz2,w1,w2,w3,w4,lTopPos,lBotPos,
+  lINSz,x,y, t: integer;
+begin
+  lInBuff:= ByteP(lRGBBuff);
+  lOutwid := round(lSrcWid*lZoomFrac);
+  lOutHt := round(lSrcHt*lZoomFrac);
+  if (lOutwid < 2) or (lOutHt < 2) then exit;
+  xP2:=((lSrcWid)shl 15)div (lOutWid );
+  yP2:=((lSrcHt) shl 15)div (lOutHt);
+  lPos := 1;
+  getmem(lBuff, lOutHt*lOutWid*4);
+  lInSz := lSrcWid *lSrcHt * 4; //32bytesperpixel
+  lSrcWidx4 := lSrcWid * 4;
+  yP:= -16384+ (yP2 shr 1);
+  xPmax :=  ((lSrcWid - 1) * 32768)-1;
+  for y:=0 to lOutHt-1 do begin
+      xP:=  -16384+ (xP2 shr 1);  //16384, e.g. 0.5 voxel
+      if yP <= 0 then begin
+         lTopPos := 0;
+         lBotPos := 0;
+      end else begin
+          lTopPos := lSrcWid * (yP shr 15) *4; //top row
+          lBotPos := lTopPos+lSrcWidx4;
+      end;
+      if lBotPos >= lInSz then lBotPos := lBotPos - lSrcWidx4;
+      if lTopPos >= lInSz then lTopPos := lTopPos - lSrcWidx4;
+      z2:=yP and $7FFF;
+      iz2:=$8000-z2;
+      for x:=0 to lOutWid-1 do begin
+        t:= ((xP shr 15) * 4);
+        if (xP > xPmax) then begin
+                lBuff^[lPos] :=lBuff^[lPos-4]; inc(lPos); //reds
+                lBuff^[lPos] :=lBuff^[lPos-4]; inc(lPos);
+                lBuff^[lPos] :=lBuff^[lPos-4]; inc(lPos);
+                lBuff^[lPos] :=lBuff^[lPos-4]; inc(lPos);
+        end else if (xP < 0) and  ((lBotPos+4) < lInSz) then begin
+            {$IFDEF Darwin}
+            lBuff^[lPos] :=kLUTalpha; inc(lPos); //reds
+            lBuff^[lPos] :=(lInBuff^[lTopPos+2]*iz2+lInBuff^[lBotPos+2]*z2)shr 15; inc(lPos); //greens
+            lBuff^[lPos] :=(lInBuff^[lTopPos+3]*iz2+lInBuff^[lBotPos+3]*z2)shr 15; inc(lPos); //greens
+            lBuff^[lPos] :=(lInBuff^[lTopPos+4]*iz2+lInBuff^[lBotPos+4]*z2)shr 15; inc(lPos); //greens
+            {$ELSE}
+            lBuff^[lPos] :=  (lInBuff^[lTopPos+3]*iz2+lInBuff^[lBotPos+3]*z2)shr 15; //blue
+            inc(lPos);
+            lBuff^[lPos] := (lInBuff^[lTopPos+2]*iz2+lInBuff^[lBotPos+2]*z2)shr 15; //green
+            inc(lPos);
+            lBuff^[lPos] := (lInBuff^[lTopPos+1]*iz2+lInBuff^[lBotPos+1]*z2)shr 15; //red
+            inc(lPos);
+            lBuff^[lPos] := kLUTalpha;
+            inc(lPos);
+            {$ENDIF}
+        end else begin
+            z:=xP and $7FFF;
+            w2:=(z*iz2)shr 15;
+            w1:=iz2-w2;
+            w4:=(z*z2)shr 15;
+            w3:=z2-w4;
+            {$IFDEF Darwin}
+                 //(lInBuff^[lTopPos+t+1]*w1+lInBuff^[lTopPos+t+5]*w2+lInBuff^[lBotPos+t+1]*w3+lInBuff^[lBotPos+t+5]*w4)shr 15;
+                 //ALPHA
+                 lBuff^[lPos] :=  kLUTalpha ;
+                 inc(lPos);
+                 //RED
+                 lBuff^[lPos] := (lInBuff^[lTopPos+t+2]*w1+lInBuff^[lTopPos+t+6]*w2+lInBuff^[lBotPos+t+2]*w3+lInBuff^[lBotPos+t+6]*w4)shr 15; ;//
+                 inc(lPos);
+                 //GREEN
+                 lBuff^[lPos] :=(lInBuff^[lTopPos+t+3]*w1+lInBuff^[lTopPos+t+7]*w2+lInBuff^[lBotPos+t+3]*w3+lInBuff^[lBotPos+t+7]*w4)shr 15;
+                 inc(lPos);
+                 //BLUE
+                 lBuff^[lPos] :=(lInBuff^[lTopPos+t+4]*w1+lInBuff^[lTopPos+t+8]*w2+lInBuff^[lBotPos+t+4]*w3+lInBuff^[lBotPos+t+8]*w4)shr 15;
+                 inc(lPos);
+            {$ELSE}
+            //Lines below tested on Linux
+            lBuff^[lPos] :=(lInBuff^[lTopPos+t+3]*w1+lInBuff^[lTopPos+t+7]*w2+lInBuff^[lBotPos+t+3]*w3+lInBuff^[lBotPos+t+7]*w4)shr 15;
+            inc(lPos); //red
+            lBuff^[lPos] :=(lInBuff^[lTopPos+t+2]*w1+lInBuff^[lTopPos+t+6]*w2+lInBuff^[lBotPos+t+2]*w3+lInBuff^[lBotPos+t+6]*w4)shr 15;
+            inc(lPos); //green
+            lBuff^[lPos] :=(lInBuff^[lTopPos+t+1]*w1+lInBuff^[lTopPos+t+5]*w2+lInBuff^[lBotPos+t+1]*w3+lInBuff^[lBotPos+t+5]*w4)shr 15;
+            inc(lPos); //blue
+            lBuff^[lPos] :=kLUTalpha;
+            inc(lPos); //reserved   lPos := lPos + 4;
+
+            (*lBuff^[lPos] :=(lInBuff^[lTopPos+t+1]*w1+lInBuff^[lTopPos+t+5]*w2+lInBuff^[lBotPos+t+1]*w3+lInBuff^[lBotPos+t+5]*w4)shr 15;
+            inc(lPos); //red
+            lBuff^[lPos] :=(lInBuff^[lTopPos+t+2]*w1+lInBuff^[lTopPos+t+6]*w2+lInBuff^[lBotPos+t+2]*w3+lInBuff^[lBotPos+t+6]*w4)shr 15;
+            inc(lPos); //green
+            lBuff^[lPos] :=(lInBuff^[lTopPos+t+3]*w1+lInBuff^[lTopPos+t+7]*w2+lInBuff^[lBotPos+t+3]*w3+lInBuff^[lBotPos+t+7]*w4)shr 15;
+            inc(lPos); //blue
+            lBuff^[lPos] :=kLUTalpha;
+            inc(lPos); //reserved   lPos := lPos + 4; *)
+            {$ENDIF}
+        end;
+        Inc(xP,xP2);
+      end;   //inner loop
+      Inc(yP,yP2);
+    end;
+  lOutRGBBuff := RGBQuadp(@lBuff[1]);
+  DrawBMP( lOutWid, lOutHt, lOutRGBBuff, lImage);
+  freemem(lBuff);
+end;
+
 procedure SetDimension32(lInPGHt,lInPGWid:integer; lBuff: RGBQuadp; var lBackgroundImg: TBGImg; var lImage: TImage; lPanel: TScrollBox);
 var
    lZoom,lZoomY,lZoomX: integer;
@@ -3529,6 +3495,7 @@ begin
 		if (l32Buf^[lInc] > lMax) then lMax := l32Buf^[lInc];
 		if (l32Buf^[lInc] < lMin) then lMin := l32Buf^[lInc];
 	 end;
+         //showmessage(format('qx %g..%g',[lMin, lMax]));
 end; //FindImgMinMax32
 
 function ImgVaries ( var lHdr: TMRIcroHdr): boolean;
@@ -4314,7 +4281,7 @@ begin
 	result := false;
 	for lRow := 1 to 3 do
 		for lCol := 1 to 3 do
-			if (lRow=lCol) then begin
+                        if (lRow=lCol) then begin
 				if lHdr.Mat.Matrix[lRow,lCol] <= 0 then
 					exit;
 			end else
@@ -4368,6 +4335,7 @@ begin
   //find bounding box for overlay, and create lookup tables
   for lI := 1 to 3 do begin
 	lScale := lOut.rMM[lI] / lIn.rMM[lI];
+
 	getmem(lLUTra[lI],lOut.rDim[lI]*4);
 	getmem(lLUTmodra[lI],lOut.rDim[lI]*4);
 	lMin[lI] := maxint;
@@ -4387,6 +4355,7 @@ begin
 			lMax[lI] := lPos;
 	end;
   end;
+
   //for lI := 1 to 3 do fx( lOut.rMM[lI],lIn.rMM[lI]);
   for lI := 1 to 3 do
 	if lMin[lI] > lMax[lI] then begin
@@ -4399,7 +4368,7 @@ begin
   //next - core
 
   if lHdr.ImgBufferBPP = 4 then begin  //next- 32 bit
-	lBuffIn32 := SingleP(lHdr.ImgBuffer);
+        lBuffIn32 := SingleP(lHdr.ImgBuffer);
 	GetMem(lBuffOutUnaligned,(lOutVolItems*sizeof(single))+16);
 	//svn lBuffOut32 := SingleP($fffffff0 and (integer(lBuffOutUnaligned)+15));
         lBuffOut32 := Align(lBuffOutUnaligned, 16);
@@ -4576,10 +4545,7 @@ procedure ResliceScrnImg (var lBGImg: TBGImg; var lHdr: TMRIcroHdr; lTrilinearSm
   lOverlap := false;
   lMatrix := lHdr.Mat;
   lMatrix := mat44_inverse(lMatrix);
-  lMatrixBG := Matrix3D ( lBGImg.Scrnmm[1],0,0,0,
-							0,lBGImg.Scrnmm[2],0,0,
-							0,0,lBGImg.Scrnmm[3],0,
-						  0,0,0,1);
+  lMatrixBG := Matrix3D ( lBGImg.Scrnmm[1],0,0,0, 0,lBGImg.Scrnmm[2],0,0,  0,0,lBGImg.Scrnmm[3],0,  0,0,0,1);
   lMatrix.size := size3D;
   lMatrix := MultiplyMatrices(lMatrix,lMatrixBG);
   lXdimIn := lHdr.NiftiHdr.dim[1];
@@ -4603,7 +4569,6 @@ procedure ResliceScrnImg (var lBGImg: TBGImg; var lHdr: TMRIcroHdr; lTrilinearSm
   lXxRA := align(lXxp, 16);  //SingleP($fffffff0 and (integer(lXxP)+15)); //data aligned to quad-word boundary
   lXyRA := align(lXyp, 16);//SingleP($fffffff0 and (integer(lXyP)+15)); //quad-word boundary
   lXzRA := align(lXzp, 16);//SingleP($fffffff0 and (integer(lXzP)+15)); //quad-word boundary
-
   for lX := 1 to  lOutDimX do begin
 			lXr := lX-(lBGImg.ScrnOri[1]);//* lBGImg.ScrnMM[1]) ;
 			//lXr := lX;
@@ -4611,7 +4576,6 @@ procedure ResliceScrnImg (var lBGImg: TBGImg; var lHdr: TMRIcroHdr; lTrilinearSm
 			lXyRA^[lX] :=  lXr*lMatrix.matrix[2,1]+1;
 			lXzRA^[lX] :=  lXr*lMatrix.matrix[3,1]+1;
   end;
-
   //end look up table
 if  lTrilinearSmooth then begin //smooth data
   if lHdr.ImgBufferBPP = 4 then begin
@@ -5515,6 +5479,7 @@ var
   lMultiImgSzOff,lMultiImgSz,lOffset,
   lVol,lnVol,lFileSz,lDataType,lFSz,lImgSamples: Int64;    //,lRow
    lP: Bytep;
+   lW: Wordp;
   lFName,lParseName: String;
   F: file;
   l16Buf : SmallIntP;
@@ -5587,7 +5552,7 @@ begin
 		lFileSz := lMultiImgSzOff * lnVol
 	 else
 		 lFileSz := (lnVol * lMultiImgSz) + lOffset;
-	 lVol := 1; //alpha
+	 lVol := 1; //assume 1st volume
          if {not l4D} lBackgroundImg.Prompt4DVolume then begin
 	    lVol := ReadIntForm.GetInt('Multi-volume file, please select volume to view.',1,1,lnVol);
                  application.processmessages;
@@ -5666,7 +5631,46 @@ begin
   //Next: prepare image : byte swap, check for special..
   case lDataType of
     kDT_RGB:  ParseRGB(lImg2Load);//RGB
+         {$IFDEF UINT16ASFLOAT}
+        kDT_UINT16: begin
+                    //showmessage(format('%d ', [12]));
+                    if gBGImg.LoadUInt16asFloat32 then begin
+                      l16Buf := SmallIntP(lImg2Load.ImgBuffer );
+                      if lSwap then
+			   for lInc := 1 to lImgSamples do
+			    l16Buf^[lInc] := Swap2(l16Buf^[lInc]);
+                       GetMem(lW , lImgSamples * sizeof(Word));
+                       for lInc := 1 to lImgSamples do
+			   lW^[lInc] := word(l16Buf^[lInc]);
+                       FreeMem(lImg2Load.ImgBufferUnaligned );
+                       //convert data type to float32
+                       lImg2Load.NIFTIhdr.bitpix:= 32;
+                       lImg2Load.NIFTIhdr.datatype := kDT_FLOAT;
+                       lImg2Load.ImgBufferBPP := 4;
+                       lMultiImgSz := (lImgSamples * lImg2Load.ImgBufferBPP);
+                       GetMem(lImg2Load.ImgBufferUnaligned ,lMultiImgSz+16);
+                       lImg2Load.ImgBuffer := align(lImg2Load.ImgBufferUnaligned, 16);
+                       l32Buf := SingleP(lImg2Load.ImgBuffer );
+                       for lInc := 1 to lImgSamples do
+			   l32Buf^[lInc] := lW^[lInc];
+                       FreeMem(lW);
+                     end else begin
+       		        l16Buf := SmallIntP(lImg2Load.ImgBuffer );
+                        if lSwap then
+       			   for lInc := 1 to lImgSamples do
+       			       l16Buf^[lInc] := Swap2(l16Buf^[lInc]);
+                        for lInc := 1 to lImgSamples do begin //downsample UINT16 to 15bit integer to fit into INT16
+       			    lWordX := word(l16Buf^[lInc]);
+       			    l16Buf^[lInc] := lWordX shr 1;
+       			end; //for
+                        lImg2Load.NIFTIhdr.scl_slope:= lImg2Load.NIFTIhdr.scl_slope * 2.0;
+                        lImg2Load.NIFTIhdr.datatype:= kDT_SIGNED_SHORT;
+       		end; //if kDT_UINT16                      end;
+            end;//kDT_UINT16
+        kDT_SIGNED_SHORT: begin //16-bit int
+         {$ELSE}
 	kDT_SIGNED_SHORT,kDT_UINT16: begin //16-bit int
+        {$ENDIF}
 		l16Buf := SmallIntP(lImg2Load.ImgBuffer );
                  if lSwap then
 			 for lInc := 1 to lImgSamples do begin
@@ -5674,10 +5678,12 @@ begin
 			 end;
 
                   if (kDT_UINT16=lDataType ) then begin //avoid wrap around if read as signed value
-			 for lInc := 1 to lImgSamples do begin
+		     for lInc := 1 to lImgSamples do begin
 			 lWordX := word(l16Buf^[lInc]);
 			 l16Buf^[lInc] := lWordX shr 1;
-			 end; //for
+		     end; //for
+                     lImg2Load.NIFTIhdr.scl_slope:= lImg2Load.NIFTIhdr.scl_slope * 2.0;
+                     lImg2Load.NIFTIhdr.datatype:= kDT_SIGNED_SHORT;
 		end; //if kDT_UINT16
 		end; //16-bit
 	  kDT_SIGNED_INT: begin
@@ -5692,14 +5698,10 @@ begin
 	  kDT_FLOAT: begin
 		l32Buf := SingleP(lImg2Load.ImgBuffer );
 		if lSwap then
-			 for lInc := 1 to lImgSamples do begin
-				pswap4r(l32Buf^[lInc])  //faster as procedure than function see www.optimalcode.com
-			 end;
-		for lInc := 1 to lImgSamples do
+                    for lInc := 1 to lImgSamples do
+		        pswap4r(l32Buf^[lInc]);  //faster as procedure than function see www.optimalcode.com
+                for lInc := 1 to lImgSamples do
 			if specialsingle(l32Buf^[lInc]) then l32Buf^[lInc] := 0.0;
-		//thresh= for lInc := 1 to lImgSamples do if l32Buf[lInc] < 2.300611 then l32Buf[lInc] := 0.0;
-
-		 //invert= for lInc := 1 to lImgSamples do l32Buf[lInc] := -l32Buf[lInc];
 		end; //32-bit float
 	  kDT_DOUBLE: begin
 		l64Buf := DoubleP(lImg2Load.ImgBuffer );
@@ -5766,16 +5768,21 @@ begin
   else if (lLoadBackground) and (not lReslice) and (lBackgroundImg.KnownAlignment) and (lBackgroundImg.OrthoReslice)  then
   	ReorientToNearestOrtho(lBackgroundImg,lImg2Load,lLoadBackground)
   else if (l4D) and (not lReslice) and (lBackgroundImg.KnownAlignment) and (lBackgroundImg.OrthoReslice)  then
-    OrthoReorientCore(lImg2Load,true);
+          OrthoReorientCore(lImg2Load,true);
   //next correct image size
   if lImg2Load.NIFTIhdr.scl_slope = 0 then
 	lImg2Load.NIFTIhdr.scl_slope := 1;
-  if (lLoadBackground) and (not l4D) then
-    ResliceScrnImg ( lBackgroundImg,lImg2Load,true)
+
+
+  if (lLoadBackground) and (not l4D) then begin
+    ResliceScrnImg ( lBackgroundImg,lImg2Load,true);
+  end
   else if not l4D then
-    ResliceScrnImg ( lBackgroundImg,lImg2Load,lBackgroundImg.OverlaySmooth); //12 April 2009 - allow nearest neighbor
-  //Next: find min/max - better after reslicing incase we have padded zeros at the edges and zero < min
-  case lImg2Load.ImgBufferBPP of
+          ResliceScrnImg ( lBackgroundImg,lImg2Load,lBackgroundImg.OverlaySmooth); //12 April 2009 - allow nearest neighbor
+ //Next: find min/max - better after reslicing incase we have padded zeros at the edges and zero < min
+
+
+   case lImg2Load.ImgBufferBPP of
 	   1: begin
 		FindImgMinMax8 (lImg2Load, lMini,lMaxi);
 		lImg2Load.GlMaxUnscaledS := lMaxI;
@@ -5784,13 +5791,14 @@ begin
 	   2: begin
 		FindImgMinMax16 (lImg2Load, lMini,lMaxi);
 		lImg2Load.GlMaxUnscaledS := lMaxI;
-		lImg2Load.GlMinUnscaledS := lMinI;;
+		lImg2Load.GlMinUnscaledS := lMinI;
+
 	   end;
 	   4:
 		FindImgMinMax32 (lImg2Load,lImg2Load.GlMinUnscaledS,lImg2Load.GlMaxUnscaledS);
 	   else Showmessage('OpenImg and LoadImg error');
   end; //case ImgBufferBPP
-
+    //showmessage(format('%g %g ', [lImg2Load.GlMinUnscaledS,lImg2Load.GlMaxUnscaledS]));
 	balance(lImg2Load); //preparecontrast autobalance
 	lImg2Load.WindowScaledMin := raw2ScaledIntensity(lImg2Load,lImg2Load.AutoBalMinUnscaled);
 	lImg2Load.WindowScaledMax := raw2ScaledIntensity(lImg2Load,lImg2Load.AutoBalMaxUnscaled);
@@ -5904,9 +5912,11 @@ begin
   if not l4D then begin//12/2007: do not create screen buffer for 4D load! saves memory and time
      if lLoadBackground then
       RescaleImgIntensity (lBackgroundImg,lImg2Load,kBGOverlayNum)
-      else
+     else
       RescaleImgIntensity (lBackgroundImg,lImg2Load,kVOIOverlayNum);
   end;
+
+
   if (lVOILoadAsBinary) and (lImg2Load.ScrnBufferItems> 0) then begin
 	  if lImg2Load.NIFTIhdr.intent_name[1] = 'I' then //indexed
 		showmessage('Indexed drawing - assuming drawing is binary. You may want to upgrade this software.');

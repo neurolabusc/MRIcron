@@ -17,12 +17,12 @@ object FilterROIform: TFilterROIform
   OnClose = FormClose
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '0.9.29'
+  LCLVersion = '1.6.0.2'
   object Label42: TLabel
     Left = 4
     Height = 17
     Top = 14
-    Width = 89
+    Width = 101
     Caption = 'Min. Threshold'
     ParentColor = False
   end
@@ -32,17 +32,15 @@ object FilterROIform: TFilterROIform
     Top = 143
     Width = 221
     Caption = 'Filter VOI with highlighted'
-    Color = clBtnFace
-    NumGlyphs = 0
     OnClick = FilterROIBtnClick
     ShowHint = True
     ParentShowHint = False
   end
   object Label43: TLabel
     Left = 4
-    Height = 14
+    Height = 17
     Top = 49
-    Width = 75
+    Width = 104
     Caption = 'Max. Threshold'
     Font.CharSet = 13
     ParentColor = False
@@ -55,8 +53,6 @@ object FilterROIform: TFilterROIform
     Top = 107
     Width = 221
     Caption = 'Save highlighted as NIfTI or VOI'
-    Color = clBtnFace
-    NumGlyphs = 0
     OnClick = Filter2NIfTIBtnClick
     ShowHint = True
     ParentShowHint = False
@@ -65,15 +61,15 @@ object FilterROIform: TFilterROIform
     Left = 8
     Height = 17
     Top = 81
-    Width = 22
+    Width = 28
     Caption = '       '
     ParentColor = False
   end
   object MinROIfilt: TSpinEdit
     Left = 120
-    Height = 24
+    Height = 27
     Top = 7
-    Width = 52
+    Width = 64
     MaxValue = 254
     OnChange = MinROIfiltChange
     TabOrder = 0
@@ -81,9 +77,9 @@ object FilterROIform: TFilterROIform
   end
   object MaxROIfilt: TSpinEdit
     Left = 120
-    Height = 24
+    Height = 27
     Top = 42
-    Width = 52
+    Width = 64
     MaxValue = 255
     OnChange = MinROIfiltChange
     TabOrder = 1

@@ -15,20 +15,19 @@ object ReadIntForm: TReadIntForm
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.6.0.2'
   object ReadIntLabel: TLabel
     Left = 8
-    Height = 14
+    Height = 17
     Top = 15
-    Width = 448
+    Width = 107
     Alignment = taRightJustify
-    AutoSize = False
     Caption = 'Enter a number'
     ParentColor = False
   end
   object ReadIntEdit: TSpinEdit
     Left = 472
-    Height = 16
+    Height = 27
     Top = 12
     Width = 120
     MaxValue = 0

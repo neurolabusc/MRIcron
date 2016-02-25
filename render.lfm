@@ -5,37 +5,37 @@ object RenderForm: TRenderForm
   Width = 955
   ActiveControl = RenderBar
   Caption = 'Volume Render'
-  ClientHeight = 512
+  ClientHeight = 487
   ClientWidth = 955
   Menu = MainMenu1
   OnCreate = FormCreate
   OnHide = FormHide
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.5'
+  LCLVersion = '1.6.0.2'
   object RenderBar: TPanel
     Left = 0
-    Height = 32
+    Height = 37
     Top = 0
     Width = 955
     Align = alTop
     BevelOuter = bvNone
-    ClientHeight = 32
+    ClientHeight = 37
     ClientWidth = 955
     TabOrder = 0
     object Label4: TLabel
       Left = 152
-      Height = 16
+      Height = 17
       Top = 5
-      Width = 57
+      Width = 63
       Caption = 'Elevation'
       ParentColor = False
     end
     object Label1: TLabel
       Left = 4
-      Height = 16
+      Height = 17
       Top = 5
-      Width = 53
+      Width = 56
       Caption = 'Azimuth'
       ParentColor = False
     end
@@ -135,15 +135,15 @@ object RenderForm: TRenderForm
     end
     object Label5: TLabel
       Left = 616
-      Height = 16
+      Height = 17
       Top = 5
-      Width = 63
+      Width = 74
       Caption = 'Shading %'
       ParentColor = False
     end
     object AzimuthEdit: TSpinEdit
       Left = 72
-      Height = 16
+      Height = 27
       Top = 2
       Width = 70
       Increment = 30
@@ -154,7 +154,7 @@ object RenderForm: TRenderForm
     end
     object ElevationEdit: TSpinEdit
       Left = 216
-      Height = 16
+      Height = 27
       Top = 2
       Width = 70
       Increment = 30
@@ -166,7 +166,7 @@ object RenderForm: TRenderForm
     end
     object BiasTrack: TTrackBar
       Left = 352
-      Height = 29
+      Height = 38
       Top = 2
       Width = 120
       Max = 100
@@ -177,7 +177,7 @@ object RenderForm: TRenderForm
     end
     object GainTrack: TTrackBar
       Left = 480
-      Height = 29
+      Height = 38
       Top = 2
       Width = 120
       Max = 100
@@ -187,8 +187,8 @@ object RenderForm: TRenderForm
       TabOrder = 3
     end
     object ShadeEdit: TSpinEdit
-      Left = 690
-      Height = 16
+      Left = 692
+      Height = 27
       Top = 2
       Width = 70
       Increment = 10
@@ -196,8 +196,8 @@ object RenderForm: TRenderForm
       TabOrder = 4
     end
     object ClipTrack: TTrackBar
-      Left = 776
-      Height = 29
+      Left = 780
+      Height = 38
       Top = 2
       Width = 120
       Max = 999
@@ -209,14 +209,14 @@ object RenderForm: TRenderForm
   end
   object RenderPanel: TScrollBox
     Left = 0
-    Height = 480
-    Top = 32
+    Height = 450
+    Top = 37
     Width = 955
     HorzScrollBar.Page = 14
     VertScrollBar.Page = 14
     Align = alClient
-    ClientHeight = 465
-    ClientWidth = 940
+    ClientHeight = 448
+    ClientWidth = 953
     TabOrder = 1
     object RenderImage: TImage
       Tag = 2
