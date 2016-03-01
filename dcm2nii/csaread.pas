@@ -296,7 +296,7 @@ begin  //main function DecodeCSA2
       result := true;
       //showmsg('Success DecodeCSA2');
    end else begin
-      dcmMsg('CSAread Warning: '+ lFilename +' at byte '+inttostr(lCSAImageHeaderInfoPos)+' reports version "'+lVers+'": only "SV10" format is supported: image is either corruprted, very old or new. See if a new version of this software is available.');
+      dcmMsg('CSAread Warning: '+ lFilename +' at byte '+inttostr(lCSAImageHeaderInfoPos)+' reports version "'+lVers+'": only "SV10" format is supported: image is corrupted, very old or new. See if a new version of this software is available.');
    end;
    //Showmsg('CSA done, final tag '+lTag.name+' CSA started at '+inttostr(lCSAImageHeaderInfoPos)+' CSA length of '+inttostr(lCSAImageHeaderInfoSz)+' formal CSA ended at @ '+inttostr(lPos));
   lData := nil;
