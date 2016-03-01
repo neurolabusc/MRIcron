@@ -422,7 +422,7 @@ begin
 
      end;
      if (lPrevDICOM.SlicesPer3DVol > 0) and (not lPrevDICOM.file4D) and ((lValidItems div lRepeatLocations) <> lPrevDICOM.SlicesPer3DVol) then begin
-        dcmMsg('Warning: Number of slices per volume ('+inttostr((lValidItems div lRepeatLocations))+')appears different than reported in DICOM header ('+inttostr(lPrevDICOM.SlicesPer3DVol)+')');
+        dcmMsg('Warning: Number of slices per volume ('+inttostr((lValidItems div lRepeatLocations))+') appears different than reported in DICOM header ('+inttostr(lPrevDICOM.SlicesPer3DVol)+')');
         dcmMsg('  Perhaps the selected folder only has some of the images');
      end;
 
