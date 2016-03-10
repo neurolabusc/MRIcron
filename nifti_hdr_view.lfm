@@ -1125,91 +1125,91 @@ object HdrForm: THdrForm
     end
     object TabUnused: TTabSheet
       Caption = 'Optional'
-      ClientHeight = 368
+      ClientHeight = 389
       ClientWidth = 595
       object Label34: TLabel
         Left = 3
-        Height = 17
+        Height = 16
         Top = 43
-        Width = 67
+        Width = 64
         Caption = 'Data Type'
         ParentColor = False
       end
       object Label5: TLabel
         Left = 3
-        Height = 17
+        Height = 16
         Top = 8
-        Width = 61
+        Width = 57
         Caption = 'Intention'
         ParentColor = False
       end
       object Label6: TLabel
         Left = 268
-        Height = 17
+        Height = 16
         Top = 116
-        Width = 51
+        Width = 47
         Caption = 'Extents'
         ParentColor = False
       end
       object Label9: TLabel
         Left = 268
-        Height = 17
+        Height = 16
         Top = 76
-        Width = 84
-        Caption = 'Sesion Error'
+        Width = 82
+        Caption = 'Session Error'
         ParentColor = False
       end
       object Label10: TLabel
         Left = 268
-        Height = 17
+        Height = 16
         Top = 148
-        Width = 94
+        Width = 85
         Caption = 'Regular [114]'
         ParentColor = False
       end
       object Label14: TLabel
         Left = 268
-        Height = 17
+        Height = 16
         Top = 8
-        Width = 40
+        Width = 37
         Caption = 'G Min'
         ParentColor = False
       end
       object Label15: TLabel
         Left = 268
-        Height = 17
+        Height = 16
         Top = 43
-        Width = 43
+        Width = 40
         Caption = 'G Max'
         ParentColor = False
       end
       object Label18: TLabel
         Left = 3
-        Height = 17
+        Height = 16
         Top = 148
-        Width = 53
+        Width = 51
         Caption = 'Aux File'
         ParentColor = False
       end
       object Label19: TLabel
         Left = 3
-        Height = 17
+        Height = 16
         Top = 111
-        Width = 63
+        Width = 57
         Caption = 'DB Name'
         ParentColor = False
       end
       object Label26: TLabel
         Left = 3
-        Height = 17
+        Height = 16
         Top = 76
-        Width = 38
+        Width = 36
         Caption = 'Notes'
         ParentColor = False
       end
       object intent_nameEdit: TEdit
         Left = 76
-        Height = 27
+        Height = 22
         Top = 6
         Width = 152
         MaxLength = 16
@@ -1218,7 +1218,7 @@ object HdrForm: THdrForm
       end
       object data_typeEdit: TEdit
         Left = 76
-        Height = 27
+        Height = 22
         Top = 41
         Width = 152
         MaxLength = 10
@@ -1227,7 +1227,7 @@ object HdrForm: THdrForm
       end
       object CommentEdit: TEdit
         Left = 76
-        Height = 27
+        Height = 22
         Top = 74
         Width = 152
         MaxLength = 80
@@ -1236,7 +1236,7 @@ object HdrForm: THdrForm
       end
       object db_: TEdit
         Left = 76
-        Height = 27
+        Height = 22
         Top = 109
         Width = 152
         MaxLength = 18
@@ -1245,7 +1245,7 @@ object HdrForm: THdrForm
       end
       object aux: TEdit
         Left = 76
-        Height = 27
+        Height = 22
         Top = 148
         Width = 152
         MaxLength = 24
@@ -1254,7 +1254,7 @@ object HdrForm: THdrForm
       end
       object gmax: TSpinEdit
         Left = 366
-        Height = 27
+        Height = 16
         Top = 44
         Width = 66
         TabOrder = 6
@@ -1262,7 +1262,7 @@ object HdrForm: THdrForm
       end
       object gmin: TSpinEdit
         Left = 366
-        Height = 27
+        Height = 16
         Top = 9
         Width = 66
         TabOrder = 5
@@ -1270,7 +1270,7 @@ object HdrForm: THdrForm
       end
       object ses: TSpinEdit
         Left = 366
-        Height = 27
+        Height = 16
         Top = 77
         Width = 66
         TabOrder = 7
@@ -1278,7 +1278,7 @@ object HdrForm: THdrForm
       end
       object ext: TSpinEdit
         Left = 366
-        Height = 27
+        Height = 16
         Top = 117
         Width = 66
         TabOrder = 8
@@ -1286,7 +1286,7 @@ object HdrForm: THdrForm
       end
       object reg: TSpinEdit
         Left = 366
-        Height = 27
+        Height = 16
         Top = 151
         Width = 66
         MaxValue = 255
