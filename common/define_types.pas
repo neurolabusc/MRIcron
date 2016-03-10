@@ -18,7 +18,7 @@ interface
         SysUtils,classes,IniFiles,
         {$IFDEF GUI} forms,userdir, dialogs{$ELSE}dialogsx{$ENDIF};
 const
-     kMRIcronVersDate = '22DEC2015';
+     kMRIcronVersDate = '13JAN2015';
      {$IFDEF LCLCocoa}
      kMRIcronAPI = 'Cocoa';
     {$ELSE}
@@ -336,7 +336,7 @@ Begin
   result := false;
   if length(Where) < 1 then
      exit;
-     
+
   if DirExists (Where) then begin
      if Where[length(Where)] <>  PathDelim then
       lFilename := Where + pathdelim + 'dummy.dum'

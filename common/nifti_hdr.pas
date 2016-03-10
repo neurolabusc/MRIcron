@@ -26,7 +26,8 @@ type
    ,WindowScaledMin,WindowScaledMax
    ,GlMinUnscaledS,GlMaxUnscaledS,Zero8Bit,Slope8bit: single; //brightness and contrast
    NIfTItransform,DiskDataNativeEndian,UsesCustomPalette,UsesCustomPaletteRandomRainbow,UsesLabels,LutFromZero: boolean;
-   HdrFileName,ImgFileName,ECodeText: string;
+   HdrFileName,ImgFileName: string;
+   //ECodeText: string;
    gzBytesX: int64;
    NIFTIVersion,LUTindex,ScrnBufferItems,ImgBufferItems,RenderBufferItems,ImgBufferBPP,RenderDim,Index: longint;
    ImgBufferUnaligned: Pointer; //raw address of Image Buffer: address may not be aligned
@@ -684,10 +685,9 @@ begin
   //fx(lHdr.NIFTIhdr.bitpix, lHdr.NIFTIhdr.datatype);
 end;
 
-//function ReadEcode(lHdr: TMRIcroHdr; swapEndian: boolean): string;
-procedure ReadEcode(var lHdr: TMRIcroHdr);
+(*procedure ReadEcode(var lHdr: TMRIcroHdr);
+warning: this code will need better initial detection that an ecode is present, e.g. reading bytes 349 and 350
 var
-
   extension : array[0..3] of byte;
    myFile    : File;
    esize , ecode: longint;
@@ -754,8 +754,7 @@ begin
   if (lEnd > lFileSz) or (esize < 1) then exit;
   SetString(lHdr.ECodeText, PChar(@lBuff[lStart]), esize);
   //showmessage(inttostr(esize));
-
-end;
+end;*)
 
 function NIFTIhdr_LoadHdr (var lFilename: string; var lHdr: TMRIcroHdr): boolean;
 var
@@ -786,7 +785,7 @@ begin
   lHdr.gzBytesX := K_gzBytes_headerAndImageUncompressed;
   lHdr.ImgFileName:= lFilename ;
   lHdr.HdrFileName:= lFilename ;
-  lHdr.ECodeText:= '';
+  //xx lHdr.ECodeText:= '';
 
   FileMode := fmOpenRead;  //Set file access to read only
   isNativeNIfTI := true;
@@ -959,12 +958,8 @@ begin
   FixCrapMat(lHdr.Mat);
   if swapEndian then
     lHdr.DiskDataNativeEndian := false;//foreign data with swapped image data
-  if (isNativeNIfTI) and (lHdr.NIFTIhdr.vox_offset > sizeof(TNIFTIHdr)) then
-     ReadEcode(lHdr);//, swapEndian);
-
-  //showmessage(inttostr(length(lHdr.ECodeText)) );
-  //showmessage(lHdr.ECodeText);
-  //ReportMatrix(lHdr.mat);
+  //if (isNativeNIfTI) and (lHdr.NIFTIhdr.vox_offset > sizeof(TNIFTIHdr)) then
+  //   ReadEcode(lHdr);//, swapEndian);
 end; //func NIFTIhdr_LoadHdr
 
 procedure NIFTIhdr_SetIdentityMatrix (var lHdr: TMRIcroHdr); //create neutral rotation matrix

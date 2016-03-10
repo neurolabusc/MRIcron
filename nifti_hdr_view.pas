@@ -15,9 +15,6 @@ LResources, Spin,
 type
   { THdrForm }
   THdrForm = class(TForm)
-    EcodeLabel: TLabel;
-    EcodeMemo: TMemo;
-    NoECodeLabel: TLabel;
     Ymm: TFloatSpinEdit;
     MainMenu1: TMainMenu;
     File1: TMenuItem;
@@ -439,14 +436,14 @@ begin
           //Finally... check values
           HeaderMagicDropSelect(nil); //disable or enable offset based on image format
           //showmessage(lHdr.ECodeText);
-          if length(lHdr.ECodeText) > 0 then begin
+          (*if length(lHdr.ECodeText) > 0 then begin
              s := lHdr.ECodeText;
              s  := StringReplace(s, chr (0), '',[rfReplaceAll, rfIgnoreCase]);
              s := AdjustLineBreaks(s);//, tlbsLF);
              EcodeMemo.Lines.Text:= s;
              EcodeMemo.Visible := true;
           end else
-              EcodeMemo.Visible := false;
+              EcodeMemo.Visible := false; *)
 
     end;  //with lHdr
 end;

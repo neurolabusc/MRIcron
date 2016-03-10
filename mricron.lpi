@@ -52,11 +52,14 @@
         <ComponentName Value="HdrForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="-1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="412"/>
-        <CursorPos X="45" Y="425"/>
+        <TopLine Value="426"/>
+        <CursorPos X="31" Y="427"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit1>
       <Unit2>
@@ -123,7 +126,6 @@
         <ComponentName Value="ImgForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="1"/>
         <TopLine Value="4744"/>
@@ -135,7 +137,7 @@
       </Unit7>
       <Unit8>
         <Filename Value="nifti_img.pas"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="1"/>
         <TopLine Value="5539"/>
         <CursorPos X="23" Y="5556"/>
@@ -376,11 +378,12 @@
       </Unit29>
       <Unit30>
         <Filename Value="common\nifti_hdr.pas"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="951"/>
-        <CursorPos X="3" Y="964"/>
+        <TopLine Value="949"/>
+        <CursorPos X="17" Y="957"/>
         <UsageCount Value="63"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit30>
       <Unit31>
@@ -607,7 +610,7 @@
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit56>
     </Units>
-    <JumpHistory Count="3" HistoryIndex="2">
+    <JumpHistory Count="18" HistoryIndex="17">
       <Position1>
         <Filename Value="nifti_img.pas"/>
         <Caret Line="1680" Column="66" TopLine="1674"/>
@@ -620,6 +623,66 @@
         <Filename Value="nifti_img_view.pas"/>
         <Caret Line="4749" Column="44" TopLine="4735"/>
       </Position3>
+      <Position4>
+        <Filename Value="common\nifti_hdr.pas"/>
+        <Caret Line="20" Column="46" TopLine="14"/>
+      </Position4>
+      <Position5>
+        <Filename Value="common\nifti_hdr.pas"/>
+        <Caret Line="42" Column="27" TopLine="27"/>
+      </Position5>
+      <Position6>
+        <Filename Value="common\nifti_hdr.pas"/>
+        <Caret Line="756" Column="7" TopLine="736"/>
+      </Position6>
+      <Position7>
+        <Filename Value="common\nifti_hdr.pas"/>
+        <Caret Line="787" Column="8" TopLine="774"/>
+      </Position7>
+      <Position8>
+        <Filename Value="common\nifti_hdr.pas"/>
+        <Caret Line="8" Column="124"/>
+      </Position8>
+      <Position9>
+        <Filename Value="common\nifti_hdr.pas"/>
+        <Caret Line="26" Column="81" TopLine="8"/>
+      </Position9>
+      <Position10>
+        <Filename Value="common\nifti_hdr.pas"/>
+        <Caret Line="30" Column="9" TopLine="8"/>
+      </Position10>
+      <Position11>
+        <Filename Value="common\nifti_hdr.pas"/>
+        <Caret Line="3" Column="137"/>
+      </Position11>
+      <Position12>
+        <Filename Value="common\nifti_hdr.pas"/>
+        <Caret Line="30" Column="6" TopLine="8"/>
+      </Position12>
+      <Position13>
+        <Filename Value="common\nifti_hdr.pas"/>
+        <Caret Line="757" Column="7" TopLine="731"/>
+      </Position13>
+      <Position14>
+        <Filename Value="nifti_hdr_view.pas"/>
+        <Caret Line="425" Column="45" TopLine="412"/>
+      </Position14>
+      <Position15>
+        <Filename Value="nifti_hdr_view.pas"/>
+        <Caret Line="449" Column="45" TopLine="429"/>
+      </Position15>
+      <Position16>
+        <Filename Value="nifti_hdr_view.pas"/>
+        <Caret Line="448" Column="45" TopLine="428"/>
+      </Position16>
+      <Position17>
+        <Filename Value="nifti_hdr_view.pas"/>
+        <Caret Line="447" Column="45" TopLine="427"/>
+      </Position17>
+      <Position18>
+        <Filename Value="nifti_hdr_view.pas"/>
+        <Caret Line="446" Column="45" TopLine="426"/>
+      </Position18>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

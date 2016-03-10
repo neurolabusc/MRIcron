@@ -1,16 +1,4 @@
-find . -name \*.dcu -type f -delete
-rm  -r *.a
-rm  -r *.o
-rm  -r *.ppu
-rm -r *.bak
-rm mricron
-
-cd ./rgb
-rm  -r *.a
-rm  -r *.o
-rm  -r *.ppu
-rm -r *.bak
-cd ..
+#!/bin/sh
 
 cd ./common
 rm  -r *.a
@@ -18,6 +6,17 @@ rm  -r *.o
 rm  -r *.ppu
 rm -r *.bak
 cd ..
+
+exit
+
+find . -name \*.dcu -type f -delete
+rm  -r *.a
+rm  -r *.o
+rm  -r *.ppu
+rm -r *.bak
+rm mricron
+
+
 
 
 cd ./dcm2nii
