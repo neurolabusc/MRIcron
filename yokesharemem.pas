@@ -82,7 +82,6 @@ function CloseSharedMem: integer; //returns number of instances after after this
 begin
     EMemMap.Free;
 end;
-
 {$ELSE}
 var
  fshmid: longint;

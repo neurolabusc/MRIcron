@@ -3,6 +3,8 @@ unit nifti_img_view;
 interface
 {$IFDEF UNIX}
 		{$IFNDEF ENDIAN_BIG}{$DEFINE COMPILEYOKE}{$ENDIF} //not supported on PPC
+{$ELSE}
+ {$DEFINE COMPILEYOKE} //windows supports yoking
 {$ENDIF}
 uses
 {$H+}
@@ -914,7 +916,7 @@ begin
     38: IncViewEdit(ZViewEdit);
     39: IncViewEdit(XViewEdit);
     40: DecViewEdit(ZViewEdit);
-  
+
   end; //case Key
       (* if WheelDelta < 0 then begin
         Case SelectedImageNum of
@@ -1147,7 +1149,7 @@ begin
         end;
         lTE1 := ReadFloatForm.GetFloat('Please enter the first TE (ms) used for phasemap. ', 0,5.19,9999);
         lTE2 := ReadFloatForm.GetFloat('Please enter the second TE (ms) used for phasemap. ', 0,7.65,9999);
-        
+
         (*lStr := floattostr(5.19); //use floattostr for local decimal separator
         if not InputQuery('TEs used to create phasemap','Please enter the first TE in ms', lStr) then
            exit;
@@ -2464,7 +2466,7 @@ procedure TImgForm.XBarBtnMouseUp(Sender: TObject; Button: TMouseButton;
 begin
 
 end;
-   
+
 procedure TImgForm.XBarBtnMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 label 555;
@@ -3620,7 +3622,7 @@ begin
   {$ENDIF}
 	 if (gMRIcroOverlay[kVOIOverlayNum].ScrnBufferItems>0) then
 	 	WriteUndoVOI(SelectedImageNum,false);
-   
+
 end;  *)
 
 procedure TImgForm.Undo1Click(Sender: TObject);
@@ -3712,7 +3714,7 @@ begin
   lOutSliceSz := gBGImg.ScrnDim[1] * gBGImg.ScrnDim[2];
   lOutVolVox :=  lOutSliceSz * lZDim;
   if (lXDim < 3) or (lYDim < 3) or (lZDim < 3) or (lOutVolVox < 36) then begin
-	 showmessage('The 3D smoothing can only be applied to images with at least 3 slices in each dimension.'); 
+	 showmessage('The 3D smoothing can only be applied to images with at least 3 slices in each dimension.');
 	 exit;
   end;
   if (lHdr.ImgBufferItems < 1) then begin
@@ -4161,7 +4163,7 @@ begin
 	SaveAsVOIorNIFTI(lBufferAligned,lVolVoxels,4,1,false,lMRIcroHdr.NiftiHdr,'log10p'+inttostr(lnTotalThreshold));
 	//next - save log10 p values...
 	MakeStatHdr (gMRIcroOverlay[kBGOverlayNum],lMRIcroHdr,lMinChi, lMaxChi,1{df},0,lnVoxelsTested,NIFTI_INTENT_LOG10PVAL,inttostr(lnVoxelsTested) );
-	for lPos := 1 to lVolVoxels do 
+	for lPos := 1 to lVolVoxels do
 		if l32Buf^[lPos] > 0 then
 			 l32Buf^[lPos] := -log(abs(gammq(0.5, 0.5 * l32Buf^[lPos])),10)
 		else

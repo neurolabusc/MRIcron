@@ -1,5 +1,5 @@
 unit winmemmap;
-{$H+}
+{$IFDEF FPC}{$mode delphi}{$H+}{$ENDIF}
 interface
 { This Unit implements an interface to Win32 memory mapped files. It
   can be used to map data simply residing in memory or data residing
@@ -38,7 +38,11 @@ interface
 Uses
    Classes,Windows;
 Const
-     hMemMap = $FFFFFFFF;
+ {$IFDEF WIN64} // magic constants... http://www.viva64.com/en/b/0022/
+     hMemMap = $FFFFFFFFFFFFFFFF;
+ {$ELSE}
+    hMemMap = $FFFFFFFF;
+ {$ENDIF}
 Type
    //Map to memory
    TEMemMap = Class(TComponent)
@@ -259,4 +263,9 @@ begin
     LeaveCriticalSection;
   end;
 end;
+   {$IFDEF WIN64}
+     //ERROR THIS LIBRARY DOES NOT SUPPORT WINDOWS 64
+   {$ENDIF}
+
 end.
+
