@@ -187,12 +187,11 @@ type
     Interpolate1: TMenuItem;
     SaveSmooth1: TMenuItem;
     Landmarks1: TMenuItem;
-    Extract1: TMenuItem;
-    AcceptLandmark1: TMenuItem;
-    Batchlandmarks1: TMenuItem;
+    //HideDrawMenuItem: TMenuItem;
     DrawHiddenMenu: TMenuItem;
-    ShowDrawMenuItem: TMenuItem;
+    MenuItem2: TMenuItem;
     HideDrawMenuItem: TMenuItem;
+    Extract1: TMenuItem;
   //procedure SetIniMenus;
   procedure SaveOrCopyImages(lCopy: boolean);
   function ImgIntensityString(var lHdr: TMRIcroHdr; lVox: integer): string;

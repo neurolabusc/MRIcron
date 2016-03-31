@@ -2,7 +2,18 @@ unit hrf;
 
 interface
 uses
-    define_types, matrices,metagraph;
+    define_types,metagraph, matrices;
+(*const
+MAX_VEC  = 16382;  { Max number of vectors in a matrix }
+MAX_FLT = 8190;
+
+    type
+    Float = double;
+    TVector     = array[0..MAX_FLT] of Float;
+           PVector     = ^TVector;
+      TMatrix     = array[0..MAX_VEC] of PVector;
+  PMatrix     = ^TMatrix;   *)
+
 const
 	 kHRFdur = 24000; //ms for 'full' HRF - window size for HRF
 function CreateHRF (lTRsec: double; var lKernelBins: integer; lDefaultsStatsFmriT: integer; var lHRFra, lTDra: doublep): boolean;

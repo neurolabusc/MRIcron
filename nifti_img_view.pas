@@ -4203,21 +4203,12 @@ begin
   ImgForm.Caption := 'y';
 end;
 
-procedure Normandy;
-begin
-  gBGImg.Prompt4DVolume  := false;
-  gBGImg.Resliced :=true;
-       paris('/Users/rorden/downloads/fx/DBM8768/DBM8768_DIFFUSION AX PRE PERFUSION.nii.gz');
-     gBGImg.Prompt4DVolume  := true;
-end;
 
 procedure TImgForm.ROIVOI1Click(Sender: TObject);
 var
 	lNumberofFiles,lC: integer;
 	lFilename: string;
 begin
-  Normandy;
-  exit;
 	if gMRIcroOverlay[kBGOverlayNum].ScrnBufferItems < 1 then begin
 		showmessage('Please load a background image (''File''/''Open'') before adding an overlay.');
 		exit;

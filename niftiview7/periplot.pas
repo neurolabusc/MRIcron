@@ -3,7 +3,7 @@ unit periplot;
 
 interface
 uses
-    nifti_hdr,define_types,metagraph,sysutils;
+    nifti_hdr,define_types,metagraph,sysutils, Matrices;
 
 function CreatePeristimulusPlot (var l4DHdr: TMRIcroHdr; var l4DTrace: T4DTrace;
 var lPSPlot: TPSPlot): boolean;
@@ -21,7 +21,7 @@ implementation
 {$ENDIF}
 uses nifti_img_view,dialogs,nifti_img,text,graphx,math
 {$IFDEF REMOVEREGRESS},fmath, hrf,
-matrices,Regmult{$ENDIF}; //need to specify path, e.g. C:\pas\mricron\npm\math
+Regmult{$ENDIF}; //need to specify path, e.g. C:\pas\mricron\npm\math
 
 
 //var   gOffsetError: array [1..kMaxCond] of double;

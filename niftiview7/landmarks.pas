@@ -19,10 +19,10 @@ type
     ToolBar1: TToolBar;
     SaveBtn: TSpeedButton;
     AddBtn: TSpeedButton;
-    AnatDrop: TComboBox;
     UpdateBtn: TSpeedButton;
     OpenBtn: TSpeedButton;
     DeleteBtn: TSpeedButton;
+    AnatDrop: TComboBox;
     procedure SaveBtnClick(Sender: TObject);
     procedure AddBtnClick(Sender: TObject);
     procedure AnatDropChange(Sender: TObject);
@@ -109,7 +109,7 @@ begin
   if gBatchImg >=  HdrForm.OpenHdrDlg.Files.Count  then begin
     gBatchImg := 1;
     if gBatchMark = length(gLandmarks) then begin
-      ImgForm.AcceptLandmark1.Enabled := false;
+      //ImgForm.AcceptLandmark1.Enabled := false;
       showmessage('Done with landmarks');
     end else
       inc(gBatchMark);
@@ -151,7 +151,7 @@ begin
   Showmessage('Press F10 to position the '+ inttostr(length(gLandmarks))+' landmarks to '+inttostr(HdrForm.OpenHdrDlg.Files.Count)+' images');
 
 
-  ImgForm.AcceptLandmark1.Enabled := true;
+  //CR ImgForm.AcceptLandmark1.Enabled := true;
 end;
 
 procedure TAnatForm.CloseAnat;

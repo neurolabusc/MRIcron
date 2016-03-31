@@ -38,7 +38,8 @@
 unit RegMult;
 interface
 uses
-  SysUtils,FMath, Matrices, Regress, Models, PaString,messages,dialogs,classes,define_types;
+  SysUtils,FMath, Regress,Matrices,Models,PaString,
+  messages,dialogs,classes,define_types;
 const
 kMaxRA = 127;
 kCR = chr (13);
