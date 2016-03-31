@@ -777,6 +777,8 @@ end;
 
 function DICOMinterslicedistance(var lDicomdata1,lDicomdata2:Dicomdata): single;//1392
 begin
+  //dcmMsg(format('XYZ->XYZ %g %g %g   %g %g %g', [lDICOMdata1.PatientPosX, lDICOMdata1.PatientPosY, lDICOMdata1.PatientPosZ,lDICOMdata2.PatientPosX, lDICOMdata2.PatientPosY, lDICOMdata2.PatientPosZ]));
+
      result := sqrt(sqr(lDICOMdata1.PatientPosX-lDICOMdata2.PatientPosX)
             +sqr(lDICOMdata1.PatientPosY-lDICOMdata2.PatientPosY)
             +sqr(lDICOMdata1.PatientPosZ-lDICOMdata2.PatientPosZ));

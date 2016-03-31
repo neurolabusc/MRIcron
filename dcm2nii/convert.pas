@@ -1349,6 +1349,7 @@ begin
              end else
                  lAHdr.dim[3] := lnSeries;
 	end;
+
         if (lDICOMdata.ManufacturerID = kSiemensID) and (lDicomData.CSASeriesHeaderInfoPos > 0) and (lDicomData.CSASeriesHeaderInfoSz > 0) then begin
            lStr := GetCSASeriesHeaderInfo (lDicomImgName, lDicomData.CSASeriesHeaderInfoPos,lDicomData.CSASeriesHeaderInfoSz,lAHdr.dim[3], lSliceOrder);
            if (lSliceOrder < kNIFTI_SLICE_SEQ_UNKNOWN) or (lSliceOrder > kNIFTI_SLICE_ALT_DEC2) then  lSliceOrder :=  kNIFTI_SLICE_SEQ_UNKNOWN;
@@ -1371,6 +1372,7 @@ begin
            //
            dcmmsg('For slice timing correction: the slice order is '+kSliceOrderStr[lSliceOrder]);
         end;
+
         if (lDICOMdata.BandwidthPerPixelPhaseEncode > 0) then begin
            //do this AFTER mosaics have reset dim[1] and dim[2]
            if (length(lDICOMdata.PhaseEncoding) > 0) and ((lDICOMdata.PhaseEncoding[1]='C') or (lDICOMdata.PhaseEncoding[1]='R')) then begin
@@ -1401,7 +1403,9 @@ lFlip := false;
   //next compute dx between slices
   if (lAHdr.dim[3] > 1) and (lnSeries > 1) and (lDICOMdata.SiemensMosaicX <2)  then begin
         lDX := abs(DICOMinterslicedistance( lDICOMra^[ Index (1,lFirstDICOM,lInterleaved,lFlip,lAHdr)], lDICOMra^[ Index (2,lFirstDICOM,lInterleaved,lFlip,lAHdr)]) );
-        if lDX <> 0 then begin
+        //dcmMsg(format('----->DX %g %g', [ lDX, lDicomData.XYZmm[3] ]));
+
+          if lDX <> 0 then begin
            lDicomData.XYZmm[3] := lDX;
            lAHdr.pixdim[3]  := lDX;
         end;

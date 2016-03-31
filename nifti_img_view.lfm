@@ -6,7 +6,7 @@ object ImgForm: TImgForm
   ActiveControl = ControlPanel
   AllowDropFiles = True
   Caption = 'MRIcroN'
-  ClientHeight = 444
+  ClientHeight = 469
   ClientWidth = 1025
   Menu = MainMenu1
   OnClose = FormClose
@@ -18,7 +18,7 @@ object ImgForm: TImgForm
   OnResize = FormResize
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.6.0.2'
+  LCLVersion = '1.6.0.4'
   object ControlPanel: TPanel
     Left = 0
     Height = 40
@@ -35,15 +35,15 @@ object ImgForm: TImgForm
     OnDblClick = ControlPanelDblClick
     object LabelX: TLabel
       Left = 6
-      Height = 17
+      Height = 16
       Top = 12
-      Width = 9
+      Width = 8
       Caption = 'X'
       ParentColor = False
     end
     object LabelY: TLabel
       Left = 81
-      Height = 17
+      Height = 16
       Top = 12
       Width = 8
       Caption = 'Y'
@@ -51,9 +51,9 @@ object ImgForm: TImgForm
     end
     object LabelZ: TLabel
       Left = 153
-      Height = 17
+      Height = 16
       Top = 12
-      Width = 9
+      Width = 8
       Caption = 'Z'
       ParentColor = False
     end
@@ -386,7 +386,7 @@ object ImgForm: TImgForm
       end
       object LayerDrop: TComboBox
         Left = 4
-        Height = 27
+        Height = 20
         Top = 4
         Width = 116
         ItemHeight = 0
@@ -404,7 +404,7 @@ object ImgForm: TImgForm
       end
       object MinWindowEdit: TFloatSpinEdit
         Left = 153
-        Height = 27
+        Height = 16
         Top = 4
         Width = 88
         DecimalPlaces = 5
@@ -417,7 +417,7 @@ object ImgForm: TImgForm
       end
       object MaxWindowEdit: TFloatSpinEdit
         Left = 245
-        Height = 27
+        Height = 16
         Top = 4
         Width = 88
         DecimalPlaces = 5
@@ -430,7 +430,7 @@ object ImgForm: TImgForm
       end
       object LUTdrop: TComboBox
         Left = 340
-        Height = 31
+        Height = 20
         Top = 5
         Width = 100
         DropDownCount = 66
@@ -445,7 +445,7 @@ object ImgForm: TImgForm
     end
     object ZoomDrop: TComboBox
       Left = 225
-      Height = 31
+      Height = 20
       Top = 8
       Width = 79
       DropDownCount = 12
@@ -472,7 +472,7 @@ object ImgForm: TImgForm
     end
     object XViewEdit: TSpinEdit
       Left = 24
-      Height = 27
+      Height = 16
       Top = 12
       Width = 52
       MinValue = 1
@@ -482,7 +482,7 @@ object ImgForm: TImgForm
     end
     object YViewEdit: TSpinEdit
       Left = 97
-      Height = 27
+      Height = 16
       Top = 12
       Width = 52
       MinValue = 1
@@ -492,7 +492,7 @@ object ImgForm: TImgForm
     end
     object ZViewEdit: TSpinEdit
       Left = 169
-      Height = 27
+      Height = 16
       Top = 12
       Width = 52
       MinValue = 1
@@ -870,7 +870,7 @@ object ImgForm: TImgForm
   object MagPanel: TPanel
     Left = 0
     Height = 18
-    Top = 426
+    Top = 451
     Width = 1025
     Align = alBottom
     BevelOuter = bvNone
@@ -879,9 +879,9 @@ object ImgForm: TImgForm
     TabOrder = 1
     object StatusLabel: TLabel
       Left = 2
-      Height = 17
+      Height = 16
       Top = 2
-      Width = 141
+      Width = 133
       Caption = '  No Images Loaded  '
       ParentColor = False
     end
@@ -898,25 +898,25 @@ object ImgForm: TImgForm
   end
   object Panel1: TPanel
     Left = 0
-    Height = 386
+    Height = 411
     Top = 40
     Width = 1025
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 386
+    ClientHeight = 411
     ClientWidth = 1025
     TabOrder = 2
     object TriplePanel: TScrollBox
       Tag = 666
       Left = 0
-      Height = 386
+      Height = 411
       Top = 0
       Width = 1025
       HorzScrollBar.Page = 775
       VertScrollBar.Page = 250
       Align = alClient
-      ClientHeight = 384
-      ClientWidth = 1023
+      ClientHeight = 396
+      ClientWidth = 1010
       Constraints.MinWidth = 5
       Color = clBlack
       ParentColor = False
@@ -1357,6 +1357,16 @@ object ImgForm: TImgForm
         object Extract1: TMenuItem
           Caption = 'Extract objects'
           OnClick = Extract1Click
+        end
+        object DilateVOI1: TMenuItem
+          Caption = 'Dilate drawing'
+          OnClick = DilateVOI1Click
+        end
+        object DilateShellsMenu1: TMenuItem
+          Tag = 1
+          Caption = 'Dilate concentric shells'
+          Hint = 'Recursively expand drawing'
+          OnClick = DilateVOI1Click
         end
       end
       object DescriptiveMenuItem: TMenuItem

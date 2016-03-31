@@ -56,6 +56,8 @@ DrawHiddenMenu: TMenuItem;
 MenuItem2: TMenuItem;
 AppleMenu: TMenuItem;
 MenuItem3: TMenuItem;
+DilateVOI1: TMenuItem;
+DilateShellsMenu1: TMenuItem;
 NewWindow1: TMenuItem;
 Sagittal2: TMenuItem;
 Sagittal1: TMenuItem;
@@ -190,6 +192,7 @@ MNIMenu: TMenuItem;
 	Inferior1: TMenuItem;
 	Superior1: TMenuItem;
         YokeMenu: TMenuItem;
+        procedure DilateVOI1Click(Sender: TObject);
         procedure Extract1Click(Sender: TObject);
         procedure NewWindow1Click(Sender: TObject);
         procedure ToggleDrawMenu(Sender: TObject);
@@ -386,7 +389,7 @@ Type
 implementation
 
 uses statclustertable,batch,imgutil, reslice_fsl,render,ROIfilt,autoroi, MultiSlice, Text,  histoform,
-  about,clustering,ReadFloat;
+  about,clustering,ReadFloat, dilate;
 
 {$IFDEF FPC}
 {$R *.lfm}
@@ -3408,8 +3411,28 @@ begin
          for lVox := 1 to lnVox do
  	    if gMRIcroOverlay[kBGOverlayNum].ScrnBuffer^[lVox] = 0 then
                 gMRIcroOverlay[kBGOverlayNum].ImgBuffer^[lVox] := lMin;
-
    end;
+end;
+
+procedure TImgForm.DilateVOI1Click(Sender: TObject);
+begin
+    if ((sender as TMenuItem).tag = 1) or (ssShift in KeyDataToShiftState(vk_Shift)) then begin
+      MakeShells;
+      exit;
+ end;
+ if (ssCtrl in KeyDataToShiftState(vk_Shift)) then begin
+    BatchDilate;
+    exit;
+ end;
+ if  gMRIcroOverlay[kVOIOverlayNum].ScrnBufferItems= 0 then begin
+     Showmessage('You need to create a VOI before you can save it.');
+     exit;
+ end;
+ CreateUndoVol;//create gBGImg.VOIUndoVol
+ DilateVOI(1, gBGImg.VOIUndoVol);
+ gBGImg.VOIchanged := true;
+ UndoVolVOI;
+ ImgForm.RefreshImagesTimer.Enabled := true;
 end;
 
 procedure TImgForm.NewWindow1Click(Sender: TObject);

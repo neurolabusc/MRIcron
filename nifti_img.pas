@@ -2221,7 +2221,7 @@ begin
 	gBGImg.ScrnMM[1],0,0,(gBGImg.ScrnOri[1]-1)*-gBGImg.ScrnMM[1],
 	0,gBGImg.ScrnMM[2],0,(gBGImg.ScrnOri[2]-1)*-gBGImg.ScrnMM[2],
 	0,0,gBGImg.ScrnMM[3],(gBGImg.ScrnOri[3]-1)*-gBGImg.ScrnMM[3]);
- 
+
       lHdr.qform_code := kNIFTI_XFORM_SCANNER_ANAT; //May07
           lMat:= Matrix3D ( gBGImg.ScrnMM[1],0,0,(gBGImg.ScrnOri[1]-1)*-gBGImg.ScrnMM[1],
 	0,gBGImg.ScrnMM[2],0,(gBGImg.ScrnOri[2]-1)*-gBGImg.ScrnMM[2],
@@ -2245,7 +2245,7 @@ begin
            lHdr.bitpix := 24;
            lHdr.datatype := kDT_RGB;
         end;
- 
+
 	2: begin
 		lHdr.bitpix := 16;
 		lHdr.datatype := kDT_SIGNED_SHORT;
@@ -3324,6 +3324,16 @@ begin
                 lBuff^[lPos] :=lBuff^[lPos-4]; inc(lPos);
                 lBuff^[lPos] :=lBuff^[lPos-4]; inc(lPos);
         end else if (xP < 0) and  ((lBotPos+4) < lInSz) then begin
+           {$IFDEF Windows}
+           lBuff^[lPos] := (lInBuff^[lTopPos+1]*iz2+lInBuff^[lBotPos+1]*z2)shr 15; //red
+           inc(lPos);
+           lBuff^[lPos] := (lInBuff^[lTopPos+2]*iz2+lInBuff^[lBotPos+2]*z2)shr 15; //green
+           inc(lPos);
+           lBuff^[lPos] :=  (lInBuff^[lTopPos+3]*iz2+lInBuff^[lBotPos+3]*z2)shr 15; //blue
+           inc(lPos);
+           lBuff^[lPos] := kLUTalpha;
+           inc(lPos);
+           {$ELSE}
             {$IFDEF Darwin}
             lBuff^[lPos] :=kLUTalpha; inc(lPos); //reds
             lBuff^[lPos] :=(lInBuff^[lTopPos+2]*iz2+lInBuff^[lBotPos+2]*z2)shr 15; inc(lPos); //greens
@@ -3339,12 +3349,23 @@ begin
             lBuff^[lPos] := kLUTalpha;
             inc(lPos);
             {$ENDIF}
+           {$ENDIF}
         end else begin
             z:=xP and $7FFF;
             w2:=(z*iz2)shr 15;
             w1:=iz2-w2;
             w4:=(z*z2)shr 15;
             w3:=z2-w4;
+            {$IFDEF Windows}
+            lBuff^[lPos] := (lInBuff^[lTopPos+t+1]*w1+lInBuff^[lTopPos+t+5]*w2+lInBuff^[lBotPos+t+1]*w3+lInBuff^[lBotPos+t+5]*w4)shr 15;
+            inc(lPos); //red
+            lBuff^[lPos] := (lInBuff^[lTopPos+t+2]*w1+lInBuff^[lTopPos+t+6]*w2+lInBuff^[lBotPos+t+2]*w3+lInBuff^[lBotPos+t+6]*w4)shr 15;
+            inc(lPos); //green
+            lBuff^[lPos] := (lInBuff^[lTopPos+t+3]*w1+lInBuff^[lTopPos+t+7]*w2+lInBuff^[lBotPos+t+3]*w3+lInBuff^[lBotPos+t+7]*w4)shr 15;
+            inc(lPos); //blue
+            lBuff^[lPos] :=kLUTalpha;
+            inc(lPos); //reserved   lPos := lPos + 4;
+            {$ELSE}
             {$IFDEF Darwin}
                  //(lInBuff^[lTopPos+t+1]*w1+lInBuff^[lTopPos+t+5]*w2+lInBuff^[lBotPos+t+1]*w3+lInBuff^[lBotPos+t+5]*w4)shr 15;
                  //ALPHA
@@ -3369,16 +3390,8 @@ begin
             inc(lPos); //blue
             lBuff^[lPos] :=kLUTalpha;
             inc(lPos); //reserved   lPos := lPos + 4;
-
-            (*lBuff^[lPos] :=(lInBuff^[lTopPos+t+1]*w1+lInBuff^[lTopPos+t+5]*w2+lInBuff^[lBotPos+t+1]*w3+lInBuff^[lBotPos+t+5]*w4)shr 15;
-            inc(lPos); //red
-            lBuff^[lPos] :=(lInBuff^[lTopPos+t+2]*w1+lInBuff^[lTopPos+t+6]*w2+lInBuff^[lBotPos+t+2]*w3+lInBuff^[lBotPos+t+6]*w4)shr 15;
-            inc(lPos); //green
-            lBuff^[lPos] :=(lInBuff^[lTopPos+t+3]*w1+lInBuff^[lTopPos+t+7]*w2+lInBuff^[lBotPos+t+3]*w3+lInBuff^[lBotPos+t+7]*w4)shr 15;
-            inc(lPos); //blue
-            lBuff^[lPos] :=kLUTalpha;
-            inc(lPos); //reserved   lPos := lPos + 4; *)
             {$ENDIF}
+           {$ENDIF}
         end;
         Inc(xP,xP2);
       end;   //inner loop
@@ -5902,7 +5915,7 @@ begin
   end;
   if lParseName = 'ch2' then begin
 	  lImg2Load.WindowScaledMin := 30;
-	  lImg2Load.WindowScaledMax := 120;    
+	  lImg2Load.WindowScaledMax := 120;
 	  lImg2Load.AutoBalMinUnscaled := lImg2Load.WindowScaledMin;
 	  lImg2Load.AutoBalMaxUnscaled := lImg2Load.WindowScaledMax;
   end;

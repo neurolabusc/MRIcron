@@ -306,6 +306,7 @@ function GetCSASeriesHeaderInfo (lFilename: string; lStart,lLength, lnSlices: in
 var
   lData: array of byte;
       lFile    : File;
+      asciiStart: integer;
 function str2str (lStr: string): string;
 var
       lPos,lOK, lStrLen,lDataLen: integer;
@@ -335,16 +336,16 @@ begin
      end; //while pos in less than data length
 end;
 
-function strValue (lStr: string): integer;
+function strValue (lStr: string; var lPos: integer): integer;
 //returns 4 for "sSliceArray.ucMode  = 0x4" (0A ends line)
 var
-      lPos,lOK, lStrLen,lDataLen: integer;
+      lOK, lStrLen,lDataLen: integer;
       lS: string;
 begin
      result := 0; //is failure
      lStrLen := length(lStr);
      lDataLen := lLength-lStrLen-1; //-1 since data must be at least 1 byte
-     lPos := 1;
+     //lPos := 1;
      lOK := 0;
      while lPos < lDataLen do begin
            lOK := 0;
@@ -358,7 +359,7 @@ begin
                            lS := lS + chr(lData[lPos]);
                          inc(lPos);
                    end; //while not end of line
-                   result := strtoint(lS);
+                   result := strtointDef(lS,0);
                    //https://wiki.cimec.unitn.it/tiki-index.php?page=MRIBOLDfMRI
                    //http://cbs.fas.harvard.edu/node/559#slice_order
                    case result of
@@ -395,9 +396,14 @@ begin
   Seek(lFile, lStart);    // Records start from 0
   BlockRead(lFile, lData[0], lLength);
   CloseFile(lFile);
-  lSliceOrder := strValue('sSliceArray.ucMode');
-  result := str2str ('CustomerSeq');
-  //dcmMsg('*********Got it '+inttostr(lSliceOrder));
+  asciiStart := 1;
+  strValue('ASCCONV BEGIN', asciiStart);
+  if (asciiStart > 0 ) then begin
+     lSliceOrder := strValue('sSliceArray.ucMode', asciiStart); // Prisma data from Tel Aviv: "sSliceArray.ucMode" can be in both main and ASCII header: we want the one from ASCII only!
+     result := str2str ('CustomerSeq');
+     showmsg(result);
+     //dcmMsg('*********Got it '+inttostr(lSliceOrder));
+  end;
   lData := nil;
 end;
 
