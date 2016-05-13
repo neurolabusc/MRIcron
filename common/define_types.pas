@@ -18,7 +18,7 @@ interface
         SysUtils,classes,IniFiles,
         {$IFDEF GUI} forms,userdir, dialogs{$ELSE}dialogsx{$ENDIF};
 const
-     kMRIcronVersDate = '31MAR2016_B';
+     kMRIcronVersDate = '30APR2016';
      {$IFDEF LCLCocoa}
      kMRIcronAPI = 'Cocoa';
     {$ELSE}
@@ -83,12 +83,8 @@ type
            rgbreserved,rgbRed,rgbGreen,rgbBlue: byte;
            //rgbBlue,rgbGreen,rgbRed,rgbreserved: byte;
       {$ELSE}
-           {$IFDEF UNIX}
-              {$IFDEF DARWIN}
-                     rgbreserved,rgbRed,rgbGreen,rgbBlue: byte;
-              {$ELSE}
-                     rgbRed,rgbGreen,rgbBlue,rgbreserved: byte;
-              {$ENDIF}
+           {$IFDEF DARWIN}
+           rgbreserved,rgbRed,rgbGreen,rgbBlue: byte;
            {$ELSE} //not unix - windows
              //rgbreserved,rgbRed,rgbGreen,rgbBlue: byte;
            rgbBlue,rgbGreen,rgbRed,rgbreserved: byte;

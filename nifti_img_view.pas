@@ -1659,13 +1659,35 @@ begin
  AnatForm.show;
 end;
 
+{$IFDEF LINUX}
+procedure InitX(var lImage: TImage);
+var
+  lx,ly: integer;
+  lTBuff: RGBQuadp;
+begin
+  lx := 121;
+  ly := 8;
+     getmem(lTBuff,lx*ly*4);
+     Fillchar(lTBuff^,lx*ly*4,0); //set all to zero
+     DrawBMP( lx, ly, lTBuff, lImage);
+     freemem(lTBuff);
+     lImage.Canvas.clear;
+end;
+{$ENDIF}
+
 procedure TImgForm.FormCreate(Sender: TObject);
 var
    lInc: longint;
 begin
  Application.ShowButtonGlyphs := sbgNever;
  KeyPreview := true;
-
+ {$IFDEF LINUX} //Lazarus Linux 1.6 has odd behavior if image width divisible by 8, but after single image of different width all is well
+ InitX(PGImageAx);
+ InitX(PGImageCor);
+  InitX(PGImageSag);
+ {$ENDIF}
+ //PGImageCor.Canvas.clear;
+ //  PGImageCor.Picture.Bitmap.Clear;
   {$IFDEF Darwin}
        //InitOpenDocHandler;//allows files to be associated...
         {$IFNDEF LCLgtk} //for Carbon or Cocoa
@@ -1767,7 +1789,7 @@ begin
 
          SetIniMenus;
          UpdateMRU;
-         DefaultControlPanel;
+
 	 OverlaySmoothMenuClick(nil);
 	 LUTDrop.OnSelect(nil);
 	 ZoomDrop.OnSelect(nil);
@@ -4917,6 +4939,7 @@ begin
 	   ImgForm.WindowState := wsMaximized;
           RefreshImagesTimer.enabled := true;
    end;
+   DefaultControlPanel;
 end;
 
 
@@ -5163,24 +5186,23 @@ end;
 
 procedure TImgForm.ResizeControlPanel (lRows: integer);
 begin
+ // exit;
   if lRows = 2 then begin
     ControlPanel.Tag := 2;
-    LayerPanel.Top := 36;
+    LayerPanel.Top := ScaleX(36,96);
     LayerPanel.Left := 1;
-
-    ControlPanel.Height := 72;
-
-    HideROIBtn.left := 307;
-    XBarBtn.Left := 307+29;
-    ToolPanel.Left := 307+61;
+    ControlPanel.Height := ScaleY(72,96);
+    HideROIBtn.left := ScaleX(307,96);
+    XBarBtn.Left := ScaleX(307+29, 96);
+    ToolPanel.Left := ScaleX(307+61,96);
   end else begin
     ControlPanel.Tag := 1;
     LayerPanel.Top := 1;
-    LayerPanel.Left := 307;
-    HideROIBtn.left := 809;
-    XBarBtn.Left := 809+29;
-    ToolPanel.Left := 809+61;
-    ControlPanel.Height := 40;
+    LayerPanel.Left := ScaleX(307,96);
+    HideROIBtn.left := ScaleX(809,96);
+    XBarBtn.Left := ScaleX(809+29,96);
+    ToolPanel.Left := ScaleX(809+61,96);
+    ControlPanel.Height := ScaleY(40,96);
   end;
 end;
 
@@ -5197,12 +5219,12 @@ procedure TImgForm.DefaultControlPanel;
 begin
   if gBGImg.SingleRow then begin
       ResizeControlPanel(1);
-      ImgForm.Width := 1025;
-      ImgForm.Height :=  469;
+      ImgForm.Width := ScaleX(1025,96);
+      ImgForm.Height :=  ScaleY(469,96);
   end else begin
     ResizeControlPanel(2);
-      ImgForm.Width := 524;
-      ImgForm.Height :=  640;
+      ImgForm.Width := ScaleX(524,96);
+      ImgForm.Height :=  ScaleY(640,96);
    end;
 end;
 

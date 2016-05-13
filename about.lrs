@@ -1,19 +1,18 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('TAboutForm','FORMDATA',[
-  'TPF0'#10'TAboutForm'#9'AboutForm'#4'Left'#3#171#2#6'Height'#2#127#3'Top'#3
-  +#153#0#5'Width'#3#184#1#11'BorderIcons'#11#12'biSystemMenu'#0#11'BorderStyle'
-  +#7#8'bsDialog'#7'Caption'#6#8'About...'#12'ClientHeight'#2#127#11'ClientWidt'
-  +'h'#3#184#1#21'Constraints.MaxHeight'#2#127#20'Constraints.MaxWidth'#3#184#1
-  +#21'Constraints.MinHeight'#2#127#20'Constraints.MinWidth'#3#184#1#8'OnCreate'
-  +#7#10'FormCreate'#8'Position'#7#14'poScreenCenter'#10'LCLVersion'#6#3'1.5'#0
-  +#6'TPanel'#6'Panel2'#4'Left'#2#8#6'Height'#2'C'#3'Top'#2'/'#5'Width'#3#168#1
-  +#12'ClientHeight'#2'C'#11'ClientWidth'#3#168#1#8'TabOrder'#2#0#0#6'TLabel'#13
-  +'HomepageLabel'#4'Left'#2#0#6'Height'#2#20#3'Top'#2#10#5'Width'#3#160#1#9'Al'
-  +'ignment'#7#8'taCenter'#8'AutoSize'#8#7'Caption'#6#7'version'#11'ParentColor'
-  +#8#7'OnClick'#7#13'HomePageClick'#0#0#6'TLabel'#11'ThreadLabel'#4'Left'#2#1#6
-  +'Height'#2#20#3'Top'#2'$'#5'Width'#3#161#1#9'Alignment'#7#8'taCenter'#8'Auto'
-  +'Size'#8#7'Caption'#6#8' Threads'#11'ParentColor'#8#0#0#0#6'TLabel'#6'Label1'
-  +#4'Left'#2#8#6'Height'#2#28#3'Top'#2#16#5'Width'#2'_'#7'Caption'#6#7'MRIcron'
-  +#11'Font.Height'#2#232#11'ParentColor'#8#10'ParentFont'#8#0#0#0
+  'TPF0'#10'TAboutForm'#9'AboutForm'#3'Tag'#3'A'#1#4'Left'#3'r'#3#6'Height'#3
+  +#159#0#3'Top'#3#233#0#5'Width'#3#138#2#11'BorderIcons'#11#12'biSystemMenu'#0
+  +#11'BorderStyle'#7#8'bsDialog'#7'Caption'#6#8'About...'#12'ClientHeight'#3
+  +#159#0#11'ClientWidth'#3#138#2#8'OnCreate'#7#10'FormCreate'#8'Position'#7#14
+  +'poScreenCenter'#10'LCLVersion'#6#7'1.6.0.4'#0#6'TPanel'#6'Panel2'#4'Left'#2
+  +#0#6'Height'#2'c'#3'Top'#2'<'#5'Width'#3#138#2#5'Align'#7#8'alBottom'#12'Cli'
+  +'entHeight'#2'c'#11'ClientWidth'#3#138#2#8'TabOrder'#2#0#0#6'TLabel'#13'Home'
+  +'pageLabel'#4'Left'#2#16#6'Height'#2' '#3'Top'#2#8#5'Width'#2'M'#9'Alignment'
+  +#7#8'taCenter'#7'Caption'#6#7'version'#11'ParentColor'#8#7'OnClick'#7#13'Hom'
+  +'ePageClick'#0#0#6'TLabel'#11'ThreadLabel'#4'Left'#2#8#6'Height'#2' '#3'Top'
+  +#2'0'#5'Width'#2'['#9'Alignment'#7#8'taCenter'#7'Caption'#6#8' Threads'#11'P'
+  +'arentColor'#8#0#0#0#6'TLabel'#6'Label1'#4'Left'#2#8#6'Height'#2' '#3'Top'#2
+  +#8#5'Width'#2'Y'#7'Caption'#6#7'MRIcron'#11'Font.Height'#2#232#11'ParentColo'
+  +'r'#8#10'ParentFont'#8#0#0#0
 ]);

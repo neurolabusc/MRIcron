@@ -3,6 +3,7 @@ unit dilate;
 interface
 uses
   //Windows, Messages,  RXSpin,
+  {$IFDEF LINUX} LCLIntf, {$ENDIF}
   SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls,  Buttons,define_types,nifti_img_view,nifti_img, ReadInt;
 

@@ -169,7 +169,7 @@ begin
 	 dcmMsg('  '+FilenameWOExt(paramstr(0))+' <options> <sourcenames>');
 	 dcmMsg('OPTIONS:');
          dcmMsg('-4 Create 4D volumes, else DTI/fMRI saved as many 3D volumes: Y,N = '+Bool2YN(lPrefs.FourD));
-         dcmMsg('-3 : Y,N = '+Bool2YN(lPrefs.PlanarRGB));
+         dcmMsg('-3 Create planar RGB images: Y,N = '+Bool2YN(lPrefs.PlanarRGB));
          dcmMsg('-a Anonymize [remove identifying information]: Y,N = '+Bool2YN(lPrefs.Anonymize));
 	 dcmMsg('-b Load settings from specified inifile, e.g. ''-b C:\set\t1.ini''  ');
 	 dcmMsg('-c Collapse input folders: Y,N = '+Bool2YN(lPrefs.CollapseFolders));
@@ -218,7 +218,7 @@ var
   lStr: string;
 begin
   result := false;
-  
+
   if (ParamCount < 1) then exit;
   for i := 1 to ParamCount do begin
     lStr := UpcaseStr(ParamStr(I));
@@ -395,4 +395,4 @@ begin
 end;
 
 end.
- 
+

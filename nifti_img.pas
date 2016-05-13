@@ -3195,93 +3195,6 @@ begin
      result.rgbBlue:= mixColor(XloYlo.rgbBlue, XloYhi.rgbBlue, XhiYlo.rgbBlue, XhiYhi.rgbBlue, Xfrac, Yfrac);
 end;
 
-(*procedure DrawBMPZoomLin(lSrcHt,lSrcWid: integer; lZoomFrac: single; var lRGBBuff: RGBQuadp; var lImage: TImage);
-//Stretch bitmap with bilinear interpolation
-var
-   lInBuff,lBuff: ByteP;
-   lOutRGBBuff: RGBQuadp;
-   lOutWid,lOutHt: integer;
-  lSrcWidx4, lPos,xPmax, xP,yP,yP2,xP2,z, z2,iz2,w1,w2,w3,w4,lTopPos,lBotPos,
-  lINSz,x,y, t: integer;
-begin
-  lInBuff:= ByteP(lRGBBuff);
-  lOutwid := round(lSrcWid*lZoomFrac);
-  lOutHt := round(lSrcHt*lZoomFrac);
-  if (lOutwid < 2) or (lOutHt < 2) then exit;
-  xP2:=((lSrcWid)shl 15)div (lOutWid );
-  yP2:=((lSrcHt) shl 15)div (lOutHt);
-  lPos := 1;
-  getmem(lBuff, lOutHt*lOutWid*4);
-  lInSz := lSrcWid *lSrcHt * 4; //32bytesperpixel
-  lSrcWidx4 := lSrcWid * 4;
-  yP:= -16384+ (yP2 shr 1);
-  xPmax :=  ((lSrcWid - 1) * 32768)-1;
-  for y:=0 to lOutHt-1 do begin
-      xP:=  -16384+ (xP2 shr 1);  //16384, e.g. 0.5 voxel
-      if yP <= 0 then begin
-         lTopPos := 0;
-         lBotPos := 0;
-      end else begin
-          lTopPos := lSrcWid * (yP shr 15) *4; //top row
-          lBotPos := lTopPos+lSrcWidx4;
-      end;
-      if lBotPos >= lInSz then lBotPos := lBotPos - lSrcWidx4;
-      if lTopPos >= lInSz then lTopPos := lTopPos - lSrcWidx4;
-      z2:=yP and $7FFF;
-      iz2:=$8000-z2;
-      for x:=0 to lOutWid-1 do begin
-        t:= ((xP shr 15) * 4);
-        if (xP > xPmax) then begin
-                lBuff^[lPos] :=lBuff^[lPos-4]; inc(lPos); //reds
-                lBuff^[lPos] :=lBuff^[lPos-4]; inc(lPos);
-                lBuff^[lPos] :=lBuff^[lPos-4]; inc(lPos);
-                lBuff^[lPos] :=lBuff^[lPos-4]; inc(lPos);
-        end else if (xP < 0) and  ((lBotPos+4) < lInSz) then begin
-                    lBuff^[lPos] :=kLUTalpha; inc(lPos); //reds
-                    lBuff^[lPos] :=(lInBuff^[lTopPos+2]*iz2+lInBuff^[lBotPos+2]*z2)shr 15; inc(lPos); //greens
-                    lBuff^[lPos] :=(lInBuff^[lTopPos+3]*iz2+lInBuff^[lBotPos+3]*z2)shr 15; inc(lPos); //greens
-                    lBuff^[lPos] :=(lInBuff^[lTopPos+4]*iz2+lInBuff^[lBotPos+4]*z2)shr 15; inc(lPos); //greens
-        end else begin
-            z:=xP and $7FFF;
-            w2:=(z*iz2)shr 15;
-            w1:=iz2-w2;
-            w4:=(z*z2)shr 15;
-            w3:=z2-w4;
-            {$IFDEF Darwin}
-                 //(lInBuff^[lTopPos+t+1]*w1+lInBuff^[lTopPos+t+5]*w2+lInBuff^[lBotPos+t+1]*w3+lInBuff^[lBotPos+t+5]*w4)shr 15;
-                 //ALPHA
-                 lBuff^[lPos] :=  kLUTalpha ;
-                 inc(lPos);
-                 //RED
-                 lBuff^[lPos] := (lInBuff^[lTopPos+t+2]*w1+lInBuff^[lTopPos+t+6]*w2+lInBuff^[lBotPos+t+2]*w3+lInBuff^[lBotPos+t+6]*w4)shr 15; ;//
-                 inc(lPos);
-                 //GREEN
-                 lBuff^[lPos] :=(lInBuff^[lTopPos+t+3]*w1+lInBuff^[lTopPos+t+7]*w2+lInBuff^[lBotPos+t+3]*w3+lInBuff^[lBotPos+t+7]*w4)shr 15;
-                 inc(lPos);
-                 //BLUE
-                 lBuff^[lPos] :=(lInBuff^[lTopPos+t+4]*w1+lInBuff^[lTopPos+t+8]*w2+lInBuff^[lBotPos+t+4]*w3+lInBuff^[lBotPos+t+8]*w4)shr 15;
-                 inc(lPos);
-            {$ELSE}
-            lBuff^[lPos] :=(lInBuff^[lTopPos+t+1]*w1+lInBuff^[lTopPos+t+5]*w2+lInBuff^[lBotPos+t+1]*w3+lInBuff^[lBotPos+t+5]*w4)shr 15;
-            inc(lPos); //red
-            lBuff^[lPos] :=(lInBuff^[lTopPos+t+2]*w1+lInBuff^[lTopPos+t+6]*w2+lInBuff^[lBotPos+t+2]*w3+lInBuff^[lBotPos+t+6]*w4)shr 15;
-            inc(lPos); //green
-            lBuff^[lPos] :=(lInBuff^[lTopPos+t+3]*w1+lInBuff^[lTopPos+t+7]*w2+lInBuff^[lBotPos+t+3]*w3+lInBuff^[lBotPos+t+7]*w4)shr 15;
-            inc(lPos); //blue
-            lBuff^[lPos] :=kLUTalpha;
-            inc(lPos); //reserved   lPos := lPos + 4;
-            {$ENDIF}
-        end;
-        Inc(xP,xP2);
-      end;   //inner loop
-      Inc(yP,yP2);
-    end;
-  lOutRGBBuff := RGBQuadp(@lBuff[1]);
-  DrawBMP( lOutWid, lOutHt, lOutRGBBuff, lImage);
-  freemem(lBuff);
-end;
-*)
-
 procedure DrawBMPZoomLin(lSrcHt,lSrcWid: integer; lZoomFrac: single; var lRGBBuff: RGBQuadp; var lImage: TImage);
 //Stretch bitmap with bilinear interpolation
 var
@@ -3324,7 +3237,7 @@ begin
                 lBuff^[lPos] :=lBuff^[lPos-4]; inc(lPos);
                 lBuff^[lPos] :=lBuff^[lPos-4]; inc(lPos);
         end else if (xP < 0) and  ((lBotPos+4) < lInSz) then begin
-           {$IFDEF Windows}
+           {$IFNDEF Darwin}
            lBuff^[lPos] := (lInBuff^[lTopPos+1]*iz2+lInBuff^[lBotPos+1]*z2)shr 15; //red
            inc(lPos);
            lBuff^[lPos] := (lInBuff^[lTopPos+2]*iz2+lInBuff^[lBotPos+2]*z2)shr 15; //green
@@ -3356,7 +3269,7 @@ begin
             w1:=iz2-w2;
             w4:=(z*z2)shr 15;
             w3:=z2-w4;
-            {$IFDEF Windows}
+            {$IFNDEF DARWIN}
             lBuff^[lPos] := (lInBuff^[lTopPos+t+1]*w1+lInBuff^[lTopPos+t+5]*w2+lInBuff^[lBotPos+t+1]*w3+lInBuff^[lBotPos+t+5]*w4)shr 15;
             inc(lPos); //red
             lBuff^[lPos] := (lInBuff^[lTopPos+t+2]*w1+lInBuff^[lTopPos+t+6]*w2+lInBuff^[lBotPos+t+2]*w3+lInBuff^[lBotPos+t+6]*w4)shr 15;
@@ -3402,6 +3315,7 @@ begin
   freemem(lBuff);
 end;
 
+
 procedure SetDimension32(lInPGHt,lInPGWid:integer; lBuff: RGBQuadp; var lBackgroundImg: TBGImg; var lImage: TImage; lPanel: TScrollBox);
 var
    lZoom,lZoomY,lZoomX: integer;
@@ -3438,14 +3352,10 @@ begin
         if lZoom = 100 then
          DrawBMP( lInPGWid, lInPGHt, lBuff, lImage)
         else begin
-            //lStartTime := GetTickCount;
-            //for i := 1 to 20 do begin
             if gBGImg.StretchQuality = sqHigh then //bilinear smoothed zoom
                DrawBMPZoomLin(lInPGHt,lInPGWid,lZoom/100,lBuff, lImage)
             else //nearest neighbor
                DrawBMPZoomNN(lInPGHt,lInPGWid,lZoom/100,lBuff, lImage);
-            //end;
-            //ImgForm.StatusLabel.Caption := inttostr(GetTickCount - lStartTime);
         end;
         lImage.Tag := lZoom;
     end;

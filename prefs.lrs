@@ -1,41 +1,42 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('TPrefForm','FORMDATA',[
-  'TPF0'#9'TPrefForm'#8'PrefForm'#4'Left'#3#164#3#6'Height'#3#200#1#3'Top'#3#200
-  +#0#5'Width'#3#137#1#13'ActiveControl'#7#12'ResliceCheck'#11'BorderIcons'#11
-  +#12'biSystemMenu'#0#11'BorderStyle'#7#8'bsDialog'#7'Caption'#6#11'Preference'
-  +'s'#12'ClientHeight'#3#200#1#11'ClientWidth'#3#137#1#21'Constraints.MaxHeigh'
-  +'t'#3#200#1#20'Constraints.MaxWidth'#3#137#1#21'Constraints.MinHeight'#3#200
-  +#1#20'Constraints.MinWidth'#3#137#1#8'OnCreate'#7#10'FormCreate'#6'OnShow'#7
-  +#8'FormShow'#8'Position'#7#14'poScreenCenter'#10'LCLVersion'#6#7'1.4.0.4'#0#9
-  +'TGroupBox'#9'GroupBox1'#4'Left'#2#8#6'Height'#3#24#1#3'Top'#2#8#5'Width'#3
-  +'p'#1#7'Caption'#6#13'Image Display'#12'ClientHeight'#3#2#1#11'ClientWidth'#3
-  +'h'#1#8'TabOrder'#2#0#0#6'TLabel'#6'Label1'#4'Left'#2'x'#6'Height'#2#16#3'To'
-  +'p'#2'G'#5'Width'#3#189#0#7'Caption'#6#26'Maximum Dimension [Voxels]'#11'Par'
-  +'entColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2'x'#6'Height'#2#16#3'Top'#2'q'
-  +#5'Width'#2'w'#7'Caption'#6#17'Rendering Threads'#11'ParentColor'#8#0#0#6'TL'
-  +'abel'#6'Label3'#4'Left'#2'x'#6'Height'#2#16#3'Top'#3#145#0#5'Width'#3#160#0
-  +#7'Caption'#6#24'Decimal places Displayed'#11'ParentColor'#8#0#0#9'TCheckBox'
-  +#12'ResliceCheck'#4'Left'#2#15#6'Height'#2#18#3'Top'#2#9#5'Width'#3#206#0#7
-  +'Caption'#6#28'Reorient images when loading'#7'OnClick'#7#17'ResliceCheckCli'
-  +'ck'#8'TabOrder'#2#0#0#0#9'TSpinEdit'#10'MaxDimEdit'#4'Left'#2#14#6'Height'#2
-  +#16#3'Top'#2'@'#5'Width'#2'd'#8'MaxValue'#3#0#16#8'MinValue'#3#0#1#8'TabOrde'
-  +'r'#2#1#5'Value'#3#0#1#0#0#9'TSpinEdit'#10'ThreadEdit'#4'Left'#2#14#6'Height'
-  +#2#16#3'Top'#2'e'#5'Width'#2'd'#8'MaxValue'#3#0#16#8'MinValue'#2#1#8'TabOrde'
-  +'r'#2#2#5'Value'#2#1#0#0#9'TSpinEdit'#10'SigDigEdit'#4'Left'#2#14#6'Height'#2
-  +#16#3'Top'#3#138#0#5'Width'#2'd'#8'MaxValue'#2' '#8'TabOrder'#2#3#0#0#9'TChe'
-  +'ckBox'#10'OrthoCheck'#4'Left'#2'+'#6'Height'#2#18#3'Top'#2'%'#5'Width'#3#234
-  +#0#7'Caption'#6'"Rotate to nearest orthogonal angle'#8'TabOrder'#2#4#0#0#9'T'
-  +'CheckBox'#14'SingleRowCheck'#4'Left'#2#16#6'Height'#2#18#3'Top'#3#208#0#5'W'
-  +'idth'#3#171#0#7'Caption'#6#26'All slices on a single row'#8'TabOrder'#2#5#0
-  +#0#0#9'TGroupBox'#9'GroupBox2'#4'Left'#2#8#6'Height'#2'@'#3'Top'#3'('#1#5'Wi'
-  +'dth'#3'p'#1#7'Caption'#6#7'Drawing'#12'ClientHeight'#2'*'#11'ClientWidth'#3
-  +'h'#1#8'TabOrder'#2#1#0#9'TCheckBox'#12'ThinPenCheck'#4'Left'#2#15#6'Height'
-  +#2#18#3'Top'#2#16#5'Width'#2'J'#7'Caption'#6#8'Thin Pen'#8'TabOrder'#2#0#0#0
-  +#0#7'TButton'#5'OKBtn'#4'Left'#3'('#1#6'Height'#2#25#3'Top'#3#160#1#5'Width'
-  +#2'K'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#2'OK'#7'OnClick'#7#10'O'
-  +'KBtnClick'#8'TabOrder'#2#2#0#0#7'TButton'#9'CancelBtn'#4'Left'#3#192#0#6'He'
-  +'ight'#2#25#3'Top'#3#160#1#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#4#7
-  +'Caption'#6#6'Cancel'#7'OnClick'#7#14'CancelBtnClick'#8'TabOrder'#2#3#0#0#7
-  +'TButton'#7'XBarClr'#4'Left'#2#26#6'Height'#2#25#3'Top'#3#197#0#5'Width'#3
-  +#178#0#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#22'Choose Cross-Bar Co'
-  +'lor'#7'OnClick'#7#12'XBarClrClick'#8'TabOrder'#2#4#0#0#0
+  'TPF0'#9'TPrefForm'#8'PrefForm'#3'Tag'#3'A'#1#4'Left'#3#150#5#6'Height'#3'>'#2
+  +#3'Top'#3#176#0#5'Width'#3#253#1#13'ActiveControl'#7#12'ResliceCheck'#11'Bor'
+  +'derIcons'#11#12'biSystemMenu'#0#7'Caption'#6#11'Preferences'#12'ClientHeigh'
+  +'t'#3'>'#2#11'ClientWidth'#3#253#1#8'OnCreate'#7#10'FormCreate'#6'OnShow'#7#8
+  +'FormShow'#8'Position'#7#14'poScreenCenter'#10'LCLVersion'#6#7'1.6.0.4'#0#9
+  +'TGroupBox'#9'GroupBox1'#4'Left'#2#0#6'Height'#3#128#1#3'Top'#2#0#5'Width'#3
+  +#253#1#5'Align'#7#5'alTop'#7'Caption'#6#13'Image Display'#12'ClientHeight'#3
+  +'['#1#11'ClientWidth'#3#249#1#8'TabOrder'#2#0#0#6'TLabel'#6'Label1'#4'Left'#3
+  +#130#0#6'Height'#2' '#3'Top'#2'U'#5'Width'#3'='#1#7'Caption'#6#26'Maximum Di'
+  +'mension [Voxels]'#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#3#128#0
+  +#6'Height'#2' '#3'Top'#3#133#0#5'Width'#3#200#0#7'Caption'#6#17'Rendering Th'
+  +'reads'#11'ParentColor'#8#0#0#6'TLabel'#6'Label3'#4'Left'#3#128#0#6'Height'#2
+  +' '#3'Top'#3#181#0#5'Width'#3#14#1#7'Caption'#6#24'Decimal places Displayed'
+  +#11'ParentColor'#8#0#0#9'TCheckBox'#12'ResliceCheck'#4'Left'#2#24#6'Height'#2
+  +'$'#3'Top'#2#9#5'Width'#3'i'#1#7'Caption'#6#28'Reorient images when loading'
+  +#7'OnClick'#7#17'ResliceCheckClick'#8'TabOrder'#2#0#0#0#9'TSpinEdit'#10'MaxD'
+  +'imEdit'#4'Left'#2#24#6'Height'#2'('#3'Top'#2'U'#5'Width'#2'd'#8'MaxValue'#3
+  +#0#16#8'MinValue'#3#0#1#8'TabOrder'#2#1#5'Value'#3#0#1#0#0#9'TSpinEdit'#10'T'
+  +'hreadEdit'#4'Left'#2#22#6'Height'#2'('#3'Top'#3#133#0#5'Width'#2'd'#8'MaxVa'
+  +'lue'#3#0#16#8'MinValue'#2#1#8'TabOrder'#2#2#5'Value'#2#1#0#0#9'TSpinEdit'#10
+  +'SigDigEdit'#4'Left'#2#22#6'Height'#2'('#3'Top'#3#181#0#5'Width'#2'd'#8'MaxV'
+  +'alue'#2' '#8'TabOrder'#2#3#0#0#9'TCheckBox'#10'OrthoCheck'#4'Left'#2'0'#6'H'
+  +'eight'#2'$'#3'Top'#2'0'#5'Width'#3#154#1#7'Caption'#6'"Rotate to nearest or'
+  +'thogonal angle'#8'TabOrder'#2#4#0#0#9'TCheckBox'#14'SingleRowCheck'#4'Left'
+  +#2#22#6'Height'#2'$'#3'Top'#3'('#1#5'Width'#3'('#1#7'Caption'#6#26'All slice'
+  +'s on a single row'#8'TabOrder'#2#5#0#0#0#9'TGroupBox'#9'GroupBox2'#4'Left'#2
+  +#0#6'Height'#2'h'#3'Top'#3#128#1#5'Width'#3#253#1#5'Align'#7#5'alTop'#7'Capt'
+  +'ion'#6#7'Drawing'#12'ClientHeight'#2'C'#11'ClientWidth'#3#249#1#8'TabOrder'
+  +#2#1#0#9'TCheckBox'#12'ThinPenCheck'#4'Left'#2#15#6'Height'#2'$'#3'Top'#2#16
+  +#5'Width'#3#130#0#7'Caption'#6#8'Thin Pen'#8'TabOrder'#2#0#0#0#0#7'TButton'#5
+  +'OKBtn'#4'Left'#3#152#1#6'Height'#2'2'#3'Top'#3#0#2#5'Width'#2'B'#8'AutoSize'
+  +#9#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#2'OK'#7'OnClick'#7#10'OKBt'
+  +'nClick'#8'TabOrder'#2#2#0#0#7'TButton'#9'CancelBtn'#4'Left'#3' '#1#6'Height'
+  +#2'2'#3'Top'#3#0#2#5'Width'#2'i'#8'AutoSize'#9#25'BorderSpacing.InnerBorder'
+  +#2#4#7'Caption'#6#6'Cancel'#7'OnClick'#7#14'CancelBtnClick'#8'TabOrder'#2#3#0
+  +#0#7'TButton'#7'XBarClr'#4'Left'#2#16#6'Height'#2'2'#3'Top'#3#13#1#5'Width'#3
+  +#30#1#8'AutoSize'#9#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#22'Choose'
+  +' Cross-Bar Color'#7'OnClick'#7#12'XBarClrClick'#8'TabOrder'#2#4#0#0#0
 ]);

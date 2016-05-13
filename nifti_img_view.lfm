@@ -1,7 +1,7 @@
 object ImgForm: TImgForm
-  Left = 414
+  Left = 538
   Height = 469
-  Top = 250
+  Top = 274
   Width = 1025
   ActiveControl = ControlPanel
   AllowDropFiles = True
@@ -1426,6 +1426,7 @@ object ImgForm: TImgForm
           Caption = 'Axial'
           GroupIndex = 234
           RadioItem = True
+          ShortCut = 65
           OnClick = Sagittal1Click
         end
         object Coronal1: TMenuItem
@@ -1434,6 +1435,7 @@ object ImgForm: TImgForm
           Caption = 'Coronal'
           GroupIndex = 234
           RadioItem = True
+          ShortCut = 67
           OnClick = Sagittal1Click
         end
         object Sagittal1: TMenuItem
@@ -1442,6 +1444,7 @@ object ImgForm: TImgForm
           Caption = 'Sagittal'
           GroupIndex = 234
           RadioItem = True
+          ShortCut = 83
           OnClick = Sagittal1Click
         end
         object Multiple1: TMenuItem
@@ -1450,6 +1453,7 @@ object ImgForm: TImgForm
           Checked = True
           GroupIndex = 234
           RadioItem = True
+          ShortCut = 77
           OnClick = Sagittal1Click
         end
         object Axial2: TMenuItem

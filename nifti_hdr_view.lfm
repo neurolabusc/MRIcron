@@ -1,11 +1,11 @@
 object HdrForm: THdrForm
   Left = 606
-  Height = 451
+  Height = 466
   Top = 154
   Width = 609
   ActiveControl = PageControl1
   Caption = 'NIfTI Header Information'
-  ClientHeight = 451
+  ClientHeight = 427
   ClientWidth = 609
   Menu = MainMenu1
   OnCreate = FormCreate
@@ -14,7 +14,7 @@ object HdrForm: THdrForm
   LCLVersion = '1.6.0.4'
   object PageControl1: TPageControl
     Left = 4
-    Height = 428
+    Height = 397
     Top = 4
     Width = 601
     ActivePage = TabRequired
@@ -29,103 +29,103 @@ object HdrForm: THdrForm
     OnChange = PageControl1Change
     object TabRequired: TTabSheet
       Caption = 'Dimensions'
-      ClientHeight = 389
-      ClientWidth = 595
+      ClientHeight = 339
+      ClientWidth = 585
       OnContextPopup = TabRequiredContextPopup
       object Label21: TLabel
         Left = 6
-        Height = 16
+        Height = 32
         Top = 6
-        Width = 79
+        Width = 135
         Caption = 'Header Type'
         ParentColor = False
       end
       object Label1: TLabel
         Left = 14
-        Height = 16
+        Height = 32
         Top = 35
-        Width = 268
+        Width = 457
         Caption = 'Dimension   Length     Spacing            Unit'
         ParentColor = False
       end
       object Label2: TLabel
         Left = 16
-        Height = 16
+        Height = 32
         Top = 67
-        Width = 44
+        Width = 76
         Caption = 'I Space'
         ParentColor = False
       end
       object Label3: TLabel
         Left = 16
-        Height = 16
+        Height = 32
         Top = 97
-        Width = 44
+        Width = 79
         Caption = 'J Space'
         ParentColor = False
       end
       object Label4: TLabel
         Left = 16
-        Height = 16
+        Height = 32
         Top = 131
-        Width = 49
+        Width = 84
         Caption = 'K Space'
         ParentColor = False
       end
       object Label8: TLabel
         Left = 6
-        Height = 16
+        Height = 32
         Top = 297
-        Width = 29
+        Width = 49
         Caption = 'Data'
         ParentColor = False
       end
       object Label7: TLabel
         Left = 294
-        Height = 16
+        Height = 32
         Top = 235
-        Width = 38
+        Width = 65
         Caption = 'Offset'
         ParentColor = False
       end
       object Label44: TLabel
         Left = 16
-        Height = 16
+        Height = 32
         Top = 166
-        Width = 31
+        Width = 53
         Caption = 'Time'
         ParentColor = False
       end
       object Label29: TLabel
         Left = 16
-        Height = 16
+        Height = 32
         Top = 198
-        Width = 51
+        Width = 86
         Caption = '5th Dim'
         ParentColor = False
       end
       object Label41: TLabel
         Left = 16
-        Height = 16
+        Height = 32
         Top = 230
-        Width = 51
+        Width = 86
         Caption = '6th Dim'
         ParentColor = False
       end
       object Label42: TLabel
         Left = 16
-        Height = 16
+        Height = 32
         Top = 265
-        Width = 51
+        Width = 86
         Caption = '7th Dim'
         ParentColor = False
       end
       object HeaderMagicDrop: TComboBox
         Left = 108
-        Height = 20
+        Height = 40
         Top = 2
         Width = 239
-        ItemHeight = 0
+        ItemHeight = 32
         Items.Strings = (
           'Unknown'
           'ni1: NIfTI separate file (hdr+.img)'
@@ -139,10 +139,10 @@ object HdrForm: THdrForm
       end
       object Endian: TComboBox
         Left = 231
-        Height = 20
+        Height = 40
         Top = 291
         Width = 210
-        ItemHeight = 0
+        ItemHeight = 32
         Items.Strings = (
           'Native Endian'
           'Swapped Endian'
@@ -152,11 +152,11 @@ object HdrForm: THdrForm
       end
       object fTypeDrop: TComboBox
         Left = 56
-        Height = 20
+        Height = 40
         Top = 291
         Width = 152
         DropDownCount = 20
-        ItemHeight = 0
+        ItemHeight = 32
         Items.Strings = (
           'binary'
           '8-bit S'
@@ -181,10 +181,10 @@ object HdrForm: THdrForm
       end
       object xyzt_sizeDrop: TComboBox
         Left = 262
-        Height = 20
+        Height = 40
         Top = 87
         Width = 128
-        ItemHeight = 0
+        ItemHeight = 32
         Items.Strings = (
           'Unknown'
           'Meter'
@@ -197,10 +197,10 @@ object HdrForm: THdrForm
       end
       object xyzt_timeDrop: TComboBox
         Left = 262
-        Height = 20
+        Height = 40
         Top = 157
         Width = 128
-        ItemHeight = 0
+        ItemHeight = 32
         Items.Strings = (
           'Unknown'
           'Second'
@@ -215,7 +215,7 @@ object HdrForm: THdrForm
       end
       object Xdim: TSpinEdit
         Left = 80
-        Height = 16
+        Height = 40
         Top = 59
         Width = 74
         MaxValue = 9999
@@ -226,7 +226,7 @@ object HdrForm: THdrForm
       end
       object Ydim: TSpinEdit
         Left = 80
-        Height = 16
+        Height = 40
         Top = 89
         Width = 74
         MaxValue = 9999
@@ -238,7 +238,7 @@ object HdrForm: THdrForm
       end
       object Zdim: TSpinEdit
         Left = 80
-        Height = 16
+        Height = 40
         Top = 123
         Width = 74
         MaxValue = 9999
@@ -250,7 +250,7 @@ object HdrForm: THdrForm
       end
       object Xmm: TFloatSpinEdit
         Left = 164
-        Height = 16
+        Height = 40
         Top = 59
         Width = 88
         DecimalPlaces = 4
@@ -262,7 +262,7 @@ object HdrForm: THdrForm
       end
       object Ymm: TFloatSpinEdit
         Left = 164
-        Height = 16
+        Height = 40
         Top = 89
         Width = 88
         DecimalPlaces = 4
@@ -274,7 +274,7 @@ object HdrForm: THdrForm
       end
       object Zmm: TFloatSpinEdit
         Left = 164
-        Height = 16
+        Height = 40
         Top = 123
         Width = 88
         DecimalPlaces = 4
@@ -286,7 +286,7 @@ object HdrForm: THdrForm
       end
       object OffsetEdit: TSpinEdit
         Left = 342
-        Height = 16
+        Height = 40
         Top = 230
         Width = 94
         MaxValue = 999999
@@ -296,7 +296,7 @@ object HdrForm: THdrForm
       end
       object TDim: TSpinEdit
         Left = 80
-        Height = 16
+        Height = 40
         Top = 157
         Width = 74
         MaxValue = 9999
@@ -308,7 +308,7 @@ object HdrForm: THdrForm
       end
       object TSec: TFloatSpinEdit
         Left = 164
-        Height = 16
+        Height = 40
         Top = 157
         Width = 88
         DecimalPlaces = 4
@@ -320,7 +320,7 @@ object HdrForm: THdrForm
       end
       object Dim5Edit: TSpinEdit
         Left = 80
-        Height = 16
+        Height = 40
         Top = 191
         Width = 74
         MaxValue = 35000
@@ -332,7 +332,7 @@ object HdrForm: THdrForm
       end
       object Dim6Edit: TSpinEdit
         Left = 80
-        Height = 16
+        Height = 40
         Top = 223
         Width = 74
         MaxValue = 35000
@@ -344,7 +344,7 @@ object HdrForm: THdrForm
       end
       object Dim7Edit: TSpinEdit
         Left = 80
-        Height = 16
+        Height = 40
         Top = 258
         Width = 74
         MaxValue = 35000
@@ -356,7 +356,7 @@ object HdrForm: THdrForm
       end
       object PixDim5: TFloatSpinEdit
         Left = 164
-        Height = 16
+        Height = 40
         Top = 191
         Width = 88
         DecimalPlaces = 4
@@ -368,7 +368,7 @@ object HdrForm: THdrForm
       end
       object PixDim6: TFloatSpinEdit
         Left = 164
-        Height = 16
+        Height = 40
         Top = 223
         Width = 88
         DecimalPlaces = 4
@@ -380,7 +380,7 @@ object HdrForm: THdrForm
       end
       object PixDim7: TFloatSpinEdit
         Left = 164
-        Height = 16
+        Height = 40
         Top = 258
         Width = 88
         DecimalPlaces = 4
@@ -461,10 +461,10 @@ object HdrForm: THdrForm
       end
       object QFormDrop: TComboBox
         Left = 150
-        Height = 20
+        Height = 40
         Top = 5
         Width = 260
-        ItemHeight = 0
+        ItemHeight = 32
         Items.Strings = (
           'None'
           'Scanner Position'
@@ -479,10 +479,10 @@ object HdrForm: THdrForm
       end
       object SFormDrop: TComboBox
         Left = 145
-        Height = 20
+        Height = 40
         Top = 150
         Width = 204
-        ItemHeight = 0
+        ItemHeight = 32
         Items.Strings = (
           'None'
           'Scanner Position'
@@ -863,11 +863,11 @@ object HdrForm: THdrForm
       end
       object IntentCodeDrop: TComboBox
         Left = 76
-        Height = 20
+        Height = 40
         Top = 8
         Width = 218
         DropDownCount = 44
-        ItemHeight = 0
+        ItemHeight = 32
         Items.Strings = (
           'Not statistics'
           'Correlation coefficient '
@@ -1017,10 +1017,10 @@ object HdrForm: THdrForm
       end
       object SliceCodeDrop: TComboBox
         Left = 87
-        Height = 20
+        Height = 40
         Top = 137
         Width = 274
-        ItemHeight = 0
+        ItemHeight = 32
         Items.Strings = (
           'Unknown'
           'Sequential Increasing (1 2 3 4)'
@@ -1036,10 +1036,10 @@ object HdrForm: THdrForm
       end
       object FreqDimDrop: TComboBox
         Left = 146
-        Height = 20
+        Height = 40
         Top = 174
         Width = 215
-        ItemHeight = 0
+        ItemHeight = 32
         Items.Strings = (
           'Unknown'
           'I'
@@ -1052,10 +1052,10 @@ object HdrForm: THdrForm
       end
       object PhaseDimDrop: TComboBox
         Left = 146
-        Height = 20
+        Height = 40
         Top = 210
         Width = 215
-        ItemHeight = 0
+        ItemHeight = 32
         Items.Strings = (
           'Unknown'
           'I'
@@ -1068,10 +1068,10 @@ object HdrForm: THdrForm
       end
       object SliceDimDrop: TComboBox
         Left = 146
-        Height = 20
+        Height = 40
         Top = 246
         Width = 215
-        ItemHeight = 0
+        ItemHeight = 32
         Items.Strings = (
           'Unknown'
           'I'
@@ -1297,11 +1297,10 @@ object HdrForm: THdrForm
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Height = 15
-    Top = 436
+    Height = 22
+    Top = 405
     Width = 609
     AutoSize = False
-    Constraints.MaxHeight = 15
     Panels = <    
       item
         Width = 140

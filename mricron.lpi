@@ -9,6 +9,10 @@
       </Flags>
       <MainUnit Value="0"/>
       <Title Value="MRIcron"/>
+      <UseXPManifest Value="True"/>
+      <XPManifest>
+        <DpiAware Value="True"/>
+      </XPManifest>
       <Icon Value="0"/>
     </General>
     <BuildModes Count="1">
@@ -35,13 +39,13 @@
         <PackageName Value="LCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="58">
+    <Units Count="59">
       <Unit0>
         <Filename Value="mricron.lpr"/>
         <IsPartOfProject Value="True"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="2"/>
-        <CursorPos X="129" Y="3"/>
+        <TopLine Value="46"/>
+        <CursorPos X="27" Y="52"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -52,12 +56,13 @@
         <ComponentName Value="HdrForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="1"/>
         <TopLine Value="426"/>
         <CursorPos X="60" Y="430"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit1>
       <Unit2>
@@ -73,11 +78,13 @@
         <ComponentName Value="AboutForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="1"/>
         <TopLine Value="19"/>
-        <CursorPos X="65" Y="40"/>
+        <CursorPos X="29" Y="30"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit3>
       <Unit4>
@@ -127,8 +134,8 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="4190"/>
-        <CursorPos Y="4212"/>
+        <TopLine Value="1656"/>
+        <CursorPos X="9" Y="1676"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -322,8 +329,8 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="60"/>
-        <CursorPos X="59" Y="74"/>
+        <TopLine Value="70"/>
+        <CursorPos X="36" Y="88"/>
         <UsageCount Value="200"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit25>
@@ -368,23 +375,20 @@
         <ComponentName Value="ReadFloatForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="3"/>
         <CursorPos X="16" Y="17"/>
         <UsageCount Value="201"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit29>
       <Unit30>
         <Filename Value="common\nifti_hdr.pas"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="949"/>
         <CursorPos X="17" Y="957"/>
-        <UsageCount Value="64"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="65"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit30>
       <Unit31>
@@ -509,23 +513,25 @@
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit44>
       <Unit45>
-        <Filename Value="..\..\..\Developer\lazarus\lcl\interfaces\cocoa\cocoawsstdctrls.pp"/>
+        <Filename Value="C:\Developer\lazarus\lcl\interfaces\cocoa\cocoawsstdctrls.pp"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="256"/>
         <CursorPos X="32" Y="272"/>
         <UsageCount Value="55"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit45>
       <Unit46>
-        <Filename Value="..\..\..\Developer\lazarus\lcl\interfaces\cocoa\cocoaint.pas"/>
+        <Filename Value="C:\Developer\lazarus\lcl\interfaces\cocoa\cocoaint.pas"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="165"/>
         <CursorPos X="42" Y="176"/>
         <UsageCount Value="55"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit46>
       <Unit47>
-        <Filename Value="..\..\..\Desktop\c4\unit1.pas"/>
+        <Filename Value="C:\Desktop\c4\unit1.pas"/>
         <ComponentName Value="Form1"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
@@ -535,20 +541,22 @@
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit47>
       <Unit48>
-        <Filename Value="..\..\..\Developer\lazarus\lcl\lclintf.pas"/>
+        <Filename Value="C:\Developer\lazarus\lcl\lclintf.pas"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="60"/>
         <CursorPos X="10" Y="72"/>
         <UsageCount Value="6"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit48>
       <Unit49>
-        <Filename Value="..\..\..\Developer\lazarus\lcl\interfaces\cocoa\cocoawsmenus.pas"/>
+        <Filename Value="C:\Developer\lazarus\lcl\interfaces\cocoa\cocoawsmenus.pas"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="46"/>
         <CursorPos X="20" Y="56"/>
         <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit49>
       <Unit50>
         <Filename Value="..\raycast\shaderu.pas"/>
@@ -585,12 +593,13 @@
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit53>
       <Unit54>
-        <Filename Value="..\..\..\Developer\lazarus\lcl\dialogs.pp"/>
+        <Filename Value="C:\Developer\lazarus\lcl\dialogs.pp"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="21"/>
         <CursorPos X="3" Y="38"/>
         <UsageCount Value="12"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit54>
       <Unit55>
         <Filename Value="batch.pas"/>
@@ -612,135 +621,141 @@
       </Unit56>
       <Unit57>
         <Filename Value="dilate.pas"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="524"/>
-        <CursorPos X="33" Y="525"/>
-        <UsageCount Value="11"/>
+        <CursorPos X="35" Y="6"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit57>
+      <Unit58>
+        <Filename Value="uscaledpi.pas"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="8"/>
+        <CursorPos Y="19"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit58>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
-        <Filename Value="common\nifti_hdr.pas"/>
-        <Caret Line="756" Column="7" TopLine="736"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="3887" Column="15" TopLine="3865"/>
       </Position1>
       <Position2>
-        <Filename Value="common\nifti_hdr.pas"/>
-        <Caret Line="787" Column="8" TopLine="774"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="3413" Column="72" TopLine="3408"/>
       </Position2>
       <Position3>
-        <Filename Value="common\nifti_hdr.pas"/>
-        <Caret Line="8" Column="124"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="3" Column="145"/>
       </Position3>
       <Position4>
-        <Filename Value="common\nifti_hdr.pas"/>
-        <Caret Line="26" Column="81" TopLine="8"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="53" Column="9" TopLine="32"/>
       </Position4>
       <Position5>
-        <Filename Value="common\nifti_hdr.pas"/>
-        <Caret Line="30" Column="9" TopLine="8"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="196" Column="27" TopLine="175"/>
       </Position5>
       <Position6>
-        <Filename Value="common\nifti_hdr.pas"/>
-        <Caret Line="3" Column="137"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="2" Column="64"/>
       </Position6>
       <Position7>
-        <Filename Value="common\nifti_hdr.pas"/>
-        <Caret Line="30" Column="6" TopLine="8"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="4212" TopLine="4190"/>
       </Position7>
       <Position8>
-        <Filename Value="common\nifti_hdr.pas"/>
-        <Caret Line="757" Column="7" TopLine="731"/>
+        <Filename Value="mricron.lpr"/>
+        <Caret Line="15" Column="24" TopLine="10"/>
       </Position8>
       <Position9>
-        <Filename Value="nifti_hdr_view.pas"/>
-        <Caret Line="425" Column="45" TopLine="412"/>
+        <Filename Value="mricron.lpr"/>
+        <Caret Line="55" Column="30" TopLine="42"/>
       </Position9>
       <Position10>
-        <Filename Value="nifti_hdr_view.pas"/>
-        <Caret Line="449" Column="45" TopLine="429"/>
+        <Filename Value="mricron.lpr"/>
+        <Caret Line="57" TopLine="42"/>
       </Position10>
       <Position11>
-        <Filename Value="nifti_hdr_view.pas"/>
-        <Caret Line="448" Column="45" TopLine="428"/>
+        <Filename Value="uscaledpi.pas"/>
+        <Caret Line="31" Column="5" TopLine="19"/>
       </Position11>
       <Position12>
-        <Filename Value="nifti_hdr_view.pas"/>
-        <Caret Line="447" Column="45" TopLine="427"/>
+        <Filename Value="uscaledpi.pas"/>
+        <Caret Line="92" Column="49" TopLine="89"/>
       </Position12>
       <Position13>
-        <Filename Value="nifti_hdr_view.pas"/>
-        <Caret Line="446" Column="45" TopLine="426"/>
+        <Filename Value="mricron.lpr"/>
+        <Caret Line="54" Column="36" TopLine="42"/>
       </Position13>
       <Position14>
         <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="2" Column="112"/>
+        <Caret Line="1735" Column="27" TopLine="1732"/>
       </Position14>
       <Position15>
         <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="3439" Column="5" TopLine="3417"/>
+        <Caret Line="1770" Column="29" TopLine="1758"/>
       </Position15>
       <Position16>
-        <Filename Value="dilate.pas"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="5199" Column="25" TopLine="5183"/>
       </Position16>
       <Position17>
-        <Filename Value="dilate.pas"/>
-        <Caret Line="6" Column="56"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="261" Column="33" TopLine="258"/>
       </Position17>
       <Position18>
-        <Filename Value="dilate.pas"/>
-        <Caret Line="5" Column="32"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="346" Column="37" TopLine="328"/>
       </Position18>
       <Position19>
-        <Filename Value="dilate.pas"/>
-        <Caret Line="7" Column="61"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="5165" Column="24" TopLine="5163"/>
       </Position19>
       <Position20>
         <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="367" Column="65" TopLine="365"/>
+        <Caret Line="5189" Column="23" TopLine="5176"/>
       </Position20>
       <Position21>
-        <Filename Value="dilate.pas"/>
-        <Caret Line="398" Column="65" TopLine="373"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="5191" Column="23" TopLine="5176"/>
       </Position21>
       <Position22>
         <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="1753" Column="27" TopLine="1732"/>
+        <Caret Line="5198" Column="25" TopLine="5179"/>
       </Position22>
       <Position23>
         <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="1754" Column="27" TopLine="1733"/>
+        <Caret Line="5202" Column="23" TopLine="5183"/>
       </Position23>
       <Position24>
         <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="3420" Column="12" TopLine="3418"/>
+        <Caret Line="346" Column="37" TopLine="336"/>
       </Position24>
       <Position25>
         <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="3887" Column="15" TopLine="3865"/>
+        <Caret Line="5164" Column="38" TopLine="5154"/>
       </Position25>
       <Position26>
         <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="3413" Column="72" TopLine="3408"/>
+        <Caret Line="5195" Column="39" TopLine="5191"/>
       </Position26>
       <Position27>
         <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="3" Column="145"/>
+        <Caret Line="344" Column="38" TopLine="334"/>
       </Position27>
       <Position28>
         <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="53" Column="9" TopLine="32"/>
+        <Caret Line="1770" Column="10" TopLine="1761"/>
       </Position28>
       <Position29>
         <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="196" Column="27" TopLine="175"/>
+        <Caret Line="4910" Column="36" TopLine="4906"/>
       </Position29>
-      <Position30>
-        <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="2" Column="64"/>
-      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

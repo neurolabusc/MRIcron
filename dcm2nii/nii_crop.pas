@@ -462,6 +462,10 @@ begin
      //finally: find minima between these two points...
      lMinSlice := MinRA(lSliceSum,lVentralMaxSlice,lMaxSlice);
      lGap := round((lMaxSlice-lMinSlice)*0.9);//add 40% for cerebellum
+
+     //for lZ := 1 to lSlices do
+     //    dcmMsg(format('%d %g', [lZ, lSliceSum[lZ] ]));
+     //dcmMsg(format('%d %d %d', [lVentralMaxSlice, lMinSlice, lMaxSlice]));
      if (lMinSlice-lGap) > 1 then begin
         result := true;
         lVentralCrop := lMinSlice-lGap;
@@ -476,7 +480,7 @@ begin
      Freemem(lSliceSumUnaligned);
      //next - max 200mm from top of head to spinal column....
 
-     //if (lSliceMM > kMaxDVmm
+     //dcmMsg(format('%d %d', [lVentralCrop,lDorsalCrop]));
 
 end;
 
@@ -808,7 +812,9 @@ begin
          end;
    end; //case
    FindDVCrop (lInHdr, lImgBuffer, lDorsalCrop,lVentralCrop, 5);
+   dcmMsg(format('1 %d %d', [lVentralCrop,lDorsalCrop]));
    FindDVCrop2 (lInHdr, lDorsalCrop,lVentralCrop);
+   dcmMsg(format('2 %d %d', [lVentralCrop,lDorsalCrop]));
    FindLRCrop (lInHdr, lImgBuffer, lLCrop,lRCrop,3,lDorsalCrop,lVentralCrop);//3% often sagittal scans near brain
    FindAPCrop (lInHdr, lImgBuffer, lACrop,lPCrop, 5,lDorsalCrop,lVentralCrop);
    FreeMem(lBuffUnaligned);
@@ -978,4 +984,4 @@ end;
 
 
 end.
-
+

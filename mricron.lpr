@@ -11,7 +11,8 @@ uses
 batchstatselect, nii_label;
 {$IFNDEF UNIX}
  {$IFDEF FPC}
-   {$R manifest.res}
+   //{$R manifest.res}
+   {$R *.res}
 {$ELSE}
   {$R *.res}//windows icon
  {$ENDIF}
@@ -21,7 +22,9 @@ batchstatselect, nii_label;
 
 
 
-{$IFDEF WINDOWS}{$R mricron.rc}{$ENDIF}
+//{$IFNDEF FPC}
+//{$IFDEF WINDOWS}{$R mricron.rc}{$ENDIF}
+//{$ENDIF}
 
 begin
   Application.Title:='MRIcron';
@@ -49,7 +52,10 @@ begin
   Application.CreateForm(TCutoutForm, CutoutForm);
   Application.CreateForm(TReadFloatForm, ReadFloatForm);
    {$IFDEF FPC}{$IFDEF LINUX} HighDPIfont(GetFontData(ImgForm.Font.Handle).Height); {$ENDIF} {$ENDIF}
-  {$IFDEF FPC}{$IFNDEF UNIX}HighDPI(96);{$ENDIF}{$ENDIF}
+  {$IFDEF FPC}{$IFNDEF UNIX}
+  HighDPI(96);
+
+   {$ENDIF}{$ENDIF}
 
   Application.Run;
 end.
