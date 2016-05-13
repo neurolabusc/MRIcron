@@ -327,6 +327,7 @@ procedure UpdateColorSchemes;
 	procedure DescriptiveMenuItemClick(Sender: TObject);
 	procedure FormResize(Sender: TObject);
 	procedure FormShow(Sender: TObject);
+        procedure InitImg(var lImage: TImage);
     procedure OnLaunch;
 	procedure FlipLRmenuClick(Sender: TObject);
 	procedure Menu2DSmoothClick(Sender: TObject);
@@ -1659,8 +1660,7 @@ begin
  AnatForm.show;
 end;
 
-{$IFDEF LINUX}
-procedure InitX(var lImage: TImage);
+procedure TImgForm.InitImg(var lImage: TImage);
 var
   lx,ly: integer;
   lTBuff: RGBQuadp;
@@ -1673,7 +1673,6 @@ begin
      freemem(lTBuff);
      lImage.Canvas.clear;
 end;
-{$ENDIF}
 
 procedure TImgForm.FormCreate(Sender: TObject);
 var
@@ -1682,9 +1681,9 @@ begin
  Application.ShowButtonGlyphs := sbgNever;
  KeyPreview := true;
  {$IFDEF LINUX} //Lazarus Linux 1.6 has odd behavior if image width divisible by 8, but after single image of different width all is well
- InitX(PGImageAx);
- InitX(PGImageCor);
-  InitX(PGImageSag);
+ InitImg(PGImageAx);
+ InitImg(PGImageCor);
+  InitImg(PGImageSag);
  {$ENDIF}
  //PGImageCor.Canvas.clear;
  //  PGImageCor.Picture.Bitmap.Clear;

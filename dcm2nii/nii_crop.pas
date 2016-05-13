@@ -58,7 +58,6 @@ begin
    l1 := 1;
    Move(lInBuffer^[lInOffset+l1],lOutBuffer^[kNIIImgOffset + l1],l4DBytes);
    lOutname := ChangeFilePrefix (lFileName,'r');
-   dcmMsg(lOutName);
    if  SaveNIfTICore (lOutName, lOutBuffer, kNIIImgOffset+1, lOutHdr, lPrefs) = '' then begin
       dcmMsg('Remove scale error');
       Freemem(lInBuffer);
@@ -812,9 +811,7 @@ begin
          end;
    end; //case
    FindDVCrop (lInHdr, lImgBuffer, lDorsalCrop,lVentralCrop, 5);
-   dcmMsg(format('1 %d %d', [lVentralCrop,lDorsalCrop]));
    FindDVCrop2 (lInHdr, lDorsalCrop,lVentralCrop);
-   dcmMsg(format('2 %d %d', [lVentralCrop,lDorsalCrop]));
    FindLRCrop (lInHdr, lImgBuffer, lLCrop,lRCrop,3,lDorsalCrop,lVentralCrop);//3% often sagittal scans near brain
    FindAPCrop (lInHdr, lImgBuffer, lACrop,lPCrop, 5,lDorsalCrop,lVentralCrop);
    FreeMem(lBuffUnaligned);

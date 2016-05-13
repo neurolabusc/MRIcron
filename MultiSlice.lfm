@@ -1,7 +1,7 @@
 object MultiSliceForm: TMultiSliceForm
-  Left = 340
+  Left = 484
   Height = 242
-  Top = 557
+  Top = 523
   Width = 745
   Caption = 'MultiSlice'
   ClientHeight = 242
@@ -12,7 +12,7 @@ object MultiSliceForm: TMultiSliceForm
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.5'
+  LCLVersion = '1.6.0.4'
   object MultiPanel: TScrollBox
     Left = 0
     Height = 242

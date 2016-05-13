@@ -4060,7 +4060,6 @@ begin
         exit;
      end;
   end; //AutodetectGenesis                        xxDCIM
-
   if (lAutoDetectInterfile) and (FileSz > 256) and (not lDICM_at_128) then begin
      if Copy(extractfilename(lFileName), 1, 4) = 'COR-' then begin
         lStr := extractfiledir(lFilename) + '\COR-.info';

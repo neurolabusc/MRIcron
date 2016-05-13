@@ -831,6 +831,7 @@ procedure TMultiSliceForm.FormCreate(Sender: TObject);
 var
 	lSlice:integer;
 begin
+ {$IFDEF Linux}ImgForm.InitImg(MultiImage);{$ENDIF}
      gMultiBuff := nil;
      gMultiSliceDir  := DefaultsDir('multislice');
      //gMultiSliceDir := extractfiledir(paramstr(0))+pathdelim+'multislice'+pathdelim;

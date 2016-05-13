@@ -1311,7 +1311,6 @@ begin
         result := true;
         exit;
   end;
-
         if (lVols > 1) and ((lnSeries mod lVols)=0) then
            lDICOMdata.SlicesPer3DVol := round(lnSeries/lVols);
         lDTIra[1].bval := -1; //not DTI
@@ -1349,7 +1348,6 @@ begin
              end else
                  lAHdr.dim[3] := lnSeries;
 	end;
-
         if (lDICOMdata.ManufacturerID = kSiemensID) and (lDicomData.CSASeriesHeaderInfoPos > 0) and (lDicomData.CSASeriesHeaderInfoSz > 0) then begin
            lStr := GetCSASeriesHeaderInfo (lDicomImgName, lDicomData.CSASeriesHeaderInfoPos,lDicomData.CSASeriesHeaderInfoSz,lAHdr.dim[3], lSliceOrder);
            if (lSliceOrder < kNIFTI_SLICE_SEQ_UNKNOWN) or (lSliceOrder > kNIFTI_SLICE_ALT_DEC2) then  lSliceOrder :=  kNIFTI_SLICE_SEQ_UNKNOWN;
@@ -1372,7 +1370,6 @@ begin
            //
            dcmmsg('For slice timing correction: the slice order is '+kSliceOrderStr[lSliceOrder]);
         end;
-
         if (lDICOMdata.BandwidthPerPixelPhaseEncode > 0) then begin
            //do this AFTER mosaics have reset dim[1] and dim[2]
            if (length(lDICOMdata.PhaseEncoding) > 0) and ((lDICOMdata.PhaseEncoding[1]='C') or (lDICOMdata.PhaseEncoding[1]='R')) then begin

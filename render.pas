@@ -793,6 +793,7 @@ end;
 
 procedure TRenderForm.FormCreate(Sender: TObject);
 begin
+     {$IFDEF Linux}ImgForm.InitImg(RenderImage);{$ENDIF}
      {$IFDEF Darwin}
      Save1.ShortCut := ShortCut(Word('S'), [ssMeta]);
      Close1.ShortCut := ShortCut(Word('W'), [ssMeta]);

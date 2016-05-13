@@ -401,8 +401,6 @@ begin
   if (asciiStart > 0 ) then begin
      lSliceOrder := strValue('sSliceArray.ucMode', asciiStart); // Prisma data from Tel Aviv: "sSliceArray.ucMode" can be in both main and ASCII header: we want the one from ASCII only!
      result := str2str ('CustomerSeq');
-     showmsg(result);
-     //dcmMsg('*********Got it '+inttostr(lSliceOrder));
   end;
   lData := nil;
 end;

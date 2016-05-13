@@ -34,7 +34,7 @@ implementation
 procedure Msg (lStr: string);
 begin
 {$IFDEF GUI}
-         showmessage(lStr);
+      showmessage(lStr);
 {$ELSE}
         writeln(lStr)
 {$ENDIF}

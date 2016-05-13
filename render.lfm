@@ -5,14 +5,14 @@ object RenderForm: TRenderForm
   Width = 955
   ActiveControl = RenderBar
   Caption = 'Volume Render'
-  ClientHeight = 487
+  ClientHeight = 512
   ClientWidth = 955
   Menu = MainMenu1
   OnCreate = FormCreate
   OnHide = FormHide
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.6.0.2'
+  LCLVersion = '1.6.0.4'
   object RenderBar: TPanel
     Left = 0
     Height = 37
@@ -25,17 +25,17 @@ object RenderForm: TRenderForm
     TabOrder = 0
     object Label4: TLabel
       Left = 152
-      Height = 17
+      Height = 16
       Top = 5
-      Width = 63
+      Width = 57
       Caption = 'Elevation'
       ParentColor = False
     end
     object Label1: TLabel
       Left = 4
-      Height = 17
+      Height = 16
       Top = 5
-      Width = 56
+      Width = 53
       Caption = 'Azimuth'
       ParentColor = False
     end
@@ -135,15 +135,15 @@ object RenderForm: TRenderForm
     end
     object Label5: TLabel
       Left = 616
-      Height = 17
+      Height = 16
       Top = 5
-      Width = 74
+      Width = 63
       Caption = 'Shading %'
       ParentColor = False
     end
     object AzimuthEdit: TSpinEdit
       Left = 72
-      Height = 27
+      Height = 16
       Top = 2
       Width = 70
       Increment = 30
@@ -154,7 +154,7 @@ object RenderForm: TRenderForm
     end
     object ElevationEdit: TSpinEdit
       Left = 216
-      Height = 27
+      Height = 16
       Top = 2
       Width = 70
       Increment = 30
@@ -188,7 +188,7 @@ object RenderForm: TRenderForm
     end
     object ShadeEdit: TSpinEdit
       Left = 692
-      Height = 27
+      Height = 16
       Top = 2
       Width = 70
       Increment = 10
@@ -209,14 +209,14 @@ object RenderForm: TRenderForm
   end
   object RenderPanel: TScrollBox
     Left = 0
-    Height = 450
+    Height = 475
     Top = 37
     Width = 955
     HorzScrollBar.Page = 14
     VertScrollBar.Page = 14
     Align = alClient
-    ClientHeight = 448
-    ClientWidth = 953
+    ClientHeight = 460
+    ClientWidth = 940
     TabOrder = 1
     object RenderImage: TImage
       Tag = 2
