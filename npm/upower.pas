@@ -1,7 +1,7 @@
 unit upower;
 interface
 
-uses define_types, statcr, distr, dialogsx;
+uses define_types, statcr, distr, dialogsx, sysutils;
 function Sum2Power(lOutImgSum: SingleP; lVolVox,lnTotal,lnDeficit: integer; lBinomial: boolean): boolean;
 function Sum2PowerCont(lOutImgSum: SingleP; lVolVox,lnTotal: integer): boolean;
 function Sum2PowerBinom(lOutImgSum: SingleP; lVolVox,lnTotal,lnDeficit: integer): boolean;
@@ -13,7 +13,13 @@ function k_out_n (k,n: integer): double; //total possible permutations
 //k= smaller group, n=sum of both groups
 begin
 	if not gFactRAready then InitFact;
-	result := round(gFactRA[n] / (gFactRA[k]*gFactRA[n-k]  )  );
+        if (n > kMaxFact) or ((n-k) > kMaxFact) then begin
+            showmsg('Serious error: Unable to compute k choose n for '+inttostr(k)+' '+inttostr(n)
+              + '! Solution: use executable that supports extended precision (Windows 32, OSX, Linux)');
+            result := 0;
+            exit;
+        end;
+        result := round(gFactRA[n] / (gFactRA[k]*gFactRA[n-k]  )  );
 // k out n = n!/(k!*(n-k)! which is equal to the PROD(i=k; 1){(n-i+1)/i}
 end; //k_out_n
 
@@ -113,4 +119,4 @@ begin
 end;
 
 
-end.
+end.

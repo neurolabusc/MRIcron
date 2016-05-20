@@ -1047,6 +1047,7 @@ end;   *)
 procedure TMainForm.FormShow(Sender: TObject);
 begin
   NPMMsgClear;
+  InitFact;
      NPMMsg(GetkVers);
      {$IFNDEF UNIX} {GUILaunch;}{$ENDIF}
      LongTimeFormat := 'YYYY-MMM-DD hh:nn:ss';  //delphi TimeToStr

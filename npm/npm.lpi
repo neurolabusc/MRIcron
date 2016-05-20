@@ -36,8 +36,9 @@
       <Unit0>
         <Filename Value="npm.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="34" Y="11"/>
-        <UsageCount Value="111"/>
+        <IsVisibleTab Value="True"/>
+        <CursorPos Y="26"/>
+        <UsageCount Value="113"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit0>
@@ -47,11 +48,10 @@
         <ComponentName Value="MainForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="1041"/>
-        <CursorPos X="8" Y="1054"/>
-        <UsageCount Value="111"/>
+        <CursorPos X="12" Y="1050"/>
+        <UsageCount Value="113"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -60,71 +60,73 @@
         <IsPartOfProject Value="True"/>
         <TopLine Value="358"/>
         <CursorPos X="49" Y="368"/>
-        <UsageCount Value="107"/>
+        <UsageCount Value="109"/>
       </Unit2>
       <Unit3>
         <Filename Value="define_types.pas"/>
         <IsPartOfProject Value="True"/>
         <TopLine Value="945"/>
         <CursorPos X="38" Y="959"/>
-        <UsageCount Value="107"/>
+        <UsageCount Value="109"/>
       </Unit3>
       <Unit4>
         <Filename Value="GraphicsMathLibrary.pas"/>
         <IsPartOfProject Value="True"/>
         <TopLine Value="681"/>
         <CursorPos Y="738"/>
-        <UsageCount Value="107"/>
+        <UsageCount Value="109"/>
       </Unit4>
       <Unit5>
         <Filename Value="distr.pas"/>
         <IsPartOfProject Value="True"/>
         <TopLine Value="99"/>
         <CursorPos Y="107"/>
-        <UsageCount Value="107"/>
+        <UsageCount Value="109"/>
       </Unit5>
       <Unit6>
         <Filename Value="statcr.pas"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="4"/>
-        <CursorPos X="11" Y="25"/>
-        <UsageCount Value="107"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="2"/>
+        <CursorPos X="37" Y="9"/>
+        <UsageCount Value="109"/>
+        <Loaded Value="True"/>
       </Unit6>
       <Unit7>
         <Filename Value="stats.pas"/>
         <IsPartOfProject Value="True"/>
         <TopLine Value="615"/>
         <CursorPos Y="635"/>
-        <UsageCount Value="107"/>
+        <UsageCount Value="109"/>
       </Unit7>
       <Unit8>
         <Filename Value="brunner.pas"/>
         <IsPartOfProject Value="True"/>
         <TopLine Value="500"/>
         <CursorPos X="29" Y="517"/>
-        <UsageCount Value="107"/>
+        <UsageCount Value="109"/>
       </Unit8>
       <Unit9>
         <Filename Value="StatThdsUtil.pas"/>
         <IsPartOfProject Value="True"/>
         <TopLine Value="49"/>
         <CursorPos X="38" Y="4"/>
-        <UsageCount Value="107"/>
+        <UsageCount Value="109"/>
       </Unit9>
       <Unit10>
         <Filename Value="StatThds.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="488"/>
         <CursorPos X="45" Y="493"/>
-        <UsageCount Value="107"/>
+        <UsageCount Value="109"/>
         <Loaded Value="True"/>
       </Unit10>
       <Unit11>
         <Filename Value="valformat.pas"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="9" Y="12"/>
-        <UsageCount Value="107"/>
+        <UsageCount Value="109"/>
       </Unit11>
       <Unit12>
         <Filename Value="design.pas"/>
@@ -134,7 +136,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="37"/>
         <CursorPos X="36" Y="58"/>
-        <UsageCount Value="106"/>
+        <UsageCount Value="108"/>
       </Unit12>
       <Unit13>
         <Filename Value="spread.pas"/>
@@ -142,10 +144,10 @@
         <ComponentName Value="SpreadForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="547"/>
         <CursorPos X="15" Y="559"/>
-        <UsageCount Value="106"/>
+        <UsageCount Value="108"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit13>
@@ -154,14 +156,14 @@
         <IsPartOfProject Value="True"/>
         <TopLine Value="774"/>
         <CursorPos X="22" Y="793"/>
-        <UsageCount Value="107"/>
+        <UsageCount Value="109"/>
       </Unit14>
       <Unit15>
         <Filename Value="part.pas"/>
         <IsPartOfProject Value="True"/>
         <TopLine Value="91"/>
         <CursorPos X="38" Y="108"/>
-        <UsageCount Value="107"/>
+        <UsageCount Value="109"/>
       </Unit15>
       <Unit16>
         <Filename Value="markorder.pas"/>
@@ -203,13 +205,13 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="23"/>
         <CursorPos X="9" Y="50"/>
-        <UsageCount Value="105"/>
+        <UsageCount Value="107"/>
       </Unit21>
       <Unit22>
         <Filename Value="ReadInt.lrs"/>
         <IsPartOfProject Value="True"/>
         <CursorPos Y="3"/>
-        <UsageCount Value="103"/>
+        <UsageCount Value="105"/>
       </Unit22>
       <Unit23>
         <Filename Value="LesionStatThds.pas"/>
@@ -296,9 +298,9 @@
       </Unit37>
       <Unit38>
         <Filename Value="regression.pas"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <CursorPos X="69" Y="13"/>
-        <UsageCount Value="42"/>
+        <UsageCount Value="43"/>
         <Loaded Value="True"/>
       </Unit38>
       <Unit39>
@@ -322,10 +324,10 @@
       </Unit41>
       <Unit42>
         <Filename Value="..\common\define_types.pas"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <TopLine Value="8"/>
         <CursorPos X="57" Y="25"/>
-        <UsageCount Value="36"/>
+        <UsageCount Value="37"/>
         <Loaded Value="True"/>
       </Unit42>
       <Unit43>
@@ -425,16 +427,16 @@
       </Unit59>
       <Unit60>
         <Filename Value="unpm.pas"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <CursorPos X="49" Y="8"/>
-        <UsageCount Value="40"/>
+        <UsageCount Value="41"/>
         <Loaded Value="True"/>
       </Unit60>
       <Unit61>
         <Filename Value="turbolesion.pas"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <CursorPos X="63" Y="8"/>
-        <UsageCount Value="35"/>
+        <UsageCount Value="36"/>
         <Loaded Value="True"/>
       </Unit61>
       <Unit62>
@@ -475,132 +477,131 @@
       <Unit68>
         <Filename Value="upower.pas"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="3"/>
-        <CursorPos X="10" Y="31"/>
-        <UsageCount Value="10"/>
+        <CursorPos X="23" Y="22"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit68>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="npmform.pas"/>
-        <Caret Line="800" Column="58" TopLine="786"/>
+        <Caret Line="130" Column="21" TopLine="110"/>
       </Position1>
       <Position2>
         <Filename Value="npmform.pas"/>
-        <Caret Line="801" Column="29" TopLine="786"/>
+        <Caret Line="2" Column="129"/>
       </Position2>
       <Position3>
         <Filename Value="npmform.pas"/>
-        <Caret Line="805" Column="26" TopLine="786"/>
+        <Caret Line="25" Column="18" TopLine="5"/>
       </Position3>
       <Position4>
         <Filename Value="npmform.pas"/>
-        <Caret Line="906" Column="26" TopLine="886"/>
+        <Caret Line="3" Column="130"/>
       </Position4>
       <Position5>
         <Filename Value="npmform.pas"/>
-        <Caret Line="2" Column="127"/>
+        <Caret Line="82" Column="17" TopLine="62"/>
       </Position5>
       <Position6>
         <Filename Value="npmform.pas"/>
-        <Caret Line="130" Column="21" TopLine="110"/>
+        <Caret Line="94" Column="15" TopLine="74"/>
       </Position6>
       <Position7>
         <Filename Value="npmform.pas"/>
-        <Caret Line="2" Column="129"/>
+        <Caret Line="119" Column="25" TopLine="99"/>
       </Position7>
       <Position8>
         <Filename Value="npmform.pas"/>
-        <Caret Line="25" Column="18" TopLine="5"/>
+        <Caret Line="3" Column="129"/>
       </Position8>
       <Position9>
         <Filename Value="npmform.pas"/>
-        <Caret Line="3" Column="130"/>
+        <Caret Line="104" Column="30" TopLine="84"/>
       </Position9>
       <Position10>
         <Filename Value="npmform.pas"/>
-        <Caret Line="82" Column="17" TopLine="62"/>
+        <Caret Line="414" Column="49" TopLine="394"/>
       </Position10>
       <Position11>
         <Filename Value="npmform.pas"/>
-        <Caret Line="94" Column="15" TopLine="74"/>
+        <Caret Line="992" Column="7" TopLine="991"/>
       </Position11>
       <Position12>
         <Filename Value="npmform.pas"/>
-        <Caret Line="119" Column="25" TopLine="99"/>
+        <Caret Line="991" Column="7" TopLine="990"/>
       </Position12>
       <Position13>
         <Filename Value="npmform.pas"/>
-        <Caret Line="3" Column="129"/>
+        <Caret Line="5" Column="105"/>
       </Position13>
       <Position14>
         <Filename Value="npmform.pas"/>
-        <Caret Line="104" Column="30" TopLine="84"/>
+        <Caret Line="103" Column="7" TopLine="83"/>
       </Position14>
       <Position15>
         <Filename Value="npmform.pas"/>
-        <Caret Line="414" Column="49" TopLine="394"/>
+        <Caret Line="118" Column="32" TopLine="98"/>
       </Position15>
       <Position16>
         <Filename Value="npmform.pas"/>
-        <Caret Line="992" Column="7" TopLine="991"/>
+        <Caret Line="434" Column="8" TopLine="410"/>
       </Position16>
       <Position17>
-        <Filename Value="npmform.pas"/>
-        <Caret Line="991" Column="7" TopLine="990"/>
+        <Filename Value="spread.pas"/>
+        <Caret Line="584" TopLine="555"/>
       </Position17>
       <Position18>
         <Filename Value="npmform.pas"/>
-        <Caret Line="5" Column="105"/>
+        <Caret Line="1049" Column="75" TopLine="1046"/>
       </Position18>
       <Position19>
         <Filename Value="npmform.pas"/>
-        <Caret Line="103" Column="7" TopLine="83"/>
+        <Caret Line="1295" Column="19" TopLine="1283"/>
       </Position19>
       <Position20>
-        <Filename Value="npmform.pas"/>
-        <Caret Line="118" Column="32" TopLine="98"/>
+        <Filename Value="upower.pas"/>
+        <Caret Line="51" Column="47" TopLine="38"/>
       </Position20>
       <Position21>
-        <Filename Value="npmform.pas"/>
-        <Caret Line="434" Column="8" TopLine="410"/>
+        <Filename Value="StatThds.pas"/>
+        <Caret Line="6" Column="24"/>
       </Position21>
       <Position22>
-        <Filename Value="spread.pas"/>
-        <Caret Line="584" TopLine="555"/>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="5" Column="35"/>
       </Position22>
       <Position23>
         <Filename Value="npmform.pas"/>
-        <Caret Line="1049" Column="75" TopLine="1046"/>
+        <Caret Line="102" Column="36" TopLine="78"/>
       </Position23>
       <Position24>
         <Filename Value="npmform.pas"/>
-        <Caret Line="1295" Column="19" TopLine="1283"/>
+        <Caret Line="107" Column="57" TopLine="83"/>
       </Position24>
       <Position25>
-        <Filename Value="upower.pas"/>
-        <Caret Line="51" Column="47" TopLine="38"/>
-      </Position25>
-      <Position26>
-        <Filename Value="StatThds.pas"/>
-        <Caret Line="6" Column="24"/>
-      </Position26>
-      <Position27>
-        <Filename Value="npmform.pas"/>
-        <Caret Line="5" Column="35"/>
-      </Position27>
-      <Position28>
-        <Filename Value="npmform.pas"/>
-        <Caret Line="102" Column="36" TopLine="78"/>
-      </Position28>
-      <Position29>
-        <Filename Value="npmform.pas"/>
-        <Caret Line="107" Column="57" TopLine="83"/>
-      </Position29>
-      <Position30>
         <Filename Value="npmform.pas"/>
         <Caret Line="2191" Column="16" TopLine="2177"/>
+      </Position25>
+      <Position26>
+        <Filename Value="upower.pas"/>
+        <Caret Line="15" Column="29"/>
+      </Position26>
+      <Position27>
+        <Filename Value="upower.pas"/>
+        <Caret Line="51" Column="44" TopLine="23"/>
+      </Position27>
+      <Position28>
+        <Filename Value="upower.pas"/>
+        <Caret Line="19" Column="18"/>
+      </Position28>
+      <Position29>
+        <Filename Value="upower.pas"/>
+        <Caret Line="4" Column="53"/>
+      </Position29>
+      <Position30>
+        <Filename Value="npm.lpr"/>
+        <Caret Line="11" Column="34"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>

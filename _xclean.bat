@@ -1,15 +1,18 @@
 #!/bin/sh
 
-
-
-
-
 find . -name \*.dcu -type f -delete
 rm  -r *.a
 rm  -r *.o
 rm  -r *.ppu
 rm -r *.bak
 rm mricron
+
+cd ./fpmath
+rm  -r *.a
+rm  -r *.o
+rm  -r *.ppu
+rm -r *.bak
+cd ..
 
 cd ./common
 rm  -r *.a

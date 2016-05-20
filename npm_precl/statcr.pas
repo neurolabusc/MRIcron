@@ -3,9 +3,16 @@ interface
 uses Dialogs,define_types;
 
 const
-	ITMAX = 300;                        
+	ITMAX = 300;
 	EPS = 3.0e-7;
-	kMaxFact = 1700;  {<= 1754}
+	{$IFDEF WIN64}
+	 // W1066 Lost Extended floating point precision. Reduced to Double (Delphi).
+	 //http://blog.synopse.info/post/2011/09/13/Using-Extended-in-Delphi-XE2-64-bit
+	 //http://docwiki.embarcadero.com/RADStudio/Seattle/en/Delphi_Considerations_for_Multi-Device_Applications#The_Extended_Data_Type_Is_2_Bytes_Smaller_on_64-bit_Windows_Systems
+	 kMaxFact = 170;
+	{$ELSE}
+	 kMaxFact = 1700;
+	{$ENDIF}  {<= 1754}
 	gFactRAready : boolean = false;
 type
 	FactRA = array[0..kMaxFact] of extended;

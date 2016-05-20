@@ -1,19 +1,20 @@
 object ReadFloatForm: TReadFloatForm
+  Tag = 321
   Left = 335
   Height = 95
   Top = 308
-  Width = 540
+  Width = 620
   HorzScrollBar.Page = 464
   VertScrollBar.Page = 94
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsDialog
   Caption = 'Real number required'
   ClientHeight = 95
-  ClientWidth = 540
+  ClientWidth = 620
   Constraints.MaxHeight = 95
-  Constraints.MaxWidth = 540
+  Constraints.MaxWidth = 620
   Constraints.MinHeight = 95
-  Constraints.MinWidth = 540
+  Constraints.MinWidth = 620
   Position = poScreenCenter
   LCLVersion = '1.6.0.4'
   object ReadFloatLabel: TLabel
@@ -26,7 +27,7 @@ object ReadFloatForm: TReadFloatForm
     ParentColor = False
   end
   object OKBtn: TButton
-    Left = 424
+    Left = 488
     Height = 25
     Top = 55
     Width = 75
@@ -36,9 +37,9 @@ object ReadFloatForm: TReadFloatForm
     TabOrder = 0
   end
   object ReadFloatEdit: TFloatSpinEdit
-    Left = 408
+    Left = 472
     Height = 16
-    Top = 12
+    Top = 15
     Width = 119
     DecimalPlaces = 4
     Increment = 1
