@@ -98,11 +98,11 @@ type
     Anydepth1: TMenuItem;
     procedure BiasTrackChange(Sender: TObject);
     procedure ClipTrackChange(Sender: TObject);
+    procedure GainTrackChange(Sender: TObject);
     procedure RenderSmoothBGClick(Sender: TObject);
     procedure RotationBMPMenuClick(Sender: TObject);
     procedure SaveClipMenuClick(Sender: TObject);
-    procedure Settings1Click(Sender: TObject);
-      procedure SetSearch(Sender: TObject);
+    procedure SetSearch(Sender: TObject);
     procedure Save1Click(Sender: TObject);
     procedure RenderImageMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
@@ -160,6 +160,8 @@ begin
 	SetSubmenuWithTag(RenderBGDepthMenu,gRender.BGDepth);
 	SetSubmenuWithTag(RenderOverlayDepthMenu,gRender.OverlayDepth);
 	RenderSmoothBG.checked := gRender.SmoothBG;
+        BiasTrack.Position:= gRender.Bias;
+        GainTrack.Position:=gRender.Gain;
 	RenderSmoothOverlay.checked := gRender.SmoothOverlay;
 	RenderPreciseInterpolation.Checked := gRender.Trilinear;
 	//RenderSurfaceOverlay.Checked := gRender.OverlayFromBGSurface;
@@ -201,6 +203,8 @@ begin
 	lIniFile.WriteString('INT', 'CutoutBias',IntToStr(CutoutBias));
 	lIniFile.WriteString('INT', 'cutoutLUTindex',IntToStr(cutoutLUTindex));
 	lIniFile.WriteString('INT', 'ShadePct',IntToStr(ShadePct));
+        lIniFile.WriteString('INT', 'Bias',IntToStr(Bias));
+        lIniFile.WriteString('INT', 'Gain',IntToStr(Gain));
 	for lInc := 1 to 3 do begin
 		lIniFile.WriteString('INT', 'CutoutLoFrac'+inttostr(lInc),IntToStr(CutoutFrac.Lo[lInc]));
 		lIniFile.WriteString('INT', 'CutoutHiFrac'+inttostr(lInc),IntToStr(CutoutFrac.Hi[lInc]));
@@ -241,7 +245,8 @@ begin
 	CutoutBias:= IniInt(lIniFile,'CutoutBias',	CutoutBias);
  	ShadePct:= IniInt(lIniFile,'ShadePct',	0);
 	cutoutLUTindex:= IniInt(lIniFile,'cutoutLUTindex',cutoutLUTindex);
-
+	Bias:= IniInt(lIniFile,'Bias',Bias);
+	Gain:= IniInt(lIniFile,'Gain',Gain);
 	for lInc := 1 to 3 do begin
 	  Cutout.Lo[lInc] := IniInt(lIniFile,'CutoutLo'+inttostr(lInc),Cutout.Lo[lInc]);
 	  Cutout.Hi[lInc] := IniInt(lIniFile,'CutoutHi'+inttostr(lInc),Cutout.Hi[lInc]);
@@ -490,15 +495,12 @@ begin
 end;
 
 
-procedure TRenderForm.Settings1Click(Sender: TObject);
-begin
 
-end;
 
 procedure TRenderForm.BiasTrackChange(Sender: TObject);
 begin
      gRender.Bias := BiasTrack.position;
-     gRender.Gain := GainTrack.Position;
+     //gRender.Gain := GainTrack.Position;
 
  	RenderRefreshTimer.Enabled := true;
   //RenderForm.caption := inttostr(BiasTrack.position)+'zzz'+inttostr(GainTrack.Position);
@@ -508,6 +510,13 @@ procedure TRenderForm.ClipTrackChange(Sender: TObject);
 begin
        gRender.ClipFrac := ClipTrack.Position;
 	RenderRefreshTimer.Enabled := true;
+end;
+
+procedure TRenderForm.GainTrackChange(Sender: TObject);
+begin
+       gRender.Gain := GainTrack.Position;
+
+ 	RenderRefreshTimer.Enabled := true;
 end;
 
 procedure TRenderForm.RenderSmoothBGClick(Sender: TObject);

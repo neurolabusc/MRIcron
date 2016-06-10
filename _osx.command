@@ -1,11 +1,17 @@
 #!/bin/sh
+#This script builds a distribution on Chris Rorden's personal computer.
+#  to build your own version you typically run
+#    lazbuild -B filename.lpr
 
 cd /Users/rorden/Documents/pas/mricron
 
 chmod 777 ./_xclean.bat
 ./_xclean.bat
 cp ./common/notgui.inc ./common/isgui.inc
-lazbuild ./dcm2nii/dcm2nii.lpr --cpu=x86_64 --compiler="/usr/local/bin/ppcx64"
+#lazbuild ./dcm2nii/dcm2nii.lpr --cpu=x86_64 --compiler="/usr/local/bin/ppcx64"
+#Current FPC 3.0.0 can not compile on OSX 10.11 El Capitan, so use 3.1.1
+lazbuild ./dcm2nii.lpr --cpu=x86_64 --ws=cocoa --compiler="/usr/local/lib/fpc/3.1.1/ppcx64"
+
 cp ./dcm2nii/dcm2nii /Users/rorden/Documents/mricron/dcm2nii64
 
 # lazbuild -B ./dcm2nii/dcm2nii.lpr
@@ -15,8 +21,10 @@ cp ./dcm2nii/dcm2nii /Users/rorden/Documents/mricron/dcm2nii
 ./_xclean.bat
 cp ./common/gui.inc ./common/isgui.inc
 
-#compile MRIcroGn 4
-lazbuild ./mricron.lpr --cpu=x86_64 --ws=cocoa --compiler="/usr/local/bin/ppcx64"
+#compile MRIcron 64
+#lazbuild ./mricron.lpr --cpu=x86_64 --ws=cocoa --compiler="/usr/local/bin/ppcx64"
+#Current FPC 3.0.0 can not compile on OSX 10.11 El Capitan, so use 3.1.1
+lazbuild ./mricron.lpr --cpu=x86_64 --ws=cocoa --compiler="/usr/local/lib/fpc/3.1.1/ppcx64"
 strip ./mricron
 cp ./mricron /Users/rorden/Documents/mricron/mricron64.app/Contents/MacOS/mricron
 

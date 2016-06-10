@@ -1,7 +1,7 @@
 object RenderForm: TRenderForm
-  Left = 461
+  Left = 220
   Height = 512
-  Top = 140
+  Top = 245
   Width = 955
   ActiveControl = RenderBar
   Caption = 'Volume Render'
@@ -12,7 +12,7 @@ object RenderForm: TRenderForm
   OnHide = FormHide
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.7'
   object RenderBar: TPanel
     Left = 0
     Height = 37
@@ -181,7 +181,7 @@ object RenderForm: TRenderForm
       Top = 2
       Width = 120
       Max = 100
-      OnChange = BiasTrackChange
+      OnChange = GainTrackChange
       Position = 50
       TickStyle = tsNone
       TabOrder = 3
@@ -238,7 +238,6 @@ object RenderForm: TRenderForm
       Caption = 'File'
       object Settings1: TMenuItem
         Caption = 'Open settings'
-        OnClick = Settings1Click
       end
       object Savesettings1: TMenuItem
         Caption = 'Save settings...'
