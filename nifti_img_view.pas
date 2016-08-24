@@ -1078,7 +1078,8 @@ end;
 
 procedure TImgForm.Preferences1Click(Sender: TObject);
 begin
-     PrefForm.ShowModal;
+     PrefForm.Show; //Cocoa has odd effects with showmodal: to exhibit try opening the pref form twice. The second time the text is scrambled
+     //PrefForm.ShowModal;
 end;
 
 function RescaleImg( lRescaleIntercept,lRescaleSlope: double): boolean;
@@ -1621,13 +1622,22 @@ begin
 	lPixel := 0;
 	for lZPos := 1 to lZ do begin
 	  lZOffset := (lZPos-1) * lXYSliceSz;
-	  lYOffset := 0;
-	  for lYPos := 1 to lY do begin
-		  inc(lPixel);
-		  lInBuff^[lPixel] := gMRIcroOverlay[kVOIOverlayNum].ScrnBuffer^[lZOffset+lYOffset+lXOffset];
-		  lYOffset := lYOffset+ lX;
-	  end; //for each Y
-	end; //for each Z
+          if gBGImg.FlipSag then begin
+            lYOffset := (lY - 1) * lX;
+	    for lYPos := 1 to lY do begin
+		    inc(lPixel);
+		    lInBuff^[lPixel] := gMRIcroOverlay[kVOIOverlayNum].ScrnBuffer^[lZOffset+lYOffset+lXOffset];
+		    lYOffset := lYOffset - lX;
+	    end; //for each Y
+          end else begin
+            lYOffset := 0;
+	    for lYPos := 1 to lY do begin
+		    inc(lPixel);
+		    lInBuff^[lPixel] := gMRIcroOverlay[kVOIOverlayNum].ScrnBuffer^[lZOffset+lYOffset+lXOffset];
+		    lYOffset := lYOffset+ lX;
+	    end; //for each Y
+          end; //if flipped else
+        end; //for each Z
 	ImgForm.SetDimension8(lZ,lY, lInBuff, lUndoOnly);
 	freemem(lInBuff);
 end;
@@ -2004,9 +2014,9 @@ begin
 		   2: begin
                       if gBGImg.FlipSag then
 	                 lXin := lImage.Width-lXinRaw;
-				lXOut := ImgForm.XViewEdit.value;
-				lYOut := round((lXin*100) / lZoom +lOffset);
-				lZOut := round((lYin*100) / lZoom +lOffset);
+		      lXOut := ImgForm.XViewEdit.value;
+		      lYOut := round((lXin*100) / lZoom +lOffset);
+		      lZOut := round((lYin*100) / lZoom +lOffset);
 		   end;
 		   3: begin
 				lXOut := round((lXin*100) / lZoom +lOffset);
@@ -2333,13 +2343,22 @@ begin
 	lPixel := 0;
 	for lZPos := 1 to lZ do begin
 	  lZOffset := (lZPos-1) * lXYSliceSz;
-	  lYOffset := 0;
-	  for lYPos := 1 to lY do begin
-		  inc(lPixel);
+          if gBGImg.FlipSag then begin
+	    lYOffset := (lY - 1) * lX;
+	    for lYPos := 1 to lY do begin
+	        inc(lPixel);
 		gMRIcroOverlay[kVOIOverlayNum].ScrnBuffer^[lZOffset+lYOffset+lXOffset] := lImage.Img^[lPixel];
-		  lYOffset := lYOffset+ lX;
-	  end; //for each Y
-	end; //for each Z
+		lYOffset := lYOffset - lX;
+	    end; //for each Y
+          end else begin //if flipped else
+            lYOffset := 0;
+            for lYPos := 1 to lY do begin
+      	      inc(lPixel);
+      	      gMRIcroOverlay[kVOIOverlayNum].ScrnBuffer^[lZOffset+lYOffset+lXOffset] := lImage.Img^[lPixel];
+      	      lYOffset := lYOffset+ lX;
+            end; //for each Y
+          end; //if flipped else
+        end; //for each Z
 	//freemem(lInBuff);
 end;
 
@@ -4778,7 +4797,11 @@ begin
  ImgForm.OpenAndDisplayImg(lStr,True);
      lStr := '/Users/rorden/desktop/mricrox/templates/crap.voi';
  LoadOverlayIncludingRGB{LoadOverlay}(lStr);    *)
-  exit;
+
+ ImgForm.OpenTemplateMRU(nil);
+ RefreshImagesTimer.enabled := true;
+ //ShowMultisliceClick(nil);
+ exit;
   //ResliceImg ('/Users/crlab/Documents/example_func.nii.gz','/Users/crlab/Documents/v1x.voi','/Users/crlab/Documents/example_func2standard.mat','/Users/crlab/Documents/z1x.nii.gz');
   {$ENDIF}
 

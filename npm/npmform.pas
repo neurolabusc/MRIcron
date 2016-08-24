@@ -6,11 +6,11 @@ interface
 {$I options.inc}
 uses
  define_types,SysUtils,
-part,StatThds,statcr,StatThdsUtil,Brunner,DISTR,nifti_img,
-   Messages,         userDir,
+ //part,StatThds, Messages, overlap, LesionStatThds, userDir,
+ statcr,StatThdsUtil,Brunner,DISTR,nifti_img,
   Classes, Graphics, Controls, Forms, DialogsX,Dialogs, nifti_types ,
   Menus, ComCtrls, ExtCtrls, StdCtrls,
-overlap,ReadInt,lesion_pattern,stats,LesionStatThds,nifti_hdr,
+ReadInt,lesion_pattern,stats,nifti_hdr,
 
 {$IFDEF FPC} LResources,gzio2,
 {$ELSE} gziod,associate,{$ENDIF}   //must be in search path, e.g. C:\pas\mricron\npm\math

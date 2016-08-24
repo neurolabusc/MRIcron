@@ -11,7 +11,8 @@
 {$ENDIF}
 {$IFDEF UNIX} //Windows is always threaded
          {$IFDEF LCLCocoa}   //for Carbon or Cocoa
-               {$DEFINE NoThreads}//NoThreads - single threaded execution
+                 //note: disable threading if using version prior to 52531 http://bugs.freepascal.org/view.php?id=30126
+                 //{$DEFINE NoThreads}//NoThreads - single threaded execution
         {$ENDIF}
 
   {$IFDEF LCLgtk2}

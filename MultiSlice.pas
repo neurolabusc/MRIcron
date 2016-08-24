@@ -49,7 +49,6 @@ type
     N351: TMenuItem;
     N502: TMenuItem;
 	procedure Copy1Click(Sender: TObject);
-procedure MenuItem1Click(Sender: TObject);
 	procedure Saveasbitmap1Click(Sender: TObject);
 	procedure OrientClick(Sender: TObject);
 	procedure FormShow(Sender: TObject);
@@ -230,22 +229,12 @@ begin
  {$ENDIF}
 end;
 
-procedure TMultiSliceForm.MenuItem1Click(Sender: TObject);
-begin
-
-
-end;
-
-
-
 procedure TMultiSliceForm.Saveasbitmap1Click(Sender: TObject);
 begin
 	 SaveImgAsPNGBMP (MultiImage);
 end;
 
-
-
-procedure CreateBlankBitmap (lPGHt,lPGWid:integer;var lImage: TImage);
+procedure CreateBlankBitmap (lPGHt,lPGWid:integer);
 var
    lPos: integer;
    lBGInvisibleColor: TRGBQuad;
@@ -435,6 +424,8 @@ begin
         freemem(lTBuff);
 end;
 {$ELSE}
+
+
 procedure SetDim (lInPGHt,lInPGWid,lWriteColumn: integer; var l32OutBitP : DWordp);
 var
    lLen,lSrc,lDest,lY: integer;
@@ -443,14 +434,14 @@ begin
         getmem(lTBuff,lInPGHt*lWriteColumn*4);
         lLen := lWriteColumn*4;
         lSrc := 1;
-        //lDest := 1;
         lDest := 1+ ((lInPGHt-1) * lWriteColumn);
-
         for lY := 1 to lInPGHt do begin
            Move(l32OutBitP^[lSrc],lTBuff^[lDest],lLen);
            lSrc := lSrc + lInPGWid;
            lDest := lDest - lWriteColumn;
         end;
+        for lY := 1 to (lInPGHt*lWriteColumn) do
+            lTBuff[lY].rgbreserved := {$IFDEF UNIX}255;{$ELSE}0;{$ENDIF}
         DrawBMP( lWriteColumn, lInPGHt, lTBuff, MultiSliceForm.MultiImage);
         freemem(lTBuff);
 end;
@@ -466,11 +457,6 @@ var
  lMaxWriteColumn,lReadColumn,lWriteColumn,lReadOffset,lWriteOffset,lPos,x,y: integer;
  lTextPos,lTextReadColumn: integer;
 begin
-      (*freemem (gMultiBuff );
- gMultiBuff := nil;
- exit;*)
-
-
      for lTextPos := 1 to kMaxMultiSlice do
          gMultiXCenterRA[lTextPos] := 0;
        lTextPos := 0;
@@ -629,7 +615,6 @@ end else begin //overslice <> 0: show subsequent slices above/below each other
 			inc(lWriteColumn);
 	end; //if maxwid < wid - unoverlapped
 end;
-
  SetDim (lHt,lWid,lWriteColumn,l32OutBitP);
  FreeMem(l32OutBitP);
    freemem (gMultiBuff );
@@ -650,7 +635,7 @@ begin
 	lWid := lWid + gBGIMg.ScrnDim[1]+2;
   if lWid < 2 then exit;
 
-  CreateBlankBitmap (lHt,lWid, MultiImage);
+  CreateBlankBitmap (lHt,lWid);
   for lSlice := 1 to gMulti.nSlices do begin
 	DrawSag (gMulti.SliceList[lSlice],1+((lSlice-1)*lSliceWid));//+lSlice because we want 1-voxel gap between slices
 	//if gMulti.SliceLabel then DrawLabel(MultiImage,DimToMM(gMulti.SliceList[lSlice],1),((lSlice-1)*lSliceWid)+(lSliceWid div 2),lWid);
@@ -681,7 +666,7 @@ begin
   if gMulti.OrthoView then  //sag crossview
 	lWid := lWid + gBGIMg.ScrnDim[2]+2;
   if lWid < 2 then exit;
-  CreateBlankBitmap (lHt,lWid, MultiImage);
+  CreateBlankBitmap (lHt,lWid);
   for lSlice := 1 to gMulti.nSlices do begin
 	//ImgForm.YViewEdit.value := gMulti.SliceList[lSlice];
 	DrawCor (gMulti.SliceList[lSlice],1+((lSlice-1)*lSliceWid));
@@ -719,7 +704,7 @@ begin
 		lHt := gBGIMg.ScrnDim[3];
   end;
   if lWid < 2 then exit;
-  CreateBlankBitmap (lHt,lWid, MultiImage);
+  CreateBlankBitmap (lHt,lWid);
   for lSlice := 1 to gMulti.nSlices do begin
 	DrawAxial (gMulti.SliceList[lSlice],1+((lSlice-1)*lSliceWid));
 	//if gMulti.SliceLabel then DrawLabel(MultiImage,DimToMM(gMulti.SliceList[lSlice],3),((lSlice-1)*lSliceWid)+(gBGIMg.ScrnDim[1] div 2),lWid);
@@ -728,11 +713,6 @@ begin
 	lLeft := gMulti.nSlices*lSliceWid;
 	//DrawSag (gBGImg.ScrnDim[1] div 2,lLeft);
 	DrawSag (gBGImg.ScrnDim[1] div 2,lLeft-1);
-
-        //MultiImage.Canvas.pen.Color := clWhite;
-        //MultiImage.Canvas.Pen.Color := gBGIMg.XBarClr;
-        //MultiImage.Canvas.Pen.Width := gBGImg.XBarThick;
-
         for lSlice := 1 to gMulti.nSlices do begin
 		lHt := gBGImg.ScrnDim[3]-(gMulti.SliceList[lSlice]);
                 MultiHLine (lLeft,lWid,lHt,gBGImg.XBarThick,TColor2TRGBQuad(gBGImg.XBarClr));
@@ -760,7 +740,6 @@ end;
 //gMultiXCenterRA
 
 procedure TMultiSliceForm.CreateMultiSlice;
-//test var lI: integer;
 begin
  if gMulti.nSlices < 1 then begin
 	showmessage('No valid slices selected - please use View/Slices.');
@@ -868,7 +847,6 @@ begin
   if not MultiSaveDialog.Execute then exit;
   {$IFDEF Unix}
   WriteMultiSliceIniFile(extractfiledir(gMultiSliceDir)+pathdelim+extractfilename(MultiSaveDialog.Filename));
-
   {$ELSE}
   WriteMultiSliceIniFile(MultiSaveDialog.Filename);
   {$ENDIF}

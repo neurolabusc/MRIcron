@@ -1069,7 +1069,11 @@ var
 	 FreeMem(lBuffIn);
   end;
   ImgForm.ProgressBar1.Position := l.ZDimStart;
+  {$IFNDEF NoThreads}
+    ImgForm.StatusLabel.caption :=('update(ms): '+inttostr(GetTickCount-lStartTime)+' threads: '+inttostr(lnThreads));
+  {$ELSE}//not threaded
     ImgForm.StatusLabel.caption :=('update(ms): '+inttostr(GetTickCount-lStartTime));
+  {$ENDIF}
 end; //proceudre VolumeRotate;
 
 end.

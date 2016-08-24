@@ -5,9 +5,9 @@ LazarusResources.Add('TMultiSliceForm','FORMDATA',[
   +#0#3'Top'#3#11#2#5'Width'#3#233#2#7'Caption'#6#10'MultiSlice'#12'ClientHeigh'
   +'t'#3#242#0#11'ClientWidth'#3#233#2#11'Font.Height'#2#245#4'Menu'#7#9'MainMe'
   +'nu1'#7'OnClose'#7#9'FormClose'#8'OnCreate'#7#10'FormCreate'#6'OnShow'#7#8'F'
-  +'ormShow'#8'Position'#7#14'poScreenCenter'#10'LCLVersion'#6#7'1.6.0.4'#0#10
-  +'TScrollBox'#10'MultiPanel'#4'Left'#2#0#6'Height'#3#242#0#3'Top'#2#0#5'Width'
-  +#3#233#2#18'HorzScrollBar.Page'#2#14#18'VertScrollBar.Page'#2#14#5'Align'#7#8
+  +'ormShow'#8'Position'#7#14'poScreenCenter'#10'LCLVersion'#6#3'1.7'#0#10'TScr'
+  +'ollBox'#10'MultiPanel'#4'Left'#2#0#6'Height'#3#242#0#3'Top'#2#0#5'Width'#3
+  +#233#2#18'HorzScrollBar.Page'#2#14#18'VertScrollBar.Page'#2#14#5'Align'#7#8
   +'alClient'#12'ClientHeight'#3#227#0#11'ClientWidth'#3#218#2#8'TabOrder'#2#0#0
   +#6'TImage'#10'MultiImage'#3'Tag'#2#2#6'Cursor'#7#7'crCross'#4'Left'#2#2#6'He'
   +'ight'#2#12#3'Top'#2#2#5'Width'#2#12#8'AutoSize'#9#7'Stretch'#9#0#0#0#9'TMai'

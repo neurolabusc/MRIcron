@@ -18,7 +18,7 @@ interface
         SysUtils,classes,IniFiles,
         {$IFDEF GUI} forms,userdir, dialogs{$ELSE}dialogsx{$ENDIF};
 const
-     kMRIcronVersDate = '30APR2016';
+     kMRIcronVersDate = '1AUG2016';
      {$IFDEF LCLCocoa}
      kMRIcronAPI = 'Cocoa';
     {$ELSE}
@@ -165,6 +165,8 @@ function ExtractFileDirWithPathDelim(lInFilename: string): string;
 function PadStr (lValIn, lPadLenIn: integer): string;
 function ChangeFileExtX( var lFilename: string; lExt: string): string;
 //function swap2i(SmallInt): Smallint;
+function swap4r4ui (s:single): uint32; //swap and convert: endian-swap and then typecast 32-bit float as 32-bit integer
+function conv4r4ui (s:single): uint32; //convert: typecast 32-bit float as 32-bit integer
 function swap4r4i (s:single): longint; //swap and convert: endian-swap and then typecast 32-bit float as 32-bit integer
 function conv4r4i (s:single): longint; //convert: typecast 32-bit float as 32-bit integer
 function swap8r(s : double):double; //endian-swap 64-bit float
@@ -484,7 +486,7 @@ begin
   outguy.b2 := b2;
   outguy.b3 := b3;
   result:=outguy.long;
-end;//swap4r4i
+end;//makesingle
 
 function ChangeFilePrefix(lInName,lPrefix: string): string;
 var
@@ -1167,6 +1169,38 @@ begin
   inguy^.Word1 := outguy.Word1;
   inguy^.Word2 := outguy.Word2;
 end; //proc Xswap4r
+
+function conv4r4ui (s:single): uint32;
+type
+  swaptype = packed record
+    case byte of
+      1:(long:uint32);
+  end;
+  swaptypep = ^swaptype;
+var
+  inguy:swaptypep;
+begin
+  inguy := @s; //assign address of s to inguy
+  result := inguy^.long;
+end; //conv4r4ui
+
+function swap4r4ui (s:single): uint32;
+type
+  swaptype = packed record
+    case byte of
+      0:(Word1,Word2 : word); //word is 16 bit
+      1:(long:uint32);
+  end;
+  swaptypep = ^swaptype;
+var
+  inguy:swaptypep;
+  outguy:swaptype;
+begin
+  inguy := @s; //assign address of s to inguy
+  outguy.Word1 := swap(inguy^.Word2);
+  outguy.Word2 := swap(inguy^.Word1);
+  result := outguy.long;
+end;//swap4r4ui
 
 function conv4r4i (s:single): longint;
 type

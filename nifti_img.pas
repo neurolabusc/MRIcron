@@ -1574,6 +1574,9 @@ end;
   procedure SaveImgAsPNGCore (lImage: TBitmap; lFilename: string);
   var
     PNG: TPortableNetworkGraphic;
+    {$IFNDEF UNIX}
+    BMP: TBitmap;
+    {$ENDIF}
   begin
   	if (lImage = nil) then begin
   		Showmessage('No image found to save.');
@@ -1581,12 +1584,20 @@ end;
   	end;
     PNG := TPortableNetworkGraphic.Create;
     try
+      {$IFNDEF UNIX} //Windows has problems with pf32bit images, e.g. see multislice
+      BMP := TBitmap.Create;
+      Clipboard.Assign(lImage);
+      BMP.Assign(Clipboard);
+      PNG.Assign(BMP);    //Convert data into png
+      BMP.Free;
+      {$ELSE}
       PNG.Assign(lImage);    //Convert data into png
+      {$ENDIF}
       PNG.SaveToFile(ChangeFileExt(lFilename,'.png'));
     finally
       PNG.Free;
     end
-  end;
+end;
 
 procedure SaveImgAsPNGBMP (lImage: TImage);
 begin
@@ -1599,7 +1610,7 @@ begin
 	ImgForm.SaveDialog1.Filter := 'PNG (*.png)|*.png;Bitmap|*.xpm';
 	ImgForm.SaveDialog1.DefaultExt := '.png';
       {$ELSE}
-	ImgForm.SaveDialog1.Filter := 'PNG (*.png)|*.png;Bitmap|*.bmp';
+	ImgForm.SaveDialog1.Filter := 'PNG (*.png)|*.png|Bitmap|*.bmp';
 	ImgForm.SaveDialog1.DefaultExt := '.png';
       {$ENDIF}
 	if not ImgForm.SaveDialog1.Execute then exit;
@@ -1794,7 +1805,7 @@ end;
 procedure ScaleBMP2Draw (var InvZoomShl10,lX, lY, lPanel: integer; lImage: TImage);
 var
   pxHt, pxWid : integer;
-  begin
+begin
       {$IFDEF Darwin}
      //please check if next line required for this OS! 8/8/2014
   {$ENDIF}
@@ -1815,8 +1826,7 @@ var
   //   lX := (lImage.Width-lX) + 1;
   if (gBGImg.FlipAx) and (lPanel = 1) then
     lY := (lImage.Height-lY) + 1;
-
-  end;
+end;
 
 (*procedure ScaleBMP2DrawOld (var InvZoomShl10,lX, lY, lPanel: integer; lImage: TImage);
 var
@@ -1969,7 +1979,7 @@ begin
 		end; //if data on this slice
 	end; //for lZ
 	if lFilePos = 0 then begin
-		Showmessage('No VOIs detected - unable to create blank MRIcro ROI.');
+		Showmessage('No VOIs detected - create blank MRIcro ROI.');
 		exit;
 	end;
 	if lBigFormat then
@@ -3114,7 +3124,9 @@ var
 begin
   lImage.Picture.Bitmap.Width:=lx;
   lImage.Picture.Bitmap.Height:=ly;
+  {$IFNDEF LCLCocoa}  //With Cocoa, saved bitmaps will not show lineto/textout if bitmap drawn as pf32bit
   lImage.Picture.Bitmap.PixelFormat := pf32bit; //if pf32bit the background color is wrong, e.g. when alpha = 0
+  {$ENDIF}
   if lBuff = nil then exit;
   lImage.Picture.Bitmap.BeginUpdate(False);
   i := 1;
@@ -5506,7 +5518,7 @@ begin
 
   case lDataType of
 	  kDT_SIGNED_SHORT,kDT_UINT16: lImg2Load.ImgBufferBPP := 2;
-	  kDT_SIGNED_INT,kDT_FLOAT:  lImg2Load.ImgBufferBPP := 4;
+	  kDT_SIGNED_INT,kDT_FLOAT, kDT_UINT32:  lImg2Load.ImgBufferBPP := 4;
           kDT_DOUBLE: lImg2Load.ImgBufferBPP := 8;
 	  kDT_UNSIGNED_CHAR : lImg2Load.ImgBufferBPP := 1;
           kDT_RGB: lImg2Load.ImgBufferBPP := 1;//rgb
@@ -5618,6 +5630,15 @@ begin
 			 for lInc := 1 to lImgSamples do
 			  l32Buf^[lInc] := Conv4r4i(l32Buf^[lInc]);
 		end; //32-bit int
+          kDT_UINT32 : begin
+		l32Buf := SingleP(lImg2Load.ImgBuffer );
+		if lSwap then //unswap and convert integer to float
+			 for lInc := 1 to lImgSamples do
+			  l32Buf^[lInc] := (Swap4r4ui(l32Buf^[lInc]))
+		else  //convert integer to float
+			 for lInc := 1 to lImgSamples do
+			  l32Buf^[lInc] := Conv4r4ui(l32Buf^[lInc]);
+		end;
 	  kDT_FLOAT: begin
 		l32Buf := SingleP(lImg2Load.ImgBuffer );
 		if lSwap then

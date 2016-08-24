@@ -15,6 +15,7 @@ uses
 {$ENDIF}
 
 begin
+  Application.Title:='NPM';
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);
     {$IFDEF SPREADSHEET}
