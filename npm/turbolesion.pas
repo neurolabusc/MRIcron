@@ -222,11 +222,6 @@ begin
 
      lPrevOrder := EmptyOrder;//impossible: forces first voxel of each order to be checked
      for lVox := 1 to lVoxPerPlank do begin
-         (*if (lVox mod lVoxPerPlankDiv10) = 0 then begin
-                       MainForm.ProgressBar1.Position := (lVox div lVoxPerPlankDiv10)*10;
-                       MainForm.Refresh;
-                       Application.processmessages;
-                    end;*)
          lOrder := EmptyOrder;
          lnLesion := 0;
          lPlankImgPos := 0;
@@ -509,4 +504,4 @@ begin
         NPMProgressBar( 0);
 end; //TurboLDM
 
-end.
+end.

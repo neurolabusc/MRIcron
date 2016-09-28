@@ -18,7 +18,7 @@ interface
         SysUtils,classes,IniFiles,
         {$IFDEF GUI} forms,userdir, dialogs{$ELSE}dialogsx{$ENDIF};
 const
-     kMRIcronVersDate = '1AUG2016';
+     kMRIcronVersDate = '1MAY2016';
      {$IFDEF LCLCocoa}
      kMRIcronAPI = 'Cocoa';
     {$ELSE}

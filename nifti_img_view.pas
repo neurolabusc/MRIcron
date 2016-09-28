@@ -907,7 +907,6 @@ end;
 procedure TImgForm.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  //ImgForm.caption := inttostr(Key);
   if (XViewEdit.focused) or (YViewEdit.focused) or (ZViewEdit.focused) or (MinWindowEdit.focused) or (MaxWindowEdit.focused) then
      exit;
   Case Key of
@@ -1566,16 +1565,19 @@ begin
 
 end;
 
-procedure WriteAxialVOI (lUndoOnly: boolean);
+procedure WriteAxialVOI (lUndoOnly, lUpdateSliceNumber: boolean);
 var lX,lY,lSliceOffset,lSliceSz,lSlicePos: integer;
 	lInBuff: ByteP;
 begin
+
 	lX := gBGImg.ScrnDim[1];
 	lY := gBGImg.ScrnDim[2];
 	lSliceSz := lX*lY;
 	if lSliceSz < 1 then exit;
-	lSliceOffset := (ImgForm.ZViewEdit.Value-1)*lX*lY;
-	gBGImg.VOIUndoSlice := ImgForm.ZViewEdit.Value;
+        if lUpdateSliceNumber then
+           gBGImg.VOIUndoSlice := round(ImgForm.ZViewEdit.Value);
+        if (gBGImg.VOIUndoSlice < 1) or (gBGImg.VOIUndoSlice > gBGImg.ScrnDim[3]) then exit;
+	lSliceOffset := (gBGImg.VOIUndoSlice-1)*lX*lY;
 	getmem(lInBuff,lSliceSz);
 	for lSlicePos := 1 to lSliceSz do
 		lInBuff^[lSlicePos]  :=  gMRIcroOverlay[kVOIOverlayNum].ScrnBuffer^[lSliceOffset+lSlicePos];
@@ -1583,15 +1585,17 @@ begin
 	freemem(lInBuff);
 end;
 
-procedure  WriteCorVOI (lUndoOnly: boolean);
+procedure  WriteCorVOI (lUndoOnly, lUpdateSliceNumber: boolean);
 var lX,lY,lZ,lYOffset,lZOffset,lXYSliceSz,lPixel,lZPos,lXPos: integer;
 	lInBuff: ByteP;
 begin
 	lX := gBGImg.ScrnDim[1];
 	lY := gBGImg.ScrnDim[2];
 	lZ := gBGImg.ScrnDim[3];
-	lYOffset := (lX) * (round(ImgForm.YViewEdit.Value)-1);
-	gBGImg.VOIUndoSlice := ImgForm.YViewEdit.Value;
+        if lUpdateSliceNumber then
+           gBGImg.VOIUndoSlice := round(ImgForm.YViewEdit.Value);
+	if (gBGImg.VOIUndoSlice < 1) or (gBGImg.VOIUndoSlice > gBGImg.ScrnDim[2]) then exit;
+        lYOffset := (lX) * (gBGImg.VOIUndoSlice-1);
 	lXYSliceSz := (lX*lY);
 	getmem(lInBuff,lZ*lX);
 	lPixel := 0;
@@ -1607,7 +1611,7 @@ begin
 	freemem(lInBuff);
 end;
 
-procedure WriteSagVOI (lUndoOnly: boolean);
+procedure WriteSagVOI (lUndoOnly, lUpdateSliceNumber: boolean);
 var lX,lY,lZ,lXOffset,lYOffset,lZOffset,lXYSliceSz,lPixel,lZPos,lYPos: integer;
 	lInBuff: ByteP;
 begin
@@ -1615,9 +1619,12 @@ begin
 	lY := gBGImg.ScrnDim[2];
 	lZ := gBGImg.ScrnDim[3];
 	lXYSliceSz := lX*lY;
-	lXOffset := round(ImgForm.XViewEdit.Value);
+        if lUpdateSliceNumber then
+           gBGImg.VOIUndoSlice := ImgForm.XViewEdit.Value;
+        if (gBGImg.VOIUndoSlice < 1) or (gBGImg.VOIUndoSlice > gBGImg.ScrnDim[1]) then exit;
+        lXOffset := round(gBGImg.VOIUndoSlice);
   //dec(lXOffset);//999+8
-	gBGImg.VOIUndoSlice := ImgForm.XViewEdit.Value;
+
 	getmem(lInBuff,lZ*lY);
 	lPixel := 0;
 	for lZPos := 1 to lZ do begin
@@ -1642,13 +1649,13 @@ begin
 	freemem(lInBuff);
 end;
 
-procedure WriteUndoVOI(lPanel: integer;lUndoOnly: boolean);
+procedure WriteUndoVOI(lPanel: integer; lUndoOnly, lUpdateSliceNumber: boolean);
 begin
 	EnsureVOIOPen;
 	case lPanel of
-		3: WriteCorVOI(lUndoOnly);
-		2: WriteSagVOI(lUndoOnly);
-		else WriteAxialVOI(lUndoOnly);
+		3: WriteCorVOI(lUndoOnly, lUpdateSliceNumber);
+		2: WriteSagVOI(lUndoOnly, lUpdateSliceNumber);
+		else WriteAxialVOI(lUndoOnly, lUpdateSliceNumber);
 	end;
 	gBGImg.VOIchanged := true;
 	if gBGImg.VOIUndoOrient = 4 then
@@ -2128,7 +2135,7 @@ begin
    SelectPanel(lPanel);
    gBGImg.VOIInvZoom := ComputeInvZoomShl10(lPanel,lImage);
    if  DrawToolSelected then begin //paint tool
-	   WriteUndoVOI(lPanel,false);
+	   WriteUndoVOI(lPanel,false, true);
 	   if (ssShift in Shift) then begin //erase
 			lImage.Canvas.Brush.Color:=clBlack;
 			lImage.Canvas.Pen.Color := clBlack;
@@ -2320,7 +2327,7 @@ begin
 	lZ := gBGImg.ScrnDim[3];
 	lYOffset := (lX) * (round(lSlice)-1);
 	lXYSliceSz := (lX*lY);
-	//Scrn2VOI (lImage,lX,lZ, lInBuff);
+
 	lPixel := 0;
 	for lZPos := 1 to lZ do begin
 	  lZOffset := (lZPos-1) * lXYSliceSz;
@@ -2339,7 +2346,7 @@ begin
 	lZ := gBGImg.ScrnDim[3];
 	lXYSliceSz := lX*lY;
 	lXOffset := round(lSlice);
- // dec(lXOffset);//999+8
+
 	lPixel := 0;
 	for lZPos := 1 to lZ do begin
 	  lZOffset := (lZPos-1) * lXYSliceSz;
@@ -2363,15 +2370,26 @@ begin
 end;
 
 procedure ReadAxialVOI (var lImage: TFX8;lSlice: integer);
-var lX,lY,lSliceOffset,lSliceSz: integer;
+var
+  lX,lY,lSliceOffset,lSliceSz: integer;
+  //lSwapBuffer: ByteP;
 begin
-	lX := gBGImg.ScrnDim[1];
-	lY := gBGImg.ScrnDim[2];
-	lSliceSz := lX*lY;
-	lSliceOffset := (lSlice-1)*lX*lY;
-	//Scrn2VOI (lImage,lX,lY, lInBuff);
-	for lX := 1 to lSliceSz do
-		gMRIcroOverlay[kVOIOverlayNum].ScrnBuffer^[lSliceOffset+lX] := lImage.Img^[lX];
+  lX := gBGImg.ScrnDim[1];
+  lY := gBGImg.ScrnDim[2];
+  lSliceSz := lX*lY;
+  lSliceOffset := (lSlice-1)*lX*lY;
+
+  //Move(src,dst,count);
+  //ping-pong buffers: copy current screen to swap, copy undo buffer to screen, copy swap to undo buffer
+  //getmem(lSwapBuffer,lSliceSz);
+  //Move(gMRIcroOverlay[kVOIOverlayNum].ScrnBuffer^[lSliceOffset+1], lSwapBuffer^[1], lSliceSz);
+  Move(lImage.Img^[1],gMRIcroOverlay[kVOIOverlayNum].ScrnBuffer^[lSliceOffset+1], lSliceSz);
+  //Move(lSwapBuffer^[1], lImage.Img^[1], lSliceSz);
+  //freemem(lSwapBuffer);
+
+  //WriteAxialVOI (lUndoOnly, lUpdateSliceNumber: boolean);
+  //for lX := 1 to lSliceSz do
+  //    gMRIcroOverlay[kVOIOverlayNum].ScrnBuffer^[lSliceOffset+lX] := lImage.Img^[lX];
 
 end;
 
@@ -3614,11 +3632,20 @@ begin
     CopyImg(ImgForm.PGImageCor,lOutImg);
     CopyImg(ImgForm.PGImageSag,lOutImg);
     if lCopy then begin
+       {$IFDEF DARWIN}
+         {$IFDEF LCLCocoa}
+         Clipboard.Assign(lOutImg.Picture.Graphic);
+         {$ELSE}
+          Clipboard.Assign(lOutImg.Picture.Graphic);
+         showmessage('Copy to clipboard not not tested on Carbon Widgetset');
+         {$ENDIF}
+       {$ELSE}
        {$IFDEF FPC}
        lOutImg.Picture.Bitmap.SaveToClipboardFormat(2);
        //Clipboard.Assign(lOutImg.Picture.Bitmap);
        {$ENDIF}
        Clipboard.Assign(lOutImg.Picture.Graphic);
+       {$ENDIF}
     end else
         SaveImgAsPNGBMP (lOutImg);
   finally
@@ -3637,8 +3664,41 @@ begin
 	SaveImgAsPNGBMP (lImage);
 end; //Proc Saveaspicture1Click
 *)
+
+procedure TImgForm.Paste1Click(Sender: TObject);
+begin
+  if (gBGImg.VOIUndoSlice < 1) then exit;
+  if gBGImg.VOIUndoOrient <> SelectedImageNum then //12/2007
+     exit;
+  WriteUndoVOI(SelectedImageNum,true, false);
+  case gBGImg.VOIUndoOrient of
+	  3: ReadCorVOI(gDrawImg,ImgForm.YViewEdit.Value);
+	  2: ReadSagVOI(gDrawImg,ImgForm.XViewEdit.Value);
+	  1: ReadAxialVOI(gDrawImg,ImgForm.ZViewEdit.Value);
+	  else exit;
+  end;
+  ImgForm.RefreshImagesTimer.Enabled := true;
+end;
+
+procedure TImgForm.Undo1Click(Sender: TObject);
+begin
+	if gBGImg.VOIUndoSlice < 1 then exit;
+	case gBGImg.VOIUndoOrient of
+		4: UndoVolVOI;
+		3: ReadCorVOI(gUndoImg,gBGImg.VOIUndoSlice);
+		2: ReadSagVOI(gUndoImg,gBGImg.VOIUndoSlice);
+		1: ReadAxialVOI(gUndoImg,gBGImg.VOIUndoSlice);
+	end;
+	ImgForm.RefreshImagesTimer.Enabled := true;
+end;
+
 procedure TImgForm.Copy1Click(Sender: TObject); //Requires 'ClipBrd' in uses section
 begin
+  {$IFDEF Darwin} //release focus so arrow keys move through image
+  ImgForm.ActiveControl :=  MagPanel;
+  {$ELSE}
+  ImgForm.ActiveControl := nil;
+  {$ENDIF}
   SaveOrCopyImages(true);
 end;
 
@@ -3664,33 +3724,6 @@ begin
 	 	WriteUndoVOI(SelectedImageNum,false);
 
 end;  *)
-
-procedure TImgForm.Undo1Click(Sender: TObject);
-begin
-	if gBGImg.VOIUndoSlice < 1 then exit;
-	case gBGImg.VOIUndoOrient of
-		4: UndoVolVOI;
-		3: ReadCorVOI(gUndoImg,gBGImg.VOIUndoSlice);
-		2: ReadSagVOI(gUndoImg,gBGImg.VOIUndoSlice);
-		1: ReadAxialVOI(gUndoImg,gBGImg.VOIUndoSlice);
-	end;
-	ImgForm.RefreshImagesTimer.Enabled := true;
-end;
-
-procedure TImgForm.Paste1Click(Sender: TObject);
-begin
-	if (gBGImg.VOIUndoSlice < 1) then exit;
-  if gBGImg.VOIUndoOrient <> SelectedImageNum then //12/2007
-    exit;
-	WriteUndoVOI(SelectedImageNum,true);
-	case gBGImg.VOIUndoOrient of
-		3: ReadCorVOI(gDrawImg,ImgForm.YViewEdit.Value);
-		2: ReadSagVOI(gDrawImg,ImgForm.XViewEdit.Value);
-		1: ReadAxialVOI(gDrawImg,ImgForm.ZViewEdit.Value);
-		else exit;
-	end;
-	ImgForm.RefreshImagesTimer.Enabled := true;
-end;
 
 procedure TImgForm.HideROIBtnMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);

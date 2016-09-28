@@ -1057,6 +1057,7 @@ begin
      //MonteCarloSimulation1.visible := true;
      {$ENDIF}
      //StartTimer.enabled := true;
+     //NPMmsg(inttostr(kMaxObs));
 end;
 
 procedure TMainForm.PairedTMenuClick(Sender: TObject);

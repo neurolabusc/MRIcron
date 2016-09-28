@@ -214,9 +214,6 @@ var
   APalette : HPalette;
   {$ENDIF}
 begin
-           {$IFDEF Darwin}
-        Showmessage('Copy not yet supported with OSX: use File/Save');
-        {$ENDIF}
 	 if (MultiImage.Picture.Graphic = nil) then begin //1420z
 		Showmessage('You need to load an image before you can copy it to the clipboard.');
 		exit;
@@ -225,7 +222,14 @@ begin
 	 MultiImage.Picture.Bitmap.SaveToClipBoardFormat(MyFormat,AData,APalette);
 	 ClipBoard.SetAsHandle(MyFormat,AData);
  {$ELSE}
+        {$IFDEF LCLCocoa}
+            Clipboard.Assign(MultiSliceForm.MultiImage.Picture.Graphic);
+
+        {$ELSE}
         MultiSliceForm.MultiImage.Picture.Bitmap.SaveToClipboardFormat(2);
+        {$ENDIF}
+
+
  {$ENDIF}
 end;
 

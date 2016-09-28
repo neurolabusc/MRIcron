@@ -11,9 +11,6 @@
       <Title Value="NPM"/>
       <Icon Value="0"/>
     </General>
-    <VersionInfo>
-      <StringTable ProductVersion=""/>
-    </VersionInfo>
     <BuildModes Count="1">
       <Item1 Name="default" Default="True"/>
     </BuildModes>
@@ -50,7 +47,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="27" Y="22"/>
+        <TopLine Value="1033"/>
+        <CursorPos X="8" Y="1060"/>
         <UsageCount Value="114"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -86,9 +84,7 @@
       <Unit6>
         <Filename Value="statcr.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="2"/>
         <CursorPos X="26" Y="5"/>
         <UsageCount Value="110"/>
         <Loaded Value="True"/>
@@ -194,8 +190,11 @@
       </Unit19>
       <Unit20>
         <Filename Value="lesion_pattern.pas"/>
-        <CursorPos X="13" Y="21"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="7"/>
+        <CursorPos X="58" Y="43"/>
         <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit20>
       <Unit21>
         <Filename Value="ReadInt.pas"/>
@@ -298,7 +297,7 @@
       </Unit37>
       <Unit38>
         <Filename Value="regression.pas"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <CursorPos X="69" Y="13"/>
         <UsageCount Value="43"/>
         <Loaded Value="True"/>
@@ -324,9 +323,9 @@
       </Unit41>
       <Unit42>
         <Filename Value="..\common\define_types.pas"/>
-        <EditorIndex Value="8"/>
-        <TopLine Value="14"/>
-        <CursorPos X="3" Y="58"/>
+        <EditorIndex Value="9"/>
+        <TopLine Value="5"/>
+        <CursorPos X="27" Y="21"/>
         <UsageCount Value="37"/>
         <Loaded Value="True"/>
       </Unit42>
@@ -427,16 +426,18 @@
       </Unit59>
       <Unit60>
         <Filename Value="unpm.pas"/>
-        <EditorIndex Value="7"/>
-        <CursorPos X="49" Y="8"/>
+        <EditorIndex Value="8"/>
+        <TopLine Value="100"/>
+        <CursorPos X="45" Y="112"/>
         <UsageCount Value="41"/>
         <Loaded Value="True"/>
       </Unit60>
       <Unit61>
         <Filename Value="turbolesion.pas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
-        <TopLine Value="468"/>
-        <CursorPos X="18" Y="470"/>
+        <TopLine Value="290"/>
+        <CursorPos X="44" Y="325"/>
         <UsageCount Value="36"/>
         <Loaded Value="True"/>
       </Unit61>
@@ -485,124 +486,124 @@
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="npmform.pas"/>
-        <Caret Line="270" Column="20" TopLine="233"/>
+        <Filename Value="..\common\define_types.pas"/>
+        <Caret Line="21" Column="41"/>
       </Position1>
       <Position2>
         <Filename Value="npmform.pas"/>
-        <Caret Line="280" Column="16" TopLine="243"/>
+        <Caret Line="47" Column="11" TopLine="38"/>
       </Position2>
       <Position3>
-        <Filename Value="StatThds.pas"/>
-        <Caret Line="2" Column="95"/>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="126" Column="21" TopLine="102"/>
       </Position3>
       <Position4>
-        <Filename Value="StatThds.pas"/>
-        <Caret Line="18" Column="50"/>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="448" Column="19" TopLine="423"/>
       </Position4>
       <Position5>
-        <Filename Value="StatThds.pas"/>
-        <Caret Line="25" Column="77"/>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="578" Column="22" TopLine="552"/>
       </Position5>
       <Position6>
-        <Filename Value="StatThds.pas"/>
-        <Caret Line="27" Column="97"/>
+        <Filename Value="unpm.pas"/>
+        <Caret Line="26" Column="20" TopLine="11"/>
       </Position6>
       <Position7>
-        <Filename Value="StatThds.pas"/>
-        <Caret Line="34" Column="77"/>
+        <Filename Value="unpm.pas"/>
+        <Caret Line="112" Column="45" TopLine="100"/>
       </Position7>
       <Position8>
-        <Filename Value="StatThds.pas"/>
-        <Caret Line="40" Column="84" TopLine="3"/>
+        <Filename Value="..\common\define_types.pas"/>
+        <Caret Line="36" Column="37" TopLine="21"/>
       </Position8>
       <Position9>
-        <Filename Value="StatThds.pas"/>
-        <Caret Line="47" Column="77" TopLine="10"/>
+        <Filename Value="turbolesion.pas"/>
+        <Caret Line="15" Column="55"/>
       </Position9>
       <Position10>
-        <Filename Value="StatThds.pas"/>
-        <Caret Line="52" Column="80" TopLine="15"/>
+        <Filename Value="turbolesion.pas"/>
+        <Caret Line="18" Column="14"/>
       </Position10>
       <Position11>
-        <Filename Value="StatThds.pas"/>
-        <Caret Line="62" Column="103" TopLine="25"/>
+        <Filename Value="turbolesion.pas"/>
+        <Caret Line="193" Column="14" TopLine="163"/>
       </Position11>
       <Position12>
-        <Filename Value="StatThds.pas"/>
-        <Caret Line="178" Column="106" TopLine="141"/>
+        <Filename Value="turbolesion.pas"/>
+        <Caret Line="282" Column="14" TopLine="252"/>
       </Position12>
       <Position13>
-        <Filename Value="StatThds.pas"/>
-        <Caret Line="184" Column="31" TopLine="147"/>
+        <Filename Value="turbolesion.pas"/>
+        <Caret Line="284" Column="58" TopLine="254"/>
       </Position13>
       <Position14>
-        <Filename Value="StatThds.pas"/>
-        <Caret Line="208" Column="61" TopLine="171"/>
+        <Filename Value="turbolesion.pas"/>
+        <Caret Line="301" Column="11" TopLine="271"/>
       </Position14>
       <Position15>
-        <Filename Value="StatThds.pas"/>
-        <Caret Line="213" Column="20" TopLine="176"/>
+        <Filename Value="turbolesion.pas"/>
+        <Caret Line="372" Column="23" TopLine="343"/>
       </Position15>
       <Position16>
-        <Filename Value="npmform.pas"/>
-        <Caret Line="417" Column="26" TopLine="414"/>
+        <Filename Value="turbolesion.pas"/>
+        <Caret Line="424" Column="31" TopLine="395"/>
       </Position16>
       <Position17>
-        <Filename Value="npmform.pas"/>
-        <Caret Line="451" Column="17" TopLine="414"/>
+        <Filename Value="turbolesion.pas"/>
+        <Caret Line="425" Column="43" TopLine="396"/>
       </Position17>
       <Position18>
-        <Filename Value="npmform.pas"/>
-        <Caret Line="464" Column="28" TopLine="427"/>
+        <Filename Value="turbolesion.pas"/>
+        <Caret Line="436" Column="40" TopLine="407"/>
       </Position18>
       <Position19>
-        <Filename Value="npmform.pas"/>
-        <Caret Line="3" Column="73"/>
+        <Filename Value="turbolesion.pas"/>
+        <Caret Line="455" Column="25" TopLine="426"/>
       </Position19>
       <Position20>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="468" Column="62" TopLine="463"/>
+        <Caret Line="469" Column="144" TopLine="440"/>
       </Position20>
       <Position21>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="293" Column="62" TopLine="271"/>
+        <Caret Line="486" Column="134" TopLine="457"/>
       </Position21>
       <Position22>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="296" Column="20" TopLine="271"/>
+        <Caret Line="488" Column="151" TopLine="459"/>
       </Position22>
       <Position23>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="375" Column="44" TopLine="339"/>
+        <Caret Line="8" Column="82"/>
       </Position23>
       <Position24>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="377" Column="40" TopLine="341"/>
+        <Caret Line="3" Column="69"/>
       </Position24>
       <Position25>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="394" Column="24" TopLine="358"/>
+        <Caret Line="233" Column="51" TopLine="207"/>
       </Position25>
       <Position26>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="395" Column="60" TopLine="359"/>
+        <Caret Line="237" Column="23" TopLine="208"/>
       </Position26>
       <Position27>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="396" Column="38" TopLine="360"/>
+        <Caret Line="209" Column="78" TopLine="208"/>
       </Position27>
       <Position28>
-        <Filename Value="turbolesion.pas"/>
-        <Caret Line="398" Column="48" TopLine="362"/>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="554" Column="32" TopLine="553"/>
       </Position28>
       <Position29>
-        <Filename Value="turbolesion.pas"/>
-        <Caret Line="399" Column="45" TopLine="363"/>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="112" Column="21" TopLine="95"/>
       </Position29>
       <Position30>
-        <Filename Value="..\common\define_types.pas"/>
-        <Caret Line="21" Column="41"/>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="434" Column="27" TopLine="428"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>

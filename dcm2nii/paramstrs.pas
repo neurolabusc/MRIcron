@@ -3,7 +3,7 @@ unit paramstrs;
 interface
 uses prefs,define_types,dialogs_msg;
 const
-kVers = 'Chris Rorden''s dcm2nii :: '+kMRIcronvers;
+kVers = 'Chris Rorden''s dcm2nii :: '+kMRIcronvers+' :: (upgrade to dcm2niix suggested)';
 {$Include ..\common\isgui.inc}
 procedure ProcessParamStrs;
 // procedure Testdcm2nii;
