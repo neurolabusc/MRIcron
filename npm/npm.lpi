@@ -46,7 +46,6 @@
         <ComponentName Value="MainForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="1131"/>
         <CursorPos X="63" Y="1140"/>
@@ -314,9 +313,9 @@
       </Unit37>
       <Unit38>
         <Filename Value="..\common\cpucount.pas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="85"/>
-        <CursorPos X="35" Y="110"/>
+        <CursorPos Y="13"/>
         <UsageCount Value="53"/>
         <Loaded Value="True"/>
       </Unit38>
@@ -349,124 +348,124 @@
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="LesionStatThds.pas"/>
-        <Caret Line="669" Column="46" TopLine="652"/>
+        <Filename Value="turbolesion.pas"/>
+        <Caret Line="5" Column="116"/>
       </Position1>
       <Position2>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="5" Column="116"/>
+        <Caret Line="245" Column="22" TopLine="216"/>
       </Position2>
       <Position3>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="245" Column="22" TopLine="216"/>
+        <Caret Line="474" Column="23" TopLine="446"/>
       </Position3>
       <Position4>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="474" Column="23" TopLine="446"/>
+        <Caret Line="245" Column="18" TopLine="243"/>
       </Position4>
       <Position5>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="245" Column="18" TopLine="243"/>
+        <Caret Line="290" Column="38" TopLine="288"/>
       </Position5>
       <Position6>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="290" Column="38" TopLine="288"/>
+        <Caret Line="455" Column="25" TopLine="424"/>
       </Position6>
       <Position7>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="455" Column="25" TopLine="424"/>
+        <Caret Line="469" Column="144" TopLine="438"/>
       </Position7>
       <Position8>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="469" Column="144" TopLine="438"/>
+        <Caret Line="488" Column="134" TopLine="457"/>
       </Position8>
       <Position9>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="488" Column="134" TopLine="457"/>
+        <Caret Line="490" Column="151" TopLine="459"/>
       </Position9>
       <Position10>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="490" Column="151" TopLine="459"/>
+        <Caret Line="283" Column="58" TopLine="264"/>
       </Position10>
       <Position11>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="283" Column="58" TopLine="264"/>
+        <Caret Line="464" Column="21" TopLine="437"/>
       </Position11>
       <Position12>
         <Filename Value="turbolesion.pas"/>
-        <Caret Line="464" Column="21" TopLine="437"/>
+        <Caret Line="469" Column="144" TopLine="438"/>
       </Position12>
       <Position13>
-        <Filename Value="turbolesion.pas"/>
-        <Caret Line="469" Column="144" TopLine="438"/>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="267" Column="22" TopLine="247"/>
       </Position13>
       <Position14>
         <Filename Value="npmform.pas"/>
-        <Caret Line="267" Column="22" TopLine="247"/>
+        <Caret Line="506" Column="15" TopLine="475"/>
       </Position14>
       <Position15>
         <Filename Value="npmform.pas"/>
-        <Caret Line="506" Column="15" TopLine="475"/>
+        <Caret Line="283" Column="33" TopLine="260"/>
       </Position15>
       <Position16>
         <Filename Value="npmform.pas"/>
-        <Caret Line="283" Column="33" TopLine="260"/>
+        <Caret Line="503" Column="25" TopLine="471"/>
       </Position16>
       <Position17>
         <Filename Value="npmform.pas"/>
-        <Caret Line="503" Column="25" TopLine="471"/>
+        <Caret Line="475" Column="18" TopLine="472"/>
       </Position17>
       <Position18>
         <Filename Value="npmform.pas"/>
-        <Caret Line="475" Column="18" TopLine="472"/>
+        <Caret Column="16"/>
       </Position18>
       <Position19>
         <Filename Value="npmform.pas"/>
-        <Caret Column="16"/>
+        <Caret Line="21" Column="41"/>
       </Position19>
       <Position20>
         <Filename Value="npmform.pas"/>
-        <Caret Line="21" Column="41"/>
+        <Caret Line="418" Column="14" TopLine="394"/>
       </Position20>
       <Position21>
-        <Filename Value="npmform.pas"/>
-        <Caret Line="418" Column="14" TopLine="394"/>
+        <Filename Value="unpm.pas"/>
+        <Caret Line="35" Column="23" TopLine="15"/>
       </Position21>
       <Position22>
         <Filename Value="unpm.pas"/>
-        <Caret Line="35" Column="23" TopLine="15"/>
+        <Caret Line="36" Column="24" TopLine="15"/>
       </Position22>
       <Position23>
         <Filename Value="unpm.pas"/>
-        <Caret Line="36" Column="24" TopLine="15"/>
+        <Caret Line="42" Column="23" TopLine="15"/>
       </Position23>
       <Position24>
         <Filename Value="unpm.pas"/>
-        <Caret Line="42" Column="23" TopLine="15"/>
+        <Caret Line="596" Column="26" TopLine="565"/>
       </Position24>
       <Position25>
         <Filename Value="unpm.pas"/>
-        <Caret Line="596" Column="26" TopLine="565"/>
+        <Caret Line="597" Column="34" TopLine="566"/>
       </Position25>
       <Position26>
         <Filename Value="unpm.pas"/>
-        <Caret Line="597" Column="34" TopLine="566"/>
+        <Caret Line="659" Column="22" TopLine="628"/>
       </Position26>
       <Position27>
         <Filename Value="unpm.pas"/>
-        <Caret Line="659" Column="22" TopLine="628"/>
+        <Caret Line="668" Column="20" TopLine="636"/>
       </Position27>
       <Position28>
-        <Filename Value="unpm.pas"/>
-        <Caret Line="668" Column="20" TopLine="636"/>
+        <Filename Value="npmform.pas"/>
+        <Caret Line="418" Column="14" TopLine="394"/>
       </Position28>
       <Position29>
         <Filename Value="npmform.pas"/>
-        <Caret Line="418" Column="14" TopLine="394"/>
+        <Caret Line="377" Column="51" TopLine="368"/>
       </Position29>
       <Position30>
-        <Filename Value="npmform.pas"/>
-        <Caret Line="377" Column="51" TopLine="368"/>
+        <Filename Value="..\common\cpucount.pas"/>
+        <Caret Line="89" Column="34" TopLine="85"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>
