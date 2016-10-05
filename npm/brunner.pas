@@ -11,15 +11,67 @@ function BMzVal(lnSubj, lnGroup0: integer; ltBM,lDF: double): double;
 function continROC (lnSubj, lnGroup0: integer; var lIn: DoubleP0): single;
 function continROC2 (lnSubj: integer; var lInIV, lInDV: DoubleP0): single;
 function continROC3 (lnSubj: integer; var lGroup: Bytep; lIn: Singlep): single;
-procedure tBM3 (lnSubj: integer; var lGroup: Bytep; lIn: Singlep; var ltBM,lDF: double; out ln0: integer);
+procedure tBM3 (lnSubj: integer; var lGroup: Bytep; lInX: Singlep; var ltBM,lDF: double; out ln0: integer);
 
 const
+      {$ifdef CPU32}
      knPermute= 20000;
+     {$ELSE}
+     knPermute= 40000;
+     {$ENDIF}
      knSim = 15;
 var
    gSimRA: array [1..knSim] of DoubleP;
    gSimRAp: array [1..knSim] of pointer;
 implementation
+
+
+{$IFDEF NEWRNG}
+uses rng;
+
+//rng: TRNG = (test: FALSE);
+
+procedure GenPermute (lnSubj: integer; var lOrigOrder,lRanOrder: DoubleP0; var rng: TRNG);
+var
+   lInc,lRand: integer;
+   lSwap: double;
+begin
+     //next lines commented out - this check should be done before inner loop
+     //if lnSubj < 2 then //can not randomize order of single value
+     //   exit;
+     //Move(src,dest,count);
+      Move(lOrigOrder^,lRanOrder^,lnSubj*sizeof(double));
+     //for lInc := 1 to lnSubj do
+     //    lRanOrder[lInc-1] := lOrigOrder[lInc-1];
+     for lInc := lnSubj downto 2 do begin
+         //lRand := Random(lInc);
+         lRand := RandomInt0(rng, lInc-1);
+         lSwap := lRanOrder^[lRand];
+         lRanOrder^[lRand] := lRanOrder^[lInc-1];
+         lRanOrder^[lInc-1] := lSwap;
+     end;
+end;
+{$ELSE}
+procedure GenPermute (lnSubj: integer; var lOrigOrder,lRanOrder: DoubleP0);
+var
+   lInc,lRand: integer;
+   lSwap: double;
+begin
+     //next lines commented out - this check should be done before inner loop
+     //if lnSubj < 2 then //can not randomize order of single value
+     //   exit;
+     //Move(src,dest,count);
+      Move(lOrigOrder^,lRanOrder^,lnSubj*sizeof(double));
+     //for lInc := 1 to lnSubj do
+     //    lRanOrder[lInc-1] := lOrigOrder[lInc-1];
+     for lInc := lnSubj downto 2 do begin
+         lRand := Random(lInc);
+         lSwap := lRanOrder^[lRand];
+         lRanOrder^[lRand] := lRanOrder^[lInc-1];
+         lRanOrder^[lInc-1] := lSwap;
+     end;
+end;
+{$ENDIF}
 
 function BMzVal(lnSubj,lnGroup0 : integer; ltBM,lDF: double): double;
 //can be approximated by      result := TtoZ(ltBM,lDF);
@@ -119,25 +171,8 @@ begin
      end
 end;  //sort
 
-procedure GenPermute (lnSubj: integer; var lOrigOrder,lRanOrder: DoubleP0);
-var
-   lInc,lRand: integer;
-   lSwap: double;
-begin
-     //next lines commented out - this check should be done before inner loop
-     //if lnSubj < 2 then //can not randomize order of single value
-     //   exit;
-     //Move(src,dest,count);
-      Move(lOrigOrder^,lRanOrder^,lnSubj*sizeof(double));
-     //for lInc := 1 to lnSubj do
-     //    lRanOrder[lInc-1] := lOrigOrder[lInc-1];
-     for lInc := lnSubj downto 2 do begin
-         lRand := Random(lInc);
-         lSwap := lRanOrder^[lRand];
-         lRanOrder^[lRand] := lRanOrder^[lInc-1];
-         lRanOrder^[lInc-1] := lSwap;
-     end;
-end;
+
+
 
 procedure SortDouble (first, last: integer; var DynDataRA:DoubleP0; var lGroupRA: Bytep0);
 {Shell sort chuck uses this- see 'Numerical Recipes in C' for similar sorts.}
@@ -553,7 +588,7 @@ end; //continROC3
 
 
 //function TStat3 (lnSubj: integer; var lGroup: Bytep; var lIn: Singlep): double;
-procedure tBM3 (lnSubj: integer; var lGroup: Bytep; lIn: Singlep; var ltBM,lDF: double; out ln0: integer);
+procedure tBM3 (lnSubj: integer; var lGroup: Bytep; lInX: Singlep; var ltBM,lDF: double; out ln0: integer);
 var
 	lObspX,lObsp: pointer;
 	lObsX,lObs: Doublep0;
@@ -568,8 +603,7 @@ begin
  ln0 := 0;
  ln1 := 0;
 	for i := 0 to (lnSubj-1) do begin //for each subject
-		//lVal := lIn[i];
-		lObs^[i] := lIn^[i+1];
+		lObs^[i] := lInX^[i+1];
 		if lGroup^[i+1] = 0 then //group0
 			lGroupRA^[i] := 0
 		else
@@ -627,16 +661,24 @@ var
    lRanOrder: DoubleP0;
    lInc,lnSmallGroup: integer;
    lOutT,lDF: double;
+   {$IFDEF NEWRNG}
+   rng: TRNG = (test: FALSE);
+   {$ENDIF}
 begin
      if (lnSubj < 1) or (knPermute < 1) then
         exit;
      createArray64(lRanOrderp,lRanOrder,lnSubj);
      //lnSmallGroup := lnGroup0;
      //if lnSmallGroup > knSim then exit;
+     RandSeed := 128; //same order for multiple sessions
      for lnSmallGroup := 1 to knSim do begin
        //RandSeed := 128; //same order for all voxels
        for lInc := 1 to knPermute do begin
+         {$IFDEF NEWRNG}
+         GenPermute(lnSubj, lOrigOrder,lRanOrder, rng); //generate random order of participants
+         {$ELSE}
          GenPermute(lnSubj, lOrigOrder,lRanOrder); //generate random order of participants
+         {$ENDIF}
          tBM (lnSubj, lnSmallGroup, lRanOrder,lOutT,lDF);
          gSimRA[lnSmallGroup]^[lInc] := lOutT;
        end;

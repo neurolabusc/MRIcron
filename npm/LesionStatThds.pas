@@ -539,6 +539,28 @@ begin
      freemem(lOrigOrder);
 end;
 
+(*procedure txtFx (lnSubj: integer; var lGroup: Bytep; lInX: Singlep; var ltBM,lDF: double; ln0: integer);
+var
+   s: string;
+  myFile : TextFile;
+  i: integer;
+begin
+     AssignFile(myFile, 'TestStat.txt');
+     ReWrite(myFile);
+     //Append(myFile);
+     WriteLn(myFile, format('%d %d %g %g',[lnSubj, ln0, ltBM, lDF]));
+     s := kTab;
+     for i := 1 to lnSubj do
+         s := s + inttostr(lGroup^[i])+kTab;
+     Writeln(myFile, s);
+     s := kTab;
+
+     for i := 1 to lnSubj do
+         s := s + floattostr(lInX^[i])+kTab;
+     Writeln(myFile, s);
+     CloseFile(myFile);
+end;*)
+
 procedure TLesionContinuous.Analyze (lttest,lBM: boolean; lnCrit,lnPermute,lThread,lThreadStart,lThreadEnd,lStartVox,lVoxPerPlank,lImagesCount,lControlsIN : integer; lPlankImg:bytep;lOutImgMn,lOutImgBM,lOutImgT,lOutImgAUC,lSymptomRA: SingleP);
 //pattern variables
 const
@@ -633,6 +655,8 @@ begin //statthread
 
               if lBM then begin
                       tBM3 (lnControlsPlusLesion, lLesionOrderp, lSymptomRA,lBMz,lDF, lnGroup0);
+                      //if lBMz > 55 then
+                      //   txtFx(lnControlsPlusLesion, lLesionOrderp, lSymptomRA,lBMz,lDF, lnGroup0);
                       lBMz := BMzVal (lnControlsPlusPatients, lnGroup0,lBMz,lDF);
                  lOutImgBM^[lPos2Offset] := lBMz;
                  lPrevZValsBM[lPatternPos] := lBMz;
