@@ -21,18 +21,23 @@ cp ./dcm2nii/dcm2nii /Users/rorden/Documents/mricron/dcm2nii
 ./_xclean.bat
 cp ./common/gui.inc ./common/isgui.inc
 
-#compile 32-bit
-# lazbuild -B ./npm/npm.lpr --ws=carbon
-# lazbuild -B ./dcm2nii/dcm2niigui.lpr --ws=carbon
-# lazbuild -B ./mricron.lpr --ws=carbon
-
-#compile 64-bit
+#compile MRIcron 64
 #lazbuild ./mricron.lpr --cpu=x86_64 --ws=cocoa --compiler="/usr/local/bin/ppcx64"
 #Current FPC 3.0.0 can not compile on OSX 10.11 El Capitan, so use 3.1.1
-/Users/rorden/lazarus/lazbuild ./mricron.lpr --cpu=x86_64 --ws=cocoa --compiler="/usr/local/lib/fpc/3.1.1/ppcx64"
-/Users/rorden/lazarus/lazbuild ./npm/npm.lpr --cpu=x86_64 --ws=cocoa --compiler="/usr/local/lib/fpc/3.1.1/ppcx64"
-/Users/rorden/lazarus/lazbuild ./dcm2nii/dcm2niigui.lpr --cpu=x86_64 --ws=cocoa --compiler="/usr/local/lib/fpc/3.1.1/ppcx64"
+lazbuild ./mricron.lpr --cpu=x86_64 --ws=cocoa --compiler="/usr/local/lib/fpc/3.1.1/ppcx64"
+strip ./mricron
+cp ./mricron /Users/rorden/Documents/mricron/mricron64.app/Contents/MacOS/mricron
 
+
+lazbuild ./npm/npm.lpr --cpu=x86_64 --ws=cocoa --compiler="/usr/local/lib/fpc/3.1.1/ppcx64"
+strip ./npm/npm
+cp ./npm/npm /Users/rorden/Documents/mricron/npm64.app/Contents/MacOS/npm
+
+# lazbuild -B ./mricron.lpr --ws=carbon
+lazbuild -B ./npm/npm.lpr --ws=carbon
+lazbuild -B ./dcm2nii/dcm2niigui.lpr --ws=carbon
+lazbuild -B ./mricron.lpr --ws=carbon
+#lazbuild -B ./dcm2nii/dcm2niigui.lpr --ws=cocoa --cpu=x86_64 --os=darwin --compiler=/usr/local/bin/ppcx64
 
 strip ./mricron
 strip ./npm/npm

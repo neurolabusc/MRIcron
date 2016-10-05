@@ -1,5 +1,5 @@
 unit stats;
-
+{$I options.inc} // {$IFDEF OLDSTATS}
 
 interface                                                                                                         
 uses define_types,statcr,DISTR
@@ -12,9 +12,16 @@ procedure WilcoxonMW2 (lnSubj, lnGroup0: integer; var lIn: DoubleP0; var lOutT: 
 procedure MeanMedian(lnSubj, lnGroupX: integer; var lIn: DoubleP0; var lMeanFX,lMedianFX: double);
 procedure TStat2Z (lnSubj, lnGroupX: integer; var lIn: DoubleP0; var lOutT: double);
 procedure BMTest (lnSubj, lnGroup0: integer; var lIn: DoubleP0; var lOutT: double);
+{$IFDEF OLDSTATS}
 procedure Liebermeister2 (lnSubj, lnGroupX: integer; var lIn: DoubleP0; var lOutZ: double);
 procedure Liebermeister2b (lnSubj, lnGroupX: integer; var lIn: ByteP0; var lAUC,lOutZ: double);
 procedure Liebermeister2bP (lnSubj, lnGroupX: integer; var lIn: ByteP0; var lOutP: double);
+{$ELSE}
+function Liebermeister3 (lnSubj: integer; var lGroup: Bytep; var lIn: Singlep): double;
+function Liebermeister3b (lnSubj: integer; var lGroup: Bytep; var lIn: Singlep; out lAUC: double): double;
+function Liebermeister3bP (lnSubj: integer; var lGroup: Bytep; var lIn: Singlep): double;
+{$ENDIF}
+function TStat3 (lnSubj: integer; var lGroup: Bytep; var lIn: Singlep): double;
 //procedure Liebermeister2bPlus (lnSubj, lnGroupX: integer; var lIn: ByteP0; var lAUC, lOutP: double);
 //function Aprime (lHit,lFA: double): double;
 //function AUC (lHit,lFA: double): double;
@@ -253,11 +260,6 @@ begin
 			lOutZ := pNormalInv(lVal)
 	end; //compute chi
         lAUC := rocAUC (lnYesDeficitYesLesion,lnNoDeficitYesLesion,lnYesDeficitNoLesion,lnNoDeficitNoLesion);
-        {lFalseAlarmRate := lnYesDeficitNoLesion/(lnYesDeficitNoLesion+lnNoDeficitNoLesion);
-        lHitRate := lnYesDeficitYesLesion/(lnYesDeficitYesLesion+lnNoDeficitYesLesion);
-        lAUC := rocAz (lHitRate,lFalseAlarmRate);
-        }
-        //if lOutZ > 4 then ax(lnYesDeficitYesLesion,lnNoDeficitYesLesion,lnYesDeficitNoLesion,lnNoDeficitNoLesion,lauc,lOutZ);
 end;
 
 procedure Liebermeister2 (lnSubj, lnGroupX: integer; var lIn: DoubleP0; var lOutZ: double);
@@ -631,7 +633,51 @@ begin
 		lOutT := 0
 	else
 		lOutT := ( ((lsumx/lnGroupX)-(lsumy/lnGroupY))/ls);//t = lm / ls;
-end;              
+end;
+
+function TStat3 (lnSubj: integer; var lGroup: Bytep; var lIn: Singlep): double;
+//pooled variance t-test http://www.okstate.edu/ag/agedcm4h/academic/aged5980a/5980/newpage26.htm
+//Group should be 1 or 0
+const
+	 tiny = 1.0e-5;
+var
+   i, g :  integer;
+   lS: double;
+   lnGroup : array [0..1] of integer = (0,0);
+   lSum: array [0..1] of double = (0,0);
+   lSumSqr: array [0..1] of double = (0,0);
+   lVar: array [0..1] of double = (0,0);
+begin
+  result := 0;
+  for i := 1 to (lnSubj) do begin
+      if lGroup^[i] = 0 then
+         g := 0
+      else
+          g := 1;
+      inc(lnGroup[g]);
+      lSum[g] := lSum[g] + lIn^[i];
+      lSumSqr[g] := lSumSqr[g] + sqr(lIn^[i]);
+  end;
+  if (lnGroup[0] < 1) or (lnGroup[1] < 1) or ((lnGroup[0]+lnGroup[1]) < 3) then   //need at least 1 subj in each group
+      exit;
+  for g := 0 to 1 do begin
+      if lnGroup[g] > 1 then begin
+         lVar[g] := (lnGroup[g]*lSumSqr[g]) - Sqr(lsum[g]);
+         lVar[g] := lVar[g] / (lnGroup[g]*(lnGroup[g]-1));
+      end;
+  end;
+  //lm := (lsumx/lnGroupX)-(lsumy/lnGroupY); //mean effect size lmnx - lmny;
+  //ldf := lnSubj - 2;
+  ls := (  ((lnGroup[0] - 1) * lvar[0] + (lnGroup[1] - 1) * lvar[1]) / (lnSubj - 2)) ;
+  if abs(ls) < tiny then
+     exit;
+  if ls < 0 then
+     ShowMsg('Error: t-test variance should not be zero.');
+  ls := sqrt( ls) ;
+  ls := ls * sqrt(1 / lnGroup[0] + 1 / lnGroup[1]); //note - to get here both lnx and lny > 0
+  if ls <> 0 then
+     result := ( ((lsum[0]/lnGroup[0])-(lsum[1]/lnGroup[1]))/ls);//t = lm / ls;
+end;  //TStat3()
 
 (*procedure TStatAbs (lnSubj, lnGroupX: integer; var lIn: DoubleP0; var lOutT: double);
 var
@@ -1003,7 +1049,97 @@ begin
  freemem(lGroupRA);
 end;
 
+function Liebermeister3 (lnSubj: integer; var lGroup: Bytep; var lIn: Singlep): double;
+var
+	lnYesDeficit0 : integer = 0;
+	lnYesDeficit1 : integer = 0;
+	lnNoDeficit0 : integer = 0;
+	lnNoDeficit1 : integer = 0;
+        i: integer;
+begin
+        for i := 1 to (lnSubj) do begin //for each subject
+            if lGroup^[i] <> 0 then begin
+		if lIn^[i] = 0 then
+                   inc(lnYesDeficit0)
+                else
+                    inc(lnNoDeficit0);
+            end else begin
+		if lIn^[i] = 0 then
+                   inc(lnYesDeficit1)
+                else
+                    inc(lnNoDeficit1);
+            end;
+        end;
+	if  ((lnYesDeficit0+lnYesDeficit1)<1) or ((lnNoDeficit0+lnNoDeficit1)<1) then
+		result := 0
+	else begin
+		result := Liebermeister(lnYesDeficit0, lnYesDeficit1, lnNoDeficit0, lnNoDeficit1);
+    	        if result < 0 then
+    		   result := -pNormalInv(abs(result))
+    	        else
+    	            result := pNormalInv(result)
+        end; //Z transform
+end; //Liebermeister3b
 
+function Liebermeister3b (lnSubj: integer; var lGroup: Bytep; var lIn: Singlep; out lAUC: double): double;
+var
+	lnYesDeficit0 : integer = 0;
+	lnYesDeficit1 : integer = 0;
+	lnNoDeficit0 : integer = 0;
+	lnNoDeficit1 : integer = 0;
+        i: integer;
+begin
+        for i := 1 to (lnSubj) do begin //for each subject
+            if lGroup^[i] <> 0 then begin
+		if lIn^[i] = 0 then
+                   inc(lnYesDeficit0)
+                else
+                    inc(lnNoDeficit0);
+            end else begin
+		if lIn^[i] = 0 then
+                   inc(lnYesDeficit1)
+                else
+                    inc(lnNoDeficit1);
+            end;
+        end;
+	if  ((lnYesDeficit0+lnYesDeficit1)<1) or ((lnNoDeficit0+lnNoDeficit1)<1) then
+		result := 0
+	else begin
+		result := Liebermeister(lnYesDeficit0, lnYesDeficit1, lnNoDeficit0, lnNoDeficit1);
+    	        if result < 0 then
+    		   result := -pNormalInv(abs(result))
+    	        else
+    	            result := pNormalInv(result)
+        end; //Z transform
+        lAUC := rocAUC (lnYesDeficit0,lnNoDeficit0,lnYesDeficit1,lnNoDeficit1);
+end; //Liebermeister3b
+
+function Liebermeister3bP (lnSubj: integer; var lGroup: Bytep; var lIn: Singlep): double;
+var
+	lnYesDeficit0 : integer = 0;
+	lnYesDeficit1 : integer = 0;
+	lnNoDeficit0 : integer = 0;
+	lnNoDeficit1 : integer = 0;
+        i: integer;
+begin
+        for i := 1 to (lnSubj) do begin //for each subject
+            if lGroup^[i] <> 0 then begin
+		if lIn^[i] = 0 then
+                   inc(lnYesDeficit0)
+                else
+                    inc(lnNoDeficit0);
+            end else begin
+		if lIn^[i] = 0 then
+                   inc(lnYesDeficit1)
+                else
+                    inc(lnNoDeficit1);
+            end;
+        end;
+	if  ((lnYesDeficit0+lnYesDeficit1)<1) or ((lnNoDeficit0+lnNoDeficit1)<1) then
+	    result := 0
+	else
+	    result := Liebermeister(lnYesDeficit0, lnYesDeficit1, lnNoDeficit0, lnNoDeficit1);
+end; //Liebermeister3bP
 
 end.
- 
+ 

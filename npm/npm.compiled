@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
-  <Compiler Value="/usr/local/bin/fpc" Date="1468338152"/>
-  <Params Value=" -MObjFPC -Scgi -O1 -Xs -XX  -k-framework -kCarbon -k-framework -kOpenGL -k-dylib_file -k/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib -l -vewnhibq -Fu/Users/rorden/Documents/pas/mricron/fpmath -Fu/Users/rorden/Documents/pas/mricron/common -Fu/Users/rorden/lazarus/lcl/units/i386-darwin/carbon -Fu/Users/rorden/lazarus/lcl/units/i386-darwin -Fu/Users/rorden/lazarus/components/lazutils/lib/i386-darwin -Fu/Users/rorden/lazarus/packager/units/i386-darwin -Fu/Users/rorden/Documents/pas/mricron/npm/ -dLCL -dLCLcarbon npm.lpr"/>
+  <Compiler Value="/usr/local/lib/fpc/3.1.1/ppcx64" Date="1464182932"/>
+  <Params Value=" -Px86_64 -MObjFPC -Scgi -O1 -Xs -XX  -k-framework -kCocoa -l -vewnhibq -Fu/Users/rorden/Documents/pas/mricron/fpmath -Fu/Users/rorden/Documents/pas/mricron/common -Fu/Users/rorden/lazarus/lcl/units/x86_64-darwin/cocoa -Fu/Users/rorden/lazarus/lcl/units/x86_64-darwin -Fu/Users/rorden/lazarus/components/lazutils/lib/x86_64-darwin -Fu/Users/rorden/lazarus/packager/units/x86_64-darwin -Fu/Users/rorden/Documents/pas/mricron/npm/ -dLCL -dLCLcocoa npm.lpr"/>
 </CONFIG>

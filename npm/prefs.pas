@@ -2,6 +2,7 @@ unit prefs;
 
 {$H+}
 interface
+{$I options.inc}//e.g. {$DEFINE MY_DEBUG}
 uses
   inifiles, define_types,SysUtils,classes,turbolesion,dialogsx;
 
@@ -12,7 +13,9 @@ function WarnIfLowNCrit(lnSubj,lnCrit: integer): boolean;
 
 implementation
 
-uses nifti_img, hdr,nifti_hdr, valformat,StatThdsUtil,filename, unpm;
+uses
+  {$IFNDEF OLDSTATS}    LesionStatThds,  {$ENDIF}
+  nifti_img, hdr,nifti_hdr, valformat,StatThdsUtil,filename, unpm;
 
 procedure SetDefaultPrefs (var lPrefs: TLDMPrefs);
 begin
@@ -86,13 +89,12 @@ begin
 	   NPMmsg('Mask file size too small.');
 	   goto 666;
    end;
-  if (lPrefs.OutName = '') or (not DirExists(extractfiledir(lPrefs.Outname))) then begin
+  if (lPrefs.OutName = '') or (not DirExists(extractfiledir(lPrefs.Outname))) then
       lPrefs.Outname := extractfiledir(lPrefs.ValFilename)+pathdelim+'results.nii.gz';
-      NPMmsg('Output stored as '+lPrefs.Outname);
-  end;
    for lFact := 1 to lnFactors do begin
           NPMMsgClear;
           NPMMsg(GetKVers);
+          NPMmsg('Output stored as '+lPrefs.Outname);
       lImageNames.clear;
        for lSubj := 1 to lnSubjAll do
            if (not lPrefs.LTest) or (lMultiSymptomRA^[lSubj+((lFact-1)*lnSubjAll)] = 0) OR (lMultiSymptomRA^[lSubj+((lFact-1)*lnSubjAll)] = 1) THEN begin
@@ -102,6 +104,10 @@ begin
                NPMMsg('Data rejected: behavior must be zero or one for binomial test '+lImageNamesAll.Strings[lSubj-1]);
            end;
        lnSubj := lImageNames.Count;
+       {$IFNDEF OLDSTATS}
+       if lPrefs.isShowRandomizationTable then
+          ShowRandomizationOrder (lnSubjAll, lPrefs.nPermute);
+       {$ENDIF}
        if lnSubj > 2 then begin
           getmem(lSymptomRA,lnSubj * sizeof(single));
           lnSubj := 0;
@@ -118,8 +124,13 @@ begin
             lFactName := lPredictorList.Strings[lFact-1];
             lFactName := LegitFilename(lFactName,lFact);
             NPMMsg('Factor = '+lFactname);
-            For lSubj := 1 to lnSubj do
-                NPMMsg (lImageNames.Strings[lSubj-1] + ' = '+realtostr(lSymptomRA^[lSubj],2) );
+            if (lPrefs.LTest) then begin
+               for lSubj := 1 to lnSubj do
+                   NPMMsg (lImageNames.Strings[lSubj-1] + ' = '+inttostr(round(lSymptomRA^[lSubj])) );
+            end else begin
+                for lSubj := 1 to lnSubj do
+                    NPMMsg (lImageNames.Strings[lSubj-1] + ' = '+realtostr(lSymptomRA^[lSubj],2) );
+            end;
             NPMMsg('Total voxels = '+inttostr(lMaskVoxels));
             lPrefs.nCrit := round( (lnSubj*lPrefs.CritPct)/100);
             NPMMsg('Only testing voxels damaged in at least '+inttostr(lPrefs.nCrit)+' individual[s]');
@@ -245,4 +256,4 @@ begin
 end;         *)
 
 end.
- 
+ 

@@ -2,20 +2,21 @@ unit turbolesion;
 interface
 {$H+}
 {$Include ..\common\isgui.inc}
+{$I options.inc} // {$IFDEF OLDSTATS}
 uses
   define_types,SysUtils,
-part,StatThds,statcr,StatThdsUtil,Brunner,DISTR,nifti_img, hdr,
+part,statcr,StatThdsUtil,Brunner,DISTR,nifti_img, hdr,
    Messages,  Classes, Graphics, Controls, Forms, Dialogs,    nifti_types,
 StdCtrls,  ComCtrls,ExtCtrls,Menus, overlap,ReadInt,lesion_pattern,stats,LesionStatThds,nifti_hdr,  unpm,
 
-{$IFDEF FPC} LResources,gzio2,
+{$IFDEF FPC} LResources,gzio2, DateUtils,
 {$ELSE} gziod,associate,{$ENDIF}   //must be in search path, e.g. C:\pas\mricron\npm\math
 {$IFNDEF UNIX} Windows, {$ENDIF}
 upower,firthThds,firth,IniFiles,cpucount,userdir,math,
-regmult,utypes;
+regmult,utypes;      //StatThds,
 Type
   TLDMPrefs = record
-         NULP,BMtest,Ttest,Ltest: boolean;
+         NULP,BMtest,Ttest,Ltest, isShowRandomizationTable: boolean;
          CritPct,nCrit,nPermute,Run: integer;
          ValFilename, OutName, ExplicitMaskName: string;
   end;
@@ -121,7 +122,6 @@ begin
 	      NPMmsg('Error: data and explicit mask have different sizes '+lMaskName);
 	      exit;
      end;
-
      getmem(lMaskData,lVolVox* sizeof(byte));
      lOK := LoadImg8(lMaskName, lMaskData, 1, lVolVox,round(lMaskHdr.NIFTIhdr.vox_offset),1,lMaskHdr.NIFTIhdr.DataType,lVolVox);
      if not lOK then goto 666;
@@ -189,7 +189,6 @@ begin
              lStatImg^[lPos] := 0;
 end;//reformat
 
-
 function NULPcount (lPlankImg: bytep; lVoxPerPlank,lImagesCount,lnCrit: integer; var lUniqueOrders: integer; var lOverlapRA: Overlapp): boolean;
 procedure CheckOrder(var lObservedOrder: TLesionPattern);
 var
@@ -243,12 +242,15 @@ begin
      result := true;
 end;
 
+{$IFDEF OLDSTATS} //with new stats we compute pNormalInv with every permutation
 procedure PtoZpermute (lnPermute: integer; lPermuteMaxT, lPermuteMinT: singlep);
 var
    lPos: integer;
    lVal : single;
 begin
-     if lPos < 1 then exit;
+     if lnPermute < 1 then exit;
+
+
      for lPos := 1 to lnPermute do begin
             if (lPermuteMinT^[lPos] > 1.1) or (lPermuteMinT^[lPos] < -1.1) then
                lPermuteMinT^[lPos] := 0.5;
@@ -267,6 +269,8 @@ begin
 			lPermuteMinT^[lPos] := pNormalInv(lPermuteMinT^[lPos]);
      end;
 end;
+{$ENDIF}
+
 
 
 function TurboLDM (var lImages: TStrings; var lMaskHdr: TMRIcroHdr;var lPrefs: TLDMPrefs ; var lSymptomRA: SingleP;var lFactname,lOutName: string): boolean;
@@ -289,9 +293,9 @@ var
         lPos2,lPosPct,lPos,lPlankImgPos,lPlank,lStartVox,lEndVox: integer;
         lOverlapRA: Overlapp;
         lPrevThreadsRunning: integer;
-     {$IFNDEF FPC} lStartTime :DWord;{$ENDIF}
+     {$IFNDEF FPC} lStartTime :DWord;{$ELSE}lStartTime: TDateTime; {$ENDIF}
 begin
-     {$IFNDEF FPC} lStartTime := GetTickCount;{$ENDIF}
+     {$IFNDEF FPC} lStartTime := GetTickCount;{$ELSE}lStartTime := Now;{$ENDIF}
      result := false;
      lNULPcalculated := false;
      lSumImg := nil;
@@ -310,6 +314,7 @@ begin
         exit;
      end;
         NPMmsg('Permutations = ' +IntToStr(lPrefs.nPermute));
+
 	NPMmsg('Analysis began = ' +TimeToStr(Now));
 	lVolVox := lMaskHdr.NIFTIhdr.dim[1]*lMaskHdr.NIFTIhdr.dim[2]* lMaskHdr.NIFTIhdr.dim[3];
 	if (lVolVox < 1) then goto 667;
@@ -467,7 +472,9 @@ begin
            NIFTIhdr_SaveHdrImg(lOutNameMod,lStatHdr,true,not IsNifTiMagic(lMaskHdr.NIFTIhdr),true,lOutImgT,1);
         end;
         if lPrefs.LTest then begin
+           {$IFDEF OLDSTATS} //with new stats we computed z-values explicitly with every permutation, no need for z-to-p
            PtoZpermute (lPrefs.nPermute, lPermuteMaxT, lPermuteMinT);
+           {$ENDIF}
            lOutNameMod := ChangeFilePostfixExt(lOutName,'L'+lFactName,'.hdr');
            NIFTIhdr_SaveHdrImg(lOutNameMod,lStatHdr,true,not IsNifTiMagic(lMaskHdr.NIFTIhdr),true,lOutImgBM,1);
            reportFDR ('L', lVolVox, lnVoxTested, lOutImgBM);
@@ -477,14 +484,18 @@ begin
            lThreshFDR :=  reportFDR ('BM', lVolVox, lnVoxTested, lOutImgBM);
            lThreshPermute := reportPermute('BM',lPrefs.nPermute,lPermuteMaxBM, lPermuteMinBM);
            lOutNameMod := ChangeFilePostfixExt(lOutName,'BM'+lFactName,'.hdr');
-           if lPrefs.Run > 0 then
-             NPMmsg('threshbm,'+inttostr(lPrefs.Run)+','+inttostr(ThreshMap(lThreshBonf,lVolVox,lOutImgBM))+','+realtostr(lThreshNULP,3)+','+realtostr(lThreshPermute,3)+','+realtostr(lThreshBonf,3));
+           //if lPrefs.Run > 0 then
+           //  NPMmsg('threshbm,'+inttostr(lPrefs.Run)+','+inttostr(ThreshMap(lThreshBonf,lVolVox,lOutImgBM))+','+realtostr(lThreshNULP,3)+','+realtostr(lThreshPermute,3)+','+realtostr(lThreshBonf,3));
 
              //NPMmsgAppend('threshbm,'+inttostr(lPrefs.Run)+','+inttostr(MainForm.ThreshMap(lThreshBonf,lVolVox,lOutImgBM))+','+realtostr(lThreshNULP,3)+','+realtostr(lThreshPermute,3)+','+realtostr(lThreshBonf,3));
            NIFTIhdr_SaveHdrImg(lOutNameMod,lStatHdr,true,not IsNifTiMagic(lMaskHdr.NIFTIhdr),true,lOutImgBM,1);
         end;
 	NPMmsg('Analysis finished = ' +TimeToStr(Now));
-     {$IFNDEF FPC} NPMmsg('Processing Time = ' +inttostr(round((GetTickCount - lStartTime)/1000)));{$ENDIF}
+     {$IFNDEF FPC}
+     NPMmsg('Processing Time = ' +inttostr(round((GetTickCount - lStartTime)/1000)));
+     {$ELSE}
+     NPMmsg('Processing Time (seconds) = ' +inttostr(round(MilliSecondsBetween(Now, lStartTime)/1000)));
+     {$ENDIF}
 
         lOutNameMod := ChangeFilePostfixExt(lOutName,'Notes'+lFactName,'.txt');
         NPMMsgSave(lOutNameMod);

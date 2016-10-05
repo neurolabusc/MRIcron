@@ -18,7 +18,7 @@ interface
         SysUtils,classes,IniFiles,
         {$IFDEF GUI} forms,userdir, dialogs{$ELSE}dialogsx{$ENDIF};
 const
-     kMRIcronVersDate = '1MAY2016';
+     kMRIcronVersDate = '2MAY2016';
      {$IFDEF LCLCocoa}
      kMRIcronAPI = 'Cocoa';
     {$ELSE}
@@ -45,7 +45,7 @@ const
      //kImgFilter = 'NIfTI/Analyze Header (*.hdr;*.nii)|*.hdr;*.nii;*.nii.gz|Volume of interest (*.voi)|*.voi';
      //kImgFilterPlusAny = 'NIfTI/Analyze Header (*.hdr;*.nii)|*.hdr;*.nii;*.nii.gz|Volume of interest (*.voi)|*.voi|Any file (*.*)|*.*';
 
-     kNIIFilter = 'Neuroimaging (*.nii)|*.hdr;*.nii;*.nii.gz;*.voi;*.HEAD;*.mgh;*.mgz;*.mha;*.mhd;*.nhdr;*.nrrd';
+     kNIIFilter = 'Neuroimaging (*.nii)|*.nii;*.hdr;*.nii.gz;*.voi;*.HEAD;*.mgh;*.mgz;*.mha;*.mhd;*.nhdr;*.nrrd';
      kImgFilter = 'Neuroimaging|*.hdr;*.nii;*.nii.gz;*.HEAD;*.mgh;*.mgz;*.mha;*.mhd;*.nhdr;*.nrrd|Volume of interest (*.voi)|*.voi';
      kImgPlusVOIFilter = 'Neuroimaging/VOI|*.hdr;*.nii;*.nii.gz;*.voi;*.HEAD;*.mgh;*.mgz;*.mha;*.mhd;*.nhdr;*.nrrd|NIfTI/Analyze Header (*.hdr;*.nii)|*.hdr;*.nii;*.nii.gz|Volume of interest (*.voi)|*.voi';
      kImgFilterPlusAny = 'Neuroimaging/VOI|*.hdr;*.nii;*.nii.gz;*.voi;*.HEAD;*.mgh;*.mgz;*.mha;*.mhd;*.nhdr;*.nrrd|NIfTI/Analyze Header (*.hdr;*.nii)|*.hdr;*.nii;*.nii.gz|Volume of interest (*.voi)|*.voi|Anything (*.*)|*.*';

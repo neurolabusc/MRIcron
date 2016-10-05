@@ -5,10 +5,10 @@ interface
 
 uses
   upower,math,utypes,
-regmult,IniFiles,Classes, SysUtils , nifti_types, define_types,distr, statcr, StatThdsUtil, userdir, dialogsx, nifti_hdr, StatThds, lesion_pattern;
+regmult,IniFiles,Classes, SysUtils , nifti_types, define_types,distr, statcr, StatThdsUtil, userdir, dialogsx, nifti_hdr,  lesion_pattern;  //StatThds,
 Type
   TNPMPrefs = record
-         NULP,ROI,ttest,BMtest: boolean;
+         NULP,ROI,ttest,BMtest, isShowRandomizationTable: boolean;
          TFCE,PlankMB,nPermute: integer;
   end;
 
@@ -79,7 +79,7 @@ begin
     {$IFDEF GUI}
     MainForm.NPMMsgClearUI;
     {$ELSE}
-     //shittt
+     //do nothing
     {$ENDIF}
 end;
 
@@ -89,7 +89,6 @@ begin
      MainForm.NPMmsgUI(str);
      {$ELSE}
      writeln(str);
-     //shittt
     {$ENDIF}
 end;
 
@@ -101,7 +100,7 @@ begin
      {$IFDEF GUI}
      MainForm.NPMmsgSaveUI(lFilename);
      {$ELSE}
-     ShowMsg('SHITTTT');
+     ShowMsg('NPMMsgSave GUI only');
      {$ENDIF}
 end;
 
@@ -109,7 +108,7 @@ end;
 
 function GetKVers: string;
 begin
-     result :=  'Chris Rorden''s NPM '+kMRIcronVers+' :: '+inttostr(sizeof(integer)*8)+'-bit :: Threads used = '+inttostr(gnCPUThreads )+' :: plankSize = '+inttostr(gNPMPrefs.PlankMB)+'mb :: (upgrade to NiiStat suggested)';
+     result :=  'Chris Rorden''s NPM '+kMRIcronVers+' :: Threads used = '+inttostr(gnCPUThreads )+' :: plankSize = '+inttostr(gNPMPrefs.PlankMB)+'mb :: (upgrade to NiiStat suggested)';
 end;
 
 procedure Refresher;
@@ -1424,6 +1423,7 @@ begin
      lNPMPrefs.TFCE := 0;
      lNPMPrefs.ttest := true;
      lNPMPrefs.BMtest := true;
+     lNPMPrefs.isShowRandomizationTable:= false;
      lNPMPrefs.PlankMB := 512;
      lNPMPrefs.nPermute := 0;
      ComputePlankSize(lNPMPrefs.PlankMB);
@@ -1445,6 +1445,7 @@ begin
      //BMmenu.checked := IniBool(lIniFile,'computebm',false);
      gNPMprefs.ttest := IniBool(lIniFile,'computettest',gNPMprefs.ttest);
      gNPMprefs.BMtest := IniBool(lIniFile,'computebm',gNPMprefs.BMtest);
+     gNPMprefs.isShowRandomizationTable := IniBool(lIniFile,'isShowRandomizationTable',gNPMprefs.isShowRandomizationTable); ;
      gNPMPrefs.NULP := IniBool(lIniFile,'countlesionpatterns',gNPMPrefs.NULP);
      gNPMPrefs.ROI := IniBool(lIniFile,'ROI',gNPMPrefs.ROI);
      gNPMPrefs.TFCE := IniInt(lIniFile,'TFCE',gNPMPrefs.TFCE);
@@ -1470,7 +1471,8 @@ begin
 	exit;
   lIniFile := TIniFile.Create(lIniName);
   lIniFile.WriteString('BOOL', 'computettest',Bool2Char(gNPMprefs.ttest));
-    lIniFile.WriteString('BOOL', 'computebm',Bool2Char(gNPMprefs.BMtest));
+  lIniFile.WriteString('BOOL', 'computebm',Bool2Char(gNPMprefs.BMtest));
+  lIniFile.WriteString('BOOL', 'isShowRandomizationTable',Bool2Char(gNPMprefs.isShowRandomizationTable));
   lIniFile.WriteString('BOOL', 'countlesionpatterns',Bool2Char(gNPMPrefs.NULP));
   lIniFile.WriteString('BOOL', 'ROI',Bool2Char(gNPMPrefs.ROI));
   lIniFile.WriteString('INT', 'TFCE',inttostr(gNPMPrefs.TFCE));

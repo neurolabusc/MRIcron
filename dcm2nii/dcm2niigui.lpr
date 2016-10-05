@@ -8,11 +8,11 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, gui, nifti_form, pref_form, dialogs_msg;
-  
-  
 
 
-//{$R dcm2niigui.res}
+
+
+{$R *.res}
 
 begin
   Application.Title:='dcm2niigui.exe';

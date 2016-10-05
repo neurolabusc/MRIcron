@@ -2,12 +2,19 @@ unit StatThdsUtil;
 interface
 uses
  //ComCtrls,Graphics, ExtCtrls,
- Classes,  define_types,dialogsx;
-const 
-        kMaxThreads = 16;
+ Classes,  define_types,dialogsx, sysutils;
+const
+        {$ifdef CPU64}
+        kMaxThreads = 32;
+        kMaxPermute = 8000;
+       {$ELSE}
+       kMaxThreads = 16;
+       kMaxPermute = 4000;
+       {$ENDIF}
+
  kSh = 10; //bits to shift
 	kMaxImages = 1024;
-        kMaxPermute = 4000;
+
         //kPlankMB : integer = 512;
 
 var
@@ -33,8 +40,8 @@ begin
      for lT := 1 to lnThreads do
          gnVoxTestedRA[lT] := 0;
      if lnPermute < 1 then exit;
-     for lT := 1 to lnThreads do begin
-         for lP := 1 to lnPermute do begin
+     for lT := 0 to lnThreads do begin
+         for lP := 0 to lnPermute do begin
              gPermuteMinT[lT,lP] := 10;
              gPermuteMaxT[lT,lP] := -10;
              gPermuteMinBM[lT,lP] := 10;
@@ -50,11 +57,11 @@ begin
      if lnThreads < 1 then exit;
      if lnPermute > kMaxPermute then
         ShowMsg('Error: recompile with larger kMaxPermute');
-     for lT := 1 to lnThreads do
+     for lT := 0 to lnThreads do
          gnVoxTestedRA[lT] := 0;
      if lnPermute < 1 then exit;
-     for lT := 1 to lnThreads do begin
-         for lP := 1 to lnPermute do begin
+     for lT := 0 to lnThreads do begin
+         for lP := 0 to lnPermute do begin
              gPermuteMinT[lT,lP] := 0;
              gPermuteMaxT[lT,lP] := 0;
              gPermuteMinBM[lT,lP] := 0;
@@ -70,6 +77,19 @@ begin
      if lnThreads < 1 then exit;
      for lT := 1 to lnThreads do
          result := result + gnVoxTestedRA[lT];
+end;
+
+procedure fxl(lnPermute: integer; var lArray: singleP);
+var
+  myFile : TextFile;
+  text   : string;
+  i: integer;
+begin
+  AssignFile(myFile, 'Test.txt');
+  ReWrite(myFile);
+  for i := 1 to lnPermute do
+      writeln(myFile, floattostr(lArray^[i]));
+  CloseFile(myFile);
 end;
 
 function SumThreadData (lnThreads,lnPermute: integer;lPermuteMaxT, lPermuteMinT,lPermuteMaxBM, lPermuteMinBM: singleP): integer;
@@ -100,7 +120,8 @@ begin
 
          end;
      end;
+     //fxl(lnPermute, lPermuteMaxT);
 end; //SumThreadData
 
 
-end.
+end.

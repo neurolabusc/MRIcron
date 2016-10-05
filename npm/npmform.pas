@@ -3,7 +3,7 @@ unit npmform;
 {$DEFINE SINGLETHREAD}
 //{$DEFINE FIRTHNOTHREAD}
 interface
-{$I options.inc}
+{$I options.inc}//e.g. {$DEFINE MY_DEBUG}
 uses
  define_types,SysUtils,
  //part,StatThds, Messages, overlap, LesionStatThds, userDir,
@@ -36,6 +36,11 @@ type
     Design1: TMenuItem;
     //PlankSzMenuItem1: TMenuItem;
     DualImageCorrelation1: TMenuItem;
+    AppleMenu: TMenuItem;
+    T32: TMenuItem;
+    N8000: TMenuItem;
+    T24: TMenuItem;
+    T12: TMenuItem;
     MultipleRegress: TMenuItem;
     SaveText1: TMenuItem;
     ROIanalysis1: TMenuItem;
@@ -91,11 +96,8 @@ type
     MaskedintensitynormalizationB1: TMenuItem;
     Binarizeimages1: TMenuItem;
     PlankSzMenuItem1: TMenuItem;
-    //Setnonseroto1001: TMenuItem;
-    //AnaCOMmenu: TMenuItem;
-    //MonteCarloSimulation1: TMenuItem;
-    //Subtract1: TMenuItem;
-    //LogPtoZ1: TMenuItem;
+
+    procedure N12000Click(Sender: TObject);
     procedure PlankSzMenuItem1Click(Sender: TObject);
     procedure NPMmsgUI( lStr: string);
     procedure NPMmsgClearUI;
@@ -206,6 +208,11 @@ begin
    ComputePlankSize(gNPMPrefs.PlankMB);
 end;
 
+procedure TMainForm.N12000Click(Sender: TObject);
+begin
+
+end;
+
 procedure TMainForm.NPMmsgClearUI;
 begin
     Memo1.Lines.Clear;
@@ -239,9 +246,14 @@ end;
 function TMainForm.SaveHdrName (lCaption: string; var lFilename: string): boolean;
 begin
 	 result := false;
-	 SaveHdrDlg.InitialDir := lFilename;
+         SaveHdrDlg.InitialDir:= extractfiledir(lFilename);
+         SaveHdrDlg.Filename:= extractfilename(lFilename);
+	 //SaveHdrDlg.InitialDir := extractfiledir(lFilename);
+         //SaveHdrDlg.FileName := extractfilename(lFilename);
+
+         //SaveHdrDlg.FileName:= lFilename;
 	 SaveHdrDlg.Title := lCaption;
-	 SaveHdrDlg.Filter := kAnaHdrFilter;
+	 SaveHdrDlg.Filter := kNIIFilter;
 	 if not SaveHdrDlg.Execute then exit;
 	 lFilename := SaveHdrDlg.Filename;
 	 result := true;
@@ -254,35 +266,60 @@ end;
 
 procedure WriteThread( lnThread: integer);
 begin
-    case lnThread of
-         2: MainForm.T2.checked := true;
-         3: MainForm.T3.checked := true;
-         4: MainForm.T4.checked := true;
-         7: MainForm.T7.checked := true;
-         8: MainForm.T8.checked := true;
-         15: MainForm.T15.checked := true;
-         16: MainForm.T16.checked := true;
-         else MainForm.T1.checked := true;
-    end;
+  if lnThread < 1 then
+     lnThread := 1;
+  if lnThread > kMaxThreads then
+        lnThread := kMaxThreads;
+  if (lnThread > 4) and (lnThread < 7) then
+     lnThread := 4;
+  if (lnThread > 8) and (lnThread < 12) then
+     lnThread := 8;
+  if (lnThread > 12) and (lnThread < 15) then
+     lnThread := 12;
+  if (lnThread > 16) and (lnThread < 24) then
+     lnThread := 16;
+  if (lnThread > 24) and (lnThread < 32) then
+     lnThread := 24;
+  case lnThread of
+     2: MainForm.T2.checked := true;
+     3: MainForm.T3.checked := true;
+     4: MainForm.T4.checked := true;
+     7: MainForm.T7.checked := true;
+     8: MainForm.T8.checked := true;
+     12: MainForm.T12.checked := true;
+     15: MainForm.T15.checked := true;
+     16: MainForm.T16.checked := true;
+     24: MainForm.T24.checked := true;
+     32: MainForm.T32.checked := true;
+     else MainForm.T1.checked := true;
+  end;
     gnCPUThreads := lnThread;
 end;
 
 function ReadThread: integer;
 begin
-    if MainForm.T16.checked then result := 16
+    if MainForm.T32.checked then result := 32
+    else if MainForm.T24.checked then result := 24
+    else if MainForm.T16.checked then result := 16
     else if MainForm.T15.checked then result := 15
+    else if MainForm.T12.checked then result := 12
     else if MainForm.T8.checked then result := 8
     else if MainForm.T7.checked then result := 7
     else if MainForm.T4.checked then result := 4
     else if MainForm.T3.checked then result := 3
     else if MainForm.T2.checked then result := 2
     else result := 1;
+    if result > kMaxThreads then
+       result := kMaxThreads;
     gnCPUThreads := result;
 end;
 
 procedure WritePermute( lnPermute: integer);
 begin
+  if lnPermute > kMaxPermute then
+     lnPermute := kMaxPermute;
     case lnPermute of
+         8000: MainForm.N8000.checked := true;
          4000: MainForm.N4000.checked := true;
          3000: MainForm.N3000.checked := true;
          2000: MainForm.N2000.checked := true;
@@ -293,17 +330,23 @@ end;
 
 function TMainForm.ReadPermute: integer;
 begin
-    if MainForm.N4000.checked then result := 4000
+  if MainForm.N8000.checked then result := 12000
+   else if MainForm.N4000.checked then result := 4000
     else if MainForm.N3000.checked then result := 3000
     else if MainForm.N2000.checked then result := 2000
     else if MainForm.N1000.checked then result := 1000
     else result := 0;
+  if result > kMaxPermute then
+     result := kMaxPermute;
 end;
 
 function TMainForm.OpenDialogExecute (lCaption: string;lAllowMultiSelect,lForceMultiSelect: boolean; lFilter: string): boolean;//; lAllowMultiSelect: boolean): boolean;
 var
    lNumberofFiles: integer;
 begin
+  {$IFDEF LCLCocoa}
+  showmessage('Select a file: '+lCaption); //El Capitan hides the title bar! tell the user what file is required
+  {$ENDIF}
 	OpenHdrDlg.Filter := lFilter;//kAnaHdrFilter;//lFilter;
 	OpenHdrDlg.FilterIndex := 1;
 	OpenHdrDlg.Title := lCaption;
@@ -331,6 +374,7 @@ var
 	lMaskname, lOutName: string;
 	lMaskHdr: TMRIcroHdr;
 begin
+  Showmessage('Please use NiiStat for VBM'); exit;
   if (not ttestmenu.checked)  and (not BMmenu.checked) then begin
       ShowMsg('Error: you need to compute at least on test [options/test menu]');
       exit;
@@ -424,13 +468,22 @@ end;
 procedure TMainForm.radiomenuclick(Sender: TObject);
 begin
      (sender as tmenuitem).checked := true;
-     gNPMprefs.nPermute:= readPermute;
+     gNPMprefs.nPermute := readPermute;
+     NPMMsgClear;
+     NPMMsg('Permutations set to ' + inttostr(gNPMprefs.nPermute));
+     NPMMsg(' Confidence limits for n permutations: p ± 2√(p(1-p)/n)');
+     NPMMsg(' See also http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Randomise/Theory');
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
+
+     if kMaxThreads < 24 then T24.Visible:= false;
+     if kMaxThreads < 32 then T32.Visible:= false;
+     if kMaxPermute < 8000 then N8000.Visible:= false;
     {$IFDEF Darwin}
-     File1.visible := false;//for OSX, exit is in the application's menu
+    AppleMenu.Visible := true;
+    File1.visible := false;//for OSX, exit is in the application's menu
      //Edit1.visible := false;//clipboard note yet working for OSX
     {$ENDIF}
     {$IFDEF FPC}
@@ -806,26 +859,41 @@ begin
      end;
      lPrefs.CritPct := -1;
      lPrefs.nPermute := ReadPermute;
+     lPrefs.isShowRandomizationTable:= gNPMprefs.isShowRandomizationTable ;
      lPrefs.Run := 0;{0 except for montecarlo}
      {if (not lPrefs.Ltest) and (not lPrefs.Ttest)  and (not lPrefs.BMtest) then begin
         ShowMsg('Error: you need to compute at least on test [options/test menu]');
         exit;
      end; code above defaults to t-test}
+    {$IFNDEF MY_DEBUG}
      if not MainForm.OpenDialogExecute('Select MRIcron VAL file',false,false,'MRIcron VAL (*.val)|*.val') then begin
 	      ShowMsg('NPM aborted: VAL file selection failed.');
 	      exit;
      end; //if not selected
      lPrefs.VALFilename := MainForm.OpenHdrDlg.Filename;
-   lPrefs.OutName := ExtractFileDirWithPathDelim(lPrefs.VALFilename)+'results';
-   lPrefs.OutName := lPrefs.OutName+'.nii.gz';
-   SaveHdrDlg.Filename := lPrefs.Outname;
-   if not SaveHdrName ('Base Statistical Map', lPrefs.OutName) then exit;
-   //Explicit mask
+    {$ELSE}
+       if lPrefs.Ltest then
+          lPrefs.VALFilename := '/Users/rorden/Downloads/VAL/binomial.val'
+       else
+           //lPrefs.VALFilename := '/Users/rorden/Downloads/VAL/behavSort.val';
+        lPrefs.VALFilename := '/Users/rorden/Downloads/VAL/continuous.val';
+    {$ENDIF}
+     //showmessage(ParseFileName(lPrefs.ValFilename));
+   //lPrefs.OutName := ExtractFileDirWithPathDelim(lPrefs.VALFilename)+'results';
+   //lPrefs.OutName := lPrefs.OutName+'.nii.gz';
+   lPrefs.OutName := ParseFileName(lPrefs.ValFilename)+'_results';
+   {$IFNDEF MY_DEBUG}
+     if not SaveHdrName ('Base Statistical Map', lPrefs.OutName) then exit;
+    {$ENDIF}
+    {$IFNDEF MY_DEBUG}
+    //Explicit mask
    if not OpenDialogExecute('Select explicit mask [optional]',false,false,kImgPlusVOIFilter) then
     lPrefs.ExplicitMaskName := ''
    else
      lPrefs.ExplicitMaskName := OpenHdrDlg.FileName;
-
+   {$ELSE}
+    lPrefs.ExplicitMaskName := '';
+   {$ENDIF}
    DoLesion (lPrefs); //Prefs.pas
 end;
 
@@ -1066,9 +1134,10 @@ label
 var
 	lnSubj,lSubj,lMaskVoxels: integer;
 	lImageNames:  TStrings;
-	lMaskname,lStr,lOutName: string;
+	lMaskname, lOutName: string;
 	lMaskHdr: TMRIcroHdr;
 begin
+   showmessage('Please use NiiStat for these analyses'); exit;
   lImageNames:= TStringList.Create; //not sure why TStrings.Create does not work???
   NPMMsgClear;
   NPMMsg(GetKVers);
@@ -1079,7 +1148,6 @@ begin
    end; //if not selected
    //OpenHdrDlg.FileName := 'c:\vbmdata\mask50.nii.gz';
    lMaskname := OpenHdrDlg.Filename;
-
   if not NIFTIhdr_LoadHdr(lMaskname,lMaskHdr) then begin
 	   ShowMsg('Error reading Mask image.');
 	   goto 666;
@@ -1090,8 +1158,7 @@ begin
 	   goto 666;
    end;
    if not ReadPairedFilenames(lImageNames) then exit;
-   lnSubj :=lImageNames.Count div 2;
-
+   lnSubj := lImageNames.Count div 2;
    if not CheckVoxelsGroupX(lImageNames,lMaskHdr{lMaskVoxels}) then begin
 	   ShowMsg('File dimensions differ from mask.');
 	   goto 666;
@@ -1100,7 +1167,6 @@ begin
    NPMMsg('Total voxels = '+inttostr(lMaskVoxels));
    NPMMsg('Number of observations = '+inttostr(lnSubj));
    NPMMsg('Degrees of Freedom = '+inttostr(lnSubj-1));
-
    if not CheckVoxelsGroupX(lImageNames,lMaskHdr{lMaskVoxels}) then begin
 	   ShowMsg('File dimensions differ from mask.');
 	   goto 666;
@@ -1108,7 +1174,7 @@ begin
    //show matrix
    //MsgStrings (lImageNames);
    NPMMsg ('n Subjects = '+inttostr(lnSubj));
-   lStr := 'Image,';
+   //lStr := 'Image,';
    for lSubj := 0 to (lnSubj-1) do
             NPMMsg(lImageNames[lSubj]+' <-> '+lImageNames[lSubj+lnSubj]);
    if lnSubj < 4 then begin
@@ -1237,6 +1303,8 @@ procedure TMainForm.threadChange(Sender: TObject);
 begin
  (sender as tmenuitem).checked := true;
  ReadThread;
+ NPMMsgClear;
+ NPMmsg('Threads set to '+inttostr(gnCPUThreads) +' your computer reports ' +inttostr(GetLogicalCpuCount)+' cores');
 end;
 
 (*procedure TMainForm.Countlesionoverlaps1Click(Sender: TObject);

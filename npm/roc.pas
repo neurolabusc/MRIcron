@@ -3,7 +3,7 @@ interface
 //demonstrates the ROC tests that are in the Brunner.pas file
 uses
   define_types,SysUtils,
-part,StatThds,statcr,StatThdsUtil,Brunner,//Brunner,nifti_img, DISTR
+part,statcr,StatThdsUtil,Brunner,//Brunner,nifti_img, DISTR
    Messages,  Classes, Graphics, Controls, Forms, Dialogsx,
 StdCtrls,  ComCtrls,ExtCtrls,Menus, //overlap,ReadInt,stats,LesionStatThds,nifti_hdr,
 
@@ -11,7 +11,7 @@ StdCtrls,  ComCtrls,ExtCtrls,Menus, //overlap,ReadInt,stats,LesionStatThds,nifti
 {$ELSE} gziod,associate,{$ENDIF}   //must be in search path, e.g. C:\pas\mricron\npm\math
 {$IFNDEF UNIX} Windows, {$ENDIF}
 upower,IniFiles,cpucount,userdir,math,
-regmult,utypes;
+regmult,utypes;  //StatThds,
 procedure testROC;
 procedure testROC2;
 function AUCbinomcont (lBinomdataRA,lContdataRA: singlep; lnSubj :integer): double;
@@ -352,4 +352,4 @@ begin
 end;      *)
 
 
-end.
+end.

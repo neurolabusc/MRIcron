@@ -43,6 +43,10 @@ object MainForm: TMainForm
   object MainMenu1: TMainMenu
     left = 8
     top = 8
+    object AppleMenu: TMenuItem
+      Caption = ''
+      Visible = False
+    end
     object File1: TMenuItem
       Caption = 'File'
       object SaveText1: TMenuItem
@@ -122,7 +126,6 @@ object MainForm: TMainForm
         object N0: TMenuItem
           AutoCheck = True
           Caption = 'None'
-          Checked = True
           GroupIndex = 123
           RadioItem = True
           OnClick = radiomenuclick
@@ -159,6 +162,14 @@ object MainForm: TMainForm
           RadioItem = True
           OnClick = radiomenuclick
         end
+        object N8000: TMenuItem
+          Tag = 8000
+          AutoCheck = True
+          Caption = '8000'
+          GroupIndex = 123
+          RadioItem = True
+          OnClick = radiomenuclick
+        end
       end
       object Tests1: TMenuItem
         Caption = 'Tests'
@@ -177,7 +188,6 @@ object MainForm: TMainForm
         object T1: TMenuItem
           AutoCheck = True
           Caption = '1'
-          Checked = True
           GroupIndex = 131
           RadioItem = True
           OnClick = threadChange
@@ -213,6 +223,14 @@ object MainForm: TMainForm
         object T8: TMenuItem
           AutoCheck = True
           Caption = '8'
+          Checked = True
+          GroupIndex = 131
+          RadioItem = True
+          OnClick = threadChange
+        end
+        object T12: TMenuItem
+          AutoCheck = True
+          Caption = '12'
           GroupIndex = 131
           RadioItem = True
           OnClick = threadChange
@@ -227,6 +245,20 @@ object MainForm: TMainForm
         object T16: TMenuItem
           AutoCheck = True
           Caption = '16'
+          GroupIndex = 131
+          RadioItem = True
+          OnClick = threadChange
+        end
+        object T24: TMenuItem
+          AutoCheck = True
+          Caption = '24'
+          GroupIndex = 131
+          RadioItem = True
+          OnClick = threadChange
+        end
+        object T32: TMenuItem
+          AutoCheck = True
+          Caption = '32'
           GroupIndex = 131
           RadioItem = True
           OnClick = threadChange

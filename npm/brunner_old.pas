@@ -1,17 +1,13 @@
 unit brunner;
-{$I options.inc} // {$IFDEF OLDSTATS}
-{$IFDEF FPC} {$mode Delphi}{$ENDIF}
+
 interface
 uses define_types,math,Distr;
-{$IFDEF OLDSTATS}
+
 procedure tBM (lnSubj, lnGroup0: integer; var lIn: DoubleP0; var ltBM,lDF: double);
-{$ENDIF}
 procedure genBMsim (lnSubj: integer; var lOrigOrder: DoubleP0);
 function BMzVal(lnSubj, lnGroup0: integer; ltBM,lDF: double): double;
 function continROC (lnSubj, lnGroup0: integer; var lIn: DoubleP0): single;
 function continROC2 (lnSubj: integer; var lInIV, lInDV: DoubleP0): single;
-function continROC3 (lnSubj: integer; var lGroup: Bytep; lIn: Singlep): single;
-procedure tBM3 (lnSubj: integer; var lGroup: Bytep; lIn: Singlep; var ltBM,lDF: double; out ln0: integer);
 
 const
      knPermute= 20000;
@@ -20,6 +16,7 @@ var
    gSimRA: array [1..knSim] of DoubleP;
    gSimRAp: array [1..knSim] of pointer;
 implementation
+
 
 function BMzVal(lnSubj,lnGroup0 : integer; ltBM,lDF: double): double;
 //can be approximated by      result := TtoZ(ltBM,lDF);
@@ -138,6 +135,35 @@ begin
          lRanOrder^[lInc-1] := lSwap;
      end;
 end;
+
+procedure genBMsim (lnSubj: integer; var lOrigOrder: DoubleP0);
+//1.) creates kSim random permutations of the data
+//2.) sorts permutations
+var
+   lRanOrderp: pointer;
+   lRanOrder: DoubleP0;
+   lInc,lnSmallGroup: integer;
+   lOutT,lDF: double;
+begin
+     if (lnSubj < 1) or (knPermute < 1) then
+        exit;
+     createArray64(lRanOrderp,lRanOrder,lnSubj);
+     //lnSmallGroup := lnGroup0;
+     //if lnSmallGroup > knSim then exit;
+     for lnSmallGroup := 1 to knSim do begin
+       //RandSeed := 128; //same order for all voxels
+       for lInc := 1 to knPermute do begin
+         GenPermute(lnSubj, lOrigOrder,lRanOrder); //generate random order of participants
+         tBM (lnSubj, lnSmallGroup, lRanOrder,lOutT,lDF);
+         gSimRA[lnSmallGroup]^[lInc] := lOutT;
+       end;
+       //next sort permutes...
+       Sort(1,knPermute,gSimRA[lnSmallGroup]);
+     end;
+     freemem(lRanOrderp);
+end;
+
+
 
 procedure SortDouble (first, last: integer; var DynDataRA:DoubleP0; var lGroupRA: Bytep0);
 {Shell sort chuck uses this- see 'Numerical Recipes in C' for similar sorts.}
@@ -503,148 +529,7 @@ begin
  freemem(lObspIV);
 end; //continROC2
 
-function continROC3 (lnSubj: integer; var lGroup: Bytep; lIn: Singlep): single;
-//see equation 9 of Obuchiwski, Statistics in Medicine, 25: 481-493
-label
-     666;
-var
-   lnGroup0 : integer = 0;
-   lnGroup1 : integer = 0;
-   lSum,lV: double;
-   linc0,linc1,i: integer;
-	lObsp0,lObsp1: pointer;
-	lObs0,lObs1: Doublep0;
 
-begin
- result := -1;
- createArray64(lObsp1,lObs1,lnSubj);
- createArray64(lObsp0,lObs0,lnSubj);
- for i := 1 to (lnSubj) do begin//for each subject without disease
-     if lGroup^[i] = 0 then begin
-        lObs0^[lnGroup0] := lIn^[i];
-        inc(lnGroup0);
-     end else begin
-       lObs1^[lnGroup1] := lIn^[i];
-       inc(lnGroup1);
-     end;
- end;
- if (lnGroup1 < 1) or (lnGroup0 < 1) then goto 666;
- SortDoubleP0(0,lnGroup0-1,lObs0);
- SortDoubleP0(0,lnGroup1-1,lObs1);
- lSum := 0;
- for linc0 := 0 to (lnGroup0-1) do begin
-     for linc1 := 0 to (lnGroup1-1) do begin
-         if (lObs0^[linc0]) > (lObs1^[linc1]) then
-            lV := 1
-         else if (lObs0^[linc0]) = (lObs1^[linc1]) then //tie
-              lV := 0.5
-         else
-             lV := 0;
-
-         lSum := lV + lSum;
-     end;//for group1
- end;//for group0
- lSum := lSum * (1/ (lnGroup0*lnGroup1 ) );
- result := lSum;
-666:
- freemem(lObsp1);
- freemem(lObsp0);
-end; //continROC3
-
-
-//function TStat3 (lnSubj: integer; var lGroup: Bytep; var lIn: Singlep): double;
-procedure tBM3 (lnSubj: integer; var lGroup: Bytep; lIn: Singlep; var ltBM,lDF: double; out ln0: integer);
-var
-	lObspX,lObsp: pointer;
-	lObsX,lObs: Doublep0;
-	lGroupRA: Bytep0;
-	i,ln1: integer;
-	lZ,lGSum: double;
-        lSum0,lSum1,lMean0,lMean1,lSqr0,lSqr1,lk0,lk1: double;
-begin
- createArray64(lObsp,lObs,lnSubj);
- getmem(lGroupRA,lnSubj*sizeof(Byte));
- createArray64(lObspX,lObsX,lnSubj);
- ln0 := 0;
- ln1 := 0;
-	for i := 0 to (lnSubj-1) do begin //for each subject
-		//lVal := lIn[i];
-		lObs^[i] := lIn^[i+1];
-		if lGroup^[i+1] = 0 then //group0
-			lGroupRA^[i] := 0
-		else
-			lGroupRA^[i] := 1;
-	end; //for each sub
-	for i := 0 to (lnSubj-1) do
-		if lGroupRA^[i] = 0 then
-			inc(ln0) //number of observations in group zero
-		else
-			inc(ln1); //number of observations in group one
-      if (ln0 > 1) and (ln1 > 1) then begin
-	SortDouble(0,lnSubj-1,lObs,lGroupRA);
-	RankArray(0,lnSubj-1,lObs,lGSum);
-        lSum0 := 0;
-        lSum1 := 0;
-	for i := 0 to (lnSubj-1) do
-          if lGroupRA^[i] = 0 then
-             lSum0 := lSum0 + lObs^[i]
-          else
-             lSum1 := lSum1 + lObs^[i];
-        lMean0 := lSum0 / ln0;
-        lMean1 := lSum1 / ln1;
-        //fx(lmean0,lMean1);
-        lSqr0 := 0;
-        lSqr1 := 1;
-        lk0 := (ln0+1)/2;
-        lk1 := (ln1+1)/2;
-        LocalRank(0,lnSubj-1,lObs,lObsX,lGroupRA);
-	for i := 0 to (lnSubj-1) do
-          if lGroupRA^[i] = 0 then
-             lSqr0 := lSqr0 + Sqr(lObs^[i]-lObsX^[i]-lMean0+lk0)
-          else
-             lSqr1 := lSqr1 + Sqr(lObs^[i]-lObsX^[i]-lMean1+lk1);
-        lSqr0 := (1/(ln0-1))*lSqr0;
-        lSqr1 := (1/(ln1-1))*lSqr1;
-
-        lZ := -(ln0*ln1*(lMean1-lMean0))/((ln0+ln1)*sqrt((ln0*lSqr0)+(ln1*lSqr1)   ) );
-        lDF := sqr(ln0*lSqr0+ln1*lSqr1) / ( (sqr(ln0*lSqr0)/(ln0-1)) + (sqr(ln1*lSqr1)/(ln1-1))  )   ;
-        //lZ := TtoZ(lZ,lDF);
-        ltBM := lZ;
-        //fx(lZ,lDF);
-      end else //>1
-          ltBM := 0;
- freemem(lObsp);
- freemem(lObspX);
- freemem(lGroupRA);
-end; //tBM3
-
-
-procedure genBMsim (lnSubj: integer; var lOrigOrder: DoubleP0);
-//1.) creates kSim random permutations of the data
-//2.) sorts permutations
-var
-   lRanOrderp: pointer;
-   lRanOrder: DoubleP0;
-   lInc,lnSmallGroup: integer;
-   lOutT,lDF: double;
-begin
-     if (lnSubj < 1) or (knPermute < 1) then
-        exit;
-     createArray64(lRanOrderp,lRanOrder,lnSubj);
-     //lnSmallGroup := lnGroup0;
-     //if lnSmallGroup > knSim then exit;
-     for lnSmallGroup := 1 to knSim do begin
-       //RandSeed := 128; //same order for all voxels
-       for lInc := 1 to knPermute do begin
-         GenPermute(lnSubj, lOrigOrder,lRanOrder); //generate random order of participants
-         tBM (lnSubj, lnSmallGroup, lRanOrder,lOutT,lDF);
-         gSimRA[lnSmallGroup]^[lInc] := lOutT;
-       end;
-       //next sort permutes...
-       Sort(1,knPermute,gSimRA[lnSmallGroup]);
-     end;
-     freemem(lRanOrderp);
-end;
 
 var
    i: integer;

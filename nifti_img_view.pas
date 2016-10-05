@@ -1396,8 +1396,8 @@ procedure TImgForm.OpenTemplateMRU(Sender: TObject);//open template or MRU
 var
 	lFilename: string;
 begin
-	 if sender = nil then begin
-	//autolaunch with last image, or last template image in list
+     if sender = nil then begin
+        //autolaunch with last image, or last template image in list
         lFilename :=  gMRUstr[0];
 	if (lFilename = '') or (not FileExistsEX(lFilename)) then begin
 	   if Templates1.Count > 0 then
@@ -4830,9 +4830,12 @@ begin
  ImgForm.OpenAndDisplayImg(lStr,True);
      lStr := '/Users/rorden/desktop/mricrox/templates/crap.voi';
  LoadOverlayIncludingRGB{LoadOverlay}(lStr);    *)
-
+ lRender := gBGImg.Prompt4DVolume;
+ gBGImg.Prompt4DVolume := false;
  ImgForm.OpenTemplateMRU(nil);
  RefreshImagesTimer.enabled := true;
+ gBGImg.Prompt4DVolume := lRender;
+
  //ShowMultisliceClick(nil);
  exit;
   //ResliceImg ('/Users/crlab/Documents/example_func.nii.gz','/Users/crlab/Documents/v1x.voi','/Users/crlab/Documents/example_func2standard.mat','/Users/crlab/Documents/z1x.nii.gz');

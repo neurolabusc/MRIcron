@@ -8,7 +8,7 @@ implementation
 {$Include isgui.inc}
 {$IFDEF UNIX}
 {$IFDEF Darwin}
-uses Process,SysUtils,Controls,classes,IniFiles,
+uses Process,SysUtils,Controls,classes,
 {$IFDEF GUI}dialogs;{$ELSE} dialogsx;{$ENDIF}
 
 
@@ -48,7 +48,7 @@ end;
 {$ELSE} //Not Darwin ... Assume Linux
 uses
     classes,sysutils;
-function GetLogicalCpuCount: Integer;
+(*function GetLogicalCpuCount: Integer;
 var lS: TStringList;
     lFilename: string;
     lLine,lnLines: integer;
@@ -68,10 +68,46 @@ begin
      if result < 1 then
         result := 1;
      lS.Free;
+end;*)
+
+function GetLogicalCpuCount: Integer;
+var lS: TStringList;
+    lFilename: string;
+    lLine,lcpu: integer;
+    sList: TStringList;
+begin
+     result := 1;
+     lFilename := '/proc/cpuinfo';
+     if not fileexists(lFilename) then exit;
+     sList := TStringList.Create;
+     lS:= TStringList.Create;
+     lS.LoadFromFile(lFilename);
+     for lLine := 0 to (lS.Count-1) do begin
+         if pos('processor',lS[lLine]) = 1 then begin
+            sList.DelimitedText := lS[lLine];
+            lcpu := strtointdef(sList[sList.Count-1],0)+1;
+            if lcpu > result then
+               result := lcpu;
+         end;
+         //showmessage('"'+lS[lLine]+'"'+inttostr(pos(lS[lLine], 'processor')));
+     end;
+     (*lnLines := lS.Count;
+     if lnLines > 0 then begin
+        result := 0;
+        for lLine := 1 to lnLines do
+            if lS[lLine-1] = '' then
+               inc(result);
+     end;*)
+     //if result > 3 then
+     //   result := result div 2; //assume hyperthreading
+     if result < 1 then
+        result := 1;
+     lS.Free;
+     sList.Free;
 end;
 {$ENDIF} //If Darwin Else Linux
 
-{$ELSE} //If UNIX ELSE NOT Unix
+{$ELSE} //If UNIX ELSE NOT Unix -> windows
 uses Windows;
 function GetLogicalCpuCount: Integer;
 var

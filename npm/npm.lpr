@@ -6,13 +6,13 @@ uses
   {$IFDEF UNIX}cthreads,{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, npmform,stats
-,nifti_hdr,valformat, part, gzio2, StatThds,
+,nifti_hdr,valformat, part, gzio2,
   StatThdsUtil, brunner, statcr, distr, GraphicsMathLibrary, define_types,
   ReadInt
-  {$IFDEF SPREADSHEET}  ,design,spread{$ENDIF};
-  {$IFNDEF FPC}
-{$R npm.res} 
-{$ENDIF}
+  {$IFDEF SPREADSHEET}  ,design,spread{$ENDIF};     //StatThds,
+ // {$IFNDEF FPC}
+{$R npm.res}
+//{$ENDIF}
 
 begin
   Application.Title:='NPM';

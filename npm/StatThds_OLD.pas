@@ -1,4 +1,5 @@
 unit StatThds;
+{$I options.inc} // {$IFDEF OLDSTATS}
   {$Include ..\common\isgui.inc}
 interface
 
@@ -29,10 +30,10 @@ type
 
 { VBM - two groups }
 
-  TNNStat = class(TStatThread)
+ (* TNNStat = class(TStatThread)
   protected
     procedure Analyze(lttest,lBM: boolean; lnCrit,lnPermute,lThread,lThreadStart,lThreadEnd,lStartVox,lVoxPerPlank,lImagesCount,lnGroup1 : integer; lMaskImg,lPlankImg,lOutImgMn,lOutImgBM,lOutImgT,lSymptomRA: SingleP); override;
-  end;
+  end;*)
 
 
   TPairedTStat = class(TStatThread)
@@ -47,13 +48,13 @@ type
     procedure Analyze(lttest,lBM: boolean; lnCrit,lnPermute,lThread,lThreadStart,lThreadEnd,lStartVox,lVoxPerPlank,lImagesCount,lnGroup1 : integer; lMaskImg,lPlankImg,lOutImgMn,lOutImgBM,lOutImgT,lSymptomRA: SingleP);  override;
   end;
 
-  TLesionBinomial = class(TStatThread)
+(*  TLesionBinomial = class(TStatThread)
   protected
     procedure Analyze(lChi2,lLieber: boolean; lnCrit,lnPermute,lThread,lThreadStart,lThreadEnd,lStartVox,lVoxPerPlank,lImagesCount,lnGroup1 : integer; lMaskImg,lPlankImg,lOutImgMn,lOutImgL,lOutImgX,lSymptomRA: SingleP);  override;
-  end;
+  end; *)
 
 implementation
-uses unpm;
+
 //uses Stat;
 
 
@@ -66,6 +67,25 @@ tpNormal	The thread has normal priority.
 tpHigher	The thread's priority is one point above normal.
 tpHighest	The thread's priority is two points above normal.
 tpTimeCritical*)
+
+{$IFDEF NEWRNG}
+uses unpm, rng;
+
+procedure GenPermuteThreaded (lnSubj: integer; var lOrigOrder,lRanOrder: DoubleP0; var rng: TRNG);
+var
+   lInc,lRand: integer;
+   lSwap: double;
+begin
+      Move(lOrigOrder^,lRanOrder^,lnSubj*sizeof(double));
+     for lInc := lnSubj downto 2 do begin
+         lRand := RandomInt0(rng, lInc-1);
+         lSwap := lRanOrder^[lRand];
+         lRanOrder^[lRand] := lRanOrder^[lInc-1];
+         lRanOrder^[lInc-1] := lSwap;
+     end;
+end;
+{$ELSE}
+uses unpm;
 
 Const Two32 = 4294967296.0 ;
 function GenRandThreaded(lRange: integer; var lRandSeed:comp): integer;
@@ -94,53 +114,27 @@ begin
          lRanOrder^[lInc-1] := lSwap;
      end;
 end;
+{$ENDIF}
 
-procedure StatPermuteThreaded (lttest,lBM: boolean; lnSubj, lnGroup0,lnPermute,lThread: integer;var lOrigOrder: DoubleP0);
+(*procedure StatPermuteBinomialThreaded (lChi2,lLieber: boolean; lnSubj, lnGroup0,lnPermute,lThread: integer;var lOrigOrder: DoubleP0);
+
 var
    lInc: integer;
    lOutT: double;
    lRS: Comp;
    lRanOrderp: pointer;
    lRanOrder: Doublep0;
+   {$IFDEF NEWRNG}
+   rng: TRNG = (test: FALSE);
+   {$ELSE}
+   rng: Comp = 128;
+   {$ENDIF}
 begin
      if (lnSubj < 1) or (lnPermute < 1) then
         exit;
      createArray64(lRanOrderp,lRanOrder,lnSubj);
-     lRS := 128;
      for lInc := 1 to lnPermute do begin
-         GenPermuteThreaded(lnSubj, lOrigOrder,lRanOrder,lRS); //generate random order of participants
-         if lttest then begin
-             TStat2 (lnSubj, lnGroup0, lRanOrder, lOutT);
-             if lOutT > gPermuteMaxT[lThread,lInc] then
-                gPermuteMaxT[lThread,lInc] := lOutT;
-             if lOutT < gPermuteMinT[lThread,lInc] then
-                gPermuteMinT[lThread,lInc] := lOutT;
-          end; //compute ttest
-          if lBM then begin
-             BMTest (lnSubj, lnGroup0, lRanOrder,lOutT);
-             if lOutT > gPermuteMaxBM[lThread,lInc] then
-                gPermuteMaxBM[lThread,lInc] := lOutT;
-             if lOutT < gPermuteMinBM[lThread,lInc] then
-                gPermuteMinBM[lThread,lInc] := lOutT;
-          end; //compute BM
-     end;
-     freemem(lRanOrderp);
-end;
-
-procedure StatPermuteBinomialThreaded (lChi2,lLieber: boolean; lnSubj, lnGroup0,lnPermute,lThread: integer;var lOrigOrder: DoubleP0);
-var
-   lInc: integer;
-   lOutT: double;
-   lRS: Comp;
-   lRanOrderp: pointer;
-   lRanOrder: Doublep0;
-begin
-     if (lnSubj < 1) or (lnPermute < 1) then
-        exit;
-     createArray64(lRanOrderp,lRanOrder,lnSubj);
-     lRS := 128;
-     for lInc := 1 to lnPermute do begin
-         GenPermuteThreaded(lnSubj, lOrigOrder,lRanOrder,lRS); //generate random order of participants
+         GenPermuteThreaded(lnSubj, lOrigOrder,lRanOrder,rng); //generate random order of participants
          if lChi2 then begin
              Chi2 (lnSubj, lnGroup0, lRanOrder, lOutT);
              if lOutT > gPermuteMaxT[lThread,lInc] then
@@ -157,7 +151,7 @@ begin
           end; //compute BM
      end;
      freemem(lRanOrderp);
-end;
+end;      *)
 
 
 procedure TStatThread.DoVisualSwap;
@@ -208,14 +202,9 @@ begin
   Analyze(lttestx,lBMx, lnCritX,lnPermuteX,lThreadx,lThreadStartx,lThreadEndx,lStartVoxx,lVoxPerPlankx,lImagesCountx,lnGroup1x,lMaskImgx,lPlankImgX,lOutImgMnx,lOutImgBMx,lOutImgTx,lSymptomRAx);
 end;
 
-(*procedure TStatThread.Terminate;
-begin
-       Dec(gThreadsRunning);
-       NPMmsg('Thread done');
-     inherited  Terminate;
-end;  *)
+(*
 
-{ Nearest Nighbor }
+{ Nearest Neighbor }
 procedure TNNStat.Analyze(lttest,lBM: boolean; lnCrit,lnPermute,lThread,lThreadStart,lThreadEnd,lStartVox,lVoxPerPlank,lImagesCount,lnGroup1 : integer; lMaskImg,lPlankImg,lOutImgMn,lOutImgBM,lOutImgT,lSymptomRA: SingleP);
 var
    lObsp: pointer;
@@ -256,7 +245,7 @@ begin //statthread
     end; //for each voxel
     freemem(lObsP);
     Terminate;
-end;
+end;   *)
 
 
 { Paired T-Test}
@@ -313,52 +302,39 @@ begin //statthread
     end; //for each voxel
     freemem(lObsP);
 end;
+{$IFDEF OLDSTATS}
 
-(*procedure TLesionStat.Analyze (lttest,lBM: boolean; lnCrit,lnPermute,lThread,lThreadStart,lThreadEnd,lStartVox,lVoxPerPlank,lImagesCount,lnGroup1 : integer; lMaskImg,lPlankImg,lOutImgMn,lOutImgBM,lOutImgT,lSymptomRA: SingleP);
+procedure StatPermuteThreaded (lttest,lBM: boolean; lnSubj, lnGroup0,lnPermute,lThread: integer;var lOrigOrder: DoubleP0);
 var
-   lObsp: pointer;
-   lObs: Doublep0;
-   lT,lBMz,lDF: Double;
-   lnLesion,lnNoLesion,lPosPct,lPos,lPos2,lPos2Offset,lnVoxTested: integer;
-begin //statthread
-    createArray64(lObsp,lObs,lImagesCount);
-    lPosPct := (lThreadEnd-lThreadStart) div 100;
-    for lPos2 := lThreadStart to lThreadEnd do begin
-        if (lThread = 1) and ((lPos2 mod lPosPct) = 0) then
-           VisualProg(round((lPos2/(lThreadEnd-lThreadStart))*100));
-        if Terminated then exit; //goto 345;//abort
-        lPos2Offset := lPos2+lStartVox-1;
-        lnLesion := 0;
-        lnNoLesion := 0;
-        for lPos := 1 to lImagesCount do begin
-            if ((gScaleRA[lPos]*lPlankImg^[((lPos-1)* lVoxPerPlank)+lPos2])+gInterceptRA[lPos]) = 0 then begin
-                                           //no lesion
-                                           inc(lnNoLesion);
-                                           lObs^[lnNoLesion-1] := lSymptomRA^[lPos];
-
-            end else begin
-                                            //lesion
-                                            inc(lnLesion);
-                                            lObs^[lImagesCount-lPos+lnNoLesion] := lSymptomRA^[lPos]; //note: lObs indexed from zero!
-            end;
-        end;
-        lOutImgMn^[lPos2Offset] := lnLesion;///lImages.Count;
-           if (lnLesion >= lnCrit) and (lnLesion > 0) then begin
-                                   inc(gnVoxTestedRA[lThread]);
-           if lttest then begin
-              TStat2 (lImagesCount, lnNoLesion, lObs,lT);
-              lOutImgT^[lPos2Offset] := lT;
-           end;
-           if lBM then begin
-              tBM (lImagesCount, lnNoLesion, lObs,lBMz,lDF);
-              BMzVal (lImagesCount, lnNoLesion,lBMz,lDF);
-              lOutImgBM^[lPos2Offset] := lBMz;
-           end;
-           StatPermuteThreaded (lttest,lBM,lImagesCount, lnNoLesion,lnPermute,lThread, lObs);
-        end; //in brain mask - compute
-    end; //for each voxel
-    freemem(lObsP);
-end;*)
+   lInc: integer;
+   lOutT: double;
+   lRS: Comp;
+   lRanOrderp: pointer;
+   lRanOrder: Doublep0;
+begin
+     if (lnSubj < 1) or (lnPermute < 1) then
+        exit;
+     createArray64(lRanOrderp,lRanOrder,lnSubj);
+     lRS := 128;
+     for lInc := 1 to lnPermute do begin
+         GenPermuteThreaded(lnSubj, lOrigOrder,lRanOrder,lRS); //generate random order of participants
+         if lttest then begin
+             TStat2 (lnSubj, lnGroup0, lRanOrder, lOutT);
+             if lOutT > gPermuteMaxT[lThread,lInc] then
+                gPermuteMaxT[lThread,lInc] := lOutT;
+             if lOutT < gPermuteMinT[lThread,lInc] then
+                gPermuteMinT[lThread,lInc] := lOutT;
+          end; //compute ttest
+          if lBM then begin
+             BMTest (lnSubj, lnGroup0, lRanOrder,lOutT);
+             if lOutT > gPermuteMaxBM[lThread,lInc] then
+                gPermuteMaxBM[lThread,lInc] := lOutT;
+             if lOutT < gPermuteMinBM[lThread,lInc] then
+                gPermuteMinBM[lThread,lInc] := lOutT;
+          end; //compute BM
+     end;
+     freemem(lRanOrderp);
+end;
 
 procedure TLesionStat.Analyze (lttest,lBM: boolean; lnCrit,lnPermute,lThread,lThreadStart,lThreadEnd,lStartVox,lVoxPerPlank,lImagesCount,lnGroup1 : integer; lMaskImg,lPlankImg,lOutImgMn,lOutImgBM,lOutImgT,lSymptomRA: SingleP);
 //pattern variables
@@ -446,8 +422,151 @@ begin //statthread
     freemem(lLesionOrderp)
 
 end;
+{$ELSE} //IFDEF OLDSTATS else NEWSTATS!
 
-procedure TLesionBinomial.Analyze (lChi2,lLieber: boolean; lnCrit,lnPermute,lThread,lThreadStart,lThreadEnd,lStartVox,lVoxPerPlank,lImagesCount,lnGroup1 : integer; lMaskImg,lPlankImg,lOutImgMn,lOutImgL,lOutImgX,lSymptomRA: SingleP);
+procedure GenPermuteThreadedX (lnSubj: integer; var lOrigOrder,lRanOrder: Singlep; var rng: TRNG);
+var
+   lInc,lRand: integer;
+   lSwap: double;
+begin
+      Move(lOrigOrder^,lRanOrder^,lnSubj*sizeof(double));
+     for lInc := lnSubj downto 2 do begin
+         lRand := RandomInt(rng, 1, lInc);
+         lSwap := lRanOrder^[lRand];
+         lRanOrder^[lRand] := lRanOrder^[lInc];
+         lRanOrder^[lInc] := lSwap;
+     end;
+end;
+
+procedure StatPermuteThreaded (lttest,lBM: boolean; lnSubj, lnPermute,lThread: integer; var lGroup: Bytep; var lOrigOrder: Singlep);
+var
+   lInc, lnGroup0: integer;
+   lOutT,lDF,lBMz: double;
+   rng: TRNG = (test: FALSE);
+   //lRanOrderp: pointer;
+   lRanOrder: Singlep;
+begin
+     if (lnSubj < 1) or (lnPermute < 1) then
+        exit;
+     getmem(lRanOrder, lnSubj*sizeof(single));
+     //lRandSeed := 128;
+     for lInc := 1 to lnPermute do begin
+         GenPermuteThreadedX(lnSubj, lOrigOrder,lRanOrder,rng); //generate random order of participants
+         if lttest then begin
+             lOutT := TStat3 (lnSubj, lGroup, lRanOrder);
+             if lOutT > gPermuteMaxT[lThread,lInc] then
+                 gPermuteMaxT[lThread,lInc] := lOutT;
+             if lOutT < gPermuteMinT[lThread,lInc] then
+                 gPermuteMinT[lThread,lInc] := lOutT;
+
+          end; //compute ttest
+          if lBM then begin
+             //BMTest (lnSubj, lnGroup0, lRanOrder,lOutT);
+             //tBM (lnSubj, lnGroup0, lRanOrder,lBMz,lDF);
+             tBM3 (lnSubj, lGroup, lRanOrder,lBMz,lDF, lnGroup0);
+             lBMz := BMzVal (lnSubj, lnGroup0,lBMz,lDF);
+
+             if lBMz > gPermuteMaxBM[lThread,lInc] then
+                gPermuteMaxBM[lThread,lInc] := lBMz;
+             if lBMz < gPermuteMinBM[lThread,lInc] then
+                gPermuteMinBM[lThread,lInc] := lBMz;
+          end; //compute BM
+     end;
+     freemem(lRanOrder);
+end;
+
+
+procedure TLesionStat.Analyze (lttest,lBM: boolean; lnCrit,lnPermute,lThread,lThreadStart,lThreadEnd,lStartVox,lVoxPerPlank,lImagesCount,lnGroup1 : integer; lMaskImg,lPlankImg,lOutImgMn,lOutImgBM,lOutImgT,lSymptomRA: SingleP);
+//pattern variables
+const
+     knPrevPattern = 10;
+var
+   lPrevPatternRA: array[1..knPrevPattern] of TLesionPattern;
+   lPattern: TLesionPattern;
+   lPrevZValsT,lPrevZValsBM: array [1..knPrevPattern] of Single;
+   lPatternPos: integer;
+   lLesionOrderp: bytep;
+//standard variables
+var
+   //lObsp: pointer;
+   //lObs: Doublep0;
+   lT,lBMz,lDF: Double;
+   lnLesion,lnNoLesion,lPosPct,lPos,lPos2,lPos2Offset,lnVoxTested, lnGroup0: integer;
+begin //statthread
+      //init patterns
+      for lPatternPos := 1 to knPrevPattern do
+          lPrevPatternRA[lPatternPos] := EmptyOrder;
+      lPatternPos := 1;
+      getmem(lLesionOrderp, lImagesCount *sizeof(byte));
+      //now init standard variables
+    //createArray64(lObsp,lObs,lImagesCount);
+    lPosPct := (lThreadEnd-lThreadStart) div 100;
+    for lPos2 := lThreadStart to lThreadEnd do begin
+        if (lThread = 1) and ((lPos2 mod lPosPct) = 0) then
+           VisualProg(round((lPos2/(lThreadEnd-lThreadStart))*100));
+        if Terminated then exit; //goto 345;//abort
+        lPos2Offset := lPos2+lStartVox-1;
+        lnLesion := 0;
+        lnNoLesion := 0;
+        for lPos := 1 to lImagesCount do begin
+            if ((gScaleRA[lPos]*lPlankImg^[((lPos-1)* lVoxPerPlank)+lPos2])+gInterceptRA[lPos]) = 0 then begin
+               //no lesion
+               inc(lnNoLesion);
+               lLesionOrderp^[lPos] := 0;
+               //lObs^[lnNoLesion-1] := lSymptomRA^[lPos];
+            end else begin
+                //lesion
+                inc(lnLesion);
+                lLesionOrderp^[lPos] := 1;
+                //lObs^[lImagesCount-lPos+lnNoLesion] := lSymptomRA^[lPos]; //note: lObs indexed from zero!
+            end;
+        end;
+        lOutImgMn^[lPos2Offset] := lnLesion;///lImages.Count;
+        if (lnLesion >= lnCrit) and (lnLesion > 0) then begin
+           inc(gnVoxTestedRA[lThread]);
+           //now check if we have seen this precise lesion order recently...
+           lPattern := SetOrderX (lLesionOrderp,lImagesCount);
+           lPos := 1;
+           while (lPos <= knPrevPattern) and not (SameOrder(lPattern,lPrevPatternRA[lPos],lImagesCount)) do
+                 inc(lPos);
+           if SameOrder(lPattern,lPrevPatternRA[lPos],lImagesCount) then begin  //lesion pattern is not novel
+             if lttest then
+                lOutImgT^[lPos2Offset] := lPrevZvalsT[lPos];
+             if lBM then
+                 lOutImgBM^[lPos2Offset] := lPrevZvalsBM[lPos];
+           end else begin //lesion pattern is novel
+               //record novel pattern
+               inc(lPatternPos);
+               if lPatternPos > knPrevPattern then
+                  lPatternPos := 1;
+               lPrevPatternRA[lPatternPos] := lPattern;
+
+
+              if lttest then begin
+                 //TStat2 (lImagesCount, lnNoLesion, lObs,lT);
+                 lT := TStat3 (lImagesCount, lLesionOrderp, lSymptomRA);
+                 lOutImgT^[lPos2Offset] := lT;
+                 lPrevZValsT[lPatternPos] := lT;
+              end;
+              if lBM then begin
+                 //tBM (lImagesCount, lnNoLesion, lObs,lBMz,lDF);
+                 tBM3 (lImagesCount, lLesionOrderp, lSymptomRA,lBMz,lDF, lnGroup0);
+                 BMzVal (lImagesCount, lnGroup0,lBMz,lDF);
+                 lOutImgBM^[lPos2Offset] := lBMz;
+                 lPrevZValsBM[lPatternPos] := lBMz;
+              end;
+              StatPermuteThreaded(lttest,lBM, lImagesCount, lnPermute,lThread, lLesionOrderp, lSymptomRA);
+              //StatPermuteThreaded (lttest,lBM,lImagesCount, lnNoLesion,lnPermute,lThread, lObs);
+           end; //novel lesion pattern
+        end; //in brain mask - compute
+    end; //for each voxel
+    //freemem(lObsP);
+    freemem(lLesionOrderp)
+
+end;
+{$ENDIF}
+
+(*procedure TLesionBinomial.Analyze (lChi2,lLieber: boolean; lnCrit,lnPermute,lThread,lThreadStart,lThreadEnd,lStartVox,lVoxPerPlank,lImagesCount,lnGroup1 : integer; lMaskImg,lPlankImg,lOutImgMn,lOutImgL,lOutImgX,lSymptomRA: SingleP);
  //pattern variables
 const
      knPrevPattern = 10;
@@ -527,7 +646,7 @@ begin //Binomial StatThread
     end; //for each voxel
     freemem(lObsP);
     freemem(lLesionOrderp)
-end;
+end;   *)
 
 (*procedure TLesionBinomial.Analyze (lChi2,lLieber: boolean; lnCrit,lnPermute,lThread,lThreadStart,lThreadEnd,lStartVox,lVoxPerPlank,lImagesCount,lnGroup1 : integer; lMaskImg,lPlankImg,lOutImgMn,lOutImgL,lOutImgX,lSymptomRA: SingleP);
 var
