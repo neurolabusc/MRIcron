@@ -7,11 +7,11 @@ MRIcron is a viewer for brain imaging data. NPM is a tool for non parametric ana
  - NPM development has been moved to [NiiStat](https://github.com/neurolabusc/NiiStat)
  - dcm2nii development has been moved to [dcm2niix](https://github.com/neurolabusc/dcm2niix)
 
- ##### Downloading compiled software
+##### Downloading compiled software
 
  - The latest stable version is released at [NITRC](https://www.nitrc.org/projects/mricron)
 
- ##### Recent Versions
+##### Recent Versions
 
 2-May-2016
  - MRIcron : Improved ability to copy images to clipboard
