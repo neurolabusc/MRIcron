@@ -108,7 +108,7 @@ end;
 
 function GetKVers: string;
 begin
-     result :=  'Chris Rorden''s NPM '+kMRIcronVers+' :: Threads used = '+inttostr(gnCPUThreads )+' :: plankSize = '+inttostr(gNPMPrefs.PlankMB)+'mb :: (upgrade to NiiStat suggested)';
+     result :=  'NPM '+kMRIcronVers+' : threads = '+inttostr(gnCPUThreads )+' : plank size = '+inttostr(gNPMPrefs.PlankMB)+'mb : please upgrade to NiiStat';
 end;
 
 procedure Refresher;

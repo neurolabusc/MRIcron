@@ -652,7 +652,6 @@ begin //statthread
                  lOutImgT^[lPos2Offset] := lT;
                  lPrevZValsT[lPatternPos] := lT;
               end;
-
               if lBM then begin
                       tBM3 (lnControlsPlusLesion, lLesionOrderp, lSymptomRA,lBMz,lDF, lnGroup0);
                       //if lBMz > 55 then

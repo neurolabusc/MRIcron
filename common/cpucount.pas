@@ -49,7 +49,6 @@ begin
 end;
 
 {$ELSE} //If UNIX ELSE NOT Unix -> windows
-end;
 
 uses Windows;
 function GetLogicalCpuCount: Integer;

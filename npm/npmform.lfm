@@ -2,11 +2,11 @@ object MainForm: TMainForm
   Left = 468
   Height = 418
   Top = 213
-  Width = 542
+  Width = 640
   ActiveControl = Memo1
   Caption = 'Non-Parametric Mapping'
   ClientHeight = 418
-  ClientWidth = 542
+  ClientWidth = 640
   Menu = MainMenu1
   OnClose = FormClose
   OnCreate = FormCreate
@@ -17,25 +17,26 @@ object MainForm: TMainForm
     Left = 0
     Height = 393
     Top = 0
-    Width = 542
+    Width = 640
     Align = alClient
     ScrollBars = ssAutoBoth
     TabOrder = 0
+    WordWrap = False
   end
   object Panel1: TPanel
     Left = 0
     Height = 25
     Top = 393
-    Width = 542
+    Width = 640
     Align = alBottom
     ClientHeight = 25
-    ClientWidth = 542
+    ClientWidth = 640
     TabOrder = 1
     object ProgressBar1: TProgressBar
       Left = 1
       Height = 23
       Top = 1
-      Width = 540
+      Width = 638
       Align = alClient
       TabOrder = 0
     end
