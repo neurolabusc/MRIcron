@@ -1112,14 +1112,17 @@ begin
 
 end;   *)
 
+
 procedure TMainForm.FormShow(Sender: TObject);
 begin
+
   NPMMsgClear;
   InitFact;
      NPMMsg(GetkVers);
      {$IFNDEF UNIX} {GUILaunch;}{$ENDIF}
-     LongTimeFormat := 'YYYY-MMM-DD hh:nn:ss';  //delphi TimeToStr
-     ShortTimeFormat := 'YYYY-MMM-DD hh:nn:ss'; //freepascal TimeToStr
+     //LongTimeFormat := 'YYYY-MMM-DD hh:nn:ss';  //delphi TimeToStr
+     LongTimeFormat := 'dd-mmmm-yyyy hh:nn:ss';
+     //ShortTimeFormat := 'YYYY-MMM-DD hh:nn:ss'; //freepascal TimeToStr
      //{$IFDEF FPC}{$IFNDEF UNIX} ReadParamStr; {$ENDIF} {$ENDIF}
      {$IFDEF benchmark}
      //MonteCarloSimulation1.visible := true;
@@ -1406,7 +1409,7 @@ begin
         gnCPUThreads := 1;
         {$ENDIF}
         NPMMsg('Permutations = ' +IntToStr(lnPermute));
-	NPMMsg('Logisitic Regression began = ' +TimeToStr(Now));
+	//NPMMsg('Logisitic Regression began = ' +TimeToStr(Now));
 	lTotalMemory := 0;
 	lVolVox := lMaskHdr.NIFTIhdr.dim[1]*lMaskHdr.NIFTIhdr.dim[2]* lMaskHdr.NIFTIhdr.dim[3];
 	if (lVolVox < 1) then goto 667;
@@ -1519,7 +1522,7 @@ begin
         freemem(lOutImgSum);
 	freemem(lObsp);
 	freemem(lPlankImg);
-	NPMMsg('Analysis finished = ' +TimeToStr(Now));
+	//NPMMsg('Analysis finished = ' +TimeToStr(Now));
         lOutNameMod := ChangeFilePostfixExt(lOutName,'Notes','.txt');
         NPMMsgSave(lOutNameMod);
 
@@ -1995,7 +1998,7 @@ begin
   end;
    NPMMsgClear;
    NPMMsg(GetKVers);
-	NPMmsg('Analysis began = ' +TimeToStr(Now));
+   //NPMmsg('Analysis began = ' +TimeToStr(Now));
    NPMMsg('VAL file name: '+MainForm.OpenHdrDlg.Filename);
    NPMMsg('Number of participants: '+inttostr(lnSubj));
    NPMMsg('Number of factors: '+inttostr(lnFactors));
@@ -2046,7 +2049,7 @@ begin
     lImageNames.Free;
     lPredictorList.Free;
     DeleteDecompressed4D(lTemp4D);
-  	NPMmsg('Analysis finished = ' +TimeToStr(Now));
+    //NPMmsg('Analysis finished = ' +TimeToStr(Now));
 end;
                     
 

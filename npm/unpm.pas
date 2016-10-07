@@ -686,8 +686,7 @@ begin
         //lnPermute := ReadPermute;
         lnPermute := 0;//not yet
 	NPMmsg('Permutations = ' +IntToStr(lnPermute));
-
-	NPMmsg('Analysis began = ' +TimeToStr(Now));
+        //NPMmsg('Analysis began = ' +TimeToStr(Now));
 	lTotalMemory := 0;
 	lVolVox := lMaskHdr.NIFTIhdr.dim[1]*lMaskHdr.NIFTIhdr.dim[2]* lMaskHdr.NIFTIhdr.dim[3];
 	if (lVolVox < 1) then goto 667;
@@ -806,7 +805,7 @@ end;
 	//freemem(lObsp);
 	freemem(lMaskImg);
 	freemem(lPlankImg);
-	NPMmsg('Analysis finished = ' +TimeToStr(Now));
+	//NPMmsg('Analysis finished = ' +TimeToStr(Now));
         lOutNameMod := ChangeFilePostfixExt(lOutName,'Notes','.txt');
         NPMMsgSave(lOutNameMod);
         NPMProgressBar(0);
@@ -889,7 +888,7 @@ begin
            lStDev := true
         else
             lStDev := false;
-	NPMMsg('Analysis began = ' +TimeToStr(Now));
+	//NPMMsg('Analysis began = ' +TimeToStr(Now));
 	lTotalMemory := 0;
 	lVolVox := lMaskHdr.NIFTIhdr.dim[1]*lMaskHdr.NIFTIhdr.dim[2]* lMaskHdr.NIFTIhdr.dim[3];
         NPMMsg('Voxels = '+inttostr(lMaskVoxels)+'  '+inttostr(kPlankSz));
@@ -1029,7 +1028,7 @@ else
 
 	//freemem(lObsp);
 	freemem(lPlankImg);
-	NPMMsg('Analysis finished = ' +TimeToStr(Now));
+	//NPMMsg('Analysis finished = ' +TimeToStr(Now));
         lOutNameMod := ChangeFilePostfixExt(lOutName,'Notes','.txt');
         NPMMsgSave(lOutNameMod);
         if (lTotalN > 0) then
@@ -1251,7 +1250,7 @@ end;(**)
 	//freemem(lObsp);
 	freemem(lMaskImg);
 	freemem(lPlankImg);
-	NPMmsg('Analysis finished = ' +TimeToStr(Now));
+	//NPMmsg('Analysis finished = ' +TimeToStr(Now));
         lOutNameMod := ChangeFilePostfixExt(lOutName,'Notes','.txt');
         NPMMsgSave(lOutNameMod);
         NPMProgressBar(0);
@@ -1311,7 +1310,7 @@ var
 	lStatHdr: TNIfTIhdr;
 begin
         result := false;
-	NPMMsg('Analysis began = ' +TimeToStr(Now));
+	//NPMMsg('Analysis began = ' +TimeToStr(Now));
 	lVolVox := lMnHdr.NIFTIhdr.dim[1]*lMnHdr.NIFTIhdr.dim[2]* lMnHdr.NIFTIhdr.dim[3];
 	if (lVolVox < 1) then goto 667;
 	//load mask
@@ -1359,7 +1358,7 @@ begin
         freemem(lOutImg);
 	freemem(lMnImg);
 	freemem(lStDevImg);
-	NPMMsg('Analysis finished = ' +TimeToStr(Now));
+	//NPMMsg('Analysis finished = ' +TimeToStr(Now));
         NPMProgressBar(0);
         result := true;
 	exit;

@@ -74,7 +74,7 @@ begin
                     if lVolImg^[lVox] <> 0 then
                        lSumImg^[lVox] := lSumImg^[lVox]+1;
 	end;//for each image
-	NPMmsg('Sum image finished = ' +TimeToStr(Now));
+	//NPMmsg('Sum image finished = ' +TimeToStr(Now));
         NPMProgressBar(0);
         //Debog(lSumImg, lVolVox);
         freemem(lVolImg);
@@ -271,7 +271,22 @@ begin
 end;
 {$ENDIF}
 
+(*{$IFDEF FPC}
+function NowStr: string;
+var
+  Fmt: string;
+begin
+     Fmt := 'dd mmmm yyyy hh:nn:ss';
+     DateTimeToString (result,Fmt,Now);
+end;
+{$ENDIF}*)
 
+{$IFDEF FPC}  //TimeToStr is defective in FPC 3.0.0
+function TimeToStr(lTime: TDateTime) : string;
+begin
+  DateTimeToString (result,LongTimeFormat,lTime);
+end;
+{$ENDIF}
 
 function TurboLDM (var lImages: TStrings; var lMaskHdr: TMRIcroHdr;var lPrefs: TLDMPrefs ; var lSymptomRA: SingleP;var lFactname,lOutName: string): boolean;
 label
@@ -314,8 +329,11 @@ begin
         exit;
      end;
         NPMmsg('Permutations = ' +IntToStr(lPrefs.nPermute));
-
-	NPMmsg('Analysis began = ' +TimeToStr(Now));
+        //{$IFDEF FPC}
+        //NPMmsg('Analysis began ' +NowStr);
+        //{$ELSE}
+	NPMmsg('Analysis began ' +TimeToStr(Now));
+        //{$ENDIF}
 	lVolVox := lMaskHdr.NIFTIhdr.dim[1]*lMaskHdr.NIFTIhdr.dim[2]* lMaskHdr.NIFTIhdr.dim[3];
 	if (lVolVox < 1) then goto 667;
   if not MakeSum( lImages, lMaskHdr, lSumImg) then goto 667;
@@ -415,7 +433,11 @@ begin
                       Application.processmessages;
                       sleep(30);
                       if (gThreadsRunning <> lPrevThreadsRunning) then begin
-                         NPMmsg(' '+inttostr(gThreadsRunning)+' threads still running ' +TimeToStr(Now));
+                         //{$IFDEF FPC}
+                         //NPMmsg(' '+inttostr(gThreadsRunning)+' threads still running ' + NowStr);
+                         //{$ELSE}
+	                 NPMmsg(' '+inttostr(gThreadsRunning)+' threads still running ' +TimeToStr(Now));
+                         //{$ENDIF}
                          lPrevThreadsRunning := gThreadsRunning;
                       end;
                 until gThreadsRunning = 0;
@@ -490,11 +512,14 @@ begin
              //NPMmsgAppend('threshbm,'+inttostr(lPrefs.Run)+','+inttostr(MainForm.ThreshMap(lThreshBonf,lVolVox,lOutImgBM))+','+realtostr(lThreshNULP,3)+','+realtostr(lThreshPermute,3)+','+realtostr(lThreshBonf,3));
            NIFTIhdr_SaveHdrImg(lOutNameMod,lStatHdr,true,not IsNifTiMagic(lMaskHdr.NIFTIhdr),true,lOutImgBM,1);
         end;
-	NPMmsg('Analysis finished = ' +TimeToStr(Now));
+
      {$IFNDEF FPC}
+     NPMmsg('Analysis finished = ' +TimeToStr(Now));
      NPMmsg('Processing Time = ' +inttostr(round((GetTickCount - lStartTime)/1000)));
      {$ELSE}
-     NPMmsg('Processing Time (seconds) = ' +inttostr(round(MilliSecondsBetween(Now, lStartTime)/1000)));
+     //NPMmsg('Analysis finished ' + NowStr);
+     NPMmsg('Analysis finished ' +TimeToStr(Now));
+     NPMmsg('Processing Time (seconds) ' +inttostr(round(MilliSecondsBetween(Now, lStartTime)/1000)));
      {$ENDIF}
 
         lOutNameMod := ChangeFilePostfixExt(lOutName,'Notes'+lFactName,'.txt');
