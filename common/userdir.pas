@@ -137,6 +137,11 @@ end;
 uses
     SysUtils, Windows,shlobj;
 
+function AppDir: string; //e.g. c:\folder\ for c:\folder\myapp.exe, but /folder/myapp.app/ for /folder/myapp.app/app
+begin
+ result := extractfilepath(paramstr(0));
+end;
+
 //for administrators, we can write to folder with executable, otherwise we will save data to the user's AppDataFolder
 function AppDataFolder: string;  //uses shlobj
 {$IFDEF FPC} const CSIDL_APPDATA = 26; {$ENDIF}
