@@ -320,6 +320,7 @@ var
   lDTIra: TDTIRA;
   lFilename,lDynStr: string;
 begin
+ //dcmMsg('Validating');
     result := false;
      lItems := lStringList.Count;
      if lItems < 1 then begin

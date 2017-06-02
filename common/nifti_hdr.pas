@@ -626,6 +626,31 @@ begin
 	+kCR+(	RealToStr(lM.matrix[4,1],6)+','+RealToStr(lM.matrix[4,2],6)+','+RealToStr(lM.matrix[4,3],6)+','+RealToStr(lM.matrix[4,4],6));
 showmessage(lStr);
 end; }
+
+function cleanChar(ch: char): char;
+begin
+     result := ch;
+     if (ord(ch) < ord(' ')) or (ord(ch) in [127,129,130]) then //or (ord(ch) > 135)  then
+        result := '_';
+end;
+
+procedure FixBadStrs (var lHdr: TNIFTIhdr);
+var
+   lInc: integer;     //chr(0)
+begin
+  for lInc := 1 to 80 do
+      lHdr.descrip[lInc] := cleanChar(lHdr.descrip[lInc]);{80 spaces}
+  for lInc := 1 to 24 do
+      lHdr.aux_file[lInc] := cleanChar(lHdr.aux_file[lInc]);{24 spaces}
+  for lInc := 1 to 10 do
+      lHdr.Data_Type[lInc] := cleanChar(lHdr.Data_Type[lInc]);
+  for lInc := 1 to 18 do
+      lHdr.db_name[lInc] := cleanChar(lHdr.db_name[lInc]);
+   for lInc := 1 to 16 do
+       lHdr.intent_name[lInc] := cleanChar(lHdr.intent_name[lInc]);
+
+end;
+
 function FixDataType (var lHdr: TMRIcroHdr ): boolean;
 //correct mistakes of datatype and bitpix - especially for software which only sets one
 label
@@ -844,6 +869,7 @@ begin
 	  ShowMsg('Illegal NIfTI Format Header: this header does not specify 1..7 dimensions.');
 	  exit;
   end;
+  FixBadStrs(lHdr.NIFTIhdr);
   FixDataType(lHdr);
   result := true;
   if  IsNifTiMagic(lHdr.niftiHdr) then begin  //must match MAGMA in nifti_img
@@ -954,7 +980,6 @@ begin
 		0,0,lHdr.NIFTIhdr.pixdim[3],(lOri[3]-1)*-lHdr.NIFTIhdr.pixdim[3],      // 3D "graphics" matrix
 		0,0,0,1);
   end;
-
   FixCrapMat(lHdr.Mat);
   if swapEndian then
     lHdr.DiskDataNativeEndian := false;//foreign data with swapped image data
@@ -1030,7 +1055,7 @@ begin
          for lInc := 1 to 80 do
              descrip[lInc] := chr(0);{80 spaces}
          for lInc := 1 to 24 do
-             aux_file[lInc] := chr(0);{80 spaces}
+             aux_file[lInc] := chr(0);{24 spaces}
          {below are standard settings which are not 0}
          bitpix := 16;//vc16; {8bits per pixel, e.g. unsigned char 136}
          DataType := 4;//vc4;{2=unsigned char, 4=16bit int 136}

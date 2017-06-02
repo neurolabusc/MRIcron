@@ -6,13 +6,66 @@ interface
 function IniName: string;
 function DefaultsDir (lSubFolder: string): string;
 function UserDataFolder: string;  //uses shlobj
+{$IFDEF OLDOSX}
+function AppDir: string;  //e.g. c:\folder\ for c:\folder\myapp.exe, but /folder/myapp.app/ for /folder/myapp.app/app
+{$ELSE}
+function AppDir: string;  //OSX 10.12 requires pigz/dcm2niix in Resources for code signing. e.g. c:\folder\ for c:\folder\myapp.exe, but /myapp.app/Contents/Resources
+{$ENDIF}
 
 implementation
 {$Include isgui.inc}
 
 {$IFDEF UNIX}
-uses Process, SysUtils,classes,IniFiles,
+uses Process, SysUtils,classes,IniFiles, define_types,
 {$IFDEF GUI}dialogs;{$ELSE} dialogsx;{$ENDIF}
+
+{$IFDEF Darwin}
+function AppDirActual: string; //e.g. c:\folder\ for c:\folder\myapp.exe, but /folder/myapp.app/ for /folder/myapp.app/app
+//OSX Sierra: randomlocation on your drive https://9to5mac.com/2016/06/15/macos-sierra-gatekeeper-changes/
+var
+   lInName,lPath,lName,lExt: string;
+begin
+ result := '';
+ lInName := extractfilepath(paramstr(0));
+ lExt := '';
+ while (length(lInName) > 1) and (upcase(lExt) <> '.APP')  do begin
+       FilenameParts (lInName, lPath,lName,lExt) ;
+       lInName := ExpandFileName(lInName + '\..');
+       //showmessage(lInName+'   '+lPath+':'+lName+':'+lExt);
+ end;
+ if (upcase(lExt) = '.APP')  then
+    result := lPath+lName+lExt+pathdelim;
+end;
+
+{$IFDEF OLDOSX}
+function AppDir: string;  //e.g. c:\folder\ for c:\folder\myapp.exe, but /folder/myapp.app/ for /folder/myapp.app/app
+begin
+     result := AppDirActual;
+end;
+{$ELSE}
+///OSX 10.12 will not codesign files if pigz and dcm2niix are not in the resources folder MRIcroGL.app/Contents/Resources
+function AppDir: string;  //e.g. c:\folder\ for c:\folder\myapp.exe, but /myapp.app/Contents/Resources
+begin
+     result := AppDirActual+'Contents'+pathdelim+'Resources'+pathdelim;
+end;
+{$ENDIF}
+
+function AppDir2: string; //e.g. c:\folder\ for c:\folder\myapp.exe, but /folder/myapp.app/ for /folder/myapp.app/app
+begin
+ result := ExtractFilePath(ExtractFileDir(AppDirActual));
+end;
+
+{$ELSE}
+function AppDir: string; //e.g. c:\folder\ for c:\folder\myapp.exe, but /folder/myapp.app/ for /folder/myapp.app/app
+begin
+ result := extractfilepath(paramstr(0));
+end;
+
+function AppDir2: string;
+begin
+   result := AppDir;
+end;
+{$ENDIF}
 
 function UserDataFolder: string;
 begin

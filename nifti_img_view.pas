@@ -1767,6 +1767,12 @@ begin
 	 SetBGImgDefaults(gBGImg);
 	 CloseImagesClick(nil);
 	 gColorSchemeDir := extractfilepath(paramstr(0))+'lut';
+         {$IFDEF Darwin}
+         if not fileexists(gColorSchemeDir) then
+            gColorSchemeDir := AppDir + 'lut';
+         //showmessage(gTemplateDir);
+         {$ENDIF}
+
 	 {$IFNDEF Unix} DragAcceptFiles(Handle, True); //engage drag and drop
          {$ENDIF}
 	 UpdateColorSchemes;
@@ -1785,6 +1791,11 @@ begin
          {$ENDIF}
 {$ENDIF}
 	 gTemplateDir := extractfilepath(paramstr(0))+'templates';
+         {$IFDEF Darwin}
+         if not fileexists(gTemplateDir) then
+            gTemplateDir := AppDir + 'templates';
+         //showmessage(gTemplateDir);
+         {$ENDIF}
 	 UpdateTemplates;
 
 	 for lInc := 1 to knMRU do
@@ -2165,7 +2176,7 @@ begin
 			gDrawImg.PenThick := 1;
 		end;
    end; //paint tool selected
-   //lImage.Canvas.Pen.Width := 1;//abba
+   //lImage.Canvas.Pen.Width := 1;
    if  (FillBtn.Down) and (ssCtrl in Shift) then begin  //3D fill
 			XYscrn2Img (lImage,lPanel,lX,lY, lXout,lYOut,lZOut);
 				XViewEdit.value := lXOut;
@@ -3035,7 +3046,7 @@ end;
 procedure TImgForm.OverlayOpenClick(Sender: TObject);
 var
 	lFilename: string;
-	lOverlay,lInc: integer;
+	lInc: integer;
 begin
 	if gMRIcroOverlay[kBGOverlayNum].ScrnBufferItems < 1 then begin
 		showmessage('Please load a background image (''File''/''Open'') before adding an overlay.');
@@ -3046,32 +3057,18 @@ begin
     exit;
   for lInc := 1 to HdrForm.OpenHdrDlg.Files.Count do begin //vcx
     lFilename := HdrForm.OpenHdrDlg.Files[lInc-1];
-    LoadOverlayIncludingRGB{LoadOverlay}(lFilename);
-    LayerDrop.ItemIndex := (LayerDrop.Items.Count-1);
+    LoadOverlayIncludingRGB(lFilename);
     {$IFNDEF FPC}
  	LayerDrop.SetItemIndex(LayerDrop.Items.Count-1);
     {$ELSE}
- 	LayerDrop.ItemIndex :=(LayerDrop.Items.Count-1);
+        if LayerDrop.Items.Count < 1 then
+         LayerDrop.ItemIndex := 0
+        else
+ 	    LayerDrop.ItemIndex :=(LayerDrop.Items.Count-1);
     {$ENDIF}
   end;
-
-
-(*	//HdrForm.OpenHdrDlg.Filter := kImgFilter;
-	// if not HdrForm.OpenHdrDlg.Execute then exit;
-	if not OpenDialogExecute(kImgFilter,'Select overlay image',false) then exit;
-	 lOverlay := 0;
-	 for lC := 1 to (knMaxOverlay-1) do //-1: save final overlay for VOI
-		  if (lOverlay = 0) and (gMRIcroOverlay[lC].ImgBufferItems = 0) then
-			lOverlay := lC;
-	 if lOverlay = 0 then begin
-		showmessage('Unable to add an overlay. You have loaded the maximum number of overlays.');
-		exit;
-	 end;
-	 lFilename := HdrForm.OpenHdrDlg.Filename;
-	 OverlayOpenCore ( lFilename, lOverlay);
-    *)
-	  LayerDropSelect(nil);
-end; //OverlayOpenClick
+  LayerDropSelect(nil);
+end; //OverlayOpenClick()
 
 procedure TImgForm.BGtrans100Click(Sender: TObject);
 begin
@@ -3114,12 +3111,19 @@ begin
 	lLayer := 0;
 	for lPos := 1 to (knMaxOverlay-1) do //-1 as max overlay is VOI
 	  if (gMRIcroOverlay[lPos].ImgBufferItems > 0) then begin
+           inc(lLayer);
+           {$IFDEF LCLCocoa} //http://stackoverflow.com/questions/2320059/how-to-add-multiple-menu-items-with-the-same-title-to-nspopupbuttonnsmenu
+                     lStrings.Add(ParseFileName(ExtractFileName(gMRIcroOverlay[lPos].HdrFileName))+':'+inttostr(lLayer));
+             {$ELSE}
 		   lStrings.Add(ParseFileName(ExtractFileName(gMRIcroOverlay[lPos].HdrFileName)));
-		   inc(lLayer);
+             {$ENDIF}
+                   //lStrings.Add(inttostr(lLayer));  //qball
+
 		   LUTdropLoad(lLayer);
 	  end;
+        //Clipboard.AsText:= lStrings.Text;
 	LayerDrop.Items := lStrings;
-
+        //Clipboard.AsText:= LayerDrop.Items.Text;
    {$IFNDEF FPC}
 	if LayerDrop.ItemIndex >= LayerDrop.Items.Count then
 		LayerDrop.SetItemIndex(LayerDrop.Items.Count-1);

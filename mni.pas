@@ -29,6 +29,11 @@ var
 implementation
 uses define_types, nifti_img,nifti_img_view;
 { TMNIForm }
+{$IFDEF FPC}
+{$R *.lfm}
+{$ELSE}
+{$R *.DFM}
+{$ENDIF}
 
 procedure TMNIForm.XEditChange(Sender: TObject);
   var
@@ -54,7 +59,7 @@ begin
 end;
 
 initialization
-  {$I mni.lrs}
+  //{$I mni.lrs}
 
 end.
 

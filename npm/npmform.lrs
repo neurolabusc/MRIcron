@@ -62,29 +62,29 @@ LazarusResources.Add('TMainForm','FORMDATA',[
   +'oupIndex'#3#131#0#9'RadioItem'#9#7'OnClick'#7#12'threadChange'#0#0#9'TMenuI'
   +'tem'#2'T7'#9'AutoCheck'#9#7'Caption'#6#1'7'#10'GroupIndex'#3#131#0#9'RadioI'
   +'tem'#9#7'OnClick'#7#12'threadChange'#0#0#9'TMenuItem'#2'T8'#9'AutoCheck'#9#7
-  +'Caption'#6#1'8'#7'Checked'#9#10'GroupIndex'#3#131#0#9'RadioItem'#9#7'OnClic'
-  +'k'#7#12'threadChange'#0#0#9'TMenuItem'#3'T12'#9'AutoCheck'#9#7'Caption'#6#2
-  +'12'#10'GroupIndex'#3#131#0#9'RadioItem'#9#7'OnClick'#7#12'threadChange'#0#0
-  ,#9'TMenuItem'#3'T15'#9'AutoCheck'#9#7'Caption'#6#2'15'#10'GroupIndex'#3#131#0
-  +#9'RadioItem'#9#7'OnClick'#7#12'threadChange'#0#0#9'TMenuItem'#3'T16'#9'Auto'
-  +'Check'#9#7'Caption'#6#2'16'#10'GroupIndex'#3#131#0#9'RadioItem'#9#7'OnClick'
-  +#7#12'threadChange'#0#0#9'TMenuItem'#3'T24'#9'AutoCheck'#9#7'Caption'#6#2'24'
-  +#10'GroupIndex'#3#131#0#9'RadioItem'#9#7'OnClick'#7#12'threadChange'#0#0#9'T'
-  +'MenuItem'#3'T32'#9'AutoCheck'#9#7'Caption'#6#2'32'#10'GroupIndex'#3#131#0#9
-  +'RadioItem'#9#7'OnClick'#7#12'threadChange'#0#0#0#9'TMenuItem'#16'PlankSzMen'
-  +'uItem1'#7'Caption'#6#10'Plank Size'#7'OnClick'#7#21'PlankSzMenuItem1Click'#0
-  +#0#0#9'TMenuItem'#10'Utilities1'#7'Caption'#6#9'Utilities'#0#9'TMenuItem'#9
-  +'Variance1'#7'Caption'#6#14'Variance image'#7'OnClick'#7#14'Variance1Click'#0
-  +#0#9'TMenuItem'#14'Makemeanimage2'#3'Tag'#2#1#7'Caption'#6#19'Make binarized'
-  +' mean'#7'OnClick'#7#19'Makemeanimage1Click'#0#0#9'TMenuItem'#14'Makemeanima'
-  +'ge1'#7'Caption'#6#21'Make mean/StDev image'#7'OnClick'#7#19'Makemeanimage1C'
-  +'lick'#0#0#9'TMenuItem'#21'SingleSubjectZScores1'#7'Caption'#6#22'Single Sub'
-  +'ject Z-Score'#7'OnClick'#7#26'SingleSubjectZScores1Click'#0#0#9'TMenuItem'
-  +#24'IntensitynormalizationA1'#3'Tag'#2#1#7'Caption'#6#25'Intensity normaliza'
-  +'tion A'#7'OnClick'#7#13'Balance1Click'#0#0#9'TMenuItem'#8'Balance1'#7'Capti'
-  +'on'#6#25'Intensity normalization B'#7'OnClick'#7#13'Balance1Click'#0#0#0#9
-  +'TMenuItem'#5'Help1'#7'Caption'#6#4'Help'#7'Visible'#8#0#9'TMenuItem'#6'Abou'
-  +'t1'#7'Caption'#6#5'About'#7'OnClick'#7#11'About1Click'#0#0#0#0#11'TSaveDial'
-  +'og'#10'SaveHdrDlg'#11'FilterIndex'#2#0#4'left'#2#8#3'top'#2'('#0#0#11'TOpen'
-  +'Dialog'#10'OpenHdrDlg'#11'FilterIndex'#2#0#4'left'#2#8#3'top'#2'H'#0#0#0
+  +'Caption'#6#1'8'#10'GroupIndex'#3#131#0#9'RadioItem'#9#7'OnClick'#7#12'threa'
+  +'dChange'#0#0#9'TMenuItem'#3'T12'#9'AutoCheck'#9#7'Caption'#6#2'12'#10'Group'
+  +'Index'#3#131#0#9'RadioItem'#9#7'OnClick'#7#12'threadChange'#0#0#9'TMenuItem'
+  ,#3'T15'#9'AutoCheck'#9#7'Caption'#6#2'15'#10'GroupIndex'#3#131#0#9'RadioItem'
+  +#9#7'OnClick'#7#12'threadChange'#0#0#9'TMenuItem'#3'T16'#9'AutoCheck'#9#7'Ca'
+  +'ption'#6#2'16'#10'GroupIndex'#3#131#0#9'RadioItem'#9#7'OnClick'#7#12'thread'
+  +'Change'#0#0#9'TMenuItem'#3'T24'#9'AutoCheck'#9#7'Caption'#6#2'24'#10'GroupI'
+  +'ndex'#3#131#0#9'RadioItem'#9#7'OnClick'#7#12'threadChange'#0#0#9'TMenuItem'
+  +#3'T32'#9'AutoCheck'#9#7'Caption'#6#2'32'#10'GroupIndex'#3#131#0#9'RadioItem'
+  +#9#7'OnClick'#7#12'threadChange'#0#0#0#9'TMenuItem'#16'PlankSzMenuItem1'#7'C'
+  +'aption'#6#10'Plank Size'#7'OnClick'#7#21'PlankSzMenuItem1Click'#0#0#0#9'TMe'
+  +'nuItem'#10'Utilities1'#7'Caption'#6#9'Utilities'#0#9'TMenuItem'#9'Variance1'
+  +#7'Caption'#6#14'Variance image'#7'OnClick'#7#14'Variance1Click'#0#0#9'TMenu'
+  +'Item'#14'Makemeanimage2'#3'Tag'#2#1#7'Caption'#6#19'Make binarized mean'#7
+  +'OnClick'#7#19'Makemeanimage1Click'#0#0#9'TMenuItem'#14'Makemeanimage1'#7'Ca'
+  +'ption'#6#21'Make mean/StDev image'#7'OnClick'#7#19'Makemeanimage1Click'#0#0
+  +#9'TMenuItem'#21'SingleSubjectZScores1'#7'Caption'#6#22'Single Subject Z-Sco'
+  +'re'#7'OnClick'#7#26'SingleSubjectZScores1Click'#0#0#9'TMenuItem'#24'Intensi'
+  +'tynormalizationA1'#3'Tag'#2#1#7'Caption'#6#25'Intensity normalization A'#7
+  +'OnClick'#7#13'Balance1Click'#0#0#9'TMenuItem'#8'Balance1'#7'Caption'#6#25'I'
+  +'ntensity normalization B'#7'OnClick'#7#13'Balance1Click'#0#0#0#9'TMenuItem'
+  +#5'Help1'#7'Caption'#6#4'Help'#7'Visible'#8#0#9'TMenuItem'#6'About1'#7'Capti'
+  +'on'#6#5'About'#7'OnClick'#7#11'About1Click'#0#0#0#0#11'TSaveDialog'#10'Save'
+  +'HdrDlg'#11'FilterIndex'#2#0#4'left'#2#8#3'top'#2'('#0#0#11'TOpenDialog'#10
+  +'OpenHdrDlg'#11'FilterIndex'#2#0#4'left'#2#8#3'top'#2'H'#0#0#0
 ]);

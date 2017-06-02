@@ -18,7 +18,7 @@ interface
         SysUtils,classes,IniFiles,
         {$IFDEF GUI} forms,userdir, dialogs{$ELSE}dialogsx{$ENDIF};
 const
-     kMRIcronVersDate = '2MAY2016';
+     kMRIcronVersDate = '3MAY2016';
      {$IFDEF LCLCocoa}
      kMRIcronAPI = 'Cocoa';
     {$ELSE}
@@ -556,6 +556,46 @@ begin
     lName := '';
     lExt := '';
     lLen := length(lInName);
+    if lLen < 1 then exit;
+    //next find final pathdelim
+    lPathPos := lLen;
+    while (lPathPos > 0) and (lInName[lPathPos] <> '\') and (lInName[lPathPos] <> '/') do
+          dec(lPathPos);
+    if (lInName[lPathPos] = '\') or (lInName[lPathPos] = '/') then begin
+       for lPos := 1 to lPathPos do
+           lPath := lPath + lInName[lPos];
+    end;
+    // else
+    //    dec(lPathPos);
+    inc(lPathPos);
+    //next find first ext
+    lExtPos := 1;
+    while (lExtPos <= lLen) and (lInName[lExtPos] <> '.') do
+          inc(lExtPos);
+    if (lInName[lExtPos] = '.')  then begin
+       for lPos := lExtPos to lLen do
+           lExt := lExt + lInName[lPos];
+    end;
+    // else
+    //    inc(lExtPos);
+    dec(lExtPos);
+    //next extract filename
+    //fx(lPathPos,lExtPos);
+
+    if (lPathPos <= lExtPos) then
+       for lPos := lPathPos to lExtPos do
+           lName := lName + lInName[lPos];
+    result := true;
+end;
+(*function FilenameParts (lInName: string; var lPath,lName,lExt: string): boolean;
+var
+   lLen,lPos,lExtPos,lPathPos: integer;
+begin
+    result := false;
+    lPath := '';
+    lName := '';
+    lExt := '';
+    lLen := length(lInName);
     if lLen < 1 then
        exit;
     if DirExists(lInName) then begin //we have been passed a folder, not a file
@@ -595,7 +635,7 @@ begin
            lName := lName + lInName[lPos];
     result := true;
 
-end;
+end;  *)
 
 procedure createArray64 (var ptr: pointer; var ra :Doublep0; Sz: integer); overload;
 var i: integer;

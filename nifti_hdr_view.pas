@@ -361,7 +361,6 @@ begin
           xyzt_sizeDrop.ItemIndex:=(xyzt_units and 3);
           xyzt_timeDrop.ItemIndex:=(time_units2DropItem(xyzt_units));
           {$ENDIF}
-
           CommentEdit.text := descrip;
           data_typeEdit.text := data_type;
           db_.text := db_name;

@@ -224,7 +224,6 @@ object MainForm: TMainForm
         object T8: TMenuItem
           AutoCheck = True
           Caption = '8'
-          Checked = True
           GroupIndex = 131
           RadioItem = True
           OnClick = threadChange

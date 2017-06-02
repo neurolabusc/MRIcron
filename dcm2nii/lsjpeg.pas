@@ -350,6 +350,7 @@ end; //nested proc ReadWord
     if (not lImgTypeC3) then
       goto 123; //lossless compressed huffman tables
     //NEXT: unpad data - delete byte that follows $FF
+    //http://stackoverflow.com/questions/27949420/dealing-with-padding-stuff-bits-entropy-encoded-jpeg
     lINc := lRawPos;
     lIncX := lRawPos;
     repeat
@@ -388,6 +389,7 @@ end; //nested proc ReadWord
     lBitMask[16]:= 65535;
     lBitMask[17]:= 131071; //ONLY required for Osiris corrupted images, see DecodePixelDifference for details
     //NEXT: some RGB images use only a single Huffman table for all 3 colour planes. In this case, replicate the correct values
+    Showmsg(format('aDecodeJPEG %d of %d',[lRawPos, lRawSz]));
     if (lnHufTables < SOFnf) then begin //use single Hufman table for each frame
        //showmessage('generating tables'+inttostr(SOFnf));
        if lnHufTables < 1 then begin
@@ -412,6 +414,7 @@ end; //nested proc ReadWord
       for lInc := 0 to 255 do
           lLookUpRA[lFrameCount,lInc] := 255; //Impossible value for SSSS, suggests 8-bits can not describe answer
     //NEXT fill lookuptable
+     Showmsg(format('vDecodeJPEG %d of %d',[lRawPos, lRawSz]));
     for lFrameCount := 1 to  SOFnf do begin
       lIncY := 0;
       for lSz := 1 to 8 do begin //set the huffman lookup table for keys with lengths <=8
@@ -455,7 +458,9 @@ end; //nested proc ReadWord
        lItems :=  SOFxdim*SOFydim;
        lPredicted :=  1 shl (SOFPrecision-1-SOSpttrans);
        lInc := 0;
-       if (SOFPrecision<> 8) then begin //start - 16 bit data
+        Showmsg(format('cDecodeJPEG %d of %d',[lRawPos, lRawSz]));
+
+    if (SOFPrecision<> 8) then begin //start - 16 bit data
           lImgRA := @lOutSmallRA[0];{set to 1 for MRIcro, else 0}
           FillChar(lImgRA^,lItems*sizeof(word), 0); //zero array
           lPredB:= 0;

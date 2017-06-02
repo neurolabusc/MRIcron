@@ -1519,6 +1519,7 @@ lFlip := false;
                 end;
                 lReadOK := true;
                 if (lDicomData.JPEGLosslessCpt) then begin
+
                    AssignFile(lInF, lDicomImgName);
                    Reset(lInF,1);
                    //lDICOMdata.CompressSz := FileSize(lInF)-lDicomData.CompressOffset;
@@ -1528,6 +1529,7 @@ lFlip := false;
                    if ( lDicomData.XYZdim[3] > 1) or ( lDicomData.XYZdim[4] > 1) then
                     dcmMsg('*Warning: this software will only convert the first slice of this multislice lossless compressed JPEG');
                    lAllocSLiceSz := (lDICOMdata.XYZdim[1]*lDICOMdata.XYZdim[2] * lDICOMdata.Allocbits_per_pixel+7) div 8 ;
+                   //showmsg(format ('%dx%d %dbpp', [lDICOMdata.XYZdim[1], lDICOMdata.XYZdim[2], lDICOMdata.Allocbits_per_pixel]));
                    DecodeJPEG(lInF,SmallIntP0(lsBuffer),ByteP0(lsBuffer),lAllocSliceSz,lDicomData.CompressOffset,lDICOMdata.CompressSz,false);
                    CloseFile(lInF);
                    (*FlipTB(lDICOMdata,lsBuffer);

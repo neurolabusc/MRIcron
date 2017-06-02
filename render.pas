@@ -808,6 +808,11 @@ begin
      Close1.ShortCut := ShortCut(Word('W'), [ssMeta]);
      {$ENDIF}
      gRenderDir  := DefaultsDir('render');
+     {$IFDEF Darwin}
+     if not fileexists(gRenderDir) then
+        gRenderDir := AppDir + 'render';
+     //showmessage(gTemplateDir);
+     {$ENDIF}
      //showmessage(gRenderDir);
      //gRenderDir := extractfiledir(paramstr(0))+pathdelim+'render'+pathdelim;
      gRenderDefaultsFilename := gRenderDir + 'default.ini';

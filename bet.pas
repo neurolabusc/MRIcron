@@ -166,6 +166,11 @@ var
 begin
      result := false;
      lCmd :=  extractfilepath(paramstr(0))+'bet';
+     {$IFDEF Darwin}
+     if not fileexists(lCmd) then
+        lCmd := AppDir + 'bet';
+     //showmessage(gTemplateDir);
+     {$ENDIF}
      {$IFNDEF Unix}
          lCmd := lCmd+'.exe';
      {$ELSE}

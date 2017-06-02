@@ -308,7 +308,7 @@ begin
           lDynStr := lDynStr+kCR+'Calibration: '+floattostr(lCalibrationFactor);
      end; {lShow Summary}
    end; //lECAT7
-if lFiletype = 9 then lFiletype := 7;  //1364: treat projections as Volume16's 
+if lFiletype = 9 then lFiletype := 7;  //1364: treat projections as Volume16's
 if not (lFileType in [1,2,3,4,7]) then begin
    dcmMsg('This software does not recognize the ECAT file type. Selected filetype: '+inttostr(lFileType));
    goto 539;
@@ -4984,7 +4984,7 @@ end;
 			  if not lrOK then goto 666;
               e_len := 0;      remaining := 0;
              lDICOMdata.XYZmm[3] := lfloat1;
-             
+
              lThickness := lfloat1;//lDICOMdata.Thickness := lfloat1; //1391b
           end;
           //$60: begin info := 'KVP [Peak Output, KV]';  t := _string; end; //aqw
@@ -5080,7 +5080,7 @@ end;
 				 DICOMHeaderString(TmpStr);
                                  lDicomData.Vers0018_1020 := Siemensversion(TmpStr);
                  end;
-          
+
                  //showdcmMsg(inttostr(lDicomData.Vers0018_1020)+' '+TmpStr);
           end;
 		  $1030: begin
@@ -5376,7 +5376,7 @@ $0019: begin
                  end;// Z diffusion direction
            end;//Case element
            //
-           
+
         end;//if GE
         end;//$0019
 
@@ -5456,7 +5456,7 @@ $0020 :
           $60 :  info := 'Laterality';
           $0105 : begin
                 //Apr2007
-               
+
                 DICOMHeaderStringToInt(lnVol);
 
            //Number of temporal positions=105
@@ -6208,11 +6208,12 @@ end; //$0028
      $FFFE : begin
         case element of
         $E000 : begin
+
           //e_len := 0; remaining := e_len;     //qas 7/2013     //not sure why?
           info := 'Image Fragment ['+inttostr(e_len)+'@'+inttostr(dFilePos(fp))+']';
-          dcmMsg( IntToHex(group,4)+','+IntToHex(element,4)+','+Info+'='+lStr+' Offset'+inttostr(dfilepos(fp))+' Length'+inttostr(e_len));
+          //dcmMsg( IntToHex(group,4)+','+IntToHex(element,4)+','+Info+'='+lStr+' Offset'+inttostr(dfilepos(fp))+' Length'+inttostr(e_len));
 
-          inc(lIndent);
+          //inc(lIndent); //DUCK
           lInside00209113 := (lprevGroup = $0020) and (lprevelement = $9113);
           lInside2005140F  := (lprevGroup = $2005) and (lprevelement = $140F);
          // if (lInside00209113) then fx(333);
@@ -6262,11 +6263,12 @@ lProprietaryImageThumbnail := false; //1496
          *)
           lFirstFragment := false;//Dec09
           lDICOMdataBackUp := lDICOMData;//Dec09
+          //dcmMsg('abba'+inttostr(lDICOMdata.CompressOffset)+'  '+inttostr(e_len));
 
          if ((e_len > 1024) and ((lDicomData.JPEGLosslessCpt)) or (e_len >= (lDicomData.XYZdim[1]*lDicomData.XYZdim[2]))){Apr 2011} and (lDicomData.XYZdim[1]> 1) then begin
             lDICOMdata.CompressOffset := dFilePos(fp);
             lDICOMdata.CompressSz  := e_len;
-            
+
             Time_To_Quit := true;
             //dcmMsg('abba'+inttostr(lDICOMdata.CompressOffset)+'  '+inttostr(lDICOMdata.CompressSz));
          end;
@@ -6306,7 +6308,7 @@ lProprietaryImageThumbnail := false; //1496
               e_len := 0;
               end;
         end;
-		end; 
+		end;
         $FFFC : begin
               dSeek(fp, dFilePos(fp) + e_len);
                  tmpstr := inttostr(e_len);
@@ -6416,7 +6418,9 @@ end;
 				  lStr := (IntToStr(i));
 				end;
 				else begin
-						 if e_len > 0 then begin
+                                                if e_len > 256 then
+                                                   lStr := '*HUGE DATA*'
+                                                else if e_len > 0 then begin
 							for i := 0 to e_len-1 do begin
 							 if Char(buff[i]) in ['+','-','/','\',' ', '0'..'9','a'..'z','A'..'Z'] then
 								   lStr := lStr+(Char(buff[i]))

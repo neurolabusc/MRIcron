@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="9"/>
+    <Version Value="10"/>
     <PathDelim Value="\"/>
     <General>
       <Flags>
@@ -32,7 +32,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="32">
+    <Units Count="33">
       <Unit0>
         <Filename Value="dcm2niigui.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -46,9 +46,9 @@
         <ComponentName Value="MainForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="250"/>
-        <CursorPos X="16" Y="275"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="285"/>
+        <CursorPos X="31" Y="302"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -95,7 +95,7 @@
       </Unit5>
       <Unit6>
         <Filename Value="dicomtypes.pas"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="755"/>
         <CursorPos X="3" Y="771"/>
         <UsageCount Value="104"/>
@@ -111,8 +111,8 @@
       </Unit7>
       <Unit8>
         <Filename Value="convert.pas"/>
-        <TopLine Value="1319"/>
-        <CursorPos X="150" Y="1351"/>
+        <TopLine Value="1519"/>
+        <CursorPos X="22" Y="1533"/>
         <UsageCount Value="115"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -132,28 +132,29 @@
       </Unit10>
       <Unit11>
         <Filename Value="..\common\dialogsx.pas"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="10"/>
         <TopLine Value="16"/>
         <CursorPos X="5" Y="37"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit11>
       <Unit12>
         <Filename Value="dicomcompat.pas"/>
-        <EditorIndex Value="7"/>
-        <TopLine Value="6539"/>
-        <CursorPos X="5" Y="6556"/>
+        <EditorIndex Value="9"/>
+        <TopLine Value="6540"/>
+        <CursorPos X="37" Y="6557"/>
         <UsageCount Value="114"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit12>
       <Unit13>
         <Filename Value="sortdicom.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="330"/>
-        <CursorPos X="23" Y="351"/>
-        <UsageCount Value="66"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="317"/>
+        <CursorPos X="43" Y="320"/>
+        <UsageCount Value="67"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit13>
       <Unit14>
@@ -172,7 +173,7 @@
       </Unit15>
       <Unit16>
         <Filename Value="csaread.pas"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="376"/>
         <CursorPos Y="404"/>
         <UsageCount Value="102"/>
@@ -182,7 +183,7 @@
       <Unit17>
         <Filename Value="dialogs_msg.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="8"/>
         <CursorPos X="11" Y="9"/>
         <UsageCount Value="208"/>
         <Loaded Value="True"/>
@@ -240,11 +241,10 @@
       </Unit24>
       <Unit25>
         <Filename Value="paramstrs.pas"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="2"/>
-        <CursorPos X="92" Y="8"/>
-        <UsageCount Value="25"/>
+        <CursorPos X="15" Y="12"/>
+        <UsageCount Value="27"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit25>
@@ -289,134 +289,144 @@
       </Unit30>
       <Unit31>
         <Filename Value="nii_crop.pas"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="7"/>
         <TopLine Value="12"/>
         <CursorPos X="70" Y="14"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit31>
+      <Unit32>
+        <Filename Value="lsjpeg.pas"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="347"/>
+        <CursorPos X="24" Y="368"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit32>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="nii_crop.pas"/>
-        <Caret Line="762" Column="16" TopLine="734"/>
+        <Filename Value="csaread.pas"/>
+        <Caret Line="26" Column="32" TopLine="9"/>
       </Position1>
       <Position2>
-        <Filename Value="nii_crop.pas"/>
-        <Caret Line="767" Column="10" TopLine="739"/>
+        <Filename Value="csaread.pas"/>
+        <Caret Line="404" Column="32" TopLine="371"/>
       </Position2>
       <Position3>
-        <Filename Value="nii_crop.pas"/>
-        <Caret Line="773" Column="12" TopLine="745"/>
+        <Filename Value="csaread.pas"/>
+        <Caret Line="227" Column="39" TopLine="211"/>
       </Position3>
       <Position4>
-        <Filename Value="nii_crop.pas"/>
-        <Caret Line="809" Column="20" TopLine="781"/>
+        <Filename Value="csaread.pas"/>
+        <Caret Line="265" Column="19" TopLine="237"/>
       </Position4>
       <Position5>
-        <Filename Value="nii_crop.pas"/>
-        <Caret Line="815" Column="4" TopLine="786"/>
+        <Filename Value="csaread.pas"/>
+        <Caret Line="290" Column="21" TopLine="262"/>
       </Position5>
       <Position6>
-        <Filename Value="nii_crop.pas"/>
-        <Caret Line="821" Column="20" TopLine="793"/>
+        <Filename Value="csaread.pas"/>
+        <Caret Line="297" Column="13" TopLine="269"/>
       </Position6>
       <Position7>
-        <Filename Value="nii_crop.pas"/>
-        <Caret Line="828" Column="20" TopLine="800"/>
+        <Filename Value="csaread.pas"/>
+        <Caret Line="301" Column="10" TopLine="273"/>
       </Position7>
       <Position8>
-        <Filename Value="nii_crop.pas"/>
-        <Caret Line="888" Column="15" TopLine="860"/>
+        <Filename Value="gui.pas"/>
+        <Caret Line="398" Column="32" TopLine="385"/>
       </Position8>
       <Position9>
-        <Filename Value="nii_crop.pas"/>
-        <Caret Line="893" Column="15" TopLine="865"/>
+        <Filename Value="gui.pas"/>
+        <Caret Line="2" Column="123"/>
       </Position9>
       <Position10>
-        <Filename Value="nii_crop.pas"/>
-        <Caret Line="933" Column="15" TopLine="905"/>
+        <Filename Value="gui.pas"/>
+        <Caret Line="275" Column="16" TopLine="250"/>
       </Position10>
       <Position11>
-        <Filename Value="nii_crop.pas"/>
-        <Caret Line="937" Column="16" TopLine="909"/>
+        <Filename Value="paramstrs.pas"/>
+        <Caret Line="6" Column="95"/>
       </Position11>
       <Position12>
-        <Filename Value="nii_crop.pas"/>
-        <Caret Line="940" Column="12" TopLine="912"/>
+        <Filename Value="dicomcompat.pas"/>
+        <Caret Line="6215" Column="36" TopLine="6214"/>
       </Position12>
       <Position13>
-        <Filename Value="nii_crop.pas"/>
-        <Caret Line="967" Column="13" TopLine="939"/>
+        <Filename Value="dicomcompat.pas"/>
+        <Caret Line="3213" Column="91" TopLine="3201"/>
       </Position13>
       <Position14>
-        <Filename Value="nii_crop.pas"/>
-        <Caret Line="969" Column="14" TopLine="941"/>
+        <Filename Value="dicomcompat.pas"/>
+        <Caret Line="3934" Column="15" TopLine="3913"/>
       </Position14>
       <Position15>
-        <Filename Value="nii_crop.pas"/>
-        <Caret Line="3" Column="92"/>
+        <Filename Value="dicomcompat.pas"/>
+        <Caret Line="4739" Column="33" TopLine="4718"/>
       </Position15>
       <Position16>
-        <Filename Value="nii_crop.pas"/>
-        <Caret Line="40" Column="15" TopLine="12"/>
+        <Filename Value="dicomcompat.pas"/>
+        <Caret Line="4861" Column="33" TopLine="4840"/>
       </Position16>
       <Position17>
-        <Filename Value="convert.pas"/>
-        <Caret Line="1344" Column="53" TopLine="1342"/>
+        <Filename Value="dicomcompat.pas"/>
+        <Caret Line="4864" Column="36" TopLine="4843"/>
       </Position17>
       <Position18>
         <Filename Value="dicomcompat.pas"/>
-        <Caret Line="4062" Column="57" TopLine="4034"/>
+        <Caret Line="6259" Column="55" TopLine="6250"/>
       </Position18>
       <Position19>
-        <Filename Value="convert.pas"/>
-        <Caret Line="1353" Column="42" TopLine="1347"/>
+        <Filename Value="dicomcompat.pas"/>
+        <Caret Line="6454" Column="21" TopLine="6429"/>
       </Position19>
       <Position20>
-        <Filename Value="csaread.pas"/>
-        <Caret Line="26" Column="32" TopLine="9"/>
+        <Filename Value="dicomcompat.pas"/>
+        <Caret Line="6164" Column="43" TopLine="6164"/>
       </Position20>
       <Position21>
-        <Filename Value="csaread.pas"/>
-        <Caret Line="404" Column="32" TopLine="371"/>
+        <Filename Value="dicomcompat.pas"/>
+        <Caret Line="4563" Column="21" TopLine="4542"/>
       </Position21>
       <Position22>
-        <Filename Value="csaread.pas"/>
-        <Caret Line="227" Column="39" TopLine="211"/>
+        <Filename Value="dicomcompat.pas"/>
+        <Caret Line="6421" Column="66" TopLine="6407"/>
       </Position22>
       <Position23>
-        <Filename Value="csaread.pas"/>
-        <Caret Line="265" Column="19" TopLine="237"/>
+        <Filename Value="convert.pas"/>
+        <Caret Line="1307" Column="30" TopLine="1293"/>
       </Position23>
       <Position24>
-        <Filename Value="csaread.pas"/>
-        <Caret Line="290" Column="21" TopLine="262"/>
-      </Position24>
-      <Position25>
-        <Filename Value="csaread.pas"/>
-        <Caret Line="297" Column="13" TopLine="269"/>
-      </Position25>
-      <Position26>
-        <Filename Value="csaread.pas"/>
-        <Caret Line="301" Column="10" TopLine="273"/>
-      </Position26>
-      <Position27>
-        <Filename Value="gui.pas"/>
-        <Caret Line="398" Column="32" TopLine="385"/>
-      </Position27>
-      <Position28>
-        <Filename Value="gui.pas"/>
-        <Caret Line="2" Column="123"/>
-      </Position28>
-      <Position29>
         <Filename Value="gui.pas"/>
         <Caret Line="275" Column="16" TopLine="250"/>
+      </Position24>
+      <Position25>
+        <Filename Value="gui.pas"/>
+        <Caret Line="302" Column="31" TopLine="285"/>
+      </Position25>
+      <Position26>
+        <Filename Value="sortdicom.pas"/>
+        <Caret Line="244" Column="10" TopLine="236"/>
+      </Position26>
+      <Position27>
+        <Filename Value="convert.pas"/>
+        <Caret Line="1205" Column="19" TopLine="1204"/>
+      </Position27>
+      <Position28>
+        <Filename Value="convert.pas"/>
+        <Caret Line="1522" Column="39" TopLine="1500"/>
+      </Position28>
+      <Position29>
+        <Filename Value="convert.pas"/>
+        <Caret Line="1518" Column="28" TopLine="1510"/>
       </Position29>
       <Position30>
-        <Filename Value="paramstrs.pas"/>
-        <Caret Line="6" Column="95"/>
+        <Filename Value="convert.pas"/>
+        <Caret Line="1533" Column="22" TopLine="1519"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>
