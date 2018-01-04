@@ -1,31 +1,31 @@
 object AboutForm: TAboutForm
   Tag = 321
-  Left = 882
-  Height = 159
-  Top = 233
-  Width = 650
+  Left = 498
+  Height = 174
+  Top = 223
+  Width = 727
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'About...'
-  ClientHeight = 159
-  ClientWidth = 650
+  ClientHeight = 174
+  ClientWidth = 727
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.9.0.0'
   object Panel2: TPanel
     Left = 0
     Height = 99
-    Top = 60
-    Width = 650
+    Top = 75
+    Width = 727
     Align = alBottom
     ClientHeight = 99
-    ClientWidth = 650
+    ClientWidth = 727
     TabOrder = 0
     object HomepageLabel: TLabel
       Left = 16
-      Height = 32
+      Height = 16
       Top = 8
-      Width = 77
+      Width = 46
       Alignment = taCenter
       Caption = 'version'
       ParentColor = False
@@ -33,9 +33,9 @@ object AboutForm: TAboutForm
     end
     object ThreadLabel: TLabel
       Left = 8
-      Height = 32
+      Height = 16
       Top = 48
-      Width = 91
+      Width = 55
       Alignment = taCenter
       Caption = ' Threads'
       ParentColor = False
@@ -43,11 +43,11 @@ object AboutForm: TAboutForm
   end
   object Label1: TLabel
     Left = 8
-    Height = 32
+    Height = 43
     Top = 8
-    Width = 89
+    Width = 142
     Caption = 'MRIcron'
-    Font.Height = -24
+    Font.Height = -36
     ParentColor = False
     ParentFont = False
   end

@@ -9,8 +9,9 @@ object HistogramForm: THistogramForm
   Font.Height = -11
   Menu = MainMenu1
   OnCreate = FormCreate
+  OnHide = FormHide
   Position = poScreenCenter
-  LCLVersion = '1.5'
+  LCLVersion = '1.9.0.0'
   object HistoPanel: TScrollBox
     Left = 0
     Height = 336

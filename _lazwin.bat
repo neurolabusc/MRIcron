@@ -8,7 +8,7 @@ c:\lazarus\lazbuild dcm2nii.lpr
 c:\lazarus\fpc\3.0.0\bin\x86_64-win64\strip dcm2nii.exe
 #C:\PROGRA~2\BORLAND\DELPHI7\BIN\dcc32   -CC -B dcm2nii.dpr
 # c:\strip dcm2nii.exe
-copy /Y dcm2nii.exe c:\mricron
+###copy /Y dcm2nii.exe c:\mricron
 cd ..
 
 call _clean.bat
@@ -19,7 +19,7 @@ cd .\npm
 # c:\strip npm.exe
 c:\lazarus\lazbuild npm.lpr
 c:\lazarus\fpc\3.0.0\bin\x86_64-win64\strip npm.exe
-copy /Y npm.exe c:\mricron
+#####copy /Y npm.exe c:\mricron
 cd ..
 
 cd .\dcm2nii
@@ -27,7 +27,7 @@ cd .\dcm2nii
 # c:\strip dcm2niigui.exe
 c:\lazarus\lazbuild dcm2niigui.lpr
 c:\lazarus\fpc\3.0.0\bin\x86_64-win64\strip dcm2niigui.exe
-copy /Y dcm2niigui.exe c:\mricron
+###copy /Y dcm2niigui.exe c:\mricron
 cd ..
 
 

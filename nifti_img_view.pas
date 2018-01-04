@@ -10,19 +10,19 @@ uses
 {$H+}
 {$IFDEF Darwin}Process,{$ENDIF}  //CarbonOpenDoc,
 {$IFDEF Unix}
-  lclintf,LCLType,//gettickcount ,LMessages
+  lclintf,LCLType,fileutil,//gettickcount ,LMessages
 {$ELSE}
   Windows,ShellAPI,
 {$ENDIF}
 {$IFDEF COMPILEYOKE}
 yokesharemem,
 {$ENDIF}
-
+{$IFDEF FPC} fphttpclient, strutils, {$ENDIF}
 LResources, fx8, cpucount, SysUtils, Classes, Graphics, Controls, Forms,
 Dialogs, Menus, ComCtrls, ExtCtrls, StdCtrls, GraphicsMathLibrary, ClipBrd,
 define_types, Spin, Buttons, nifti_hdr, nifti_hdr_view, nifti_img, voismooth,
 IniFiles, ReadInt,  stat, Distr, bet, mni, prefs, CropEdges,nifti_types,
-userdir, graphx, GraphType, IntfGraphics, landmarks,fastsmooth, nii_label;//registry
+userdir, graphx, GraphType, IntfGraphics, landmarks,fastsmooth, nii_label, dcm2nii;//registry
 
 
 type
@@ -60,6 +60,9 @@ AppleMenu: TMenuItem;
 MenuItem3: TMenuItem;
 DilateVOI1: TMenuItem;
 DilateShellsMenu1: TMenuItem;
+ImportMenu: TMenuItem;
+dcm2niiMenu: TMenuItem;
+CheckUpdatesMenu: TMenuItem;
 NewWindow1: TMenuItem;
 Sagittal2: TMenuItem;
 Sagittal1: TMenuItem;
@@ -194,13 +197,15 @@ MNIMenu: TMenuItem;
 	Inferior1: TMenuItem;
 	Superior1: TMenuItem;
         YokeMenu: TMenuItem;
+        procedure ControlPanelClick(Sender: TObject);
+        procedure dcm2niiMenuClick(Sender: TObject);
         procedure DilateVOI1Click(Sender: TObject);
         procedure Extract1Click(Sender: TObject);
         procedure NewWindow1Click(Sender: TObject);
         procedure ToggleDrawMenu(Sender: TObject);
         procedure SaveVOIcore(lPromptFilename: boolean);
 procedure FormOpenFileMethod(const FileName : string);
-
+procedure CheckForUpdates(Sender: TObject);
 procedure Landmarks1Click(Sender: TObject);
 procedure SetIniMenus;
 procedure Batchclusterprobmaps1Batchclusterprobmaps1ClickClick(Sender: TObject);
@@ -235,6 +240,7 @@ procedure RescaleMenuClick(Sender: TObject);
 procedure Resliceimage1Click(Sender: TObject);
 procedure SaveasNIfTI1Click(Sender: TObject);
 procedure SaveDialog1Close(Sender: TObject);
+procedure ToolPanelClick(Sender: TObject);
 procedure UpdateColorSchemes;
 	procedure UpdateTemplates;
 	procedure UpdateMRU;
@@ -953,7 +959,7 @@ begin
         result := 0;
 end;
 
-{$DEFINE noTEST}
+{$DEFINE NoTEST}
 
 {$IFDEF TEST}
 procedure DrawBMP2( lx, ly: integer; var lBuff: RGBQuadp; var lImage: TImage);
@@ -1242,7 +1248,12 @@ end;
 
 procedure TImgForm.SaveDialog1Close(Sender: TObject);
 begin
-  ApplySaveDlgFilter(SaveDialog1);
+  //ApplySaveDlgFilter(SaveDialog1);
+end;
+
+procedure TImgForm.ToolPanelClick(Sender: TObject);
+begin
+
 end;
 
 
@@ -1511,7 +1522,8 @@ begin
   	lLayer := ActiveLayer;
 	HdrForm.SaveHdrDlg.Filename := gMRIcroOverlay[lLayer].HdrFilename;
 	HdrForm.WriteHdrForm (gMRIcroOverlay[lLayer]);
-	HdrForm.Show;
+	//HdrForm.ShowModal;
+        HdrForm.Show;
         //HdrForm.BringToFront;
  //HdrForm.BringToFront;
 end;
@@ -1695,7 +1707,7 @@ procedure TImgForm.FormCreate(Sender: TObject);
 var
    lInc: longint;
 begin
- Application.ShowButtonGlyphs := sbgNever;
+  Application.ShowButtonGlyphs := sbgNever;
  KeyPreview := true;
  {$IFDEF LINUX} //Lazarus Linux 1.6 has odd behavior if image width divisible by 8, but after single image of different width all is well
  InitImg(PGImageAx);
@@ -1728,12 +1740,8 @@ begin
         {$ENDIF}
  {$ENDIF}
 {$IFDEF Darwin}
-        {$IFNDEF LCLgtk} //only for Carbon or Cocoa compile
-        Exit1.visible := false;//with OSX users quit from application menu
-        {$ENDIF}
-        {$IFDEF LCLcocoa}
+        //x Exit1.visible := false;//with OSX users quit from application menu
         Application.OnDropFiles := FormDropFiles;
-        {$ENDIF}
  {$ENDIF}
      CreateFX8(gUndoImg);
      CreateFX8(gDrawImg);
@@ -1785,7 +1793,7 @@ begin
 	 LUTdrop.ItemIndex:=(0);
 	 Zoomdrop.ItemIndex:=(0);
 	 LayerDrop.ItemIndex:=(0);
-         MagnifyMenuItem.visible := false;
+         //x MagnifyMenuItem.visible := false;
          {$IFNDEF COMPILEYOKE}
          YokeMenu.visible := false;
          {$ENDIF}
@@ -1797,23 +1805,12 @@ begin
          //showmessage(gTemplateDir);
          {$ENDIF}
 	 UpdateTemplates;
-
 	 for lInc := 1 to knMRU do
 		 gMRUstr[lInc] := '';
-
-         (*if (ssShift in KeyDataToShiftState(vk_Shift))  then begin
-          	case MessageDlg('Shift key down during launch: do you want to reset the default preferences?', mtConfirmation,
-      				[mbYes, mbNo], 0) of	{ produce the message dialog box }
-      				mrNo: ReadIniFile;
-      	    end; //case
-
-         end else*)
-
          if  ResetDefaults then
-             DrawMenu.Visible := ToolPanel.visible
+             //DrawMenu.Visible := ToolPanel.visible
          else
 	    ReadIniFile;
-
          SetIniMenus;
          UpdateMRU;
 
@@ -1913,7 +1910,7 @@ end;
 
 procedure TImgForm.XViewEditChange(Sender: TObject);
 begin
-	 gBGImg.XViewCenter := XviewEdit.value;
+  gBGImg.XViewCenter := XviewEdit.value;
 	 gBGImg.YViewCenter := YviewEdit.value;
 	 gBGImg.ZViewCenter := ZviewEdit.value;
 	 RefreshImagesTimer.Enabled := true;
@@ -2128,7 +2125,6 @@ procedure TImgForm.PGImageMouseDown(Sender: TObject; Button: TMouseButton;Shift:
 var lZoom,lPanel,lX, lY,lXout,lYOut,lZOut,lBasePenThick,lX2, lY2: integer;
 	lImage: TImage;
 begin
-  //ImgForm.GetFocus := true;
    gSelectOrigin.X := -1;
 
    lX := X; lY := Y;
@@ -2426,7 +2422,7 @@ procedure TImgForm.PGImageMouseUp(Sender: TObject; Button: TMouseButton;
 var lX, lY,lPanel: integer;
 lImage: TImage;
 begin
-        lPanel := SelectedImageNum;
+  lPanel := SelectedImageNum;
         lImage := Sender as TImage;
 	 lX := X; lY := Y;
 	 ScaleScrn2BMP(lX,lY,lImage);
@@ -3211,7 +3207,8 @@ var
 	lLayer: integer;
 begin
 	lLayer := ActiveLayer;
-	//if gMRIcroOverlay[lLayer].WindowScaledMin = MinWindowEdit.Value then exit;
+        if MinWindowEdit.ValueEmpty then exit;
+        //if gMRIcroOverlay[lLayer].WindowScaledMin = MinWindowEdit.Value then exit;
 	gMRIcroOverlay[lLayer].WindowScaledMin := MinWindowEdit.Value;
         gMRIcroOverlay[lLayer].WindowScaledMax := MaxWindowEdit.Value;
 	RescaleImagesTimer.Enabled := true;
@@ -3222,8 +3219,10 @@ var
 	lLayer: integer;
 begin
 	 lLayer := ActiveLayer;
+         if MaxWindowEdit.ValueEmpty then exit;
 	 if gMRIcroOverlay[lLayer].WindowScaledMax = MaxWindowEdit.Value then exit;
-	 gMRIcroOverlay[lLayer].WindowScaledMax := MaxWindowEdit.Value;
+ 	gMRIcroOverlay[lLayer].WindowScaledMin := MinWindowEdit.Value;
+         gMRIcroOverlay[lLayer].WindowScaledMax := MaxWindowEdit.Value;
 	RescaleImagesTimer.Enabled := true;
 end;
 
@@ -3348,9 +3347,10 @@ end;
 procedure TImgForm.OpenVOICore(var lFilename : string);
 var
 	lExt: string;
+        isOverlaySmooth: boolean;
 begin
 	 if gMRIcroOverlay[kVOIOverlayNum].ScrnBufferItems > 0 then
-		ImgForm.CloseVOIClick(nil);
+	ImgForm.CloseVOIClick(nil);
 	lExt := UpCaseExt(lFileName);
 	gBGImg.VOIchanged := false;
 	if (lExt='.ROI') then begin
@@ -3359,9 +3359,16 @@ begin
 		ImgForm.RefreshImagesTimer.Enabled := true;
 		exit;
 	end;
-	if not HdrForm.OpenAndDisplayHdr(lFilename,gMRIcroOverlay[kVOIOverlayNum]) then exit;
-	if not OpenImg(gBGImg,gMRIcroOverlay[kVOIOverlayNum],false,true,false,gBGImg.ResliceOnLoad,false) then exit;
-	ImgForm.RefreshImagesTimer.Enabled := true;
+        if not HdrForm.OpenAndDisplayHdr(lFilename,gMRIcroOverlay[kVOIOverlayNum]) then exit;
+        isOverlaySmooth := gBGImg.OverlaySmooth;
+        gBGImg.OverlaySmooth := false;
+	if not OpenImg(gBGImg,gMRIcroOverlay[kVOIOverlayNum],false,true,false,gBGImg.ResliceOnLoad,false) then begin
+           gBGImg.OverlaySmooth := isOverlaySmooth;
+           exit;
+        end;
+        gBGImg.OverlaySmooth := isOverlaySmooth;
+
+        ImgForm.RefreshImagesTimer.Enabled := true;
 end;//OpenVOIClick
 
 
@@ -3373,8 +3380,6 @@ begin
 		showmessage('Please load a background image (''File''/''Open'') before adding a VOI.');
 		exit;
 	end;
-	//HdrForm.OpenHdrDlg.Filter := '*.roi';//kVOIFilter;
-	//if not HdrForm.OpenHdrDlg.Execute then exit;
 	 if not OpenDialogExecute(kVOIFilter,'Select Volume of Interest drawing',false) then exit;
 	lFilename := HdrForm.OpenHdrDlg.Filename;
 	OpenVOICore(lFilename);
@@ -3497,6 +3502,20 @@ begin
  gBGImg.VOIchanged := true;
  UndoVolVOI;
  ImgForm.RefreshImagesTimer.Enabled := true;
+end;
+
+procedure TImgForm.dcm2niiMenuClick(Sender: TObject);
+begin
+  dcm2niiForm.showmodal;
+end;
+
+procedure TImgForm.ControlPanelClick(Sender: TObject);
+begin
+  {$IFDEF Darwin} //release focus so arrow keys move through image
+  ImgForm.ActiveControl :=  MagPanel;
+  {$ELSE}
+  ImgForm.ActiveControl := nil;
+  {$ENDIF}
 end;
 
 procedure TImgForm.NewWindow1Click(Sender: TObject);
@@ -4594,7 +4613,6 @@ end;
 
 procedure TImgForm.FormResize(Sender: TObject);
 begin
-
         if not ImgForm.visible then
         exit;
 
@@ -4804,6 +4822,132 @@ begin
    end;
 end;
 
+{$IFDEF FPC}
+function latestGitRelease(url: string): string;
+//Returns string for latest release (error will return empty string)
+//example
+// latestGitRelease('https://api.github.com/repos/rordenlab/dcm2niix/releases/latest');
+//will return
+// "v1.0.20171204"
+const
+     key = '"tag_name":"';
+var
+  s, e: integer;
+  cli: TFPHTTPClient;
+begin
+  result := '';
+  cli := TFPHTTPClient.Create(nil);
+  cli.AddHeader('User-Agent','Mozilla/5.0 (compatible; fpweb)');
+  try
+    try
+      result := Cli.Get(url);
+    except
+      result := '';
+    end;
+  finally
+    cli.free
+  end;
+  if length(result) < 1 then exit;
+  s := posex(key, result);
+  if s < 1 then begin
+     result := '';
+     exit;
+  end;
+  s := s+length(key);
+  e:= posex('"', result, s);
+  if e < 1 then begin
+     result := '';
+     exit;
+  end;
+  result := copy(result, s, e-s);
+end;
+
+procedure ReportGitVer(localVer, api, url, exe: string);
+var
+  gitVer, exeNam: string;
+  git, local: integer;
+begin
+  exeNam := ExtractFileName(exe);
+  if length(localVer) < 8 then begin  //last 8 digits are date: v.1.0.20170101
+     MessageDlg(exeNam,'Unable to detect version:  '+exe, mtConfirmation,[mbOK],0) ;
+     //showmessage('Unable to detect latest version:  '+exe);
+     Clipboard.AsText := exe+' : '+ localVer;
+     exit;
+  end;
+  gitVer := latestGitRelease(api);
+  if length(gitVer) < 8 then begin  //last 8 digits are date: v.1.0.20170101
+      showmessage('Unable to detect latest version: are you connected to the web and do you have libssl installed? '+api);
+      exit;
+  end;
+  if CompareText(gitVer, localVer) = 0 then begin
+      //showmessage('You are running the latest release '+localVer);
+      MessageDlg(exeNam,'You are running the latest release '+localVer, mtConfirmation,[mbOK],0) ;
+      exit;
+  end;
+  git := strtointdef(RightStr(gitVer,8),0);
+  local := strtointdef(RightStr(localVer,8),0);
+  if local > git then
+     MessageDlg(exeNam,'You are running a beta release '+localVer+', the latest stable release is '+gitVer+' Visit '+url +' to update '+exe, mtConfirmation,[mbOK],0)
+     //showmessage('You are running a beta release '+localVer+', the latest stable release is '+gitVer+' Visit '+url +' to update '+exe)
+  else
+    MessageDlg(exeNam,'You are running an old release '+localVer+', the latest stable release is '+gitVer+' Visit '+url +' to update '+exe, mtConfirmation,[mbOK],0)
+          //showmessage('You are running an old release '+localVer+', the latest stable release is '+gitVer+' Visit '+url +' to update '+exe);
+end;
+
+procedure CheckForUpdatesMRIcron;
+const
+     //https://github.com/neurolabusc/MRIcron/releases
+     kBase = '/neurolabusc/MRIcron/releases/latest';
+     kUrl = 'https://github.com' + kBase;
+     kApi = 'https://api.github.com/repos' + kBase;
+begin
+     ReportGitVer(kVers, kApi, kUrl, paramstr(0));
+end;
+
+function delimStr(s, default: string; idx: integer): string;
+//e.g. delimStr('Chris Rorden's dcm2niiX version v1.0.20171215 GCC6.1.0',5) returns 'v1.0.20171215'
+var
+   strs : TStringList;
+begin
+     result := default;
+     strs := TStringList.Create;
+     strs.DelimitedText := s;
+     if (strs.Count >= idx) then
+        result := strs[idx-1]; //string lists are indexed from 0
+     strs.Free;
+end;
+
+procedure CheckForUpdatesDcm2niix;
+const
+     kBase = '/rordenlab/dcm2niix/releases/latest';
+     kUrl = 'https://github.com' + kBase;
+     kApi = 'https://api.github.com/repos' + kBase;
+var
+  exe, cmd, line1, localVer: string;
+begin
+    exe := dcm2niiForm.getExeName;
+    if not fileexists(exe) then begin
+       showmessage('Unable to find dcm2niix installed '+ exe);
+       exit;
+    end;
+    cmd := '"'+exe +'" -h';
+    dcm2niiForm.RunCmd(cmd, false, line1);
+    localVer := delimStr(line1, line1, 5);
+    ReportGitVer(localVer, kApi, kUrl, exe);
+end;
+
+procedure TImgForm.CheckForUpdates(Sender: TObject);
+begin
+     CheckForUpdatesMRIcron;
+     CheckForUpdatesDcm2niix;
+end;
+{$ELSE}
+procedure TImgForm.CheckForUpdates(Sender: TObject);
+begin
+	//not available for windows
+end;
+
+{$ENDIF}
 
 procedure TImgForm.FormShow(Sender: TObject);
 var
@@ -4825,7 +4969,13 @@ begin
   {$ENDIF}
 end; //nested ReadCmdVal
 begin
+  //CheckForUpdates;
+  DrawMenu.Visible := ToolPanel.visible;
+  {$IFDEF FPC}MagnifyMenuItem.visible := false;
+  {$ENDIF}
   {$IFDEF Darwin}
+  Exit1.visible := false;//with OSX users quit from application menu
+
   //Darwin starts passing a strange paramstr....
   //with Darwin, opening a file can interfere with opening by association...
 

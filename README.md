@@ -13,6 +13,10 @@ MRIcron is a viewer for brain imaging data. NPM is a tool for non parametric ana
 
 ##### Recent Versions
 
+20-December-2017 (v1.0.20171220)
+ - Now includes [dcm2niix](https://github.com/rordenlab/dcm2niix) (import menu).
+ - NPM and dcm2nii no longer included (as they were deprecated)
+
 2-May-2016
  - MRIcron : Improved ability to copy images to clipboard
  - NPM : Permutation thresholds in previous versions were not completely random, while the influence of this was typically negligible when images were listed in random order, this could make the thresholds slightly more liberal or conservative if the images listed in a sorted manner (e.g. lesion size, behavioral deficit). This new version revamps the randomization process, including using the [random number generator described by Marsaglia Zaman](http://paulbourke.net/miscellaneous/random/). Permutation thresholds are now more robust, albeit slower. THe enhanced 64-bit version allows the user to select more threads, which can accelerate the software (assuming your computer has more CPUs).

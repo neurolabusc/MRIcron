@@ -748,8 +748,7 @@ procedure TRenderForm.RenderImageMouseDown(Sender: TObject;
 var lXrender,lYrender,lZrender,lXout,lYout,lZOut,lPixelOffset,lZoom: integer;
 lMatrix: TMatrix;
 begin
-
-		RenderDrawXBar ( X,Y,RenderImage);
+     RenderDrawXBar ( X,Y,RenderImage);
 	//Next: find coordinates for orthogonal views:
 	lZoom := ImageZoomPct(RenderImage);
 	lXrender := round((X*100) / lZoom );
@@ -798,6 +797,7 @@ begin
      if gBGImg.RenderDepthBufferItems > 0 then
 		Freemem(gBGImg.RenderDepthBuffer);
 	  gBGImg.RenderDepthBufferItems := 0;
+       {$IFDEF Darwin}Application.MainForm.SetFocus;{$ENDIF}
 end;
 
 procedure TRenderForm.FormCreate(Sender: TObject);

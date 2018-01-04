@@ -1,6 +1,7 @@
 unit dilate;
 
 interface
+{$mode delphi}
 uses
   //Windows, Messages,  RXSpin,
   {$IFDEF LINUX} LCLIntf, {$ENDIF}

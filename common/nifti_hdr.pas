@@ -630,7 +630,7 @@ end; }
 function cleanChar(ch: char): char;
 begin
      result := ch;
-     if (ord(ch) < ord(' ')) or (ord(ch) in [127,129,130]) then //or (ord(ch) > 135)  then
+     if (ord(ch) <> 0) and  ((ord(ch) < ord(' ')) or (ord(ch) in [127,129,130])) then //or (ord(ch) > 135)  then
         result := '_';
 end;
 

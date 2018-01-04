@@ -53,6 +53,7 @@ Type
 
     //procedure Plot4DFFT(lStartSample: integer);
     //function XL: boolean;
+    procedure FormHide(Sender: TObject);
     procedure FormShow(Sender: TObject);
     function ReadGraf(lFilename: string; lBatch,lTRcritical: boolean): boolean;
     procedure FormCreate(Sender: TObject);
@@ -346,6 +347,12 @@ end;
 procedure TGraph4DForm.FormShow(Sender: TObject);
 begin
 end;
+
+procedure TGraph4DForm.FormHide(Sender: TObject);
+begin
+    {$IFDEF Darwin}Application.MainForm.SetFocus;{$ENDIF}
+end;
+
 (*{x$IFDEF FFTs}
 procedure TGraph4DForm.FormShow(Sender: TObject);
 var

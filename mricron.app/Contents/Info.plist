@@ -5,17 +5,17 @@
   <key>CFBundleDevelopmentRegion</key>
   <string>English</string>
   <key>CFBundleExecutable</key>
-  <string>mricron</string>
+  <string>MRIcron</string>
   <key>CFBundleName</key>
   <string>MRIcron</string>
   <key>CFBundleIdentifier</key>
-  <string>com.company.mricron</string>
+  <string>com.company.MRIcron</string>
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundlePackageType</key>
   <string>APPL</string>
   <key>CFBundleSignature</key>
-  <string>mric</string>
+  <string>MRIc</string>
   <key>CFBundleShortVersionString</key>
   <string>0.1</string>
   <key>CFBundleVersion</key>

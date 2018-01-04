@@ -36,8 +36,22 @@ implementation
 {$ENDIF}
 
 procedure TAboutForm.FormCreate(Sender: TObject);
+var
+  str: string;
 begin
-      HomepageLabel.caption := 'www.mricro.com :: '+kMRIcronVers ;
+{$IFDEF CPU64}
+str := '64-bit';
+{$ELSE}
+str := '32-bit';
+{$ENDIF}
+{$IFDEF Windows}str := str + ' Windows '; {$ENDIF}
+{$IFDEF LINUX}str := str + ' Linux '; {$ENDIF}
+{$IFDEF Darwin}str := str + ' OSX '; {$ENDIF}
+{$IFDEF LCLQT}str := str + ' (QT) '; {$ENDIF}
+{$IFDEF LCLGTK2}str := str + ' (GTK2) '; {$ENDIF}
+{$IFDEF LCLCocoa}str := str + ' (Cocoa) ';{$ENDIF}
+{$IFDEF LCLCarbon}str := str + ' (Carbon) '; {$ENDIF}
+      HomepageLabel.caption := 'www.mricro.com :: '+str+kVers ;
 end;
 
 procedure TAboutForm.HomePageClick(Sender: TObject);

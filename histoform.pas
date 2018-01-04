@@ -25,6 +25,7 @@ type
     procedure Copy1Click(Sender: TObject);
     procedure Closewindow1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormHide(Sender: TObject);
     procedure Saveasbitmap1Click(Sender: TObject);
   private
     { Private declarations }
@@ -80,6 +81,11 @@ begin
          Closewindow1.ShortCut := ShortCut(Word('W'), [ssMeta]);
          {$ENDIF}
         {$ENDIF}
+end;
+
+procedure THistogramForm.FormHide(Sender: TObject);
+begin
+    {$IFDEF Darwin}Application.MainForm.SetFocus;{$ENDIF}
 end;
 
 procedure THistogramForm.Saveasbitmap1Click(Sender: TObject);

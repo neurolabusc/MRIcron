@@ -151,6 +151,7 @@ type
     SFormDrop: TComboBox;
     Label38: TLabel;
     Label47: TLabel;
+    procedure FormHide(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure SaveHdrDlgClose(Sender: TObject);
@@ -191,7 +192,10 @@ uses nifti_img_view, render,nifti_img;
 function OpenDialogExecute (lFilter,lCaption: string; lAllowMultiSelect: boolean): boolean;
 begin
 	HdrForm.OpenHdrDlg.Filter := lFilter;
-	HdrForm.OpenHdrDlg.FilterIndex := 1;
+        {$IFDEF Darwin}
+         HdrForm.OpenHdrDlg.Filter := '';
+        {$ENDIF}
+        HdrForm.OpenHdrDlg.FilterIndex := 1;
 	HdrForm.OpenHdrDlg.Title := lCaption;
 	if lAllowMultiSelect then
 		HdrForm.OpenHdrDlg.Options := [ofAllowMultiSelect,ofFileMustExist];
@@ -492,6 +496,11 @@ begin
       // ImgForm.OnLaunch;
 end;
 
+procedure THdrForm.FormHide(Sender: TObject);
+begin
+  {$IFDEF Darwin}Application.MainForm.SetFocus;{$ENDIF}
+end;
+
 
 procedure THdrForm.PageControl1Change(Sender: TObject);
 begin
@@ -633,9 +642,11 @@ begin
   if lFileDir <> gTemplateDir then
      OpenHdrDlg.InitialDir := lFileDir;
   SaveHdrDlg.InitialDir := lFileDir;
-  //999 ImgForm.SaveDialog1.InitialDir := lFileDir;
   SaveHdrDlg.FileName := lFilename; //make this default file to write
-  StatusBar1.Panels[1].text := lFilename;
+  if length(lFilename) < 79 then
+     StatusBar1.Panels[1].text := lFilename
+  else
+      StatusBar1.Panels[1].text := extractfilename(lFilename);
   StatusBar1.Panels[0].text := 'Img= '+inttostr(ComputeImageDataBytes(lHdr));
   result := true;
 end;

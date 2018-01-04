@@ -1,6 +1,7 @@
 unit define_types;
 interface
 {$H+}
+{$mode delphi}
 {$include isgui.inc}
 
         uses
@@ -19,6 +20,7 @@ interface
         {$IFDEF GUI} forms,userdir, dialogs{$ELSE}dialogsx{$ENDIF};
 const
      kMRIcronVersDate = '3MAY2016';
+     kVers = 'v1.0.20171220';
      {$IFDEF LCLCocoa}
      kMRIcronAPI = 'Cocoa';
     {$ELSE}
@@ -85,6 +87,9 @@ type
       {$ELSE}
            {$IFDEF DARWIN}
            rgbreserved,rgbRed,rgbGreen,rgbBlue: byte;
+           //rgbBlue,rgbreserved,rgbGreen,rgbRed: byte;
+
+           //rgbBlue,rgbGreen,rgbRed,rgbreserved: byte;
            {$ELSE} //not unix - windows
              //rgbreserved,rgbRed,rgbGreen,rgbBlue: byte;
            rgbBlue,rgbGreen,rgbRed,rgbreserved: byte;

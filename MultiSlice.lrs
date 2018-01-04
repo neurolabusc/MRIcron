@@ -4,46 +4,46 @@ LazarusResources.Add('TMultiSliceForm','FORMDATA',[
   'TPF0'#15'TMultiSliceForm'#14'MultiSliceForm'#4'Left'#3#228#1#6'Height'#3#242
   +#0#3'Top'#3#11#2#5'Width'#3#233#2#7'Caption'#6#10'MultiSlice'#12'ClientHeigh'
   +'t'#3#242#0#11'ClientWidth'#3#233#2#11'Font.Height'#2#245#4'Menu'#7#9'MainMe'
-  +'nu1'#7'OnClose'#7#9'FormClose'#8'OnCreate'#7#10'FormCreate'#6'OnShow'#7#8'F'
-  +'ormShow'#8'Position'#7#14'poScreenCenter'#10'LCLVersion'#6#3'1.7'#0#10'TScr'
-  +'ollBox'#10'MultiPanel'#4'Left'#2#0#6'Height'#3#242#0#3'Top'#2#0#5'Width'#3
-  +#233#2#18'HorzScrollBar.Page'#2#14#18'VertScrollBar.Page'#2#14#5'Align'#7#8
-  +'alClient'#12'ClientHeight'#3#227#0#11'ClientWidth'#3#218#2#8'TabOrder'#2#0#0
-  +#6'TImage'#10'MultiImage'#3'Tag'#2#2#6'Cursor'#7#7'crCross'#4'Left'#2#2#6'He'
-  +'ight'#2#12#3'Top'#2#2#5'Width'#2#12#8'AutoSize'#9#7'Stretch'#9#0#0#0#9'TMai'
-  +'nMenu'#9'MainMenu1'#4'left'#2'('#3'top'#2#8#0#9'TMenuItem'#5'File1'#7'Capti'
-  +'on'#6#4'File'#0#9'TMenuItem'#9'Settings1'#7'Caption'#6#13'Open settings'#7
-  +'OnClick'#7#14'Settings1Click'#0#0#9'TMenuItem'#13'Savesettings1'#7'Caption'
-  +#6#13'Save settings'#8'ShortCut'#3'S@'#7'OnClick'#7#18'Savesettings1Click'#0
-  +#0#9'TMenuItem'#13'Saveasbitmap1'#7'Caption'#6#17'Save as bitmap...'#7'OnCli'
-  +'ck'#7#18'Saveasbitmap1Click'#0#0#9'TMenuItem'#12'Closewindow1'#7'Caption'#6
-  +#12'Close window'#8'ShortCut'#3'W@'#7'OnClick'#7#17'Closewindow1Click'#0#0#0
-  +#9'TMenuItem'#5'Edit1'#7'Caption'#6#4'Edit'#0#9'TMenuItem'#5'Copy1'#7'Captio'
-  +'n'#6#4'Copy'#8'ShortCut'#3'C@'#7'OnClick'#7#10'Copy1Click'#0#0#0#9'TMenuIte'
-  +'m'#5'View1'#7'Caption'#6#4'View'#0#9'TMenuItem'#10'OrientMenu'#7'Caption'#6
-  +#6'Orient'#0#9'TMenuItem'#9'Sagittal1'#3'Tag'#2#2#7'Caption'#6#8'Sagittal'#10
-  +'GroupIndex'#3#129#0#9'RadioItem'#9#7'OnClick'#7#11'OrientClick'#0#0#9'TMenu'
-  +'Item'#8'Coronal1'#3'Tag'#2#3#7'Caption'#6#7'Coronal'#10'GroupIndex'#3#129#0
-  +#9'RadioItem'#9#7'OnClick'#7#11'OrientClick'#0#0#9'TMenuItem'#6'Axial1'#3'Ta'
-  +'g'#2#1#7'Caption'#6#5'Axial'#7'Checked'#9#10'GroupIndex'#3#129#0#9'RadioIte'
-  +'m'#9#7'OnClick'#7#11'OrientClick'#0#0#0#9'TMenuItem'#13'OversliceMenu'#7'Ca'
-  +'ption'#6#9'Overslice'#0#9'TMenuItem'#4'N501'#3'Tag'#2#206#7'Caption'#6#4'-5'
-  +'0%'#10'GroupIndex'#3#158#0#9'RadioItem'#9#7'OnClick'#7#14'OverlsiceClick'#0
-  +#0#9'TMenuItem'#4'N331'#3'Tag'#2#221#7'Caption'#6#4'-35%'#10'GroupIndex'#3
-  +#158#0#9'RadioItem'#9#7'OnClick'#7#14'OverlsiceClick'#0#0#9'TMenuItem'#4'N20'
-  +'1'#3'Tag'#2#236#7'Caption'#6#4'-20%'#10'GroupIndex'#3#158#0#9'RadioItem'#9#7
-  +'OnClick'#7#14'OverlsiceClick'#0#0#9'TMenuItem'#3'N01'#7'Caption'#6#2'0%'#7
-  +'Checked'#9#10'GroupIndex'#3#158#0#9'RadioItem'#9#7'OnClick'#7#14'OverlsiceC'
-  +'lick'#0#0#9'TMenuItem'#4'N202'#3'Tag'#2#20#7'Caption'#6#3'20%'#10'GroupInde'
-  +'x'#3#158#0#9'RadioItem'#9#7'OnClick'#7#14'OverlsiceClick'#0#0#9'TMenuItem'#4
-  +'N351'#3'Tag'#2'#'#7'Caption'#6#3'35%'#10'GroupIndex'#3#158#0#9'RadioItem'#9
-  +#7'OnClick'#7#14'OverlsiceClick'#0#0#9'TMenuItem'#4'N502'#3'Tag'#2'2'#7'Capt'
-  +'ion'#6#3'50%'#10'GroupIndex'#3#158#0#9'RadioItem'#9#7'OnClick'#7#14'Overlsi'
-  +'ceClick'#0#0#0#9'TMenuItem'#9'Orthoview'#7'Caption'#6#15'Orthogonal view'#7
-  +'Checked'#9#7'OnClick'#7#14'OrthoviewClick'#0#0#9'TMenuItem'#15'SliceLabelCh'
-  +'eck'#7'Caption'#6#16'Show slice label'#7'Checked'#9#7'OnClick'#7#20'SliceLa'
-  +'belCheckClick'#0#0#9'TMenuItem'#7'Slices1'#7'Caption'#6#9'Slices...'#7'OnCl'
-  +'ick'#7#12'Slices1Click'#0#0#0#0#11'TSaveDialog'#15'MultiSaveDialog'#10'Defa'
-  +'ultExt'#6#4'.ini'#6'Filter'#6#19'Settings file|*.ini'#11'FilterIndex'#2#0#4
-  +'left'#2'a'#3'top'#2#11#0#0#0
+  +'nu1'#7'OnClose'#7#9'FormClose'#8'OnCreate'#7#10'FormCreate'#6'OnHide'#7#8'F'
+  +'ormHide'#6'OnShow'#7#8'FormShow'#8'Position'#7#14'poScreenCenter'#10'LCLVer'
+  +'sion'#6#7'1.9.0.0'#0#10'TScrollBox'#10'MultiPanel'#4'Left'#2#0#6'Height'#3
+  +#242#0#3'Top'#2#0#5'Width'#3#233#2#18'HorzScrollBar.Page'#2#14#18'VertScroll'
+  +'Bar.Page'#2#14#5'Align'#7#8'alClient'#12'ClientHeight'#3#227#0#11'ClientWid'
+  +'th'#3#218#2#8'TabOrder'#2#0#0#6'TImage'#10'MultiImage'#3'Tag'#2#2#6'Cursor'
+  +#7#7'crCross'#4'Left'#2#2#6'Height'#2#12#3'Top'#2#2#5'Width'#2#12#8'AutoSize'
+  +#9#7'Stretch'#9#0#0#0#9'TMainMenu'#9'MainMenu1'#4'left'#2'('#3'top'#2#8#0#9
+  +'TMenuItem'#5'File1'#7'Caption'#6#4'File'#0#9'TMenuItem'#9'Settings1'#7'Capt'
+  +'ion'#6#13'Open settings'#7'OnClick'#7#14'Settings1Click'#0#0#9'TMenuItem'#13
+  +'Savesettings1'#7'Caption'#6#13'Save settings'#8'ShortCut'#3'S@'#7'OnClick'#7
+  +#18'Savesettings1Click'#0#0#9'TMenuItem'#13'Saveasbitmap1'#7'Caption'#6#17'S'
+  +'ave as bitmap...'#7'OnClick'#7#18'Saveasbitmap1Click'#0#0#9'TMenuItem'#12'C'
+  +'losewindow1'#7'Caption'#6#12'Close window'#8'ShortCut'#3'W@'#7'OnClick'#7#17
+  +'Closewindow1Click'#0#0#0#9'TMenuItem'#5'Edit1'#7'Caption'#6#4'Edit'#0#9'TMe'
+  +'nuItem'#5'Copy1'#7'Caption'#6#4'Copy'#8'ShortCut'#3'C@'#7'OnClick'#7#10'Cop'
+  +'y1Click'#0#0#0#9'TMenuItem'#5'View1'#7'Caption'#6#4'View'#0#9'TMenuItem'#10
+  +'OrientMenu'#7'Caption'#6#6'Orient'#0#9'TMenuItem'#9'Sagittal1'#3'Tag'#2#2#7
+  +'Caption'#6#8'Sagittal'#10'GroupIndex'#3#129#0#9'RadioItem'#9#7'OnClick'#7#11
+  +'OrientClick'#0#0#9'TMenuItem'#8'Coronal1'#3'Tag'#2#3#7'Caption'#6#7'Coronal'
+  +#10'GroupIndex'#3#129#0#9'RadioItem'#9#7'OnClick'#7#11'OrientClick'#0#0#9'TM'
+  +'enuItem'#6'Axial1'#3'Tag'#2#1#7'Caption'#6#5'Axial'#7'Checked'#9#10'GroupIn'
+  +'dex'#3#129#0#9'RadioItem'#9#7'OnClick'#7#11'OrientClick'#0#0#0#9'TMenuItem'
+  +#13'OversliceMenu'#7'Caption'#6#9'Overslice'#0#9'TMenuItem'#4'N501'#3'Tag'#2
+  +#206#7'Caption'#6#4'-50%'#10'GroupIndex'#3#158#0#9'RadioItem'#9#7'OnClick'#7
+  +#14'OverlsiceClick'#0#0#9'TMenuItem'#4'N331'#3'Tag'#2#221#7'Caption'#6#4'-35'
+  +'%'#10'GroupIndex'#3#158#0#9'RadioItem'#9#7'OnClick'#7#14'OverlsiceClick'#0#0
+  +#9'TMenuItem'#4'N201'#3'Tag'#2#236#7'Caption'#6#4'-20%'#10'GroupIndex'#3#158
+  +#0#9'RadioItem'#9#7'OnClick'#7#14'OverlsiceClick'#0#0#9'TMenuItem'#3'N01'#7
+  +'Caption'#6#2'0%'#7'Checked'#9#10'GroupIndex'#3#158#0#9'RadioItem'#9#7'OnCli'
+  +'ck'#7#14'OverlsiceClick'#0#0#9'TMenuItem'#4'N202'#3'Tag'#2#20#7'Caption'#6#3
+  +'20%'#10'GroupIndex'#3#158#0#9'RadioItem'#9#7'OnClick'#7#14'OverlsiceClick'#0
+  +#0#9'TMenuItem'#4'N351'#3'Tag'#2'#'#7'Caption'#6#3'35%'#10'GroupIndex'#3#158
+  +#0#9'RadioItem'#9#7'OnClick'#7#14'OverlsiceClick'#0#0#9'TMenuItem'#4'N502'#3
+  +'Tag'#2'2'#7'Caption'#6#3'50%'#10'GroupIndex'#3#158#0#9'RadioItem'#9#7'OnCli'
+  +'ck'#7#14'OverlsiceClick'#0#0#0#9'TMenuItem'#9'Orthoview'#7'Caption'#6#15'Or'
+  +'thogonal view'#7'Checked'#9#7'OnClick'#7#14'OrthoviewClick'#0#0#9'TMenuItem'
+  +#15'SliceLabelCheck'#7'Caption'#6#16'Show slice label'#7'Checked'#9#7'OnClic'
+  +'k'#7#20'SliceLabelCheckClick'#0#0#9'TMenuItem'#7'Slices1'#7'Caption'#6#9'Sl'
+  +'ices...'#7'OnClick'#7#12'Slices1Click'#0#0#0#0#11'TSaveDialog'#15'MultiSave'
+  +'Dialog'#10'DefaultExt'#6#4'.ini'#6'Filter'#6#19'Settings file|*.ini'#11'Fil'
+  +'terIndex'#2#0#4'left'#2'a'#3'top'#2#11#0#0#0
 ]);

@@ -10,9 +10,10 @@ object MultiSliceForm: TMultiSliceForm
   Menu = MainMenu1
   OnClose = FormClose
   OnCreate = FormCreate
+  OnHide = FormHide
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.7'
+  LCLVersion = '1.9.0.0'
   object MultiPanel: TScrollBox
     Left = 0
     Height = 242

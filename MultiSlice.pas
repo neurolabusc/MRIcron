@@ -49,6 +49,7 @@ type
     N351: TMenuItem;
     N502: TMenuItem;
 	procedure Copy1Click(Sender: TObject);
+        procedure FormHide(Sender: TObject);
 	procedure Saveasbitmap1Click(Sender: TObject);
 	procedure OrientClick(Sender: TObject);
 	procedure FormShow(Sender: TObject);
@@ -231,6 +232,11 @@ begin
 
 
  {$ENDIF}
+end;
+
+procedure TMultiSliceForm.FormHide(Sender: TObject);
+begin
+    {$IFDEF Darwin}Application.MainForm.SetFocus;{$ENDIF}
 end;
 
 procedure TMultiSliceForm.Saveasbitmap1Click(Sender: TObject);

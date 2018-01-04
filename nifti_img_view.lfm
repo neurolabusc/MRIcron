@@ -1,13 +1,14 @@
 object ImgForm: TImgForm
-  Left = 481
-  Height = 352
-  Top = 183
-  Width = 769
+  Left = 450
+  Height = 366
+  Top = 179
+  Width = 846
   ActiveControl = ControlPanel
   AllowDropFiles = True
   Caption = 'MRIcron'
-  ClientHeight = 352
-  ClientWidth = 769
+  ClientHeight = 366
+  ClientWidth = 846
+  KeyPreview = True
   Menu = MainMenu1
   OnClose = FormClose
   OnCreate = FormCreate
@@ -18,25 +19,26 @@ object ImgForm: TImgForm
   OnResize = FormResize
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.7'
+  LCLVersion = '1.9.0.0'
   object ControlPanel: TPanel
     Left = 0
-    Height = 30
+    Height = 35
     Top = 0
-    Width = 769
+    Width = 846
     Align = alTop
     BevelOuter = bvNone
-    ClientHeight = 30
-    ClientWidth = 769
+    ClientHeight = 35
+    ClientWidth = 846
     ParentColor = False
     ParentShowHint = False
     ShowHint = True
     TabOrder = 0
+    OnClick = ControlPanelClick
     OnDblClick = ControlPanelDblClick
     object LabelX: TLabel
       Left = 4
       Height = 16
-      Top = 9
+      Top = 10
       Width = 8
       Caption = 'X'
       ParentColor = False
@@ -44,7 +46,7 @@ object ImgForm: TImgForm
     object LabelY: TLabel
       Left = 61
       Height = 16
-      Top = 9
+      Top = 10
       Width = 8
       Caption = 'Y'
       ParentColor = False
@@ -52,17 +54,17 @@ object ImgForm: TImgForm
     object LabelZ: TLabel
       Left = 115
       Height = 16
-      Top = 9
+      Top = 10
       Width = 8
       Caption = 'Z'
       ParentColor = False
     end
     object HideROIBtn: TSpeedButton
-      Left = 606
-      Height = 22
+      Left = 632
+      Height = 26
       Hint = 'Briefly hide VOIs and Overlays'
-      Top = 3
-      Width = 22
+      Top = 4
+      Width = 26
       Glyph.Data = {
         36060000424D3606000000000000360000002800000010000000180000000100
         2000000000000006000064000000640000000000000000000000FFFFFF00FFFF
@@ -119,11 +121,11 @@ object ImgForm: TImgForm
       OnMouseUp = HideROIBtnMouseUp
     end
     object XBarBtn: TSpeedButton
-      Left = 628
-      Height = 22
+      Left = 658
+      Height = 26
       Hint = 'Toggle Crosshairs'#13#10'right-click to change gap size'#13#10'right+ctrl click to change color'#13#10'right+alt click to change thickness'#13#10'right+shift to reposition origin'#13#10'right+ctrl+alt to adjust font size'
-      Top = 3
-      Width = 22
+      Top = 4
+      Width = 26
       AllowAllUp = True
       Glyph.Data = {
         F6060000424DF606000000000000360000002800000018000000180000000100
@@ -190,20 +192,20 @@ object ImgForm: TImgForm
       ParentShowHint = False
     end
     object LayerPanel: TPanel
-      Left = 228
-      Height = 27
+      Left = 232
+      Height = 30
       Top = 2
-      Width = 375
-      ClientHeight = 27
-      ClientWidth = 375
+      Width = 396
+      ClientHeight = 30
+      ClientWidth = 396
       ParentColor = False
       TabOrder = 5
       object AutoContrastBtn: TSpeedButton
         Left = 91
-        Height = 21
+        Height = 26
         Hint = 'Autocontrast'
         Top = 2
-        Width = 21
+        Width = 26
         Glyph.Data = {
           D6080000424DD608000000000000360000002800000018000000170000000100
           200000000000A008000064000000640000000000000000000000FFFFFF00FFFF
@@ -280,11 +282,11 @@ object ImgForm: TImgForm
         OnClick = AutoContrastBtnClick
       end
       object LutFromZeroBtn: TSpeedButton
-        Left = 329
-        Height = 21
+        Left = 338
+        Height = 26
         Hint = 'Color range from zero'
         Top = 3
-        Width = 21
+        Width = 26
         AllowAllUp = True
         Glyph.Data = {
           AE060000424DAE06000000000000360000002800000018000000170000000100
@@ -346,11 +348,11 @@ object ImgForm: TImgForm
         OnClick = LutFromZeroBtnClick
       end
       object ColorBarBtn: TSpeedButton
-        Left = 350
-        Height = 21
+        Left = 364
+        Height = 26
         Hint = 'Draw color range '
         Top = 3
-        Width = 21
+        Width = 26
         Glyph.Data = {
           96030000424D96030000000000003600000028000000180000000C0000000100
           180000000000600300006400000064000000000000000000000000FF0000FF00
@@ -403,9 +405,9 @@ object ImgForm: TImgForm
         Text = 'Background Layer'
       end
       object MinWindowEdit: TFloatSpinEdit
-        Left = 115
+        Left = 120
         Height = 16
-        Top = 3
+        Top = 6
         Width = 66
         DecimalPlaces = 5
         Increment = 1
@@ -416,9 +418,9 @@ object ImgForm: TImgForm
         Value = 1
       end
       object MaxWindowEdit: TFloatSpinEdit
-        Left = 184
+        Left = 189
         Height = 16
-        Top = 3
+        Top = 6
         Width = 66
         DecimalPlaces = 5
         Increment = 1
@@ -429,9 +431,9 @@ object ImgForm: TImgForm
         Value = 1
       end
       object LUTdrop: TComboBox
-        Left = 255
+        Left = 260
         Height = 20
-        Top = 4
+        Top = 6
         Width = 75
         DropDownCount = 66
         ItemHeight = 0
@@ -451,8 +453,8 @@ object ImgForm: TImgForm
       DropDownCount = 12
       ItemHeight = 0
       Items.Strings = (
-        'To Fit'
-        'To Int'
+        'Fit'
+        'Int'
         'x1'
         'x2'
         'x3'
@@ -501,21 +503,22 @@ object ImgForm: TImgForm
       Value = 14
     end
     object ToolPanel: TPanel
-      Left = 654
-      Height = 24
-      Top = 3
-      Width = 124
+      Left = 688
+      Height = 32
+      Top = 0
+      Width = 144
       BevelOuter = bvNone
-      ClientHeight = 24
-      ClientWidth = 124
+      ClientHeight = 32
+      ClientWidth = 144
       TabOrder = 3
       Visible = False
+      OnClick = ToolPanelClick
       object PenBtn: TSpeedButton
         Left = 0
-        Height = 22
+        Height = 26
         Hint = 'Pen Tool'
-        Top = 0
-        Width = 22
+        Top = 4
+        Width = 26
         AllowAllUp = True
         Glyph.Data = {
           F6060000424DF606000000000000360000002800000018000000180000000100
@@ -579,11 +582,11 @@ object ImgForm: TImgForm
         OnClick = PenBtnClick
       end
       object ClosedPenBtn: TSpeedButton
-        Left = 22
-        Height = 22
+        Left = 28
+        Height = 26
         Hint = 'Autoclose Pen'
-        Top = 0
-        Width = 22
+        Top = 4
+        Width = 26
         AllowAllUp = True
         Glyph.Data = {
           F6060000424DF606000000000000360000002800000018000000180000000100
@@ -647,11 +650,11 @@ object ImgForm: TImgForm
         OnClick = PenBtnClick
       end
       object FillBtn: TSpeedButton
-        Left = 45
-        Height = 22
+        Left = 56
+        Height = 26
         Hint = 'Fill tool'
-        Top = 0
-        Width = 22
+        Top = 4
+        Width = 26
         AllowAllUp = True
         Glyph.Data = {
           F6060000424DF606000000000000360000002800000018000000180000000100
@@ -715,11 +718,11 @@ object ImgForm: TImgForm
         OnClick = PenBtnClick
       end
       object EllipseBtn: TSpeedButton
-        Left = 68
-        Height = 22
+        Left = 84
+        Height = 26
         Hint = 'Ellipse Tool'
-        Top = 0
-        Width = 22
+        Top = 4
+        Width = 26
         AllowAllUp = True
         Glyph.Data = {
           F6060000424DF606000000000000360000002800000018000000180000000100
@@ -783,11 +786,11 @@ object ImgForm: TImgForm
         OnClick = PenBtnClick
       end
       object Fill3DBtn: TSpeedButton
-        Left = 90
-        Height = 22
+        Left = 112
+        Height = 26
         Hint = 'Create VOI based on background intensity'
-        Top = 0
-        Width = 22
+        Top = 4
+        Width = 26
         AllowAllUp = True
         Glyph.Data = {
           D6080000424DD608000000000000360000002800000018000000170000000100
@@ -869,54 +872,54 @@ object ImgForm: TImgForm
   end
   object MagPanel: TPanel
     Left = 0
-    Height = 14
-    Top = 338
-    Width = 769
+    Height = 16
+    Top = 350
+    Width = 846
     Align = alBottom
+    AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 14
-    ClientWidth = 769
+    ClientHeight = 16
+    ClientWidth = 846
     TabOrder = 1
     object StatusLabel: TLabel
-      Left = 2
+      Left = 0
       Height = 16
-      Top = 2
+      Top = 0
       Width = 133
       Caption = '  No Images Loaded  '
       ParentColor = False
     end
     object ProgressBar1: TProgressBar
-      Left = 657
-      Height = 14
+      Left = 734
+      Height = 16
       Top = 0
       Width = 112
       Align = alRight
-      Anchors = [akRight, akBottom]
       BorderWidth = 1
       TabOrder = 0
     end
   end
   object Panel1: TPanel
     Left = 0
-    Height = 308
-    Top = 30
-    Width = 769
+    Height = 315
+    Top = 35
+    Width = 846
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 308
-    ClientWidth = 769
+    ClientHeight = 315
+    ClientWidth = 846
     TabOrder = 2
     object TriplePanel: TScrollBox
       Tag = 666
       Left = 0
-      Height = 308
+      Height = 315
       Top = 0
-      Width = 769
+      Width = 846
       HorzScrollBar.Page = 584
       VertScrollBar.Page = 190
       Align = alClient
-      ClientHeight = 293
-      ClientWidth = 754
+      ClientHeight = 300
+      ClientWidth = 831
       Constraints.MinWidth = 4
       Color = clBlack
       ParentColor = False
@@ -1560,11 +1563,22 @@ object ImgForm: TImgForm
         OnClick = Header1Click
       end
     end
+    object ImportMenu: TMenuItem
+      Caption = 'Import'
+      object dcm2niiMenu: TMenuItem
+        Caption = 'Convert DICOM to NIfTI'
+        OnClick = dcm2niiMenuClick
+      end
+    end
     object Help1: TMenuItem
       Caption = '&Help'
       object Preferences1: TMenuItem
         Caption = 'Preferences...'
         OnClick = Preferences1Click
+      end
+      object CheckUpdatesMenu: TMenuItem
+        Caption = 'Check for updates'
+        OnClick = CheckForUpdates
       end
       object About1: TMenuItem
         Caption = 'About'
@@ -1573,7 +1587,6 @@ object ImgForm: TImgForm
     end
   end
   object SaveDialog1: TSaveDialog
-    OnClose = SaveDialog1Close
     FilterIndex = 0
     left = 40
     top = 104

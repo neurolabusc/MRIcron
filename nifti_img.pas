@@ -2,6 +2,7 @@ unit nifti_img;
 interface
 uses
 {$H+}
+
 {$IFNDEF FPC}
 RXSpin,capmenu,PNGImage,SSE,ShellAPI,Spin,
 {$ENDIF}
@@ -24,6 +25,7 @@ const
   kSagViewOnly = -2;
   kCoroViewOnly = -3;
   kMaxLabel = 255;
+  {$mode delphi}
 Type
 
  TBGImg =  record //Next: analyze Format Header structure
@@ -2361,10 +2363,12 @@ begin
      ImgForm.SaveDialog1.DefaultExt := '.voi';
   end else begin
       ImgForm.SaveDialog1.Filter := 'NIfTI compressed (.nii.gz)|*.nii.gz|NIfTI (.nii)|*.nii|NIfTI (.hdr/.img)|*.hdr|Volume of Interest(.voi)|*.voi|MRIcro (.roi)|*.roi';
-      ImgForm.SaveDialog1.Filename := changefileext(ImgForm.SaveDialog1.Filename,'.nii.gz');//10/10/06
+      //ImgForm.SaveDialog1.Filename := changefileext(ImgForm.SaveDialog1.Filename,'.nii.gz');//10/10/06
+      ImgForm.SaveDialog1.Filename := changefileext(ImgForm.SaveDialog1.Filename,'');//10/10/06
       ImgForm.SaveDialog1.FilterIndex:= gBGImg.SaveImgFilter; //8/8/2014 removed +1 new behavior with new lazarus 1.2+1since default added
       ImgForm.SaveDialog1.DefaultExt := '.nii.gz';
   end;
+  ImgForm.SaveDialog1.filterIndex := 1;
   if lDefFilename <> '' then
 	ImgForm.SaveDialog1.Filename := ParseFilename(lDefFilename);
   if not ImgForm.SaveDialog1.Execute then exit;
@@ -2372,8 +2376,15 @@ begin
       gBGImg.SaveVoiFilter :=  ImgForm.SaveDialog1.FilterIndex
   else
       gBGImg.SaveImgFilter :=  ImgForm.SaveDialog1.FilterIndex;
+  {$IFDEF Darwin}
+  if (ImgForm.SaveDialog1.filterIndex = 1) and (not DefaultFormatVOI) and (not ExtGZ(ImgForm.SaveDialog1.Filename)) and(pos(ExtractFileExt(ImgForm.SaveDialog1.Filename), '.nii')=1) then begin
+     ImgForm.SaveDialog1.Filename := ImgForm.SaveDialog1.Filename+'.gz';
+
+  end;
+  {$ENDIF}
+  //showmessage(format('%s %d %s', [ExtractFileExt(ImgForm.SaveDialog1.Filename), ImgForm.SaveDialog1.filterIndex, ImgForm.SaveDialog1.Filename])); exit;
   lFileName := ImgForm.SaveDialog1.Filename;
-  {$IFDEF FPC} //recent versions of Lazarus (1.2) do handle this, but will put .gz not .nii.gz
+  {$IFDEF XFPC} //recent versions of Lazarus (1.2) do handle this, but will put .gz not .nii.gz
   if ImgForm.SaveDialog1.filterIndex > 0 then begin
      {$IFNDEF Darwin}
         // check next line in each OS
@@ -3124,9 +3135,11 @@ var
 begin
   lImage.Picture.Bitmap.Width:=lx;
   lImage.Picture.Bitmap.Height:=ly;
-  {$IFNDEF LCLCocoa}  //With Cocoa, saved bitmaps will not show lineto/textout if bitmap drawn as pf32bit
+  //{$IFNDEF LCLCocoa}  //With Cocoa, saved bitmaps will not show lineto/textout if bitmap drawn as pf32bit
   lImage.Picture.Bitmap.PixelFormat := pf32bit; //if pf32bit the background color is wrong, e.g. when alpha = 0
-  {$ENDIF}
+  //{$ELSE}
+  //lImage.Picture.Bitmap.PixelFormat := pf32bit; //if pf32bit the background color is wrong, e.g. when alpha = 0
+  //{$ENDIF}
   if lBuff = nil then exit;
   lImage.Picture.Bitmap.BeginUpdate(False);
   i := 1;
@@ -4248,10 +4261,7 @@ var
  lLUTmodRA: array [1..3] of Singlep;
 begin
   result := false;
-  // if lHdr.ImgBufferBPP = 4 then exit;
   if not TestSameOrtho(lHdr) then exit;
-  //if lHdr.ImgBufferBPP <> 1 then exit;
-  //lStartTime := GetTickCount;
   for lI := 1 to 3 do begin
 	lIn.rDim[lI] := lHdr.NIFTIhdr.dim[lI];
 	lIn.rMM[lI] := lHdr.NIFTIhdr.pixdim[lI];
@@ -4270,7 +4280,6 @@ begin
   //find bounding box for overlay, and create lookup tables
   for lI := 1 to 3 do begin
 	lScale := lOut.rMM[lI] / lIn.rMM[lI];
-
 	getmem(lLUTra[lI],lOut.rDim[lI]*4);
 	getmem(lLUTmodra[lI],lOut.rDim[lI]*4);
 	lMin[lI] := maxint;
@@ -4470,12 +4479,13 @@ procedure ResliceScrnImg (var lBGImg: TBGImg; var lHdr: TMRIcroHdr; lTrilinearSm
  lBuffIn16,lBuffOut16 : SmallIntP;//16bit
  lBuffIn32,lBuffOut32: SingleP;
  begin
+  //x imgform.LabelY.caption :='-';
   if SameAsBG(lBGImg,lHdr) then exit;
+  //x imgform.LabelY.caption :='+';
   if not lBGImg.Resliced then begin //2008
     Reslice_Img_To_Unaligned (gMRIcroOverlay[kBGOverlayNum].NIftiHdr, lHdr, lBGImg.OverlaySmooth);
     exit;
   end;
-  //if lTrilinearSmooth then showmessage('ts') else showmessage('nn');
   if OrthoReslice(lBGImg,lHdr) then exit;
   lOverlap := false;
   lMatrix := lHdr.Mat;
@@ -5257,8 +5267,8 @@ begin
   pos := ((lZ div 2) * byteSlice)+1; //offset to middle slice for 3D data
   posEnd := pos + byteSlice - incPacked;
   while (pos <= posEnd) do begin
-    dxPlanar := dxPlanar + abs(rawRGB[pos]-rawRGB[pos+incPlanar]);
-    dxPacked := dxPacked + abs(rawRGB[pos]-rawRGB[pos+incPacked]);
+    dxPlanar := dxPlanar + abs(rawRGB^[pos]-rawRGB^[pos+incPlanar]);
+    dxPacked := dxPacked + abs(rawRGB^[pos]-rawRGB^[pos+incPacked]);
     pos := pos + 1;
   end;
   result := (dxPlanar < dxPacked);
@@ -5421,7 +5431,7 @@ var
   l32Buf,l32TempBuf : SingleP;
   l64Buf : DoubleP;
 begin
-    lReslice := lResliceIn;
+     lReslice := lResliceIn;
     if lLoadBackground then begin
        lBackgroundImg.LabelRA := nil;
       ImgForm.CloseImagesClick(nil);
@@ -5743,7 +5753,7 @@ begin
 	   else Showmessage('OpenImg and LoadImg error');
   end; //case ImgBufferBPP
     //showmessage(format('%g %g ', [lImg2Load.GlMinUnscaledS,lImg2Load.GlMaxUnscaledS]));
-	balance(lImg2Load); //preparecontrast autobalance
+    balance(lImg2Load); //preparecontrast autobalance
 	lImg2Load.WindowScaledMin := raw2ScaledIntensity(lImg2Load,lImg2Load.AutoBalMinUnscaled);
 	lImg2Load.WindowScaledMax := raw2ScaledIntensity(lImg2Load,lImg2Load.AutoBalMaxUnscaled);
    if (lVOILoadAsBinary) then begin
@@ -5859,10 +5869,8 @@ begin
      else
       RescaleImgIntensity (lBackgroundImg,lImg2Load,kVOIOverlayNum);
   end;
-
-
   if (lVOILoadAsBinary) and (lImg2Load.ScrnBufferItems> 0) then begin
-	  if lImg2Load.NIFTIhdr.intent_name[1] = 'I' then //indexed
+     if lImg2Load.NIFTIhdr.intent_name[1] = 'I' then //indexed
 		showmessage('Indexed drawing - assuming drawing is binary. You may want to upgrade this software.');
 	  gBGImg.VOIchanged := false;
 	  for lInc := 1 to lImg2Load.ScrnBufferItems do

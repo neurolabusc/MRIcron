@@ -47,8 +47,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="285"/>
-        <CursorPos X="31" Y="302"/>
+        <TopLine Value="255"/>
+        <CursorPos X="13" Y="275"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -95,7 +95,7 @@
       </Unit5>
       <Unit6>
         <Filename Value="dicomtypes.pas"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <TopLine Value="755"/>
         <CursorPos X="3" Y="771"/>
         <UsageCount Value="104"/>
@@ -104,9 +104,12 @@
       </Unit6>
       <Unit7>
         <Filename Value="..\common\define_types.pas"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="18" Y="2"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="12"/>
+        <CursorPos X="28" Y="36"/>
         <UsageCount Value="113"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit7>
       <Unit8>
@@ -132,7 +135,7 @@
       </Unit10>
       <Unit11>
         <Filename Value="..\common\dialogsx.pas"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <TopLine Value="16"/>
         <CursorPos X="5" Y="37"/>
         <UsageCount Value="13"/>
@@ -141,7 +144,7 @@
       </Unit11>
       <Unit12>
         <Filename Value="dicomcompat.pas"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <TopLine Value="6540"/>
         <CursorPos X="37" Y="6557"/>
         <UsageCount Value="114"/>
@@ -173,7 +176,7 @@
       </Unit15>
       <Unit16>
         <Filename Value="csaread.pas"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="376"/>
         <CursorPos Y="404"/>
         <UsageCount Value="102"/>
@@ -183,7 +186,7 @@
       <Unit17>
         <Filename Value="dialogs_msg.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <CursorPos X="11" Y="9"/>
         <UsageCount Value="208"/>
         <Loaded Value="True"/>
@@ -242,8 +245,7 @@
       <Unit25>
         <Filename Value="paramstrs.pas"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="2"/>
-        <CursorPos X="15" Y="12"/>
+        <CursorPos X="41" Y="6"/>
         <UsageCount Value="27"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -289,7 +291,7 @@
       </Unit30>
       <Unit31>
         <Filename Value="nii_crop.pas"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <TopLine Value="12"/>
         <CursorPos X="70" Y="14"/>
         <UsageCount Value="12"/>
@@ -298,10 +300,9 @@
       </Unit31>
       <Unit32>
         <Filename Value="lsjpeg.pas"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="347"/>
-        <CursorPos X="24" Y="368"/>
+        <CursorPos X="27" Y="349"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -310,123 +311,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="csaread.pas"/>
-        <Caret Line="26" Column="32" TopLine="9"/>
+        <Caret Line="265" Column="19" TopLine="237"/>
       </Position1>
       <Position2>
         <Filename Value="csaread.pas"/>
-        <Caret Line="404" Column="32" TopLine="371"/>
+        <Caret Line="290" Column="21" TopLine="262"/>
       </Position2>
       <Position3>
         <Filename Value="csaread.pas"/>
-        <Caret Line="227" Column="39" TopLine="211"/>
+        <Caret Line="297" Column="13" TopLine="269"/>
       </Position3>
       <Position4>
         <Filename Value="csaread.pas"/>
-        <Caret Line="265" Column="19" TopLine="237"/>
+        <Caret Line="301" Column="10" TopLine="273"/>
       </Position4>
       <Position5>
-        <Filename Value="csaread.pas"/>
-        <Caret Line="290" Column="21" TopLine="262"/>
-      </Position5>
-      <Position6>
-        <Filename Value="csaread.pas"/>
-        <Caret Line="297" Column="13" TopLine="269"/>
-      </Position6>
-      <Position7>
-        <Filename Value="csaread.pas"/>
-        <Caret Line="301" Column="10" TopLine="273"/>
-      </Position7>
-      <Position8>
         <Filename Value="gui.pas"/>
         <Caret Line="398" Column="32" TopLine="385"/>
-      </Position8>
-      <Position9>
+      </Position5>
+      <Position6>
         <Filename Value="gui.pas"/>
         <Caret Line="2" Column="123"/>
-      </Position9>
-      <Position10>
+      </Position6>
+      <Position7>
         <Filename Value="gui.pas"/>
         <Caret Line="275" Column="16" TopLine="250"/>
-      </Position10>
-      <Position11>
+      </Position7>
+      <Position8>
         <Filename Value="paramstrs.pas"/>
         <Caret Line="6" Column="95"/>
+      </Position8>
+      <Position9>
+        <Filename Value="dicomcompat.pas"/>
+        <Caret Line="6215" Column="36" TopLine="6214"/>
+      </Position9>
+      <Position10>
+        <Filename Value="dicomcompat.pas"/>
+        <Caret Line="3213" Column="91" TopLine="3201"/>
+      </Position10>
+      <Position11>
+        <Filename Value="dicomcompat.pas"/>
+        <Caret Line="3934" Column="15" TopLine="3913"/>
       </Position11>
       <Position12>
         <Filename Value="dicomcompat.pas"/>
-        <Caret Line="6215" Column="36" TopLine="6214"/>
+        <Caret Line="4739" Column="33" TopLine="4718"/>
       </Position12>
       <Position13>
         <Filename Value="dicomcompat.pas"/>
-        <Caret Line="3213" Column="91" TopLine="3201"/>
+        <Caret Line="4861" Column="33" TopLine="4840"/>
       </Position13>
       <Position14>
         <Filename Value="dicomcompat.pas"/>
-        <Caret Line="3934" Column="15" TopLine="3913"/>
+        <Caret Line="4864" Column="36" TopLine="4843"/>
       </Position14>
       <Position15>
         <Filename Value="dicomcompat.pas"/>
-        <Caret Line="4739" Column="33" TopLine="4718"/>
+        <Caret Line="6259" Column="55" TopLine="6250"/>
       </Position15>
       <Position16>
         <Filename Value="dicomcompat.pas"/>
-        <Caret Line="4861" Column="33" TopLine="4840"/>
+        <Caret Line="6454" Column="21" TopLine="6429"/>
       </Position16>
       <Position17>
         <Filename Value="dicomcompat.pas"/>
-        <Caret Line="4864" Column="36" TopLine="4843"/>
+        <Caret Line="6164" Column="43" TopLine="6164"/>
       </Position17>
       <Position18>
         <Filename Value="dicomcompat.pas"/>
-        <Caret Line="6259" Column="55" TopLine="6250"/>
+        <Caret Line="4563" Column="21" TopLine="4542"/>
       </Position18>
       <Position19>
         <Filename Value="dicomcompat.pas"/>
-        <Caret Line="6454" Column="21" TopLine="6429"/>
+        <Caret Line="6421" Column="66" TopLine="6407"/>
       </Position19>
       <Position20>
-        <Filename Value="dicomcompat.pas"/>
-        <Caret Line="6164" Column="43" TopLine="6164"/>
-      </Position20>
-      <Position21>
-        <Filename Value="dicomcompat.pas"/>
-        <Caret Line="4563" Column="21" TopLine="4542"/>
-      </Position21>
-      <Position22>
-        <Filename Value="dicomcompat.pas"/>
-        <Caret Line="6421" Column="66" TopLine="6407"/>
-      </Position22>
-      <Position23>
         <Filename Value="convert.pas"/>
         <Caret Line="1307" Column="30" TopLine="1293"/>
-      </Position23>
-      <Position24>
+      </Position20>
+      <Position21>
         <Filename Value="gui.pas"/>
         <Caret Line="275" Column="16" TopLine="250"/>
-      </Position24>
-      <Position25>
+      </Position21>
+      <Position22>
         <Filename Value="gui.pas"/>
         <Caret Line="302" Column="31" TopLine="285"/>
-      </Position25>
-      <Position26>
+      </Position22>
+      <Position23>
         <Filename Value="sortdicom.pas"/>
         <Caret Line="244" Column="10" TopLine="236"/>
+      </Position23>
+      <Position24>
+        <Filename Value="convert.pas"/>
+        <Caret Line="1205" Column="19" TopLine="1204"/>
+      </Position24>
+      <Position25>
+        <Filename Value="convert.pas"/>
+        <Caret Line="1522" Column="39" TopLine="1500"/>
+      </Position25>
+      <Position26>
+        <Filename Value="convert.pas"/>
+        <Caret Line="1518" Column="28" TopLine="1510"/>
       </Position26>
       <Position27>
         <Filename Value="convert.pas"/>
-        <Caret Line="1205" Column="19" TopLine="1204"/>
+        <Caret Line="1533" Column="22" TopLine="1519"/>
       </Position27>
       <Position28>
-        <Filename Value="convert.pas"/>
-        <Caret Line="1522" Column="39" TopLine="1500"/>
+        <Filename Value="gui.pas"/>
+        <Caret Line="4" Column="89"/>
       </Position28>
       <Position29>
-        <Filename Value="convert.pas"/>
-        <Caret Line="1518" Column="28" TopLine="1510"/>
+        <Filename Value="gui.pas"/>
+        <Caret Line="275" Column="13" TopLine="255"/>
       </Position29>
       <Position30>
-        <Filename Value="convert.pas"/>
-        <Caret Line="1533" Column="22" TopLine="1519"/>
+        <Filename Value="paramstrs.pas"/>
+        <Caret Line="6" Column="41"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>

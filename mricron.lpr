@@ -2,11 +2,12 @@ program mricron;
 
 {$mode objfpc}{$H+}
 uses
- {$IFDEF UNIX} cthreads,{$ENDIF}
+ {$IFDEF UNIX} cthreads,
+ {$ENDIF}
  {$IFDEF FPC}{$IFNDEF UNIX} uscaledpi, {$ENDIF}{$IFDEF LINUX} Graphics, uscaledpi, {$ENDIF}{$ENDIF}
  Interfaces, Forms, nifti_img_view, nifti_hdr_view,
  about, Text, ReadInt, histoform, autoroi, ROIfilt, render,
- MultiSlice, CropEdges, bet, mni,
+ MultiSlice, CropEdges, bet, mni,dcm2nii,
  voismooth, prefs, perisettings, graphx, cutout, ReadFloat, landmarks,
 batchstatselect, nii_label;
 {$IFNDEF UNIX}
@@ -33,6 +34,7 @@ begin
   Application.Initialize;
   Application.CreateForm(TImgForm, ImgForm);
   Application.CreateForm(THdrForm, HdrForm);
+  Application.CreateForm(Tdcm2niiForm, dcm2niiForm);
   Application.CreateForm(TAnatForm, AnatForm);
   Application.CreateForm(TAboutForm, AboutForm);
   Application.CreateForm(TTextForm, TextForm);
@@ -54,7 +56,6 @@ begin
    {$IFDEF FPC}{$IFDEF LINUX} HighDPIfont(GetFontData(ImgForm.Font.Handle).Height); {$ENDIF} {$ENDIF}
   {$IFDEF FPC}{$IFNDEF UNIX}
   HighDPI(96);
-
    {$ENDIF}{$ENDIF}
 
   Application.Run;
