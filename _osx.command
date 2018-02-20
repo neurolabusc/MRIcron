@@ -56,6 +56,9 @@ awk '{gsub(/Active="MacOS"/,"Active=\"Default\"");}1' mricron.lps > mricron.tmp 
 
 ./_xclean.bat
 
+rm -rf lib
+rm -rf backup
+
 cd /Users/rorden/Documents/pas/
 zip -r /Users/rorden/Documents/mricron_source.zip mricron
 

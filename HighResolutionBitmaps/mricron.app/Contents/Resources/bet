@@ -1,0 +1,390 @@
+#!/bin/sh
+
+#   bet - wrapper script for lots of different bet functionality
+#
+#   Stephen Smith, FMRIB Image Analysis Group
+#   SIENA eye cleanup option by Marco Battaglini and Nicola De Stefano, Siena
+#
+#   Copyright (C) 2005-2007 University of Oxford
+#
+#   Part of FSL - FMRIB's Software Library
+#   http://www.fmrib.ox.ac.uk/fsl
+#   fsl@fmrib.ox.ac.uk
+#   
+#   Developed at FMRIB (Oxford Centre for Functional Magnetic Resonance
+#   Imaging of the Brain), Department of Clinical Neurology, Oxford
+#   University, Oxford, UK
+#   
+#   
+#   LICENCE
+#   
+#   FMRIB Software Library, Release 4.0 (c) 2007, The University of
+#   Oxford (the "Software")
+#   
+#   The Software remains the property of the University of Oxford ("the
+#   University").
+#   
+#   The Software is distributed "AS IS" under this Licence solely for
+#   non-commercial use in the hope that it will be useful, but in order
+#   that the University as a charitable foundation protects its assets for
+#   the benefit of its educational and research purposes, the University
+#   makes clear that no condition is made or to be implied, nor is any
+#   warranty given or to be implied, as to the accuracy of the Software,
+#   or that it will be suitable for any particular purpose or for use
+#   under any specific conditions. Furthermore, the University disclaims
+#   all responsibility for the use which is made of the Software. It
+#   further disclaims any liability for the outcomes arising from using
+#   the Software.
+#   
+#   The Licensee agrees to indemnify the University and hold the
+#   University harmless from and against any and all claims, damages and
+#   liabilities asserted by third parties (including claims for
+#   negligence) which arise directly or indirectly from the use of the
+#   Software or the sale of any products based on the Software.
+#   
+#   No part of the Software may be reproduced, modified, transmitted or
+#   transferred in any form or by any means, electronic or mechanical,
+#   without the express permission of the University. The permission of
+#   the University is not required if the said reproduction, modification,
+#   transmission or transference is done without financial return, the
+#   conditions of this Licence are imposed upon the receiver of the
+#   product, and all original and amended source code is included in any
+#   transmitted product. You may be held legally responsible for any
+#   copyright infringement that is caused or encouraged by your failure to
+#   abide by these terms and conditions.
+#   
+#   You are not permitted under this Licence to use this Software
+#   commercially. Use for which any financial return is received shall be
+#   defined as commercial use, and includes (1) integration of all or part
+#   of the source code or the Software into a product for sale or license
+#   by or on behalf of Licensee to third parties or (2) use of the
+#   Software or any derivative of it for research with the final aim of
+#   developing software products for sale or license to a third party or
+#   (3) use of the Software or any derivative of it for research with the
+#   final aim of developing non-software products for sale or license to a
+#   third party, or (4) use of the Software to provide any service to an
+#   external organisation for which payment is received. If you are
+#   interested in using the Software commercially, please contact Isis
+#   Innovation Limited ("Isis"), the technology transfer company of the
+#   University, to negotiate a licence. Contact details are:
+#   innovation@isis.ox.ac.uk quoting reference DE/1112.
+
+# {{{ Usage()
+
+Usage() {
+    cat <<EOF
+
+Usage:    bet <input> <output> [options]
+
+Main bet2 options:
+  -o          generate brain surface outline overlaid onto original image
+  -m          generate binary brain mask
+  -s          generate approximate skull image
+  -n          don't generate segmented brain image output
+  -f <f>      fractional intensity threshold (0->1); default=0.5; smaller values give larger brain outline estimates
+  -g <g>      vertical gradient in fractional intensity threshold (-1->1); default=0; positive values give larger brain outline at bottom, smaller at top
+  -r <r>      head radius (mm not voxels); initial surface sphere is set to half of this
+  -c <x y z>  centre-of-gravity (voxels not mm) of initial mesh surface.
+  -t          apply thresholding to segmented brain image and mask
+  -e          generates brain surface as mesh in .vtk format
+
+Variations on default bet2 functionality (mutually exclusive options):
+  (default)   just run bet2
+  -R          robust brain centre estimation (iterates BET several times)
+  -S          eye & optic nerve cleanup (can be useful in SIENA)
+  -B          bias field & neck cleanup (can be useful in SIENA)
+  -Z          improve BET if FOV is very small in Z (by temporarily padding end slices)
+  -F          apply to 4D FMRI data (uses -f 0.4 and dilates brain mask slightly)
+  -A          run bet2 and then betsurf to get additional skull and scalp surfaces (includes registrations)
+  -A2 <T2>    as with -A, when also feeding in non-brain-extracted T2 (includes registrations)
+
+Miscellaneous options:
+  -v          verbose (switch on diagnostic messages)
+  -h          display this help, then exits
+  -d          debug (don't delete temporary intermediate images)
+
+EOF
+    exit 1
+}
+
+# }}}
+# {{{ get_dims()
+
+get_dims() {
+    xdim=`${FSLDIR}/bin/fslval $1 dim1 | sed 's/-//g'`
+    ydim=`${FSLDIR}/bin/fslval $1 dim2 | sed 's/-//g'`
+    zdim=`${FSLDIR}/bin/fslval $1 dim3 | sed 's/-//g'`
+    xpixdim=`${FSLDIR}/bin/fslval $1 pixdim1 | sed 's/-//g'`
+    ypixdim=`${FSLDIR}/bin/fslval $1 pixdim2 | sed 's/-//g'`
+    zpixdim=`${FSLDIR}/bin/fslval $1 pixdim3 | sed 's/-//g'`
+    #echo $xdim $ydim $zdim $xpixdim $ypixdim $zpixdim
+}
+
+# }}}
+# {{{ find_centre_in_mm()
+
+# find_centre_in_mm() {
+#     centre=`${FSLDIR}/bin/fslstats $1 -l 0.001 -C`
+#     x=`echo $centre $xpixdim | awk '{print "10 k " $1 " " $4 " * p"}' | dc -`
+#     y=`echo $centre $ypixdim | awk '{print "10 k " $2 " " $4 " * p"}' | dc -`
+#     z=`echo $centre $zpixdim | awk '{print "10 k " $3 " " $4 " * p"}' | dc -`
+#     #echo $x $y $z
+# }
+
+# }}}
+# {{{ find_centre_in_voxels()
+
+find_centre_in_voxels() {
+    centre=`${FSLDIR}/bin/fslstats $1 -l 0.001 -C`
+    x=`echo $centre | awk '{print $1}'`
+    y=`echo $centre | awk '{print $2}'`
+    z=`echo $centre | awk '{print $3}'`
+    #echo $x $y $z
+}
+
+# }}}
+
+# {{{ parse IN and OUT options
+
+[ "$2" = "" ] && Usage
+IN=`${FSLDIR}/bin/remove_ext $1`
+OUT=`${FSLDIR}/bin/remove_ext $2`
+shift 2
+if [ `${FSLDIR}/bin/imtest $IN` = 0 ] ; then
+    echo ""
+    echo "Error: input image $IN not valid"
+    echo ""
+    exit 1
+fi
+
+# }}}
+# {{{ setup variable defaults
+
+debug=0
+verbose=0
+variation=0
+bet2opts=""
+
+# }}}
+# {{{ parse options
+
+while [ _$1 != _ ] ; do
+    if [ $1 = -o -o $1 = -m -o $1 = -s -o $1 = -n -o $1 = -t -o $1 = -e ] ; then
+        bet2opts="$bet2opts $1"
+        shift
+    elif [ $1 = -f -o $1 = -g -o $1 = -r ] ; then
+	[ "$2" = "" ] && Usage
+        bet2opts="$bet2opts $1 $2"
+        shift 2
+    elif [ $1 = -c ] ; then
+	[ "$4" = "" ] && Usage
+        bet2opts="$bet2opts $1 $2 $3 $4"
+        shift 4
+    elif [ $1 = -R ] ; then
+	variation=1
+        shift
+    elif [ $1 = -S ] ; then
+	variation=2
+        shift
+    elif [ $1 = -Z ] ; then
+	variation=3
+        shift
+    elif [ $1 = -F ] ; then
+	variation=4
+        shift
+    elif [ $1 = -A ] ; then
+	variation=5
+        shift
+    elif [ $1 = -A2 ] ; then
+	[ "$2" = "" ] && Usage
+	variation=6
+	IN2=$2
+        shift 2
+    elif [ $1 = -B ] ; then
+	variation=7
+        shift
+    elif [ $1 = -v ] ; then
+	verbose=1
+	bet2opts="$bet2opts -v"
+        shift
+    elif [ $1 = -d ] ; then
+	debug=1
+        shift
+    else
+	Usage
+    fi
+done
+
+if [ $verbose = 1 ] ; then
+    echo IN=$IN
+    echo OUT=$OUT
+    echo bet2opts="${bet2opts}"
+    echo verbose=$verbose
+    echo debug=$debug
+    echo variation=$variation
+fi
+
+# }}}
+# {{{ process variations
+
+if [ $variation = 0 ] ; then
+    ${FSLDIR}/bin/bet2 $IN $OUT $bet2opts
+elif [ $variation = 1 ] ; then
+    # {{{ BET robust
+
+bet2opts=`echo $bet2opts | sed 's/-n//g'`
+get_dims $IN
+
+i=1
+while [ $i -gt 0 ] ; do
+    #echo $i
+    if [ $i = 1 ] ; then
+	${FSLDIR}/bin/bet2 $IN $OUT $bet2opts
+	find_centre_in_voxels $OUT
+    else
+	${FSLDIR}/bin/bet2 $IN $OUT $bet2opts -c $x $y $z
+	ox=$x; oy=$y; oz=$z;
+	find_centre_in_voxels $OUT
+	diffsq=`echo "0 k $ox $x - 2 ^ $oy $y - 2 ^ + $oz $z - 2 ^ + 1 / p" | dc -`
+	#echo $diffsq
+	if [ $diffsq -lt 1 -o $i -gt 10 ] ; then
+	    i=_10
+	fi
+    fi
+    i=`echo "$i 1 + p" | dc -`
+done
+
+# }}}
+elif [ $variation = 2 ] ; then
+    # {{{ SIENA eye cleanup
+
+#### get the raw brain and skull images
+${FSLDIR}/bin/bet2 $IN ${OUT}_tmp_betraw -s $bet2opts
+
+#### run betpremask (keep intermediate files around using -d) and feed it into bet
+${FSLDIR}/bin/standard_space_roi $IN ${OUT}_tmp_premask -b -d
+${FSLDIR}/bin/bet2 ${OUT}_tmp_premask ${OUT}_tmp_premask_bet -n -m -f 0.4 $bet2opts
+
+#### bring eye mask from standard space into native and dilate, mostly in 2D and then invert
+${FSLDIR}/bin/flirt -ref $IN -in ${FSLDIR}/data/standard/MNI152_T1_2mm_eye_mask -applyxfm -init ${OUT}_tmp_premask_tmp_to_std_inv.mat -datatype float -out ${OUT}_tmp_eye_mask
+${FSLDIR}/bin/fslmaths ${OUT}_tmp_eye_mask -thr 0.5 -bin -dilF -kernel 2D -dilF -dilF -dilF -dilF -dilF -dilF -dilF ${OUT}_tmp_eyes7dil -odt short
+${FSLDIR}/bin/fslmaths ${OUT}_tmp_eyes7dil -mul -1 -add 1 ${OUT}_tmp_eyes7dil_inv
+
+#### mask original brain mask with inverted-eye-mask, ADD betpremask_bet_mask and X by original brain
+${FSLDIR}/bin/fslmaths ${OUT}_tmp_betraw -bin -mas ${OUT}_tmp_eyes7dil_inv -add ${OUT}_tmp_premask_bet_mask -bin -mul ${OUT}_tmp_betraw ${OUT}_tmp_prebrain
+
+#### find upper threshold used to delete eyes
+Mean=`${FSLDIR}/bin/fslstats ${OUT}_tmp_prebrain -M`
+SD=`${FSLDIR}/bin/fslstats ${OUT}_tmp_prebrain -S`
+thr=`echo "10 k 3.5 $SD * $Mean + p" | dc -`
+
+#### apply threshold and a little morphology (twice) to cleanup further and produce final brain image
+${FSLDIR}/bin/fslmaths ${OUT}_tmp_prebrain -uthr $thr -bin -ero -dilF -dilF -ero -mul ${OUT}_tmp_prebrain -uthr $thr -bin -kernel 2D -ero -dilF -mul ${OUT}_tmp_betraw $OUT
+${FSLDIR}/bin/fslmaths $OUT -bin ${OUT}_mask
+
+#### remove eyes from original skull to produce final skull image
+${FSLDIR}/bin/fslmaths ${OUT}_tmp_eyes7dil -ero -kernel 2D -ero -mul -1 -add 1 ${OUT}_tmp_eyes5dil_inv
+${FSLDIR}/bin/fslmaths ${OUT}_tmp_betraw_skull -mas ${OUT}_tmp_eyes5dil_inv ${OUT}_skull
+
+# }}}
+elif [ $variation = 3 ] ; then
+    # {{{ small FOV in Z
+
+MINZFOV=100.0
+get_dims $IN
+
+npad=`echo "$MINZFOV $zpixdim / $zdim - 2 / 1 + p" | dc -`
+
+if [ $npad -le 0 ] ; then
+    echo "Image already has a greater Z FOV than $MINZFOV so not using padding"
+    ${FSLDIR}/bin/bet2 $IN $OUT $bet2opts
+    exit
+fi
+
+${FSLDIR}/bin/fslroi $IN ${OUT}_tmp_bottom 0 $xdim 0 $ydim 0 1
+${FSLDIR}/bin/fslroi $IN ${OUT}_tmp_top    0 $xdim 0 $ydim `echo "$zdim 1 - p" | dc -` 1
+
+n=1
+while [ $n -le $npad ] ; do
+    bottomlist="$bottomlist ${OUT}_tmp_bottom"
+    toplist="$toplist ${OUT}_tmp_top"
+    n=`echo "$n 1 + p" | dc -`
+done
+
+${FSLDIR}/bin/fslmerge -z ${OUT}_tmp $bottomlist $IN $toplist
+
+${FSLDIR}/bin/bet2 ${OUT}_tmp $OUT $bet2opts
+
+for f in `imglob ${OUT}*` ; do
+    ${FSLDIR}/bin/fslroi $f $f 0 $xdim 0 $ydim $npad $zdim
+done
+
+# }}}
+elif [ $variation = 4 ] ; then
+    # {{{ FMRI
+
+${FSLDIR}/bin/fslroi $IN ${OUT}_tmp 0 1
+${FSLDIR}/bin/bet2 ${OUT}_tmp ${OUT}_tmp_brain -m -n -f 0.3 $bet2opts
+${FSLDIR}/bin/fslmaths ${OUT}_tmp_brain_mask -dilF ${OUT}_mask
+${FSLDIR}/bin/fslmaths $IN -mas ${OUT}_mask $OUT
+
+# }}}
+elif [ $variation = 5 ] ; then
+    # {{{ bet2 + betsurf (T1 only)
+
+# register T1 to standard space
+${FSLDIR}/bin/flirt -ref ${FSLDIR}/data/standard/MNI152_T1_2mm -in $IN -omat ${OUT}_tmp_T1_to_std.mat
+
+# run brain extraction and save brain mesh
+${FSLDIR}/bin/bet2 $IN $OUT -e $bet2opts
+
+# find other surfaces
+${FSLDIR}/bin/betsurf --t1only -o -m -s $IN ${OUT}_mesh.vtk ${OUT}_tmp_T1_to_std.mat $OUT
+
+# }}}
+elif [ $variation = 6 ] ; then
+    # {{{ bet2 + betsurf (T1 & T2)
+
+# register T2 to T1
+${FSLDIR}/bin/flirt -in $IN2 -ref $IN -out ${OUT}_tmp_T2_to_T1 -omat ${OUT}_tmp_T2_to_T1.mat -interp sinc
+
+# register T1 to standard space
+${FSLDIR}/bin/flirt -ref ${FSLDIR}/data/standard/MNI152_T1_2mm -in $IN -omat ${OUT}_tmp_T1_to_std.mat
+
+# run brain extraction and save brain mesh
+${FSLDIR}/bin/bet2 $IN $OUT -e $bet2opts
+
+# find other surfaces
+${FSLDIR}/bin/betsurf -o -m -s $IN ${OUT}_tmp_T2_to_T1 ${OUT}_mesh.vtk ${OUT}_tmp_T1_to_std.mat $OUT
+
+# }}}
+elif [ $variation = 7 ] ; then
+    # {{{ SIENA bias field & neck cleanup
+
+#### run betpremask
+${FSLDIR}/bin/standard_space_roi $IN ${OUT}_tmp_premask -b -d
+
+#### run FAST to get bias field
+${FSLDIR}/bin/fast -b ${OUT}_tmp_premask >& /dev/null
+
+#### apply bias correction to original
+${FSLDIR}/bin/fslmaths $IN -div ${OUT}_tmp_premask_bias ${OUT}_tmp_unbiased
+
+#### re-run betpremask
+${FSLDIR}/bin/standard_space_roi ${OUT}_tmp_unbiased ${OUT}_tmp_unbiased_premask -b -d
+
+#### re-run in robust mode
+${FSLDIR}/bin/bet ${OUT}_tmp_unbiased_premask $OUT -m $bet2opts -R -d
+
+# }}}
+fi
+
+# }}}
+# {{{ cleanup temporary files
+
+if [ $debug = 0 ] ; then
+    /bin/rm -f ${OUT}_tmp*
+fi
+
+# }}}
+

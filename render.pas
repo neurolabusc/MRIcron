@@ -37,9 +37,10 @@ type
     Copy1: TMenuItem;
     Save1: TMenuItem;
     Label4: TLabel;
-    RefreshBtn: TSpeedButton;
     BiasTrack: TTrackBar;
     GainTrack: TTrackBar;
+    RefreshToolbar: TToolBar;
+    RefreshBtn: TToolButton;
     Volume1: TMenuItem;
     RenderBGSurfaceMenu: TMenuItem;
     N1: TMenuItem;

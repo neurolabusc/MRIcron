@@ -11,7 +11,6 @@ object MNIForm: TMNIForm
   Caption = 'MNI position'
   ClientHeight = 27
   ClientWidth = 198
-  DesignTimePPI = 72
   OnCreate = FormCreate
   Position = poScreenCenter
   LCLVersion = '1.7'

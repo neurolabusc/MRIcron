@@ -15,6 +15,9 @@ uses
   Dialogs, StdCtrls, Buttons, ToolWin, ComCtrls;
 
 type
+
+  { TAnatForm }
+
   TAnatForm = class(TForm)
     ToolBar1: TToolBar;
     SaveBtn: TSpeedButton;
@@ -23,6 +26,7 @@ type
     UpdateBtn: TSpeedButton;
     OpenBtn: TSpeedButton;
     DeleteBtn: TSpeedButton;
+    procedure FormCreate(Sender: TObject);
     procedure SaveBtnClick(Sender: TObject);
     procedure AddBtnClick(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
@@ -87,6 +91,11 @@ begin
    for i := 0 to length(gLandmarks)-1 do
     Writeln(lF, gLandmarks[i].Name+kSep+floattostr(gLandmarks[i].X)+kSep+floattostr(gLandmarks[i].Y)+kSep+floattostr(gLandmarks[i].Z)  );
   CloseFile(lF);
+
+end;
+
+procedure TAnatForm.FormCreate(Sender: TObject);
+begin
 
 end;
 

@@ -43,12 +43,13 @@ Type
     TextBtn: TSpeedButton;
     SelectDirectoryDialog1: TSelectDirectoryDialog;
     StatusBar1: TStatusBar;
+    RefreshToolbar: TToolBar;
+    RefreshBtn: TToolButton;
     TrackBar1: TTrackBar;
     TREdit: TFloatSpinEdit;
     FourDBar: TPanel;
     TRLabel: TLabel;
     OpenDataBtn: TSpeedButton;
-    RefreshBtn: TSpeedButton;
 
 
     //procedure Plot4DFFT(lStartSample: integer);

@@ -22,7 +22,7 @@ LResources, fx8, cpucount, SysUtils, Classes, Graphics, Controls, Forms,
 Dialogs, Menus, ComCtrls, ExtCtrls, StdCtrls, GraphicsMathLibrary, ClipBrd,
 define_types, Spin, Buttons, nifti_hdr, nifti_hdr_view, nifti_img, voismooth,
 IniFiles, ReadInt,  stat, Distr, bet, mni, prefs, CropEdges,nifti_types,
-userdir, graphx, GraphType, IntfGraphics, landmarks,fastsmooth, nii_label, dcm2nii;//registry
+userdir, graphx, GraphType, IntfGraphics, landmarks,fastsmooth, nii_label, dcm2nii, ImgList;//registry
 
 
 type
@@ -30,11 +30,12 @@ type
   { TImgForm }
 
   TImgForm = class(TForm)
-    AutoContrastBtn: TSpeedButton;
-    ColorBarBtn: TSpeedButton;
+    ImageList1: TImageList;
+    LabelX: TLabel;
+    LabelY: TLabel;
+    LabelZ: TLabel;
     LayerDrop: TComboBox;
     LUTdrop: TComboBox;
-    LutFromZeroBtn: TSpeedButton;
 	MainMenu1: TMainMenu;
 	File1: TMenuItem;
 MaxWindowEdit: TFloatSpinEdit;
@@ -64,6 +65,16 @@ ImportMenu: TMenuItem;
 dcm2niiMenu: TMenuItem;
 CheckUpdatesMenu: TMenuItem;
 NewWindow1: TMenuItem;
+ColorBarBtn: TToolButton;
+HideROIBtn: TToolButton;
+AutoContrastPanel: TPanel;
+SlicePanel: TPanel;
+AutoContrastToolbar: TToolBar;
+AutoContrastBtn: TToolButton;
+XBarBtn: TToolButton;
+ViewToolBar: TToolBar;
+LutFromZeroBtn: TToolButton;
+ViewPanel: TPanel;
 Sagittal2: TMenuItem;
 Sagittal1: TMenuItem;
 Multiple1: TMenuItem;
@@ -96,20 +107,23 @@ MNIMenu: TMenuItem;
 	Pen1: TMenuItem;
 	Penautoclose1: TMenuItem;
 	CircleSquare1: TMenuItem;
+        ToolToolBar: TToolBar;
+        PenBtn: TToolButton;
+        ClosedPenBtn: TToolButton;
+        FillBtn: TToolButton;
+        EllipseBtn: TToolButton;
+        Fill3DBtn: TToolButton;
+        ToolPanel: TPanel;
+        XViewEdit: TSpinEdit;
         YokeTimer: TTimer;
-	XViewEdit: TSpinEdit;
-	YViewEdit: TSpinEdit;
-	ZViewEdit: TSpinEdit;
+        YViewEdit: TSpinEdit;
+        ZoomDrop: TComboBox;
 	MagPanel: TPanel;
 	ProgressBar1: TProgressBar;
 	StatusLabel: TLabel;
-	LabelX: TLabel;
-	LabelY: TLabel;
-	LabelZ: TLabel;
 	Templates1: TMenuItem;
 	Recent1: TMenuItem;
 	Controls1: TMenuItem;
-	ZoomDrop: TComboBox;
 	Panel1: TPanel;
 	Saveaspicture1: TMenuItem;
 	SaveDialog1: TSaveDialog;
@@ -174,14 +188,6 @@ MNIMenu: TMenuItem;
 	ShowMultislice: TMenuItem;
 	DescriptiveMenuItem: TMenuItem;
 	N1: TMenuItem;
-	HideROIBtn: TSpeedButton;
-	XBarBtn: TSpeedButton;
-	ToolPanel: TPanel;
-	PenBtn: TSpeedButton;
-	ClosedPenBtn: TSpeedButton;
-	FillBtn: TSpeedButton;
-	EllipseBtn: TSpeedButton;
-	Fill3DBtn: TSpeedButton;
 	N2: TMenuItem;
 	Display1: TMenuItem;
 	N3: TMenuItem;
@@ -197,10 +203,13 @@ MNIMenu: TMenuItem;
 	Inferior1: TMenuItem;
 	Superior1: TMenuItem;
         YokeMenu: TMenuItem;
+        ZViewEdit: TSpinEdit;
         procedure ControlPanelClick(Sender: TObject);
         procedure dcm2niiMenuClick(Sender: TObject);
         procedure DilateVOI1Click(Sender: TObject);
         procedure Extract1Click(Sender: TObject);
+        procedure GetWidthForPPI(Sender: TCustomImageList; AImageWidth,
+          APPI: Integer; var AResultWidth: Integer);
         procedure NewWindow1Click(Sender: TObject);
         procedure ToggleDrawMenu(Sender: TObject);
         procedure SaveVOIcore(lPromptFilename: boolean);
@@ -240,6 +249,7 @@ procedure RescaleMenuClick(Sender: TObject);
 procedure Resliceimage1Click(Sender: TObject);
 procedure SaveasNIfTI1Click(Sender: TObject);
 procedure SaveDialog1Close(Sender: TObject);
+procedure ToolBar2Click(Sender: TObject);
 procedure ToolPanelClick(Sender: TObject);
 procedure UpdateColorSchemes;
 	procedure UpdateTemplates;
@@ -282,8 +292,6 @@ procedure UpdateColorSchemes;
 	  Shift: TShiftState; X, Y: Integer);
 	procedure Saveaspicture1Click(Sender: TObject);
 	procedure XBarBtnClick(Sender: TObject);
-	procedure XBarBtnMouseUp(Sender: TObject; Button: TMouseButton;
-	  Shift: TShiftState; X, Y: Integer);
         procedure XBarBtnMouseDown(Sender: TObject; Button: TMouseButton;
 	  Shift: TShiftState; X, Y: Integer);
 	procedure AutoContrastBtnClick(Sender: TObject);
@@ -1251,6 +1259,11 @@ begin
   //ApplySaveDlgFilter(SaveDialog1);
 end;
 
+procedure TImgForm.ToolBar2Click(Sender: TObject);
+begin
+
+end;
+
 procedure TImgForm.ToolPanelClick(Sender: TObject);
 begin
 
@@ -1463,7 +1476,10 @@ begin
       YViewEdit.Value := Bound ( round(gBGImg.ScrnOri[2]),1,round(YViewEdit.MaxValue));
       ZViewEdit.Value := Bound ( round(gBGImg.ScrnOri[3]),1,round(ZViewEdit.MaxValue));
 	 //ImgForm.Caption := extractfilename(paramstr(0))+' - '+lFilename;
-      StatusLabel.caption := 'Opened: '+lFilename;
+      if length(lFilename) > 80 then
+          StatusLabel.caption := 'Opened: '+extractfilename(lFilename)
+      else
+          StatusLabel.caption := 'Opened: '+lFilename;
 
 	 Result := true;
   //LayerDrop.ItemIndex := 0;
@@ -2526,12 +2542,6 @@ begin
      gBGImg.ScrnOri[3] := ImgForm.ZviewEdit.value;
 end;
 
-procedure TImgForm.XBarBtnMouseUp(Sender: TObject; Button: TMouseButton;
-	  Shift: TShiftState; X, Y: Integer);
-begin
-
-end;
-
 procedure TImgForm.XBarBtnMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 label 555;
@@ -3483,6 +3493,19 @@ begin
    end;
 end;
 
+procedure TImgForm.GetWidthForPPI(Sender: TCustomImageList; AImageWidth,
+  APPI: Integer; var AResultWidth: Integer);
+begin
+  case AResultWidth of
+    20..24: AResultWidth:=22;
+    30..36: AResultWidth:=24;//32;
+
+
+  end;
+  //AResultWidth:=64;
+  //LabelX.caption := inttostr(AResultWidth);
+end;
+
 procedure TImgForm.DilateVOI1Click(Sender: TObject);
 begin
     if ((sender as TMenuItem).tag = 1) or (ssShift in KeyDataToShiftState(vk_Shift)) then begin
@@ -3680,6 +3703,8 @@ procedure TImgForm.Saveaspicture1Click(Sender: TObject);
 begin
   SaveOrCopyImages(false);
 end;
+
+
 (*var
   lImage: TImage;
 begin
@@ -5401,20 +5426,41 @@ begin
  // exit;
   if lRows = 2 then begin
     ControlPanel.Tag := 2;
-    LayerPanel.Top := ScaleX(36,96);
+    ControlPanel.Height := (2 * LayerPanel.Height)+4;
+    ViewPanel.Left := 0;
+    ToolPanel.Left := ViewPanel.Width + 2;
+    ViewPanel.Top := LayerPanel.Height+2;
+    ToolPanel.Top := LayerPanel.Height+2;
+    (*LayerPanel.Top := LayerPanel.Height+2;
+    LayerPanel.Left := 1;
+    HideROIBtn.Left := ZoomDrop.Left+ZoomDrop.Width+2;
+    XBarBtn.Left := HideROIBtn.Left + HideROIBtn.Width + 2;
+    ToolPanel.Left := XBarBtn.Left+XBarBtn.Width+2;()
+
+    (*LayerPanel.Top := ScaleX(36,96);
     LayerPanel.Left := 1;
     ControlPanel.Height := ScaleY(72,96);
-    HideROIBtn.left := ScaleX(307,96);
-    XBarBtn.Left := ScaleX(307+29, 96);
-    ToolPanel.Left := ScaleX(307+61,96);
+    HideROIBtnXX.left := ScaleX(307,96);
+    XBarBtnXX.Left := ScaleX(307+29, 96);
+    ToolPanel.Left := ScaleX(307+61,96); *)
   end else begin
     ControlPanel.Tag := 1;
-    LayerPanel.Top := 1;
+    ControlPanel.Height := LayerPanel.Height+2;
+    ViewPanel.Left := LayerPanel.Left+LayerPanel.Width+2;
+    ToolPanel.Left := LayerPanel.Left+LayerPanel.Width+2 + ViewPanel.Width + 2;
+    ViewPanel.Top := 0;
+    ToolPanel.Top := 0;
+    (*LayerPanel.Top := 2;
+    LayerPanel.Left := ZoomDrop.Left+ZoomDrop.Width+2;
+    HideROIBtn.Left := LayerPanel.Left+LayerPanel.Width+2;
+    XBarBtn.Left := HideROIBtn.Left + HideROIBtn.Width + 2;
+    ToolPanel.Left := XBarBtn.Left+XBarBtn.Width+2;  *)
+    (*LayerPanel.Top := 1;
     LayerPanel.Left := ScaleX(307,96);
-    HideROIBtn.left := ScaleX(809,96);
-    XBarBtn.Left := ScaleX(809+29,96);
+    HideROIBtnXX.left := ScaleX(809,96);
+    XBarBtnXX.Left := ScaleX(809+29,96);
     ToolPanel.Left := ScaleX(809+61,96);
-    ControlPanel.Height := ScaleY(40,96);
+    ControlPanel.Height := ScaleY(40,96);  *)
   end;
 end;
 
@@ -5425,6 +5471,15 @@ begin
   else
     ResizeControlPanel(1);
   ImgForm.RefreshImagesTimer.enabled := true;
+  (*if ControlPanel.Tag = 2 then begin
+      ResizeControlPanel(1);
+      ImgForm.Width := ScaleX(1025,96);
+      ImgForm.Height :=  ScaleY(469,96);
+  end else begin
+    ResizeControlPanel(2);
+      ImgForm.Width := ScaleX(524,96);
+      ImgForm.Height :=  ScaleY(640,96);
+   end;*)
 end;
 
 procedure TImgForm.DefaultControlPanel;

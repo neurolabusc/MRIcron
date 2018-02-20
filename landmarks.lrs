@@ -1,22 +1,24 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('TAnatForm','FORMDATA',[
   'TPF0'#9'TAnatForm'#8'AnatForm'#4'Left'#3'S'#2#6'Height'#2#27#3'Top'#3#138#1#5
-  +'Width'#3#182#1#11'BorderStyle'#7#8'bsDialog'#7'Caption'#6#9'Landmarks'#12'C'
-  +'lientHeight'#2#27#11'ClientWidth'#3#182#1#21'Constraints.MaxHeight'#2#27#20
-  +'Constraints.MaxWidth'#3#182#1#21'Constraints.MinHeight'#2#27#20'Constraints'
-  +'.MinWidth'#3#182#1#11'Font.Height'#2#245#9'FormStyle'#7#11'fsStayOnTop'#8'P'
-  +'osition'#7#14'poScreenCenter'#10'LCLVersion'#6#7'1.4.2.0'#0#8'TToolBar'#8'T'
-  +'oolBar1'#4'Left'#2#0#6'Height'#2#29#3'Top'#2#0#5'Width'#3#182#1#12'ButtonHe'
-  +'ight'#2#21#7'Caption'#6#8'ToolBar1'#10'ParentFont'#8#8'TabOrder'#2#0#0#12'T'
-  +'SpeedButton'#7'OpenBtn'#4'Left'#2#1#6'Height'#2#21#3'Top'#2#2#5'Width'#2'8'
-  +#7'Caption'#6#4'Open'#7'OnClick'#7#12'OpenBtnClick'#0#0#12'TSpeedButton'#7'S'
-  +'aveBtn'#4'Left'#2'9'#6'Height'#2#21#3'Top'#2#2#5'Width'#2'8'#7'Caption'#6#4
-  +'Save'#7'OnClick'#7#12'SaveBtnClick'#0#0#9'TComboBox'#9'ComboBox1'#4'Left'#2
-  +'q'#6'Height'#2#20#3'Top'#2#2#5'Width'#3#145#0#13'DropDownCount'#2#24#10'Ite'
-  +'mHeight'#2#0#8'OnChange'#7#15'ComboBox1Change'#5'Style'#7#14'csDropDownList'
-  +#8'TabOrder'#2#0#0#0#12'TSpeedButton'#6'AddBtn'#4'Left'#3#2#1#6'Height'#2#21
-  +#3'Top'#2#2#5'Width'#2'8'#7'Caption'#6#3'Add'#7'OnClick'#7#11'AddBtnClick'#0
-  +#0#12'TSpeedButton'#9'UpdateBtn'#4'Left'#3':'#1#6'Height'#2#21#3'Top'#2#2#5
-  +'Width'#2'8'#7'Caption'#6#6'Update'#7'OnClick'#7#14'UpdateBtnClick'#0#0#12'T'
-  +'SpeedButton'#9'DeleteBtn'#4'Left'#3'r'#1#6'Height'#2#21#3'Top'#2#2#5'Width'
-  +#2'8'#7'Caption'#6#6'Delete'#7'OnClick'#7#14'DeleteBtnClick'#0#0#0#0
+  +'Width'#3'h'#1#11'BorderStyle'#7#8'bsDialog'#7'Caption'#6#9'Landmarks'#12'Cl'
+  +'ientHeight'#2#27#11'ClientWidth'#3'h'#1#11'Font.Height'#2#245#9'FormStyle'#7
+  +#11'fsStayOnTop'#8'OnCreate'#7#10'FormCreate'#8'Position'#7#14'poScreenCente'
+  +'r'#10'LCLVersion'#6#7'1.9.0.0'#0#8'TToolBar'#8'ToolBar1'#4'Left'#2#0#6'Heig'
+  +'ht'#2#22#3'Top'#2#0#5'Width'#3'h'#1#8'AutoSize'#9#12'ButtonHeight'#2#21#11
+  +'ButtonWidth'#2#23#7'Caption'#6#8'ToolBar1'#10'ParentFont'#8#8'TabOrder'#2#0
+  +#0#12'TSpeedButton'#7'OpenBtn'#4'Left'#2#1#6'Height'#2#20#3'Top'#2#2#5'Width'
+  +#2'&'#8'AutoSize'#9#7'Caption'#6#4'Open'#7'OnClick'#7#12'OpenBtnClick'#0#0#12
+  +'TSpeedButton'#7'SaveBtn'#4'Left'#2''''#6'Height'#2#20#3'Top'#2#2#5'Width'#2
+  +' '#8'AutoSize'#9#7'Caption'#6#4'Save'#7'OnClick'#7#12'SaveBtnClick'#0#0#9'T'
+  +'ComboBox'#9'ComboBox1'#4'Left'#2'G'#6'Height'#2#20#3'Top'#2#2#5'Width'#3#145
+  +#0#13'DropDownCount'#2#24#10'ItemHeight'#2#0#8'OnChange'#7#15'ComboBox1Chang'
+  +'e'#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#0#0#0#12'TSpeedButton'#6'Add'
+  +'Btn'#4'Left'#3#216#0#6'Height'#2#20#3'Top'#2#2#5'Width'#2#29#8'AutoSize'#9#7
+  +'Caption'#6#3'Add'#7'OnClick'#7#11'AddBtnClick'#0#0#12'TSpeedButton'#9'Updat'
+  +'eBtn'#4'Left'#3#245#0#6'Height'#2#20#3'Top'#2#2#5'Width'#2'1'#8'AutoSize'#9
+  +#7'Caption'#6#6'Update'#7'OnClick'#7#14'UpdateBtnClick'#0#0#12'TSpeedButton'
+  +#9'DeleteBtn'#4'Left'#3'&'#1#6'Height'#2#20#3'Top'#2#2#5'Width'#2','#8'AutoS'
+  +'ize'#9#7'Caption'#6#6'Delete'#7'OnClick'#7#14'DeleteBtnClick'#0#0#0#0
 ]);
