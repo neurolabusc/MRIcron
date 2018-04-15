@@ -39,7 +39,7 @@ Type
    //ResizeBeforeRescale - 0=intensity rescale, then resize;  1= nearest neighbor resize, then rescale;1=trilinear resize, then rescale;12:47 PM 7/13/2006
    UseReorientHdr,XBarVisible,ThinPen,Mirror,OverlaySmooth,VOIchanged,VOImirrored,
    SaveDefaultIni,KnownAlignment,Resliced, LoadUInt16asFloat32,
-   FlipAx,FlipSag,SingleRow,ResliceOnLoad,Prompt4DVolume,OrthoReslice, ShowDraw: boolean;
+   FlipAx,FlipSag,SingleRow,ResliceOnLoad,Prompt4DVolume,OrthoReslice, ShowDraw, DarkMode: boolean;
    MinChar,MaxChar: array [1..3] of char; //May07
    StretchQuality : TStretchQuality;
    VOIClr,XBarClr: TColor;
@@ -2434,11 +2434,11 @@ begin
 	FlipSag := false;
         SaveImgFilter := 0;
         SaveVoiFilter := 0;
-
 	OverlayTransPct := -1;
         FontSize := 12;
 	BGTransPct := 0;
 	LicenseID := 0;
+        DarkMode := false;
     ShowDraw := false;
 	ResliceOnLoad := false;
 	OrthoReslice := true;
@@ -2623,16 +2623,20 @@ begin
 	Filemode := 2;
 end;
 
-procedure LoadLabelLUT(var lBackgroundImg: TBGImg; var lHdr: TMRIcroHdr {; isBackground: boolean});
+function LoadLabelLUT(var lBackgroundImg: TBGImg; var lHdr: TMRIcroHdr): boolean;
 var lLUTname: string;
 (*	lInc: integer;
 	lTextFile: TextFile;
 	lStr1: string;
 	lCh: char; *)
 begin
+     result := false;
 	lLUTname := changefileext(lHdr.HdrFileName,'.lut');
+        if not Fileexists(lLUTname) then // .nii.gz -> .lut
+           lLUTname := changefileextX(lHdr.HdrFileName,'.lut');
 	if Fileexists(lLUTname) then begin
-		lHdr.UsesCustomPalette := true;
+                result := true;
+                lHdr.UsesCustomPalette := true;
 		LoadColorScheme(lLUTname,lHdr);
 
 	end;
@@ -3774,7 +3778,7 @@ begin
      if (lHdr.ImgBufferItems < 2) or  (lHdr.ImgBufferBPP <> 1) then
 		exit;
      if (lHdr.UsesCustomPaletteRandomRainbow) then begin
-      createLutLabel (lHdr.LUT, abs(lHdr.WindowScaledMax-lHdr.WindowScaledMin)/100);
+        createLutLabel (lHdr.LUT, abs(lHdr.WindowScaledMax-lHdr.WindowScaledMin)/100);
          for lInc := 1 to lHdr.ScrnBufferItems do
              lHdr.ScrnBuffer^[lInc] := lHdr.ImgBuffer^[lInc];
       (*    l16Buf := SmallIntP(lHdr.ImgBuffer );
@@ -5804,9 +5808,13 @@ begin
 	  lImg2Load.LutFromZero := true;
 	  lImg2Load.AutoBalMinUnscaled := lImg2Load.WindowScaledMin;
 	  lImg2Load.AutoBalMaxUnscaled := lImg2Load.WindowScaledMax;
-  end else if (lImg2Load.NIFTIhdr.intent_code = kNIFTI_INTENT_LABEL) and (lImg2Load.ImgBufferBPP = 1) and (lImg2Load.NIFTIhdr.regular = char(98))  then begin
+  end (*else if (lImg2Load.NIFTIhdr.intent_code = kNIFTI_INTENT_LABEL) and (lImg2Load.ImgBufferBPP = 1) and (lImg2Load.NIFTIhdr.regular = char(98))  then begin
    //createLutLabel (lImg2Load, 1.0);
    LoadLabelLUT(lBackgroundImg,lImg2Load);
+   if (( lImg2Load.NIFTIhdr.vox_offset- lImg2Load.NIFTIhdr.HdrSz) > 128) then
+      LoadLabels(lImg2Load.HdrFileName,lBackgroundImg.LabelRA, lImg2Load.NIFTIhdr.HdrSz, round( lImg2Load.NIFTIhdr.vox_offset))
+   else
+       LoadLabelsTxt(lImg2Load.HdrFileName, lBackgroundImg.LabelRA);
    lImg2Load.NIFTIhdr.scl_slope := 1;
    lImg2Load.NIFTIhdr.scl_inter := 0;
    lImg2Load.WindowScaledMin := kMin8bit;
@@ -5814,17 +5822,23 @@ begin
    lImg2Load.UsesCustomPalette := true;
    lImg2Load.AutoBalMinUnscaled := lImg2Load.WindowScaledMin;
    lImg2Load.AutoBalMaxUnscaled := lImg2Load.WindowScaledMax;
-  end else if (lImg2Load.NIFTIhdr.intent_code = kNIFTI_INTENT_LABEL) and ((lImg2Load.ImgBufferBPP = 1) or (lImg2Load.ImgBufferBPP = 2))  then begin
-
-          createLutLabel (lImg2Load.LUT, 1.0);
+  end else*) else if ( (lImg2Load.NIFTIhdr.regular = char(98)) or (lImg2Load.NIFTIhdr.intent_code = kNIFTI_INTENT_LABEL)) and ((lImg2Load.ImgBufferBPP = 1) or (lImg2Load.ImgBufferBPP = 2))  then begin
+           if not LoadLabelLUT(lBackgroundImg,lImg2Load) then begin
+              createLutLabel (lImg2Load.LUT, 1.0);
+              lImg2Load.WindowScaledMin := kMin8bit;
+             lImg2Load.WindowScaledMax := 255;
+              (*lImg2Load.WindowScaledMin := 0;//kMin8bit;
+	      lImg2Load.WindowScaledMax := 100;//255;
+              lImg2Load.UsesCustomPaletteRandomRainbow := true; *)
+           end else begin
+             lImg2Load.WindowScaledMin := kMin8bit;
+             lImg2Load.WindowScaledMax := 255;
+           end;
+           lImg2Load.AutoBalMinUnscaled := lImg2Load.WindowScaledMin;
+	   lImg2Load.AutoBalMaxUnscaled := lImg2Load.WindowScaledMax;
 	  lImg2Load.NIFTIhdr.scl_slope := 1;
 	  lImg2Load.NIFTIhdr.scl_inter := 0;
-	  lImg2Load.WindowScaledMin := 0;//kMin8bit;
-	  lImg2Load.WindowScaledMax := 100;//255;
 	  lImg2Load.UsesCustomPalette := true;
-          lImg2Load.UsesCustomPaletteRandomRainbow := true;
-	  lImg2Load.AutoBalMinUnscaled := lImg2Load.WindowScaledMin;
-	  lImg2Load.AutoBalMaxUnscaled := lImg2Load.WindowScaledMax;
           if {lLoadBackground} true then begin
              if (( lImg2Load.NIFTIhdr.vox_offset- lImg2Load.NIFTIhdr.HdrSz) > 128) then
                 LoadLabels(lImg2Load.HdrFileName,lBackgroundImg.LabelRA, lImg2Load.NIFTIhdr.HdrSz, round( lImg2Load.NIFTIhdr.vox_offset))

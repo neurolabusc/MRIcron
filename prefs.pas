@@ -5,7 +5,8 @@ unit prefs;
 interface
 
 uses
-  userdir, Process,
+   {$IFDEF Windows} ShellAPI, Windows, {$ENDIF} //x18
+    userdir, Process,
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, StdCtrls,
   Spin, Buttons;
 
@@ -15,11 +16,11 @@ type
 
   TPrefForm = class(TForm)
     AdvancedBtn: TButton;
+    DarkModeCheck: TCheckBox;
     Label4: TLabel;
     SingleRowCheck: TCheckBox;
     OrthoCheck: TCheckBox;
     FontEdit1: TSpinEdit;
-    XBarClr: TButton;
     OKBtn: TButton;
     CancelBtn: TButton;
     ThinPenCheck: TCheckBox;
@@ -32,6 +33,7 @@ type
     MaxDimEdit: TSpinEdit;
     ThreadEdit: TSpinEdit;
     SigDigEdit: TSpinEdit;
+    XBarClr: TButton;
     procedure Quit2TextEditor;
     procedure AdvancedBtnClick(Sender: TObject);
     procedure CancelBtnClick(Sender: TObject);
@@ -39,6 +41,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure OKBtnClick(Sender: TObject);
     procedure ResliceCheckClick(Sender: TObject);
+    procedure SingleRowCheckChange(Sender: TObject);
     procedure XBarClrClick(Sender: TObject);
   private
     { private declarations }
@@ -111,8 +114,14 @@ begin
   ImgForm.close;
 end; //Quit2TextEditor()
 {$ELSE}
-
-xxxxx
+begin
+  gBGImg.SaveDefaultIni := false;
+  //  Showmessage('Preferences will be opened in a text editor. The program '+ExtractFilename(paramstr(0))+' will now quit, so that the file will not be overwritten.');
+   //GLForm1.SavePrefs;
+    ShellExecute(Handle,'open', 'notepad.exe',PAnsiChar(AnsiString(IniName)), nil, SW_SHOWNORMAL) ;
+  //WritePrefsOnQuit.checked := false;
+  ImgForm.close; //x18
+end;
 
 {$ENDIF}
 
@@ -128,17 +137,23 @@ end;
 
 procedure TPrefForm.FormShow(Sender: TObject);
 begin
-        //RGBPlanarCheck.checked := gBGImg.isPlanarRGB;
+    //RGBPlanarCheck.checked := gBGImg.isPlanarRGB;
        ResliceCheck.checked := gBGImg.ResliceOnLoad;
        //OrthoCheck.Visible := not gBGImg.ResliceOnLoad;
        OrthoCheck.checked := gBGImg.OrthoReslice;
-     MaxDimEdit.value := gBGImg.MaxDim;
+
+       MaxDimEdit.value := gBGImg.MaxDim;
      ThreadEdit.value := gnCPUThreads;
      //DrawCheck.checked := ImgForm.ToolPanel.Visible;
      ThinPenCheck.Checked := gBGImg.ThinPen;
      SigDigEdit.value := gBGImg.SigDig;
      SingleRowCheck.checked := gBGImg.SingleRow;
      FontEdit1.Value := gBGImg.FontSize;
+     {$IFDEF LCLCocoa}
+     DarkModeCheck.visible := true;
+     DarkModeCheck.Checked := gBGImg.DarkMode;
+     {$ENDIF}
+
 end;
 
 procedure TPrefForm.OKBtnClick(Sender: TObject);
@@ -160,6 +175,12 @@ begin
 
      end;
      gBGImg.SigDig := SigDigEdit.value;
+     {$IFDEF LCLCocoa}
+     if gBGImg.DarkMode <> DarkModeCheck.Checked then begin
+        gBGImg.DarkMode := DarkModeCheck.Checked;
+        ImgForm.SetDarkMode;
+     end;
+     {$ENDIF}
      if gBGImg.SingleRow <> SingleRowCheck.Checked then begin
         gBGImg.SingleRow := SingleRowCheck.Checked;
         ImgForm.DefaultControlPanel;
@@ -171,6 +192,11 @@ end;
 procedure TPrefForm.ResliceCheckClick(Sender: TObject);
 begin
     OrthoCheck.Visible := not ResliceCheck.checked;
+end;
+
+procedure TPrefForm.SingleRowCheckChange(Sender: TObject);
+begin
+
 end;
 
 procedure TPrefForm.XBarClrClick(Sender: TObject);

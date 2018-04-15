@@ -8,6 +8,7 @@ interface
 {$ENDIF}
 uses
 {$H+}
+{$IFDEF LCLCocoa} nsappkitext, {$ENDIF}
 {$IFDEF Darwin}Process,{$ENDIF}  //CarbonOpenDoc,
 {$IFDEF Unix}
   lclintf,LCLType,fileutil,//gettickcount ,LMessages
@@ -217,6 +218,7 @@ procedure FormOpenFileMethod(const FileName : string);
 procedure CheckForUpdates(Sender: TObject);
 procedure Landmarks1Click(Sender: TObject);
 procedure SetIniMenus;
+function ActiveLayer:integer;
 procedure Batchclusterprobmaps1Batchclusterprobmaps1ClickClick(Sender: TObject);
 procedure Batchprobmaps1Click(Sender: TObject);
 procedure BatchROImean1Click(Sender: TObject);
@@ -362,6 +364,9 @@ procedure UpdateColorSchemes;
         procedure SaveOrCopyImages(lCopy: boolean);
         function ImgIntensityString(var lHdr: TMRIcroHdr; lVox: integer): string;  overload;
         function ImgIntensityString(var lHdr: TMRIcroHdr; lX,lY,lZ: integer): string;  overload;
+            {$IFDEF LCLCocoa}
+    procedure SetDarkMode;
+    {$ENDIF}
  private
 	{ Private declarations }
 
@@ -615,6 +620,8 @@ begin
   lIniFile.WriteString('BOOL', 'Reslice',Bool2Char(gBGImg.ResliceOnLoad));
   lIniFile.WriteString('BOOL', 'ResliceOrtho',Bool2Char(gBGImg.OrthoReslice));
   lIniFile.WriteString('BOOL', 'ShowDraw',Bool2Char(gBGImg.ShowDraw));
+  lIniFile.WriteString('BOOL', 'ShowDraw',Bool2Char(gBGImg.ShowDraw));
+  {$IFDEF LCLCocoa}lIniFile.WriteString('BOOL', 'DarkMode',Bool2Char(gBGImg.DarkMode)); {$ENDIF}
   lIniFile.WriteString('BOOL', 'ThinPen',Bool2Char(gBGImg.ThinPen));
 
   lIniFile.WriteString('BOOL', 'Smooth2D',Bool2Char(Menu2DSmooth.checked));
@@ -959,8 +966,7 @@ begin
   DisplayHdrClick(nil);
 end;
 
-
-function ActiveLayer:integer;
+function TImgForm.ActiveLayer:integer;
 begin
      result := ImgForm.LayerDrop.ItemIndex;
      if result < 0 then
@@ -1035,9 +1041,10 @@ begin
      {$IFDEF TEST}
      FZ;
      {$ELSE}
+
 		lLayer := ActiveLayer;
 		DrawHistogram(gMRIcroOverlay[lLayer],HistogramForm.HistoImage{lImage});
-		HistogramForm.Caption := 'Histogram: '+extractfilename(gMRIcroOverlay[lLayer].HdrFileName);
+                HistogramForm.Caption := 'Histogram: '+extractfilename(gMRIcroOverlay[lLayer].HdrFileName);
          {$ENDIF}
    HistogramForm.show;
   //HistogramForm.BringToFront;
@@ -1878,7 +1885,7 @@ begin
     lV := round(ImgIntensity(lHdr,lVox));
     if lV <= High(gBGImg.LabelRA) then
        result := gBGImg.LabelRA[lV];
-    exit;
+   exit;
   end;
   if (not lHdr.UsesCustomPalette) or (lHdr.NIFTIhdr.datatype = kDT_RGB) then begin
      result := realtostr(ImgIntensity(lHdr,lVox),gBGImg.SigDig);
@@ -2072,7 +2079,7 @@ var
  lMinInten,lMaxInten,lVal: single;
 begin
    lPanel := SelectedImageNum;
-   lLayer := ActiveLayer;
+   lLayer := ImgForm.ActiveLayer;
    XYscrn2Img (lImage,lPanel,gSelectRect.Left,gSelectRect.Top, lXout,lYOut,lZOut);
    lMinInten := ImgIntensity(gMRIcroOverlay[lLayer],lXout,lYOut,lZOut);
    lMaxInten := lMinInten;
@@ -4974,6 +4981,13 @@ end;
 
 {$ENDIF}
 
+{$IFDEF LCLCocoa}
+procedure TImgForm.SetDarkMode;
+begin
+  setThemeMode(Self.Handle, gBGImg.DarkMode);
+end;
+{$ENDIF}
+
 procedure TImgForm.FormShow(Sender: TObject);
 var
    lStr: String;
@@ -4995,6 +5009,9 @@ begin
 end; //nested ReadCmdVal
 begin
   //CheckForUpdates;
+     {$IFDEF LCLCocoa}
+   SetDarkMode;
+   {$ENDIF}
   DrawMenu.Visible := ToolPanel.visible;
   {$IFDEF FPC}MagnifyMenuItem.visible := false;
   {$ENDIF}

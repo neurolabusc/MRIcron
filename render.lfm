@@ -1,12 +1,13 @@
 object RenderForm: TRenderForm
-  Left = 547
-  Height = 512
-  Top = 220
-  Width = 955
+  Left = 1215
+  Height = 1280
+  Top = 342
+  Width = 2388
   ActiveControl = RenderBar
   Caption = 'Volume Render'
-  ClientHeight = 512
-  ClientWidth = 955
+  ClientHeight = 1231
+  ClientWidth = 2388
+  DesignTimePPI = 240
   Menu = MainMenu1
   OnCreate = FormCreate
   OnHide = FormHide
@@ -15,129 +16,129 @@ object RenderForm: TRenderForm
   LCLVersion = '1.9.0.0'
   object RenderBar: TPanel
     Left = 0
-    Height = 36
+    Height = 80
     Top = 0
-    Width = 955
+    Width = 2388
     Align = alTop
     BevelOuter = bvNone
-    ClientHeight = 36
-    ClientWidth = 955
+    ClientHeight = 80
+    ClientWidth = 2388
+    ParentFont = False
     TabOrder = 0
+    OnClick = RenderBarClick
     object Label4: TLabel
-      Left = 152
-      Height = 16
-      Top = 5
-      Width = 55
+      Left = 380
+      Height = 41
+      Top = 12
+      Width = 119
       Caption = 'Elevation'
       ParentColor = False
+      ParentFont = False
     end
     object Label1: TLabel
-      Left = 4
-      Height = 16
-      Top = 5
-      Width = 50
+      Left = 10
+      Height = 41
+      Top = 12
+      Width = 110
       Caption = 'Azimuth'
       ParentColor = False
-    end
-    object RenderImageBUP: TImage
-      Tag = 2
-      Cursor = crCross
-      Left = 360
-      Height = 12
-      Top = 8
-      Width = 12
-      AutoSize = True
-      Center = True
-      OnMouseDown = RenderImageMouseDown
-      OnMouseMove = RenderImageMouseMove
-      Stretch = True
-      Visible = False
+      ParentFont = False
     end
     object Label5: TLabel
-      Left = 616
-      Height = 16
-      Top = 5
-      Width = 64
+      Left = 1540
+      Height = 41
+      Top = 12
+      Width = 141
       Caption = 'Shading %'
       ParentColor = False
+      ParentFont = False
     end
     object AzimuthEdit: TSpinEdit
-      Left = 72
-      Height = 21
-      Top = 4
-      Width = 70
+      Left = 180
+      Height = 49
+      Top = 15
+      Width = 180
+      Constraints.MinWidth = 175
       Increment = 30
       MaxValue = 360
       OnChange = EditChange
+      ParentFont = False
       TabOrder = 0
       Value = 120
     end
     object ElevationEdit: TSpinEdit
-      Left = 216
-      Height = 21
-      Top = 4
-      Width = 70
+      Left = 540
+      Height = 49
+      Top = 15
+      Width = 180
+      Constraints.MinWidth = 175
       Increment = 30
       MaxValue = 180
       MinValue = -180
       OnChange = EditChange
+      ParentFont = False
       TabOrder = 1
       Value = 30
     end
     object BiasTrack: TTrackBar
-      Left = 352
-      Height = 32
-      Top = 2
-      Width = 120
+      Left = 880
+      Height = 75
+      Top = 5
+      Width = 300
       Max = 100
       OnChange = BiasTrackChange
       Position = 50
       TickStyle = tsNone
+      ParentFont = False
       TabOrder = 2
     end
     object GainTrack: TTrackBar
-      Left = 480
-      Height = 32
-      Top = 2
-      Width = 120
+      Left = 1200
+      Height = 75
+      Top = 5
+      Width = 300
       Max = 100
       OnChange = GainTrackChange
       Position = 50
       TickStyle = tsNone
+      ParentFont = False
       TabOrder = 3
     end
     object ShadeEdit: TSpinEdit
-      Left = 692
-      Height = 21
-      Top = 4
-      Width = 70
+      Left = 1730
+      Height = 49
+      Top = 15
+      Width = 180
       Increment = 10
       OnChange = EditChange
+      ParentFont = False
       TabOrder = 4
     end
     object ClipTrack: TTrackBar
-      Left = 780
-      Height = 32
-      Top = 2
-      Width = 120
+      Left = 1950
+      Height = 75
+      Top = 5
+      Width = 300
       Max = 999
       OnChange = ClipTrackChange
       Position = 0
       TickStyle = tsNone
+      ParentFont = False
       TabOrder = 5
     end
     object RefreshToolbar: TToolBar
-      Left = 292
-      Height = 34
+      Left = 750
+      Height = 82
       Top = 0
-      Width = 33
+      Width = 81
       Align = alNone
       AutoSize = True
-      ButtonHeight = 32
-      ButtonWidth = 32
+      ButtonHeight = 80
+      ButtonWidth = 80
       Caption = 'RefreshToolbar'
       Images = ImgForm.ImageList1
       ImagesWidth = 28
+      ParentFont = False
       TabOrder = 6
       object RefreshBtn: TToolButton
         Left = 1
@@ -151,31 +152,46 @@ object RenderForm: TRenderForm
   end
   object RenderPanel: TScrollBox
     Left = 0
-    Height = 476
-    Top = 36
-    Width = 955
-    HorzScrollBar.Page = 14
-    VertScrollBar.Page = 14
+    Height = 1151
+    Top = 80
+    Width = 2388
+    HorzScrollBar.Page = 912
+    VertScrollBar.Page = 32
     Align = alClient
-    ClientHeight = 476
-    ClientWidth = 955
+    ClientHeight = 1147
+    ClientWidth = 2384
+    ParentFont = False
     TabOrder = 1
     object RenderImage: TImage
       Tag = 2
       Cursor = crCross
-      Left = 2
+      Left = 5
       Height = 12
-      Top = 2
+      Top = 5
       Width = 12
       AutoSize = True
       OnMouseDown = RenderImageMouseDown
       OnMouseMove = RenderImageMouseMove
       Stretch = True
     end
+    object RenderImageBUP: TImage
+      Tag = 2
+      Cursor = crCross
+      Left = 900
+      Height = 12
+      Top = 20
+      Width = 12
+      AutoSize = True
+      Center = True
+      OnMouseDown = RenderImageMouseDown
+      OnMouseMove = RenderImageMouseMove
+      Stretch = True
+      Visible = False
+    end
   end
   object MainMenu1: TMainMenu
-    left = 16
-    top = 32
+    left = 40
+    top = 80
     object FileMenu: TMenuItem
       Caption = 'File'
       object Settings1: TMenuItem
@@ -509,7 +525,7 @@ object RenderForm: TRenderForm
     Enabled = False
     Interval = 150
     OnTimer = RenderRefreshTimerTimer
-    left = 48
-    top = 32
+    left = 120
+    top = 80
   end
 end

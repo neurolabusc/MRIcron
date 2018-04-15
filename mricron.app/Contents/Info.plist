@@ -14,8 +14,6 @@
   <string>6.0</string>
   <key>CFBundlePackageType</key>
   <string>APPL</string>
-  <key>CFBundleIconFile</key>
-  <string>mricron.icns</string>
   <key>CFBundleSignature</key>
   <string>MRIc</string>
   <key>CFBundleShortVersionString</key>

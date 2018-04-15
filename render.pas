@@ -13,6 +13,7 @@ Windows,
 {$ELSE}
 rendernothreads,
 {$ENDIF}
+{$IFDEF LCLCocoa} nsappkitext, {$ENDIF}
  LResources,SysUtils, GraphicsMathLibrary,Classes, Graphics, Controls, Forms, Dialogs,ExtCtrls,Buttons,
  nifti_img, nifti_hdr,define_types,nifti_img_view,StdCtrls, Spin, Menus,ClipBrd,ReadInt,IniFiles,
  ComCtrls,userdir,render_composite;
@@ -22,6 +23,7 @@ type
     CutoutMenu: TMenuItem;
     ClipTrack: TTrackBar;
     MenuItem1: TMenuItem;
+    RenderImageBUP: TImage;
     SaveClipMenu: TMenuItem;
     MIPItem: TMenuItem;
     ShadeEdit: TSpinEdit;
@@ -83,7 +85,6 @@ type
 
     RenderPanel: TScrollBox;
     RenderImage: TImage;
-    RenderImageBUP: TImage;
     //RenderImage2: TImage;
 
      RenderSmoothOverlay: TMenuItem;
@@ -100,6 +101,7 @@ type
     procedure BiasTrackChange(Sender: TObject);
     procedure ClipTrackChange(Sender: TObject);
     procedure GainTrackChange(Sender: TObject);
+    procedure RenderBarClick(Sender: TObject);
     procedure RenderSmoothBGClick(Sender: TObject);
     procedure RotationBMPMenuClick(Sender: TObject);
     procedure SaveClipMenuClick(Sender: TObject);
@@ -520,6 +522,11 @@ begin
  	RenderRefreshTimer.Enabled := true;
 end;
 
+procedure TRenderForm.RenderBarClick(Sender: TObject);
+begin
+
+end;
+
 procedure TRenderForm.RenderSmoothBGClick(Sender: TObject);
 begin
 	(sender as TMenuItem).checked := not (sender as TMenuItem).checked;
@@ -581,11 +588,16 @@ begin
 	RenderRefreshTimer.Enabled := true;
 end;
 
+
 procedure TRenderForm.FormShow(Sender: TObject);
 var
 	lInc: integer;
 begin
-     gRender.ClipFrac := 0;
+  {$IFDEF LCLCocoa}
+    setThemeMode(Self.Handle, gBGImg.DarkMode);
+  {$ENDIF}
+
+  gRender.ClipFrac := 0;
       gRender.Bias := 50;
      gRender.Gain := 50;
         gRender.cutoutLUTindex := 0;
@@ -812,7 +824,6 @@ begin
      {$IFDEF Darwin}
      if not fileexists(gRenderDir) then
         gRenderDir := AppDir + 'render';
-     //showmessage(gTemplateDir);
      {$ENDIF}
      //showmessage(gRenderDir);
      //gRenderDir := extractfiledir(paramstr(0))+pathdelim+'render'+pathdelim;

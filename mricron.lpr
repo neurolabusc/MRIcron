@@ -28,6 +28,7 @@ batchstatselect, nii_label;
 //{$ENDIF}
 
 begin
+  Application.Scaled:=True;
   Application.Title:='MRIcron';
   //Application.Title:='MRIcron';
   RequireDerivedFormResource := True;
@@ -55,7 +56,7 @@ begin
   Application.CreateForm(TReadFloatForm, ReadFloatForm);
    {$IFDEF FPC}{$IFDEF LINUX} HighDPIfont(GetFontData(ImgForm.Font.Handle).Height); {$ENDIF} {$ENDIF}
   {$IFDEF FPC}{$IFNDEF UNIX}
-  HighDPI(96);
+  //HighDPI(96);
    {$ENDIF}{$ENDIF}
 
   Application.Run;

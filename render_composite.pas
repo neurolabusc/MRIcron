@@ -17,7 +17,7 @@ rendernothreads,
  {$ENDIF}
  SysUtils, GraphicsMathLibrary,Classes, Graphics, Controls, Forms, Dialogs,ExtCtrls,Buttons,
  nifti_img, nifti_hdr,define_types,nifti_img_view,StdCtrls, Menus,ClipBrd,ReadInt,cutout,IniFiles,
- ComCtrls, nifti_types;
+ ComCtrls, nifti_types, nii_label;
 type
    TRender =  record
            Zoom: single;
@@ -136,6 +136,8 @@ end; //for each pixel
 			lOutBuffer^[lPixel]:= lIntensity div lSamples;
 	end ; //if background
   end;    *)
+  //showmessage(inttostr(lHdr.NIFTIhdr.intent_code ));
+  //if (lHdr.NIFTIhdr.intent_code = kNIFTI_INTENT_LABEL) then showmessage('xx');
   if (Smooth2D) and (lHdr.NIFTIhdr.intent_code <> kNIFTI_INTENT_LABEL) then //do not smooth labels
 	Smooth2DImage (lX,lY, lOutBuffer);
 //Mar2007 start
@@ -588,9 +590,9 @@ begin
   //if not lCreateDepthBuffer then
 
   if (lHdr.IMgBufferItems > 0) {2/2008} and (lHdr.NIFTIhdr.intent_code = kNIFTI_INTENT_LABEL) then
-	lRenderSurface := 1
+	lRenderSurface := 0
   else begin
-  //make sure at least some voxels are below air-surface threshold
+            //make sure at least some voxels are below air-surface threshold
 	if (lHdr.WindowScaledMin <= (Raw2ScaledIntensity(lHdr,lHdr.GlMinUnscaledS) )) and (lHdr.WindowScaledMax <> 0 ) then begin
                lTemp := round( (Raw2ScaledIntensity(lHdr,lHdr.GlMinUnscaledS)-lHdr.WindowScaledMin)/(lHdr.WindowScaledMax)*255);
 		//showmessage(inttostr(lTemp));
@@ -598,7 +600,6 @@ begin
 			lRenderSurface := lTemp + 1;
 	end;
   end;
-
   if (lUseDepthBuffer=kBelow)  then begin
 	CreateOverlayRenderBehind(lBGHdr,lHdr, lX,lY,lZ,lRenderSurface,lRenderDepth, lQuadP, Smooth2D);
 	exit;
@@ -728,7 +729,8 @@ end; //volume render without depth buffer
 	for lPixel := 1 to lSliceSz do
 	   lOutBuffer^[lPixel] := lLUT[lOutBuffer^[lPixel]];
   end;
-  if lShade then begin
+
+  if (lHdr.NIFTIhdr.intent_code <> kNIFTI_INTENT_LABEL) and (lShade) then begin
       if lShadePrecise then begin
          SmoothShading (lX,lY,lPreciseDepthBuffer);
          IlluminationShading(lX,lY,gRender.ShadePct,lOutBuffer,lPreciseDepthBuffer{gBGImg.RenderDepthBuffer} );
@@ -737,10 +739,21 @@ end; //volume render without depth buffer
          IlluminationShading(lX,lY,gRender.ShadePct,lOutBuffer,gBGImg.RenderDepthBuffer);
 
   end;//shading
+  //if (lHdr.UsesCustomPaletteRandomRainbow) then
+  //      createLutLabel (lHdr.LUT, abs(lHdr.WindowScaledMax-lHdr.WindowScaledMin)/100);
 
   for lPixel := 0 to 255 do
       lrgbLUT[lPixel] := lHdr.LUT[lPixel];
-   if (lHdr.NIFTIhdr.intent_code <> kNIFTI_INTENT_LABEL) then
+  (*for lPixel := 1 to 255 do begin
+      lrgbLUT[lPixel].rgbRed:= 255;
+      //lrgbLUT[lPixel].rgbGreen:= lPixel;
+      //lrgbLUT[lPixel].rgbBlue:= lPixel;
+  end;  *)
+  if (lHdr.NIFTIhdr.intent_code <> kNIFTI_INTENT_LABEL) then
+   RenderForm.caption := '-'
+  else
+      RenderForm.caption := 'i';
+  if (lHdr.NIFTIhdr.intent_code <> kNIFTI_INTENT_LABEL) then
       LUTGainX(lrgbLUT,gRender.Bias,gRender.Gain ); //Mar2007
 
   for lPixel := 1 to lSliceSz do

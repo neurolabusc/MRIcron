@@ -1,13 +1,14 @@
 object ImgForm: TImgForm
-  Left = 262
-  Height = 401
-  Top = 124
-  Width = 1018
+  Left = 459
+  Height = 1002
+  Top = 406
+  Width = 2545
   ActiveControl = ControlPanel
   AllowDropFiles = True
   Caption = 'MRIcron'
-  ClientHeight = 401
-  ClientWidth = 1018
+  ClientHeight = 953
+  ClientWidth = 2545
+  DesignTimePPI = 240
   KeyPreview = True
   Menu = MainMenu1
   OnClose = FormClose
@@ -23,41 +24,44 @@ object ImgForm: TImgForm
   object ControlPanel: TPanel
     Tag = 1
     Left = 0
-    Height = 36
+    Height = 90
     Top = 0
-    Width = 1018
+    Width = 2545
     Align = alTop
     BevelOuter = bvNone
-    ClientHeight = 36
-    ClientWidth = 1018
+    ClientHeight = 90
+    ClientWidth = 2545
     ParentColor = False
+    ParentFont = False
     ParentShowHint = False
     ShowHint = True
     TabOrder = 0
     OnClick = ControlPanelClick
     OnDblClick = ControlPanelDblClick
     object LayerPanel: TPanel
-      Left = 274
-      Height = 36
+      Left = 685
+      Height = 90
       Top = 0
-      Width = 410
+      Width = 1025
       BevelOuter = bvNone
-      ClientHeight = 36
-      ClientWidth = 410
+      ClientHeight = 90
+      ClientWidth = 1025
       ParentColor = False
+      ParentFont = False
       TabOrder = 1
       object LayerDrop: TComboBox
         Left = 0
-        Height = 26
-        Top = 6
-        Width = 104
-        ItemHeight = 26
+        Height = 49
+        Top = 15
+        Width = 260
+        ItemHeight = 41
         ItemIndex = 0
         Items.Strings = (
           'Background'
         )
         OnChange = LayerDropChange
         OnSelect = LayerDropSelect
+        ParentFont = False
         ParentShowHint = False
         ShowHint = True
         Style = csDropDownList
@@ -65,68 +69,70 @@ object ImgForm: TImgForm
         Text = 'Background'
       end
       object MinWindowEdit: TFloatSpinEdit
-        Left = 144
-        Height = 21
-        Top = 6
-        Width = 80
+        Left = 360
+        Height = 49
+        Top = 15
+        Width = 200
         DecimalPlaces = 5
-        Increment = 1
         MaxValue = 9999999
         MinValue = -9999999
         OnChange = MinContrastWindowEditChange
+        ParentFont = False
         TabOrder = 1
         Value = 3
       end
       object MaxWindowEdit: TFloatSpinEdit
-        Left = 228
-        Height = 21
-        Top = 6
-        Width = 80
+        Left = 570
+        Height = 49
+        Top = 15
+        Width = 200
         DecimalPlaces = 5
-        Increment = 1
         MaxValue = 9999999
         MinValue = -9999999
         OnChange = MaxContrastWindowEditChange
+        ParentFont = False
         TabOrder = 2
         Value = 1
       end
       object LUTdrop: TComboBox
-        Left = 308
-        Height = 26
-        Top = 6
-        Width = 100
+        Left = 770
+        Height = 49
+        Top = 15
+        Width = 250
         DropDownCount = 66
-        ItemHeight = 26
+        ItemHeight = 41
         OnChange = LUTdropChange
         OnSelect = LUTdropSelect
+        ParentFont = False
         ParentShowHint = False
         ShowHint = True
         Style = csDropDownList
         TabOrder = 3
-        Text = '0'
       end
       object AutoContrastPanel: TPanel
-        Left = 104
-        Height = 36
+        Left = 260
+        Height = 90
         Top = 0
-        Width = 36
+        Width = 90
         BevelOuter = bvNone
-        ClientHeight = 36
-        ClientWidth = 36
+        ClientHeight = 90
+        ClientWidth = 90
+        ParentFont = False
         TabOrder = 4
         object AutoContrastToolbar: TToolBar
           Left = 0
-          Height = 36
+          Height = 90
           Top = 0
-          Width = 36
+          Width = 90
           Align = alClient
-          ButtonHeight = 32
-          ButtonWidth = 32
+          ButtonHeight = 80
+          ButtonWidth = 80
           Caption = 'AutoContrastToolBar'
           EdgeInner = esNone
           EdgeOuter = esNone
           Images = ImageList1
           ImagesWidth = 28
+          ParentFont = False
           TabOrder = 0
           object AutoContrastBtn: TToolButton
             Left = 1
@@ -140,28 +146,30 @@ object ImgForm: TImgForm
       end
     end
     object ToolPanel: TPanel
-      Left = 820
-      Height = 36
+      Left = 2050
+      Height = 90
       Top = 0
-      Width = 170
+      Width = 425
       BevelOuter = bvNone
-      ClientHeight = 36
-      ClientWidth = 170
+      ClientHeight = 90
+      ClientWidth = 425
+      ParentFont = False
       TabOrder = 0
       Visible = False
       OnClick = ToolPanelClick
       object ToolToolBar: TToolBar
         Left = 0
-        Height = 36
+        Height = 90
         Top = 0
-        Width = 168
+        Width = 420
         Align = alNone
-        ButtonHeight = 30
-        ButtonWidth = 30
+        ButtonHeight = 75
+        ButtonWidth = 75
         Caption = 'DrawBar'
         EdgeOuter = esNone
         Images = ImageList1
         ImagesWidth = 28
+        ParentFont = False
         TabOrder = 0
         object PenBtn: TToolButton
           Left = 1
@@ -175,7 +183,7 @@ object ImgForm: TImgForm
           Style = tbsCheck
         end
         object ClosedPenBtn: TToolButton
-          Left = 33
+          Left = 76
           Hint = 'Autoclose Pen'
           Top = 1
           AllowAllUp = True
@@ -186,7 +194,7 @@ object ImgForm: TImgForm
           Style = tbsCheck
         end
         object FillBtn: TToolButton
-          Left = 65
+          Left = 151
           Hint = 'Fill tool'
           Top = 1
           AllowAllUp = True
@@ -197,7 +205,7 @@ object ImgForm: TImgForm
           Style = tbsCheck
         end
         object EllipseBtn: TToolButton
-          Left = 97
+          Left = 226
           Hint = 'Ellipse Tool'
           Top = 1
           AllowAllUp = True
@@ -208,7 +216,7 @@ object ImgForm: TImgForm
           Style = tbsCheck
         end
         object Fill3DBtn: TToolButton
-          Left = 129
+          Left = 301
           Hint = 'Create VOI based on background intensity'
           Top = 1
           AllowAllUp = True
@@ -221,27 +229,29 @@ object ImgForm: TImgForm
       end
     end
     object ViewPanel: TPanel
-      Left = 688
-      Height = 36
+      Left = 1720
+      Height = 90
       Top = 0
-      Width = 136
+      Width = 340
       BevelOuter = bvNone
-      ClientHeight = 36
-      ClientWidth = 136
+      ClientHeight = 90
+      ClientWidth = 340
+      ParentFont = False
       TabOrder = 2
       object ViewToolBar: TToolBar
         Left = 0
-        Height = 36
+        Height = 90
         Top = 0
-        Width = 136
+        Width = 340
         Align = alClient
-        ButtonHeight = 32
-        ButtonWidth = 32
+        ButtonHeight = 80
+        ButtonWidth = 80
         EdgeBorders = []
         EdgeInner = esNone
         EdgeOuter = esNone
         Images = ImageList1
         ImagesWidth = 28
+        ParentFont = False
         TabOrder = 0
         object LutFromZeroBtn: TToolButton
           Left = 1
@@ -252,7 +262,7 @@ object ImgForm: TImgForm
           OnClick = LutFromZeroBtnClick
         end
         object ColorBarBtn: TToolButton
-          Left = 33
+          Left = 81
           Hint = 'Draw color range '
           Top = 0
           Caption = 'ColorBarBtn'
@@ -260,7 +270,7 @@ object ImgForm: TImgForm
           OnMouseDown = ColorBarBtnMouseDown
         end
         object HideROIBtn: TToolButton
-          Left = 65
+          Left = 161
           Hint = 'Briefly hide VOIs and Overlays'
           Top = 0
           Caption = 'HideROIBtn'
@@ -269,7 +279,7 @@ object ImgForm: TImgForm
           OnMouseUp = HideROIBtnMouseUp
         end
         object XBarBtn: TToolButton
-          Left = 97
+          Left = 241
           Hint = 'Toggle Crosshairs'#10'right-click to change gap size'#10'right+ctrl click to change color'#10'right+alt click to change thickness'#10'right+shift to reposition origin'#10'right+ctrl+alt to adjust font size'
           Top = 0
           Caption = 'XBarBtn'
@@ -282,43 +292,48 @@ object ImgForm: TImgForm
     end
     object SlicePanel: TPanel
       Left = 0
-      Height = 36
+      Height = 90
       Top = 0
-      Width = 274
-      ClientHeight = 36
-      ClientWidth = 274
+      Width = 685
+      BevelOuter = bvNone
+      ClientHeight = 90
+      ClientWidth = 685
+      ParentFont = False
       TabOrder = 3
       object LabelX: TLabel
-        Left = 4
-        Height = 16
-        Top = 10
-        Width = 9
+        Left = 10
+        Height = 41
+        Top = 25
+        Width = 18
         Caption = 'X'
         ParentColor = False
+        ParentFont = False
       end
       object LabelY: TLabel
-        Left = 74
-        Height = 16
-        Top = 10
-        Width = 9
+        Left = 185
+        Height = 41
+        Top = 25
+        Width = 17
         Caption = 'Y'
         ParentColor = False
+        ParentFont = False
       end
       object LabelZ: TLabel
-        Left = 141
-        Height = 16
-        Top = 10
-        Width = 9
+        Left = 352
+        Height = 41
+        Top = 25
+        Width = 17
         Caption = 'Z'
         ParentColor = False
+        ParentFont = False
       end
       object ZoomDrop: TComboBox
-        Left = 212
-        Height = 26
-        Top = 6
-        Width = 59
+        Left = 530
+        Height = 49
+        Top = 15
+        Width = 148
         DropDownCount = 12
-        ItemHeight = 26
+        ItemHeight = 41
         Items.Strings = (
           'Fit'
           'Int'
@@ -334,39 +349,42 @@ object ImgForm: TImgForm
         )
         OnChange = ZoomDropChange
         OnSelect = ZoomDropSelect
+        ParentFont = False
         ParentShowHint = False
         ShowHint = True
         Style = csDropDownList
         TabOrder = 0
-        Text = '0'
       end
       object XViewEdit: TSpinEdit
-        Left = 18
-        Height = 21
-        Top = 9
-        Width = 52
+        Left = 45
+        Height = 49
+        Top = 22
+        Width = 130
         MinValue = 1
         OnChange = XViewEditChange
+        ParentFont = False
         TabOrder = 1
         Value = 100
       end
       object YViewEdit: TSpinEdit
-        Left = 86
-        Height = 21
-        Top = 9
-        Width = 52
+        Left = 215
+        Height = 49
+        Top = 22
+        Width = 130
         MinValue = 1
         OnChange = XViewEditChange
+        ParentFont = False
         TabOrder = 2
         Value = 30
       end
       object ZViewEdit: TSpinEdit
-        Left = 153
-        Height = 21
-        Top = 9
-        Width = 52
+        Left = 382
+        Height = 49
+        Top = 22
+        Width = 130
         MinValue = 1
         OnChange = XViewEditChange
+        ParentFont = False
         TabOrder = 3
         Value = 14
       end
@@ -374,65 +392,70 @@ object ImgForm: TImgForm
   end
   object MagPanel: TPanel
     Left = 0
-    Height = 20
-    Top = 381
-    Width = 1018
+    Height = 41
+    Top = 912
+    Width = 2545
     Align = alBottom
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 20
-    ClientWidth = 1018
+    ClientHeight = 41
+    ClientWidth = 2545
+    ParentFont = False
     TabOrder = 1
     object StatusLabel: TLabel
       Left = 0
-      Height = 16
+      Height = 41
       Top = 0
-      Width = 129
+      Width = 283
       Caption = '  No Images Loaded  '
       ParentColor = False
+      ParentFont = False
     end
     object ProgressBar1: TProgressBar
-      Left = 906
-      Height = 20
+      Left = 2265
+      Height = 41
       Top = 0
-      Width = 112
+      Width = 280
       Align = alRight
       BorderWidth = 1
+      ParentFont = False
       TabOrder = 0
     end
   end
   object Panel1: TPanel
     Left = 0
-    Height = 345
-    Top = 36
-    Width = 1018
+    Height = 822
+    Top = 90
+    Width = 2545
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 345
-    ClientWidth = 1018
+    ClientHeight = 822
+    ClientWidth = 2545
+    ParentFont = False
     TabOrder = 2
     object TriplePanel: TScrollBox
       Tag = 666
       Left = 0
-      Height = 345
+      Height = 822
       Top = 0
-      Width = 1018
-      HorzScrollBar.Page = 584
-      VertScrollBar.Page = 190
+      Width = 2545
+      HorzScrollBar.Page = 1442
+      VertScrollBar.Page = 457
       Align = alClient
-      ClientHeight = 345
-      ClientWidth = 1018
-      Constraints.MinWidth = 4
+      ClientHeight = 818
+      ClientWidth = 2541
+      Constraints.MinWidth = 10
       Color = clBlack
       ParentColor = False
+      ParentFont = False
       TabOrder = 0
       OnClick = ImgPanelClick
       object PGImageCor: TImage
         Tag = 2
         Cursor = crCross
-        Left = 1
+        Left = 2
         Height = 12
-        Top = 1
+        Top = 2
         Width = 12
         AutoSize = True
         OnDblClick = PGImageCorDblClick
@@ -444,9 +467,9 @@ object ImgForm: TImgForm
       object PGImageSag: TImage
         Tag = 3
         Cursor = crCross
-        Left = 24
+        Left = 60
         Height = 12
-        Top = 1
+        Top = 2
         Width = 12
         AutoSize = True
         OnDblClick = PGImageCorDblClick
@@ -458,9 +481,9 @@ object ImgForm: TImgForm
       object PGImageAx: TImage
         Tag = 1
         Cursor = crCross
-        Left = 572
+        Left = 1430
         Height = 12
-        Top = 178
+        Top = 445
         Width = 12
         AutoSize = True
         OnDblClick = PGImageCorDblClick
@@ -472,8 +495,8 @@ object ImgForm: TImgForm
     end
   end
   object MainMenu1: TMainMenu
-    left = 112
-    top = 212
+    left = 280
+    top = 530
     object AppleMenu: TMenuItem
       Caption = ''
       Visible = False
@@ -1090,8 +1113,8 @@ object ImgForm: TImgForm
   end
   object SaveDialog1: TSaveDialog
     FilterIndex = 0
-    left = 40
-    top = 104
+    left = 100
+    top = 260
   end
   object ColorDialog1: TColorDialog
     Color = clBlack
@@ -1117,35 +1140,35 @@ object ImgForm: TImgForm
       'ColorS=F0FBFF'
       'ColorT=A4A0A0'
     )
-    left = 50
-    top = 212
+    left = 125
+    top = 530
   end
   object RefreshImagesTimer: TTimer
     Enabled = False
     Interval = 20
     OnTimer = RefreshImagesTimerTimer
-    left = 82
-    top = 212
+    left = 205
+    top = 530
   end
   object RescaleImagesTimer: TTimer
     Enabled = False
     Interval = 50
     OnTimer = RescaleImagesTimerTimer
-    left = 178
-    top = 212
+    left = 445
+    top = 530
   end
   object YokeTimer: TTimer
     Enabled = False
     Interval = 200
     OnTimer = YokeTimerTimer
-    left = 280
-    top = 264
+    left = 700
+    top = 660
   end
   object ImageList1: TImageList
     Scaled = True
     OnGetWidthForPPI = GetWidthForPPI
-    left = 944
-    top = 24
+    left = 2360
+    top = 60
     Bitmap = {
       4C690C0000001000000010000000000000000000000000000000000000000000
       00040000004A2A2A2A92494949B1494949B12A2A2A920000004A000000040000

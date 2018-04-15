@@ -1,14 +1,15 @@
 object dcm2niiForm: Tdcm2niiForm
   Left = 503
-  Height = 480
+  Height = 1200
   Top = 192
-  Width = 780
+  Width = 1950
   AllowDropFiles = True
   Caption = 'dcm2niix'
-  ClientHeight = 480
-  ClientWidth = 780
-  Constraints.MinHeight = 120
-  Constraints.MinWidth = 640
+  ClientHeight = 1151
+  ClientWidth = 1950
+  Constraints.MinHeight = 300
+  Constraints.MinWidth = 1600
+  DesignTimePPI = 240
   Menu = MainMenu1
   OnClose = FormClose
   OnCreate = FormCreate
@@ -19,130 +20,144 @@ object dcm2niiForm: Tdcm2niiForm
   LCLVersion = '1.9.0.0'
   object Panel1: TPanel
     Left = 0
-    Height = 34
+    Height = 85
     Top = 0
-    Width = 780
+    Width = 1950
     Align = alTop
-    ClientHeight = 34
-    ClientWidth = 780
+    ClientHeight = 85
+    ClientWidth = 1950
+    ParentFont = False
     TabOrder = 0
     object compressCheck: TCheckBox
-      Left = 74
-      Height = 18
-      Top = 9
-      Width = 20
+      Left = 185
+      Height = 45
+      Top = 22
+      Width = 46
       Checked = True
       OnClick = compressCheckClick
+      ParentFont = False
       ParentBidiMode = False
       State = cbChecked
       TabOrder = 0
     end
     object outnameLabel: TLabel
-      Left = 232
-      Height = 16
-      Top = 10
-      Width = 84
+      Left = 580
+      Height = 41
+      Top = 25
+      Width = 182
       Caption = 'Output Name'
       ParentColor = False
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
     end
     object outnameEdit: TEdit
-      Left = 320
-      Height = 22
+      Left = 800
+      Height = 49
       Hint = 'Name for NIfTI images. Special characters are %f (Folder name) %i (ID) %n (patient Name) %p (Protocol name) %s (Series number) %t (Time)'
-      Top = 6
-      Width = 176
+      Top = 15
+      Width = 440
       OnKeyUp = outnameEditKeyUp
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
       Text = 'outnameEdit'
     end
     object Label2: TLabel
-      Left = 4
-      Height = 16
+      Left = 10
+      Height = 41
       Hint = 'Set whether NIfTI images are compressed (.nii.gz) or not (.nii)'
-      Top = 10
-      Width = 63
+      Top = 25
+      Width = 133
       Caption = 'Compress'
       ParentColor = False
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
     end
     object outputFolderLabel: TLabel
-      Left = 504
-      Height = 16
-      Top = 10
-      Width = 86
+      Left = 1260
+      Height = 41
+      Top = 25
+      Width = 181
       Caption = 'Output folder'
       ParentColor = False
+      ParentFont = False
     end
     object outputFolderName: TButton
-      Left = 600
-      Height = 25
+      Left = 1500
+      Height = 62
       Hint = 'NIfTI files will be saved to this folder. Press this button and click Cancel if you want files NIfTI images saved to same folder as DICOM input'
-      Top = 5
-      Width = 180
+      Top = 12
+      Width = 450
       Caption = 'input folder'
       OnClick = outputFolderNameClick
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 2
     end
     object VerboseLabel: TLabel
-      Left = 96
-      Height = 16
+      Left = 240
+      Height = 41
       Hint = 'Set whether NIfTI images are compressed (.nii.gz) or not (.nii)'
-      Top = 10
-      Width = 51
+      Top = 25
+      Width = 108
       Caption = 'Verbose'
       ParentColor = False
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
     end
     object verboseCheck: TCheckBox
-      Left = 152
-      Height = 18
-      Top = 9
-      Width = 20
+      Left = 380
+      Height = 45
+      Top = 22
+      Width = 46
+      Checked = True
       OnClick = compressCheckClick
+      ParentFont = False
       ParentBidiMode = False
+      State = cbChecked
       TabOrder = 3
     end
     object bidsCheck: TCheckBox
-      Left = 210
-      Height = 18
-      Top = 8
-      Width = 20
+      Left = 525
+      Height = 45
+      Top = 20
+      Width = 46
       OnClick = compressCheckClick
+      ParentFont = False
       ParentBidiMode = False
       TabOrder = 4
     end
     object VerboseLabel1: TLabel
-      Left = 176
-      Height = 16
+      Left = 440
+      Height = 41
       Hint = 'Create Brain Imaging Data Structure file'
-      Top = 10
-      Width = 28
+      Top = 25
+      Width = 62
       Caption = 'BIDS'
       ParentColor = False
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
     end
   end
   object Memo1: TMemo
     Left = 0
-    Height = 446
-    Top = 34
-    Width = 780
+    Height = 1066
+    Top = 85
+    Width = 1950
     Align = alClient
+    ParentFont = False
     ScrollBars = ssAutoVertical
     TabOrder = 1
   end
   object MainMenu1: TMainMenu
-    left = 24
-    top = 48
+    left = 60
+    top = 120
     object FileMenu: TMenuItem
       Caption = 'File'
       object DicomMenu: TMenuItem
@@ -169,7 +184,7 @@ object dcm2niiForm: Tdcm2niiForm
   object OpenDialog1: TOpenDialog
     Filter = 'Philips research (*.par)|*.PAR;*.par'
     Options = [ofAllowMultiSelect, ofEnableSizing, ofViewDetail]
-    left = 96
-    top = 48
+    left = 240
+    top = 120
   end
 end

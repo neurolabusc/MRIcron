@@ -26,6 +26,8 @@ type
     procedure Closewindow1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormHide(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure Saveasbitmap1Click(Sender: TObject);
   private
     { Private declarations }
@@ -40,7 +42,7 @@ implementation
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}
-uses nifti_img;
+uses nifti_img, nifti_img_view;
 
 procedure THistogramForm.Copy1Click(Sender: TObject);
 {$IFDEF FPC}
@@ -86,6 +88,19 @@ end;
 procedure THistogramForm.FormHide(Sender: TObject);
 begin
     {$IFDEF Darwin}Application.MainForm.SetFocus;{$ENDIF}
+end;
+
+procedure THistogramForm.FormResize(Sender: TObject);
+begin
+
+  DrawHistogram(gMRIcroOverlay[ImgForm.ActiveLayer],HistogramForm.HistoImage);
+
+end;
+
+procedure THistogramForm.FormShow(Sender: TObject);
+begin
+  //HistogramForm.Caption := inttostr(HistogramForm.HistoImage.Width);
+
 end;
 
 procedure THistogramForm.Saveasbitmap1Click(Sender: TObject);

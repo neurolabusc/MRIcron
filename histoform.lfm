@@ -1,42 +1,47 @@
 object HistogramForm: THistogramForm
   Left = 889
-  Height = 336
+  Height = 840
   Top = 234
-  Width = 465
+  Width = 1162
   Caption = 'Histogram'
-  ClientHeight = 336
-  ClientWidth = 465
-  Font.Height = -11
+  ClientHeight = 791
+  ClientWidth = 1162
+  DesignTimePPI = 240
+  Font.Height = -28
   Menu = MainMenu1
   OnCreate = FormCreate
   OnHide = FormHide
+  OnResize = FormResize
+  OnShow = FormShow
   Position = poScreenCenter
   LCLVersion = '1.9.0.0'
   object HistoPanel: TScrollBox
     Left = 0
-    Height = 336
+    Height = 791
     Top = 0
-    Width = 465
+    Width = 1162
     HorzScrollBar.Page = 90
     VertScrollBar.Page = 90
     Align = alClient
-    ClientHeight = 321
-    ClientWidth = 450
+    ClientHeight = 787
+    ClientWidth = 1158
+    Font.Height = -28
+    ParentFont = False
     TabOrder = 0
     object HistoImage: TImage
       Cursor = crCross
       Left = 0
-      Height = 321
+      Height = 787
       Top = 0
-      Width = 450
+      Width = 1158
       Align = alClient
       AutoSize = True
       Center = True
     end
   end
   object MainMenu1: TMainMenu
-    left = 113
-    top = 51
+    left = 283
+    top = 128
     object File1: TMenuItem
       Caption = 'File'
       object Saveasbitmap1: TMenuItem
