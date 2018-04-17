@@ -1740,6 +1740,10 @@ begin
  //PGImageCor.Canvas.clear;
  //  PGImageCor.Picture.Bitmap.Clear;
   {$IFDEF Darwin}
+          LabelX.Top := LabelX.Top + 2;
+          LabelY.Top := LabelY.Top + 2;
+          LabelZ.Top := LabelZ.Top + 2;
+
        //InitOpenDocHandler;//allows files to be associated...
         {$IFNDEF LCLgtk} //for Carbon or Cocoa
         AppleMenu.Visible:= true;

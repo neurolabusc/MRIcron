@@ -1,72 +1,71 @@
 object PrefForm: TPrefForm
   Tag = 321
   Left = 722
-  Height = 1258
+  Height = 503
   Top = 117
-  Width = 922
+  Width = 369
   ActiveControl = ResliceCheck
   BorderIcons = [biSystemMenu]
   Caption = 'Preferences'
-  ClientHeight = 1258
-  ClientWidth = 922
-  DesignTimePPI = 240
+  ClientHeight = 503
+  ClientWidth = 369
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
   LCLVersion = '1.9.0.0'
   object GroupBox1: TGroupBox
     Left = 0
-    Height = 960
+    Height = 384
     Top = 0
-    Width = 922
+    Width = 369
     Align = alTop
     Caption = 'Image Display'
-    ClientHeight = 914
-    ClientWidth = 918
+    ClientHeight = 361
+    ClientWidth = 361
     ParentFont = False
     TabOrder = 0
     object Label1: TLabel
-      Left = 325
-      Height = 41
-      Top = 195
-      Width = 393
+      Left = 130
+      Height = 16
+      Top = 78
+      Width = 189
       Caption = 'Maximum Dimension [Voxels]'
       ParentColor = False
       ParentFont = False
     end
     object Label2: TLabel
-      Left = 320
-      Height = 41
-      Top = 315
-      Width = 249
+      Left = 128
+      Height = 16
+      Top = 126
+      Width = 119
       Caption = 'Rendering Threads'
       ParentColor = False
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 320
-      Height = 41
-      Top = 435
-      Width = 335
+      Left = 128
+      Height = 16
+      Top = 174
+      Width = 160
       Caption = 'Decimal places Displayed'
       ParentColor = False
       ParentFont = False
     end
     object ResliceCheck: TCheckBox
-      Left = 60
-      Height = 45
-      Top = 22
-      Width = 449
+      Left = 24
+      Height = 18
+      Top = 9
+      Width = 211
       Caption = 'Reorient images when loading'
       OnClick = ResliceCheckClick
       ParentFont = False
       TabOrder = 0
     end
     object MaxDimEdit: TSpinEdit
-      Left = 60
-      Height = 49
-      Top = 195
-      Width = 250
+      Left = 24
+      Height = 16
+      Top = 78
+      Width = 100
       MaxValue = 4096
       MinValue = 256
       ParentFont = False
@@ -74,10 +73,10 @@ object PrefForm: TPrefForm
       Value = 256
     end
     object ThreadEdit: TSpinEdit
-      Left = 55
-      Height = 49
-      Top = 315
-      Width = 250
+      Left = 22
+      Height = 16
+      Top = 126
+      Width = 100
       MaxValue = 4096
       MinValue = 1
       ParentFont = False
@@ -85,47 +84,47 @@ object PrefForm: TPrefForm
       Value = 1
     end
     object SigDigEdit: TSpinEdit
-      Left = 55
-      Height = 49
-      Top = 435
-      Width = 250
+      Left = 22
+      Height = 16
+      Top = 174
+      Width = 100
       MaxValue = 32
       ParentFont = False
       TabOrder = 3
     end
     object OrthoCheck: TCheckBox
-      Left = 120
-      Height = 45
-      Top = 100
-      Width = 511
+      Left = 48
+      Height = 18
+      Top = 40
+      Width = 240
       Caption = 'Rotate to nearest orthogonal angle'
       ParentFont = False
       TabOrder = 4
     end
     object SingleRowCheck: TCheckBox
-      Left = 60
-      Height = 45
-      Top = 740
-      Width = 367
+      Left = 24
+      Height = 18
+      Top = 296
+      Width = 176
       Caption = 'All slices on a single row'
       OnChange = SingleRowCheckChange
       ParentFont = False
       TabOrder = 5
     end
     object Label4: TLabel
-      Left = 320
-      Height = 41
-      Top = 538
-      Width = 118
+      Left = 128
+      Height = 16
+      Top = 215
+      Width = 57
       Caption = 'Font size'
       ParentColor = False
       ParentFont = False
     end
     object FontEdit1: TSpinEdit
-      Left = 55
-      Height = 49
-      Top = 538
-      Width = 250
+      Left = 22
+      Height = 16
+      Top = 215
+      Width = 100
       MaxValue = 128
       MinValue = 1
       ParentFont = False
@@ -133,22 +132,22 @@ object PrefForm: TPrefForm
       Value = 12
     end
     object DarkModeCheck: TCheckBox
-      Left = 60
-      Height = 45
-      Top = 820
-      Width = 193
+      Left = 24
+      Height = 18
+      Top = 328
+      Width = 90
       Caption = 'Dark mode'
       ParentFont = False
       TabOrder = 7
       Visible = False
     end
     object XBarClr: TButton
-      Left = 60
-      Height = 71
-      Top = 640
-      Width = 362
+      Left = 24
+      Height = 28
+      Top = 256
+      Width = 189
       AutoSize = True
-      BorderSpacing.InnerBorder = 10
+      BorderSpacing.InnerBorder = 4
       Caption = 'Choose Cross-Bar Color'
       OnClick = XBarClrClick
       ParentFont = False
@@ -157,56 +156,56 @@ object PrefForm: TPrefForm
   end
   object GroupBox2: TGroupBox
     Left = 0
-    Height = 160
-    Top = 960
-    Width = 922
+    Height = 64
+    Top = 384
+    Width = 369
     Align = alTop
     Caption = 'Drawing'
-    ClientHeight = 114
-    ClientWidth = 918
+    ClientHeight = 41
+    ClientWidth = 361
     ParentFont = False
     TabOrder = 1
     object ThinPenCheck: TCheckBox
-      Left = 38
-      Height = 45
-      Top = 40
-      Width = 161
+      Left = 15
+      Height = 18
+      Top = 16
+      Width = 75
       Caption = 'Thin Pen'
       ParentFont = False
       TabOrder = 0
     end
   end
   object OKBtn: TButton
-    Left = 700
-    Height = 71
-    Top = 1120
-    Width = 86
+    Left = 280
+    Height = 28
+    Top = 448
+    Width = 78
     AutoSize = True
-    BorderSpacing.InnerBorder = 10
+    BorderSpacing.InnerBorder = 4
     Caption = 'OK'
     OnClick = OKBtnClick
     ParentFont = False
     TabOrder = 2
   end
   object CancelBtn: TButton
-    Left = 420
-    Height = 71
-    Top = 1120
-    Width = 134
+    Left = 168
+    Height = 28
+    Top = 448
+    Width = 78
     AutoSize = True
-    BorderSpacing.InnerBorder = 10
+    BorderSpacing.InnerBorder = 4
     Caption = 'Cancel'
     OnClick = CancelBtnClick
     ParentFont = False
     TabOrder = 3
   end
   object AdvancedBtn: TButton
-    Left = 60
-    Height = 71
-    Top = 1120
-    Width = 177
+    Left = 24
+    Height = 28
+    Top = 448
+    Width = 98
     AutoSize = True
-    BorderSpacing.InnerBorder = 10
+    BorderSpacing.InnerBorder = 4
     Caption = 'Advanced'
     OnClick = AdvancedBtnClick
     ParentFont = False

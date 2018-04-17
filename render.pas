@@ -817,6 +817,9 @@ procedure TRenderForm.FormCreate(Sender: TObject);
 begin
      {$IFDEF Linux}ImgForm.InitImg(RenderImage);{$ENDIF}
      {$IFDEF Darwin}
+     Label1.Top := Label1.Top + 2;
+     Label4.Top := Label4.Top + 2;
+     Label5.Top := Label5.Top + 2;
      Save1.ShortCut := ShortCut(Word('S'), [ssMeta]);
      Close1.ShortCut := ShortCut(Word('W'), [ssMeta]);
      {$ENDIF}

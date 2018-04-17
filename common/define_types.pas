@@ -19,8 +19,8 @@ interface
         SysUtils,classes,IniFiles,
         {$IFDEF GUI} forms,userdir, dialogs{$ELSE}dialogsx{$ENDIF};
 const
-     kMRIcronVersDate = '3MAY2016';
-     kVers = 'v1.0.20171220';
+     //kMRIcronVersDate = '3MAY2016';
+     kVers = 'v1.0.20180404';
      {$IFDEF LCLCocoa}
      kMRIcronAPI = 'Cocoa';
     {$ELSE}
@@ -35,7 +35,7 @@ const
      {$ELSE}
       kMRIcronCPU = '64';
      {$ENDIF}
-     kMRIcronVers = kMRIcronVersDate+' '+ kMRIcronCPU +'bit BSD License '+kMRIcronAPI;
+     kMRIcronVers = kVers+' '+ kMRIcronCPU +'bit BSD License '+kMRIcronAPI;
      NaN : double = 1/0;
      kMagicDouble : double = -111666222;
      kTxtFilter = 'Text (*.txt)|*.txt;*.csv|Comma Separated (*.csv)|*.csv';

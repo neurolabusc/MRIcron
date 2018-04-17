@@ -6,7 +6,7 @@ interface
 
 uses
    {$IFDEF Windows} ShellAPI, Windows, {$ENDIF} //x18
-    userdir, Process,
+    userdir, Process, FileUtil,
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, StdCtrls,
   Spin, Buttons;
 
@@ -94,7 +94,7 @@ begin
          AProcess.Free;
     end;
     Clipboard.AsText := EditorFName;
-    GLForm1.close;
+    ImgForm.close;
     exit;
     {$ENDIF}
     Showmessage('Preferences will be opened in a text editor. The program '+ExtractFilename(paramstr(0))+' will now quit, so that the file will not be overwritten.');
