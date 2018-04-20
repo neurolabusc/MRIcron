@@ -6,7 +6,7 @@ interface
 
 uses
    {$IFDEF Windows} ShellAPI, Windows, {$ENDIF} //x18
-    userdir, Process, FileUtil,
+    userdir, Process, FileUtil, Clipbrd,
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, StdCtrls,
   Spin, Buttons;
 

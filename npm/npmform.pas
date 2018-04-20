@@ -385,7 +385,8 @@ begin
 	   exit;
   end; //if not selected
   lMaskname := OpenHdrDlg.Filename;
-  (*if not NIFTIhdr_LoadHdr(lMaskname,lMaskHdr) then begin
+
+  if not NIFTIhdr_LoadHdr(lMaskname,lMaskHdr) then begin
 	   showMsg('Error reading mask.');
 	   exit;
   end;
@@ -393,7 +394,7 @@ begin
    if (lMaskVoxels < 2) or (not CheckVoxels(lMaskname,lMaskVoxels,0)){make sure there is uncompressed .img file}  then begin
 	   ShowMsg('Mask file size too small.');
 	   exit;
-   end; *)
+   end;
 
    //next, get 1st group
    if not OpenDialogExecute('Select postive group (Z scores positive if this group is brighter)',true,true,kImgFilter) then begin

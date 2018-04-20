@@ -160,7 +160,9 @@ begin
          end; *)
          for lDim := 1 to 3 do begin
             if (lHdr.NIFTIhdr.dim[lDim] <> lMaskHdr.NIFTIhdr.dim[lDim]) then begin
-               NPMmsg('Dimension '+inttostr(lDim)+' of '+lHdrName+' does not match '+lMaskHdr.HdrFileName);
+               NPMmsg('Dimension '+inttostr(lDim)+' of "'+lHdrName+'" does not match mask "'+lMaskHdr.HdrFileName+'"');
+               NPMmsg('  Specifically '+inttostr(lHdr.NIFTIhdr.dim[lDim])+' does not match '+inttostr(lMaskHdr.NIFTIhdr.dim[lDim]) );
+
                exit;
             end;
          end;
@@ -584,4 +586,4 @@ begin
      SaveAsVOIorNIFTIcore (lOutNameMod, lHdr, SingleP(lImg),lnVol,1);
 end;
 
-end.
+end.

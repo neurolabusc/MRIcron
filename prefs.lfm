@@ -20,7 +20,7 @@ object PrefForm: TPrefForm
     Width = 369
     Align = alTop
     Caption = 'Image Display'
-    ClientHeight = 361
+    ClientHeight = 362
     ClientWidth = 361
     ParentFont = False
     TabOrder = 0
@@ -55,7 +55,7 @@ object PrefForm: TPrefForm
       Left = 24
       Height = 18
       Top = 9
-      Width = 211
+      Width = 202
       Caption = 'Reorient images when loading'
       OnClick = ResliceCheckClick
       ParentFont = False
@@ -96,7 +96,7 @@ object PrefForm: TPrefForm
       Left = 48
       Height = 18
       Top = 40
-      Width = 240
+      Width = 231
       Caption = 'Rotate to nearest orthogonal angle'
       ParentFont = False
       TabOrder = 4
@@ -105,7 +105,7 @@ object PrefForm: TPrefForm
       Left = 24
       Height = 18
       Top = 296
-      Width = 176
+      Width = 168
       Caption = 'All slices on a single row'
       OnChange = SingleRowCheckChange
       ParentFont = False
@@ -135,7 +135,7 @@ object PrefForm: TPrefForm
       Left = 24
       Height = 18
       Top = 328
-      Width = 90
+      Width = 87
       Caption = 'Dark mode'
       ParentFont = False
       TabOrder = 7
@@ -145,7 +145,7 @@ object PrefForm: TPrefForm
       Left = 24
       Height = 28
       Top = 256
-      Width = 189
+      Width = 184
       AutoSize = True
       BorderSpacing.InnerBorder = 4
       Caption = 'Choose Cross-Bar Color'
@@ -161,7 +161,7 @@ object PrefForm: TPrefForm
     Width = 369
     Align = alTop
     Caption = 'Drawing'
-    ClientHeight = 41
+    ClientHeight = 42
     ClientWidth = 361
     ParentFont = False
     TabOrder = 1
@@ -169,7 +169,7 @@ object PrefForm: TPrefForm
       Left = 15
       Height = 18
       Top = 16
-      Width = 75
+      Width = 73
       Caption = 'Thin Pen'
       ParentFont = False
       TabOrder = 0
@@ -203,7 +203,7 @@ object PrefForm: TPrefForm
     Left = 24
     Height = 28
     Top = 448
-    Width = 98
+    Width = 96
     AutoSize = True
     BorderSpacing.InnerBorder = 4
     Caption = 'Advanced'

@@ -87,7 +87,6 @@
         <ComponentName Value="ImgForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <WindowIndex Value="1"/>
         <TopLine Value="5487"/>
         <CursorPos X="3" Y="5490"/>
@@ -221,10 +220,10 @@
         <ComponentName Value="PrefForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="98"/>
-        <CursorPos X="12" Y="125"/>
+        <CursorPos X="38" Y="9"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -325,7 +324,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="286"/>
         <CursorPos X="55" Y="290"/>
-        <UsageCount Value="67"/>
+        <UsageCount Value="68"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit25>

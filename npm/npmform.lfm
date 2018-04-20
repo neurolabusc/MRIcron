@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 468
+  Left = 656
   Height = 418
-  Top = 213
+  Top = 175
   Width = 640
   ActiveControl = Memo1
   Caption = 'Non-Parametric Mapping'
@@ -12,13 +12,14 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.7'
+  LCLVersion = '1.9.0.0'
   object Memo1: TMemo
     Left = 0
     Height = 393
     Top = 0
     Width = 640
     Align = alClient
+    Lines.Strings = (    )
     ScrollBars = ssAutoBoth
     TabOrder = 0
     WordWrap = False
