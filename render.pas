@@ -377,7 +377,8 @@ begin
   lOutImg.Width := RenderImage.Width;
   lOutImg.Height := RenderImage.Height;
   lOutImg.Canvas.Draw(0,0,RenderImage.Picture.Graphic);
-  lOutImg.Picture.Bitmap.SaveToClipboardFormat(2);
+
+  //lOutImg.Picture.Bitmap.SaveToClipboardFormat(CF_BITMAP);
   Clipboard.Assign(lOutImg.Picture.Graphic);
   FreeAndNil (lOutImg);
 end;

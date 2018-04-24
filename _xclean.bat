@@ -7,6 +7,13 @@ rm  -r *.ppu
 rm -r *.bak
 rm mricron
 
+cd ./rgb
+rm  -r *.a
+rm  -r *.o
+rm  -r *.ppu
+rm -r *.bak
+cd ..
+
 cd ./fpmath
 rm  -r *.a
 rm  -r *.o

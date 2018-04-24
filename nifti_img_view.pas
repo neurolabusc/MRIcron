@@ -1768,7 +1768,8 @@ begin
  {$ENDIF}
 {$IFDEF Darwin}
         //x Exit1.visible := false;//with OSX users quit from application menu
-        Application.OnDropFiles := FormDropFiles;
+        //With Lazarus 1.9 and Cocoa this causes double  loading
+        //Application.OnDropFiles := FormDropFiles;
  {$ENDIF}
      CreateFX8(gUndoImg);
      CreateFX8(gDrawImg);
@@ -3698,7 +3699,7 @@ begin
          {$ENDIF}
        {$ELSE}
        {$IFDEF FPC}
-       lOutImg.Picture.Bitmap.SaveToClipboardFormat(2);
+       lOutImg.Picture.Bitmap.SaveToClipboardFormat(CF_BITMAP);//2
        //Clipboard.Assign(lOutImg.Picture.Bitmap);
        {$ENDIF}
        Clipboard.Assign(lOutImg.Picture.Graphic);

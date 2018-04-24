@@ -29,7 +29,7 @@ object RenderForm: TRenderForm
       Left = 152
       Height = 16
       Top = 5
-      Width = 57
+      Width = 55
       Caption = 'Elevation'
       ParentColor = False
       ParentFont = False
@@ -38,7 +38,7 @@ object RenderForm: TRenderForm
       Left = 4
       Height = 16
       Top = 5
-      Width = 53
+      Width = 50
       Caption = 'Azimuth'
       ParentColor = False
       ParentFont = False
@@ -47,14 +47,14 @@ object RenderForm: TRenderForm
       Left = 616
       Height = 16
       Top = 5
-      Width = 63
+      Width = 64
       Caption = 'Shading %'
       ParentColor = False
       ParentFont = False
     end
     object AzimuthEdit: TSpinEdit
       Left = 72
-      Height = 16
+      Height = 21
       Top = 6
       Width = 72
       Constraints.MinWidth = 70
@@ -67,7 +67,7 @@ object RenderForm: TRenderForm
     end
     object ElevationEdit: TSpinEdit
       Left = 216
-      Height = 16
+      Height = 21
       Top = 6
       Width = 72
       Constraints.MinWidth = 70
@@ -105,7 +105,7 @@ object RenderForm: TRenderForm
     end
     object ShadeEdit: TSpinEdit
       Left = 692
-      Height = 16
+      Height = 21
       Top = 6
       Width = 72
       Increment = 10
@@ -157,8 +157,8 @@ object RenderForm: TRenderForm
     HorzScrollBar.Page = 372
     VertScrollBar.Page = 20
     Align = alClient
-    ClientHeight = 465
-    ClientWidth = 940
+    ClientHeight = 480
+    ClientWidth = 955
     ParentFont = False
     TabOrder = 1
     object RenderImage: TImage

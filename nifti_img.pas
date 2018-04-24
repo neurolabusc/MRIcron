@@ -8,7 +8,9 @@ RXSpin,capmenu,PNGImage,SSE,ShellAPI,Spin,
 {$ENDIF}
 {$IFNDEF Unix} Windows,
 {$ELSE}
-     //RGBGraphics,rgbroutines,
+     {$IFDEF LINUX}
+     RGBGraphics,rgbroutines,
+    {$ENDIF}
 {$ENDIF}
 {$DEFINE UINT16ASFLOAT}
 nifti_types,
@@ -3131,7 +3133,72 @@ begin
   lImage.Picture.Bitmap.EndUpdate(False);
 end; *)
 
+{$IFDEF LINUX}
+//DrawBMP16 draws graphics for 16-bit displays. There are two versions, the first has fewer dependencies, the second is thoroughly tested
+(*
+procedure DrawBMP16( lx, ly: integer; var lBuff: RGBQuadp; var lImage: TImage);
+var
+  DestPtr: PInteger;
+  col, row, i, j: integer;
+  clr: TRGBQuad;
+  lTempBuff: Bytep;
+begin
+  lImage.Picture.Bitmap.Width:=lx;
+  lImage.Picture.Bitmap.Height:=ly;
+  if lBuff = nil then exit;
+  lImage.Picture.Bitmap.BeginUpdate(False);
+  i := 1;
+  getmem(lTempBuff, lx * 2);
+  for row:= ly-1 downto 0 do begin
+    j := 1;
+    for  col := 1 to lx do begin
+       clr := lBuff^[i];
+       lTempBuff^[j] := (((clr.rgbGreen shr 3) and 3)  shl 6) + clr.rgbBlue shr 3;
+       lTempBuff^[j+1] :=  ((clr.rgbRed shr 3) shl 3) + (clr.rgbGreen shr 5)  ;//((clr.rgbRed shr 4) shl 4) + (clr.rgbGreen shr 4);//((clr.rgbRed shr 4) shl 4) + clr.rgbGreen shr 4;//255-63;//clr.rgbRed;
+       i := i + 1;
+       j := j + 2;
+    end;
+    DestPtr := PInteger(lImage.Picture.Bitmap.RawImage.GetLineStart(row));
+    Move(lTempBuff^[1], DestPtr^, lx * 2);
+  end;
+  freemem(lTempBuff);
+  lImage.Picture.Bitmap.EndUpdate(False);
+end;*)
 
+procedure DrawBMP16( lx, ly: integer; var lBuff: RGBQuadp; var lImage: TImage);
+var
+  TempBitmap: TBitmap;
+  lRGBBitmap: TRGB32Bitmap;
+  {$IFNDEF NOFLIP}
+  i,j, row: integer;
+  lBuffFlip: RGBQuadp;
+  {$ENDIF}
+begin
+  TempBitmap := TBitmap.Create;
+    TempBitmap.Width := lx;
+    TempBitmap.Height := ly;
+    if lBuff <> nil then begin
+          {$IFDEF NOFLIP}
+          lRGBBitmap := TRGB32Bitmap.CreateFromData(@lBuff[1],lx,ly);
+          DrawRGB32Bitmap(TempBitmap.Canvas.Handle, 0, 0, 0, 0, lx, ly,lRGBBitmap {Self});
+          {$ELSE}
+          GetMem(lBuffFlip, lx * ly * 4);
+          i := 1;
+          j := (lx * (ly-1)) + 1;
+          for row:= 1 to ly do begin
+            Move(lBuff^[i], lBuffFlip^[j], lx * 4);
+            inc(i, lx);
+            dec(j,lx);
+          end;
+          lRGBBitmap := TRGB32Bitmap.CreateFromData(@lBuffFlip[1],lx,ly);
+          DrawRGB32Bitmap(TempBitmap.Canvas.Handle, 0, 0, 0, 0, lx, ly,lRGBBitmap {Self});
+          freemem(lBuffFlip);
+          {$ENDIF}
+    end;  //if lBuff=nil
+    lImage.Picture.Bitmap := TempBitmap;
+    TempBitmap.Free;
+end;
+{$ENDIF}
 procedure DrawBMP( lx, ly: integer; var lBuff: RGBQuadp; var lImage: TImage);
 var
   DestPtr: PInteger;
@@ -3139,6 +3206,14 @@ var
 begin
   lImage.Picture.Bitmap.Width:=lx;
   lImage.Picture.Bitmap.Height:=ly;
+  if (lImage.Picture.Bitmap.PixelFormat = pf16bit) then begin
+         {$IFDEF Linux}
+         DrawBMP16( lx, ly, lBuff, lImage);
+         {$ELSE}
+          imgform.StatusLabel.Caption:='16-bit displays not supported: use an older version osf MRIcronn';
+         {$ENDIF}
+         exit;
+  end;
   //{$IFNDEF LCLCocoa}  //With Cocoa, saved bitmaps will not show lineto/textout if bitmap drawn as pf32bit
   lImage.Picture.Bitmap.PixelFormat := pf32bit; //if pf32bit the background color is wrong, e.g. when alpha = 0
   //{$ELSE}
@@ -3381,7 +3456,7 @@ begin
         if lZoom = 100 then
          DrawBMP( lInPGWid, lInPGHt, lBuff, lImage)
         else begin
-            if gBGImg.StretchQuality = sqHigh then //bilinear smoothed zoom
+            if lBackgroundImg.StretchQuality = sqHigh then //bilinear smoothed zoom
                DrawBMPZoomLin(lInPGHt,lInPGWid,lZoom/100,lBuff, lImage)
             else //nearest neighbor
                DrawBMPZoomNN(lInPGHt,lInPGWid,lZoom/100,lBuff, lImage);

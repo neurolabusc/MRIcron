@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <Package Version="3">
+    <PathDelim Value="\"/>
+    <Name Value="LazRGBGraphics"/>
+    <Author Value="Tom Gregorovic (_tom_@centrum.cz)"/>
+    <CompilerOptions>
+      <Version Value="5"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <IncludeFiles Value="include\"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
+        <LCLWidgetType Value="gtk2"/>
+      </SearchPaths>
+      <CodeGeneration>
+        <Generate Value="Faster"/>
+      </CodeGeneration>
+      <Linking>
+        <Debugging>
+          <GenerateDebugInfo Value="True"/>
+        </Debugging>
+      </Linking>
+      <Other>
+        <CompilerPath Value="$(CompPath)"/>
+      </Other>
+    </CompilerOptions>
+    <Description Value="This package provides fast in memory image processing and pixel manipulations (like scan line).
+"/>
+    <License Value="Modified LGPL
+"/>
+    <Version Minor="2" Release="2"/>
+    <Files Count="8">
+      <Item1>
+        <Filename Value="rgbgraphics.pas"/>
+        <UnitName Value="RGBGraphics"/>
+      </Item1>
+      <Item2>
+        <Filename Value="rgbutils.pas"/>
+        <UnitName Value="RGBUtils"/>
+      </Item2>
+      <Item3>
+        <Filename Value="rgbtypes.pas"/>
+        <UnitName Value="RGBTypes"/>
+      </Item3>
+      <Item4>
+        <Filename Value="rgbroutines.pas"/>
+        <UnitName Value="RGBRoutines"/>
+      </Item4>
+      <Item5>
+        <Filename Value="rgbwinroutines.pas"/>
+        <AddToUsesPkgSection Value="False"/>
+        <UnitName Value="RGBWinRoutines"/>
+      </Item5>
+      <Item6>
+        <Filename Value="rgbgtkroutines.pas"/>
+        <AddToUsesPkgSection Value="False"/>
+        <UnitName Value="RGBGTKRoutines"/>
+      </Item6>
+      <Item7>
+        <Filename Value="rgbcarbonroutines.pas"/>
+        <AddToUsesPkgSection Value="False"/>
+        <UnitName Value="RGBCarbonRoutines"/>
+      </Item7>
+      <Item8>
+        <Filename Value="rgbqtroutines.pas"/>
+        <AddToUsesPkgSection Value="False"/>
+        <UnitName Value="RGBQtRoutines"/>
+      </Item8>
+    </Files>
+    <RequiredPkgs Count="2">
+      <Item1>
+        <PackageName Value="LCL"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item2>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)\"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <DestinationDirectory Value="$(TestDir)\publishedpackage\"/>
+      <IgnoreBinaries Value="False"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>
