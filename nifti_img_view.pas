@@ -23,6 +23,7 @@ LResources, fx8, cpucount, SysUtils, Classes, Graphics, Controls, Forms,
 Dialogs, Menus, ComCtrls, ExtCtrls, StdCtrls, GraphicsMathLibrary, ClipBrd,
 define_types, Spin, Buttons, nifti_hdr, nifti_hdr_view, nifti_img, voismooth,
 IniFiles, ReadInt,  stat, Distr, bet, mni, prefs, CropEdges,nifti_types,
+draw_interpolate_slices,
 userdir, graphx, GraphType, IntfGraphics, landmarks,fastsmooth, nii_label, dcm2nii, ImgList;//registry
 
 
@@ -65,6 +66,8 @@ DilateShellsMenu1: TMenuItem;
 ImportMenu: TMenuItem;
 dcm2niiMenu: TMenuItem;
 CheckUpdatesMenu: TMenuItem;
+Interpolate1: TMenuItem;
+VOImaskCustom: TMenuItem;
 NewWindow1: TMenuItem;
 ColorBarBtn: TToolButton;
 HideROIBtn: TToolButton;
@@ -211,6 +214,7 @@ MNIMenu: TMenuItem;
         procedure Extract1Click(Sender: TObject);
         procedure GetWidthForPPI(Sender: TCustomImageList; AImageWidth,
           APPI: Integer; var AResultWidth: Integer);
+        procedure Interpolate1Click(Sender: TObject);
         procedure NewWindow1Click(Sender: TObject);
         procedure ToggleDrawMenu(Sender: TObject);
         procedure SaveVOIcore(lPromptFilename: boolean);
@@ -3518,6 +3522,44 @@ begin
   //LabelX.caption := inttostr(AResultWidth);
 end;
 
+procedure TImgForm.Interpolate1Click(Sender: TObject);
+var
+  lStrings: TStringList;
+  lOrient:integer;
+  lOK: boolean;
+begin
+  if gMRIcroOverlay[kVOIOverlayNum].ScrnBufferItems=0 then begin
+	  showmessage('Please open the drawing you wish to interpolate.');
+	  exit;
+  end;
+  lOrient := gBGImg.VOIUndoOrient;
+  if (lOrient < 1) or (lOrient > 3) then begin
+    showmessage('Unknown orient');
+    exit;
+  end;
+	(*	4: UndoVolVOI;
+		3: ReadCorVOI(ImgForm.UndoImg,gBGImg.VOIUndoSlice);
+		2: ReadSagVOI(ImgForm.UndoImg,gBGImg.VOIUndoSlice);
+		1: ReadAxialVOI(ImgForm.UndoImg,gBGImg.VOIUndoSlice);
+	end;     *)
+
+  CreateUndoVol;
+  lStrings := TStringList.Create;
+
+  TextForm.MemoT.Lines.Clear;
+  lStrings.Add('Background');
+  lOK := Interpolate_Slices (gMRIcroOverlay[kVOIOverlayNum].ScrnBuffer,gBGImg.ScrnDim[1],gBGImg.ScrnDim[2],gBGImg.ScrnDim[3],lOrient, lStrings);
+  if not lOK then begin
+    TextForm.MemoT.Lines.AddStrings(lStrings);
+    TextForm.Show;
+  end;
+	ImgForm.RefreshImagesTimer.Enabled := true;
+	lStrings.Free;
+end;
+
+
+
+
 procedure TImgForm.DilateVOI1Click(Sender: TObject);
 begin
     if ((sender as TMenuItem).tag = 1) or (ssShift in KeyDataToShiftState(vk_Shift)) then begin
@@ -4012,14 +4054,28 @@ end; //quicksmooth
 procedure TImgForm.VOImaskClick(Sender: TObject);
 var
  lPreserve: integer;
+ lMaskVal : single;
+ lMaskVal16: smallint;
+ lMaskVal8 : byte;
  lHdr,lMaskHdr: TMRicroHdr;
  lXDim,lYDim,lZDim,lOutVolVox,lOutSliceSz,lZ: integer;
  lSrcBuff,lMaskBuff: Bytep;
  l16SrcBuff: SmallIntP;
  l32SrcBuff: SingleP;
 begin
-	lPreserve := (sender as TMenuItem).tag;
+  lPreserve := (sender as TMenuItem).tag;
   lHdr := gMRIcroOverlay[kBGOverlayNum];
+  if lPreserve = 2 then begin
+     lMaskVal := ReadFloatForm.GetFloat('Change voxels with VOI to what value? ', -9999,2,9999);
+     lMaskVal := Scaled2RawIntensity (lHdr, lMaskVal);
+  end else
+     lMaskVal := lHdr.GlMinUnscaledS;
+  //else
+  //  lMaskVal := 0.0;
+  lMaskVal16 := round(lMaskVal);
+  lMaskVal8 := round(lMaskVal);
+
+
   lMaskHdr := gMRIcroOverlay[kVOIOverlayNum];
 
   lXDim := gBGImg.ScrnDim[1];
@@ -4035,44 +4091,46 @@ begin
 	  showmessage('Please first load both an image (File/Open) and a masking VOI (Draw/Open).');
 	  exit;
   end;
+
   if gBGImg.Mirror then
      MirrorScrnBuffer(gBGImg,lMaskHdr);//4/2008
   lMaskBuff := (lMaskHdr.ScrnBuffer);
   ProgressBar1.Min := 0;
   ProgressBar1.Max :=lZDim;
   StatusLabel.caption := 'Masking data';
+
   if  lHdr.ImgBufferBPP = 4 then begin //32-bit float data
 	l32SrcBuff := SingleP(lHdr.ImgBuffer);
 	if lPreserve = 1 then begin
 		for lZ := 1 to lOutVolVox do
 			if lMaskBuff^[lZ] = 0 then
-				l32SrcBuff^[lZ] := 0;
+				l32SrcBuff^[lZ] := lMaskVal;
 	end else begin
 		for lZ := 1 to lOutVolVox do
 			if lMaskBuff^[lZ] <> 0 then
-				l32SrcBuff^[lZ] := 0;
+				l32SrcBuff^[lZ] := lMaskVal;
 	end; //if preserve
   end else if (lHdr.ImgBufferBPP = 2) then begin //16-bit int data*)
 	l16SrcBuff :=  SmallIntP(lHdr.ImgBuffer );
 	if lPreserve = 1 then begin
 		for lZ := 1 to lOutVolVox do
 			if lMaskBuff^[lZ] = 0 then
-				l16SrcBuff^[lZ] := 0;
+				l16SrcBuff^[lZ] := lMaskVal16;
 	end else begin
 		for lZ := 1 to lOutVolVox do
 			if lMaskBuff^[lZ] <> 0 then
-				l16SrcBuff^[lZ] := 0;
+				l16SrcBuff^[lZ] := lMaskVal16;
 	end;
   end else if lHdr.ImgBufferBPP = 1 then begin //8-bit data
 	  lSrcBuff := lHdr.ImgBuffer;
 	if lPreserve = 1 then begin
 		for lZ := 1 to lOutVolVox do
 			if lMaskBuff^[lZ] = 0 then
-				lSrcBuff^[lZ] := 0
+				lSrcBuff^[lZ] := lMaskVal8
 	end else begin
 		for lZ := 1 to lOutVolVox do
 			if lMaskBuff^[lZ] <> 0 then
-				lSrcBuff^[lZ] := 0;
+				lSrcBuff^[lZ] := lMaskVal8;
 	end;
   end else begin //8bit data
 	  showmessage('Unknown bits per pixel '+inttostr(lHdr.ImgBufferBPP) );
@@ -4149,7 +4207,8 @@ end;
 
 procedure TImgForm.Fill3DBtnClick(Sender: TObject);
 begin
-	AutoROIForm.Show;
+	AutoROIForm.show;
+        AutoROIForm.Refresh;
 end;
 
 

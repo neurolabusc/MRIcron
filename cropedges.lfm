@@ -1,7 +1,7 @@
 object CropEdgeForm: TCropEdgeForm
-  Left = 562
+  Left = 872
   Height = 142
-  Top = 209
+  Top = 203
   Width = 398
   ActiveControl = DEdit
   BorderIcons = [biSystemMenu]
@@ -17,14 +17,13 @@ object CropEdgeForm: TCropEdgeForm
   OnHide = FormHide
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.0.2.0'
+  LCLVersion = '1.9.0.0'
   object CancelBtn: TSpeedButton
     Left = 320
     Height = 25
     Top = 104
     Width = 65
     Caption = 'Cancel'
-    NumGlyphs = 0
     OnClick = CancelBtnClick
   end
   object ApplyBtn: TSpeedButton
@@ -33,7 +32,6 @@ object CropEdgeForm: TCropEdgeForm
     Top = 104
     Width = 65
     Caption = 'Apply'
-    NumGlyphs = 0
     OnClick = ApplyBtnClick
   end
   object CropFileSzBtn: TSpeedButton
@@ -42,65 +40,64 @@ object CropEdgeForm: TCropEdgeForm
     Top = 104
     Width = 105
     Caption = 'Save Cropped'
-    NumGlyphs = 0
     OnClick = CropFileSzBtnClick
   end
   object DEdit: TSpinEdit
     Left = 57
-    Height = 21
+    Height = 16
     Top = 8
     Width = 72
-    MaxValue = 255
+    MaxValue = 9999
     OnChange = CropEditChange
     TabOrder = 0
     Value = 8
   end
   object PEdit: TSpinEdit
     Left = 8
-    Height = 21
+    Height = 16
     Top = 41
     Width = 72
-    MaxValue = 255
+    MaxValue = 9999
     OnChange = CropEditChange
     TabOrder = 1
     Value = 8
   end
   object AEdit: TSpinEdit
     Left = 104
-    Height = 21
+    Height = 16
     Top = 41
     Width = 72
-    MaxValue = 255
+    MaxValue = 9999
     OnChange = CropEditChange
     TabOrder = 2
     Value = 8
   end
   object VEdit: TSpinEdit
     Left = 57
-    Height = 21
+    Height = 16
     Top = 73
     Width = 72
-    MaxValue = 255
+    MaxValue = 9999
     OnChange = CropEditChange
     TabOrder = 3
     Value = 8
   end
   object REdit: TSpinEdit
     Left = 311
-    Height = 21
+    Height = 16
     Top = 41
     Width = 72
-    MaxValue = 255
+    MaxValue = 9999
     OnChange = CropEditChange
     TabOrder = 4
     Value = 8
   end
   object LEdit: TSpinEdit
     Left = 224
-    Height = 21
+    Height = 16
     Top = 41
     Width = 72
-    MaxValue = 255
+    MaxValue = 9999
     OnChange = CropEditChange
     TabOrder = 5
     Value = 8

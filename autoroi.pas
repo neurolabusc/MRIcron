@@ -17,8 +17,10 @@ type
   { TAutoROIForm }
 
   TAutoROIForm = class(TForm)
+    CancelBtn: TButton;
+    OriginBtn: TButton;
+    AutoROIBtn: TButton;
     OriginLabel: TLabel;
-    OriginBtn: TSpeedButton;
     EdgeEdit: TSpinEdit;
     RadiusEdit: TSpinEdit;
     ErodeEdit: TSpinEdit;
@@ -28,8 +30,6 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    AutoROIBtn: TSpeedButton;
-    CancelBtn: TSpeedButton;
     Timer1: TTimer;
     Label4: TLabel;
     ExcludeBlackCheck: TCheckBox;

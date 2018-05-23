@@ -1,7 +1,7 @@
 object ImgForm: TImgForm
-  Left = 98
+  Left = 210
   Height = 401
-  Top = 296
+  Top = 73
   Width = 1018
   ActiveControl = ControlPanel
   AllowDropFiles = True
@@ -50,10 +50,10 @@ object ImgForm: TImgForm
       TabOrder = 1
       object LayerDrop: TComboBox
         Left = 0
-        Height = 26
+        Height = 20
         Top = 6
         Width = 104
-        ItemHeight = 26
+        ItemHeight = 0
         ItemIndex = 0
         Items.Strings = (
           'Background'
@@ -69,7 +69,7 @@ object ImgForm: TImgForm
       end
       object MinWindowEdit: TFloatSpinEdit
         Left = 144
-        Height = 21
+        Height = 16
         Top = 6
         Width = 80
         DecimalPlaces = 5
@@ -82,7 +82,7 @@ object ImgForm: TImgForm
       end
       object MaxWindowEdit: TFloatSpinEdit
         Left = 228
-        Height = 21
+        Height = 16
         Top = 6
         Width = 80
         DecimalPlaces = 5
@@ -95,11 +95,11 @@ object ImgForm: TImgForm
       end
       object LUTdrop: TComboBox
         Left = 308
-        Height = 26
+        Height = 20
         Top = 6
         Width = 100
         DropDownCount = 66
-        ItemHeight = 26
+        ItemHeight = 0
         OnChange = LUTdropChange
         OnSelect = LUTdropSelect
         ParentFont = False
@@ -107,7 +107,6 @@ object ImgForm: TImgForm
         ShowHint = True
         Style = csDropDownList
         TabOrder = 3
-        Text = '0'
       end
       object AutoContrastPanel: TPanel
         Left = 104
@@ -304,7 +303,7 @@ object ImgForm: TImgForm
         Left = 4
         Height = 16
         Top = 10
-        Width = 9
+        Width = 8
         Caption = 'X'
         ParentColor = False
         ParentFont = False
@@ -313,7 +312,7 @@ object ImgForm: TImgForm
         Left = 74
         Height = 16
         Top = 10
-        Width = 9
+        Width = 8
         Caption = 'Y'
         ParentColor = False
         ParentFont = False
@@ -322,18 +321,18 @@ object ImgForm: TImgForm
         Left = 141
         Height = 16
         Top = 10
-        Width = 9
+        Width = 8
         Caption = 'Z'
         ParentColor = False
         ParentFont = False
       end
       object ZoomDrop: TComboBox
         Left = 212
-        Height = 26
+        Height = 20
         Top = 6
         Width = 59
         DropDownCount = 12
-        ItemHeight = 26
+        ItemHeight = 0
         Items.Strings = (
           'Fit'
           'Int'
@@ -354,11 +353,10 @@ object ImgForm: TImgForm
         ShowHint = True
         Style = csDropDownList
         TabOrder = 0
-        Text = '0'
       end
       object XViewEdit: TSpinEdit
         Left = 18
-        Height = 21
+        Height = 16
         Top = 9
         Width = 52
         MinValue = 1
@@ -369,7 +367,7 @@ object ImgForm: TImgForm
       end
       object YViewEdit: TSpinEdit
         Left = 86
-        Height = 21
+        Height = 16
         Top = 9
         Width = 52
         MinValue = 1
@@ -380,7 +378,7 @@ object ImgForm: TImgForm
       end
       object ZViewEdit: TSpinEdit
         Left = 153
-        Height = 21
+        Height = 16
         Top = 9
         Width = 52
         MinValue = 1
@@ -393,13 +391,13 @@ object ImgForm: TImgForm
   end
   object MagPanel: TPanel
     Left = 0
-    Height = 20
-    Top = 381
+    Height = 16
+    Top = 385
     Width = 1018
     Align = alBottom
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 20
+    ClientHeight = 16
     ClientWidth = 1018
     ParentFont = False
     TabOrder = 1
@@ -407,14 +405,14 @@ object ImgForm: TImgForm
       Left = 0
       Height = 16
       Top = 0
-      Width = 129
+      Width = 133
       Caption = '  No Images Loaded  '
       ParentColor = False
       ParentFont = False
     end
     object ProgressBar1: TProgressBar
       Left = 906
-      Height = 20
+      Height = 16
       Top = 0
       Width = 112
       Align = alRight
@@ -425,26 +423,26 @@ object ImgForm: TImgForm
   end
   object Panel1: TPanel
     Left = 0
-    Height = 345
+    Height = 349
     Top = 36
     Width = 1018
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 345
+    ClientHeight = 349
     ClientWidth = 1018
     ParentFont = False
     TabOrder = 2
     object TriplePanel: TScrollBox
       Tag = 666
       Left = 0
-      Height = 345
+      Height = 349
       Top = 0
       Width = 1018
       HorzScrollBar.Page = 584
       VertScrollBar.Page = 190
       Align = alClient
-      ClientHeight = 345
-      ClientWidth = 1018
+      ClientHeight = 334
+      ClientWidth = 1003
       Constraints.MinWidth = 4
       Color = clBlack
       ParentColor = False
@@ -747,6 +745,11 @@ object ImgForm: TImgForm
           Caption = 'Preserve regions with VOI'
           OnClick = VOImaskClick
         end
+        object VOImaskCustom: TMenuItem
+          Tag = 2
+          Caption = 'Change regions with VOI to custom intensity'
+          OnClick = VOImaskClick
+        end
       end
       object Overlaycomparisons1: TMenuItem
         Caption = 'Overlay comparisons'
@@ -862,6 +865,10 @@ object ImgForm: TImgForm
         object GenerateSPM5maskslesions1: TMenuItem
           Caption = 'Create SPM5 mask'
           OnClick = GenerateSPM5maskslesions1Click
+        end
+        object Interpolate1: TMenuItem
+          Caption = 'Interpolate VOI between slices'
+          OnClick = Interpolate1Click
         end
         object LRFlip1: TMenuItem
           Caption = 'LR Flip'
