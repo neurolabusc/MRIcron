@@ -8,6 +8,7 @@ object RenderForm: TRenderForm
   ClientHeight = 512
   ClientWidth = 955
   Menu = MainMenu1
+  OnClose = FormClose
   OnCreate = FormCreate
   OnHide = FormHide
   OnShow = FormShow
@@ -154,8 +155,8 @@ object RenderForm: TRenderForm
     Height = 480
     Top = 32
     Width = 955
-    HorzScrollBar.Page = 372
-    VertScrollBar.Page = 20
+    HorzScrollBar.Page = 14
+    VertScrollBar.Page = 14
     Align = alClient
     ClientHeight = 465
     ClientWidth = 940
@@ -172,20 +173,6 @@ object RenderForm: TRenderForm
       OnMouseDown = RenderImageMouseDown
       OnMouseMove = RenderImageMouseMove
       Stretch = True
-    end
-    object RenderImageBUP: TImage
-      Tag = 2
-      Cursor = crCross
-      Left = 360
-      Height = 12
-      Top = 8
-      Width = 12
-      AutoSize = True
-      Center = True
-      OnMouseDown = RenderImageMouseDown
-      OnMouseMove = RenderImageMouseMove
-      Stretch = True
-      Visible = False
     end
   end
   object MainMenu1: TMainMenu

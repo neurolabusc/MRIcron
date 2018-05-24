@@ -9,7 +9,7 @@ RXSpin,capmenu,PNGImage,SSE,ShellAPI,Spin,
 {$IFNDEF Unix} Windows,
 {$ELSE}
      {$IFDEF LINUX}
-     RGBGraphics,rgbroutines,
+    // RGBGraphics,rgbroutines,
     {$ENDIF}
 {$ENDIF}
 {$DEFINE UINT16ASFLOAT}
@@ -3165,7 +3165,7 @@ begin
   lImage.Picture.Bitmap.EndUpdate(False);
 end;*)
 
-procedure DrawBMP16( lx, ly: integer; var lBuff: RGBQuadp; var lImage: TImage);
+(*procedure DrawBMP16( lx, ly: integer; var lBuff: RGBQuadp; var lImage: TImage);
 var
   TempBitmap: TBitmap;
   lRGBBitmap: TRGB32Bitmap;
@@ -3197,7 +3197,7 @@ begin
     end;  //if lBuff=nil
     lImage.Picture.Bitmap := TempBitmap;
     TempBitmap.Free;
-end;
+end;*)
 {$ENDIF}
 procedure DrawBMP( lx, ly: integer; var lBuff: RGBQuadp; var lImage: TImage);
 var
@@ -3206,14 +3206,14 @@ var
 begin
   lImage.Picture.Bitmap.Width:=lx;
   lImage.Picture.Bitmap.Height:=ly;
-  if (lImage.Picture.Bitmap.PixelFormat = pf16bit) then begin
+  (*if (lImage.Picture.Bitmap.PixelFormat = pf16bit) then begin
          {$IFDEF Linux}
          DrawBMP16( lx, ly, lBuff, lImage);
          {$ELSE}
           imgform.StatusLabel.Caption:='16-bit displays not supported: use an older version osf MRIcronn';
          {$ENDIF}
          exit;
-  end;
+  end;*)
   //{$IFNDEF LCLCocoa}  //With Cocoa, saved bitmaps will not show lineto/textout if bitmap drawn as pf32bit
   lImage.Picture.Bitmap.PixelFormat := pf32bit; //if pf32bit the background color is wrong, e.g. when alpha = 0
   //{$ELSE}

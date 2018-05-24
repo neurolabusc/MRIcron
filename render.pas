@@ -23,7 +23,6 @@ type
     CutoutMenu: TMenuItem;
     ClipTrack: TTrackBar;
     MenuItem1: TMenuItem;
-    RenderImageBUP: TImage;
     SaveClipMenu: TMenuItem;
     MIPItem: TMenuItem;
     ShadeEdit: TSpinEdit;
@@ -100,6 +99,7 @@ type
     Anydepth1: TMenuItem;
     procedure BiasTrackChange(Sender: TObject);
     procedure ClipTrackChange(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure GainTrackChange(Sender: TObject);
     procedure RenderBarClick(Sender: TObject);
     procedure RenderSmoothBGClick(Sender: TObject);
@@ -142,6 +142,8 @@ var
   RenderForm: TRenderForm;
   gZoom : single = 1;
   gRenderDir,gRenderStartupFilename,gRenderDefaultsFilename:string;
+  gRenderBMP: RGBQuadp = nil;
+  gRenderBMPX, gRenderBMPY: integer;
 implementation
 
 uses MultiSlice,math,cutout;
@@ -516,6 +518,13 @@ begin
 	RenderRefreshTimer.Enabled := true;
 end;
 
+procedure TRenderForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  if (gRenderBMP <> nil) then
+     freemem(gRenderBMP);
+  gRenderBMP := nil;
+end;
+
 procedure TRenderForm.GainTrackChange(Sender: TObject);
 begin
        gRender.Gain := GainTrack.Position;
@@ -728,11 +737,14 @@ end;
 procedure RenderDrawXBar ( lHorPos, lVerPos: integer;var lImage: TImage);
 var lL,lT,lW,lH,lZoomPct: integer;
 begin
-     lImage.Picture.Graphic := RenderForm.RenderImageBUP.Picture.Graphic;
+    if  gRenderBMP = nil then exit;
+  SetDimension32(gRenderBMPY,gRenderBMPX,  gRenderBMP, gBGImg, RenderForm.RenderImage, RenderForm.RenderPanel);
+
+     //nitro lImage.Picture.Graphic := RenderForm.RenderImageBUP.Picture.Graphic;
      {$IFNDEF Darwin}
        //make sure next line required on this OS!
      {$ENDIF}
-     lImage.Canvas.Draw(0,0,RenderForm.RenderImageBUP.Picture.Graphic);
+     //nitro lImage.Canvas.Draw(0,0,RenderForm.RenderImageBUP.Picture.Graphic);
      //lImage.Picture.Bitmap := RenderForm.RenderImageBUP.Picture.Bitmap;    //xxxx
          //redraw image even if not drawing X-bar: hide visible X-bar if use toggles X-bars off.
          if not ImgForm.XBarBtn.Down then

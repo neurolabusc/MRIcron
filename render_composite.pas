@@ -847,7 +847,12 @@ if lnOverlay > 0 then begin
 end;
 //draw image
   SetDimension32(lY,lX,  lBGQuadP, gBGImg, RenderForm.RenderImage, RenderForm.RenderPanel);
-  SetDimension32(lY,lX,  lBGQuadP, gBGImg, RenderForm.RenderImageBUP, RenderForm.RenderPanel);
+  if gRenderBMP <> nil then freemem(gRenderBMP);
+  gRenderBMPX := lX;
+  gRenderBMPY := lY;
+  getmem(gRenderBMP, lSliceSz*4);
+  Move(lBGQuadP^, gRenderBMP^, lSliceSz*4);
+  //SetDimension32(lY,lX,  lBGQuadP, gBGImg, RenderForm.RenderImageBUP, RenderForm.RenderPanel);
   FreeMem ( lBGQuadP);
   if gBGImg.RenderDepthBufferItems > 0 then //negative depth was used for cutouts, now set to true depth
 	for lX := 1 to gBGImg.RenderDepthBufferItems do

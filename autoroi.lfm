@@ -10,10 +10,6 @@ object AutoROIForm: TAutoROIForm
   Caption = 'Create ROI'
   ClientHeight = 355
   ClientWidth = 265
-  Constraints.MaxHeight = 355
-  Constraints.MaxWidth = 265
-  Constraints.MinHeight = 355
-  Constraints.MinWidth = 265
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnHide = FormHide
