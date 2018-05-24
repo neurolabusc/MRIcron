@@ -88,10 +88,9 @@
         <ComponentName Value="ImgForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="919"/>
-        <CursorPos X="5" Y="936"/>
+        <TopLine Value="1262"/>
+        <CursorPos X="4" Y="1263"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -338,10 +337,11 @@
       </Unit26>
       <Unit27>
         <Filename Value="nifti_img.pas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="8"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="3621"/>
-        <CursorPos X="24" Y="3621"/>
+        <TopLine Value="5540"/>
+        <CursorPos X="10" Y="5547"/>
         <UsageCount Value="101"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -769,124 +769,124 @@
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="4209" Column="22" TopLine="4207"/>
+        <Filename Value="render_composite.pas"/>
+        <Caret Line="854" Column="29" TopLine="844"/>
       </Position1>
       <Position2>
-        <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="4958" Column="17" TopLine="4941"/>
+        <Filename Value="render.pas"/>
+        <Caret Line="733" Column="44" TopLine="733"/>
       </Position2>
       <Position3>
-        <Filename Value="render_composite.pas"/>
-        <Caret Line="854" Column="3" TopLine="839"/>
+        <Filename Value="render.pas"/>
+        <Caret Line="38" Column="9" TopLine="28"/>
       </Position3>
       <Position4>
         <Filename Value="render.pas"/>
-        <Caret Line="146" Column="10" TopLine="131"/>
+        <Caret Line="112" Column="19" TopLine="95"/>
       </Position4>
       <Position5>
         <Filename Value="render.pas"/>
-        <Caret Line="742" Column="3" TopLine="732"/>
+        <Caret Line="373" Column="27" TopLine="355"/>
       </Position5>
       <Position6>
-        <Filename Value="render_composite.pas"/>
-        <Caret Line="854" Column="29" TopLine="844"/>
+        <Filename Value="render.pas"/>
+        <Caret Line="390" Column="26" TopLine="372"/>
       </Position6>
       <Position7>
         <Filename Value="render.pas"/>
-        <Caret Line="733" Column="44" TopLine="733"/>
+        <Caret Line="394" Column="67" TopLine="376"/>
       </Position7>
       <Position8>
         <Filename Value="render.pas"/>
-        <Caret Line="38" Column="9" TopLine="28"/>
+        <Caret Line="406" Column="67" TopLine="388"/>
       </Position8>
       <Position9>
-        <Filename Value="render.pas"/>
-        <Caret Line="112" Column="19" TopLine="95"/>
-      </Position9>
-      <Position10>
-        <Filename Value="render.pas"/>
-        <Caret Line="373" Column="27" TopLine="355"/>
-      </Position10>
-      <Position11>
-        <Filename Value="render.pas"/>
-        <Caret Line="390" Column="26" TopLine="372"/>
-      </Position11>
-      <Position12>
-        <Filename Value="render.pas"/>
-        <Caret Line="394" Column="67" TopLine="376"/>
-      </Position12>
-      <Position13>
-        <Filename Value="render.pas"/>
-        <Caret Line="406" Column="67" TopLine="388"/>
-      </Position13>
-      <Position14>
         <Filename Value="nifti_img.pas"/>
         <Caret Line="2547" Column="50" TopLine="2541"/>
-      </Position14>
-      <Position15>
+      </Position9>
+      <Position10>
         <Filename Value="nifti_img.pas"/>
         <Caret Line="4435" Column="13" TopLine="4419"/>
-      </Position15>
-      <Position16>
+      </Position10>
+      <Position11>
         <Filename Value="nifti_img.pas"/>
         <Caret Line="13" Column="23"/>
+      </Position11>
+      <Position12>
+        <Filename Value="nifti_img.pas"/>
+        <Caret Line="3145" Column="12" TopLine="3124"/>
+      </Position12>
+      <Position13>
+        <Filename Value="nifti_img.pas"/>
+        <Caret Line="3227" Column="9" TopLine="3207"/>
+      </Position13>
+      <Position14>
+        <Filename Value="../../../lazarus/lcl/interfaces/carbon/carbonproc.pp"/>
+        <Caret Line="563" Column="13" TopLine="555"/>
+      </Position14>
+      <Position15>
+        <Filename Value="histoform.pas"/>
+        <Caret Line="94" Column="15" TopLine="85"/>
+      </Position15>
+      <Position16>
+        <Filename Value="histoform.pas"/>
+        <Caret Line="96" Column="11" TopLine="75"/>
       </Position16>
       <Position17>
         <Filename Value="nifti_img.pas"/>
-        <Caret Line="3145" Column="12" TopLine="3124"/>
+        <Caret Line="79" Column="24" TopLine="68"/>
       </Position17>
       <Position18>
-        <Filename Value="nifti_img.pas"/>
-        <Caret Line="3227" Column="9" TopLine="3207"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="106" Column="6" TopLine="96"/>
       </Position18>
       <Position19>
-        <Filename Value="../../../lazarus/lcl/interfaces/carbon/carbonproc.pp"/>
-        <Caret Line="563" Column="13" TopLine="555"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="970" Column="15" TopLine="967"/>
       </Position19>
       <Position20>
-        <Filename Value="histoform.pas"/>
-        <Caret Line="94" Column="15" TopLine="85"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="269" Column="7" TopLine="267"/>
       </Position20>
       <Position21>
-        <Filename Value="histoform.pas"/>
-        <Caret Line="96" Column="11" TopLine="75"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="970" Column="13" TopLine="967"/>
       </Position21>
       <Position22>
-        <Filename Value="nifti_img.pas"/>
-        <Caret Line="79" Column="24" TopLine="68"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="266" Column="12" TopLine="256"/>
       </Position22>
       <Position23>
         <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="106" Column="6" TopLine="96"/>
+        <Caret Line="1551" Column="13" TopLine="1545"/>
       </Position23>
       <Position24>
         <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="970" Column="15" TopLine="967"/>
+        <Caret Line="11" Column="22"/>
       </Position24>
       <Position25>
         <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="269" Column="7" TopLine="267"/>
+        <Caret Line="239" Column="19" TopLine="222"/>
       </Position25>
       <Position26>
         <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="970" Column="13" TopLine="967"/>
+        <Caret Line="921" Column="30" TopLine="919"/>
       </Position26>
       <Position27>
-        <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="266" Column="12" TopLine="256"/>
+        <Filename Value="nifti_img.pas"/>
+        <Caret Line="3624" Column="81" TopLine="3621"/>
       </Position27>
       <Position28>
-        <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="1551" Column="13" TopLine="1545"/>
+        <Filename Value="nifti_img.pas"/>
+        <Caret Line="4207" Column="29" TopLine="4190"/>
       </Position28>
       <Position29>
-        <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="11" Column="22"/>
+        <Filename Value="nifti_img.pas"/>
+        <Caret Line="4213" Column="28" TopLine="4196"/>
       </Position29>
       <Position30>
-        <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="239" Column="19" TopLine="222"/>
+        <Filename Value="nifti_img.pas"/>
+        <Caret Line="4217" Column="28" TopLine="4200"/>
       </Position30>
     </JumpHistory>
     <RunParams>

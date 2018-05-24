@@ -5554,7 +5554,7 @@ begin
    lFName := lImg2Load.ImgFileName;
   lMultiImgSz := ComputeImageDataBytes(lImg2Load);
   if (lMultiImgSz < 1) then begin
-     Showmessage('Unable to load this image (to large or corrupt)');
+     Showmessage('Unable to load this image (too large or corrupt)');
   end;
   lOffset := round(lImg2Load.NIFTIhdr.vox_offset);
   lMultiImgSzOff := lMultiImgSz + abs(lOffset);
