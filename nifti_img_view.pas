@@ -922,10 +922,16 @@ end;
 procedure TImgForm.FormDropFiles(Sender: TObject; const FileNames: array of String);
 var
    lFilename: string;
+   ss: TShiftState;
 begin
+  ss:=getKeyshiftstate;
   if length(FileNames) < 1 then
      exit;
   lFilename := Filenames[0];
+  if (ssMeta in ss) or (ssCtrl in ss) then begin
+     LoadOverlay(lFilename);
+     exit;
+  end;
   OpenAndDisplayImg(lFilename,true);
 end;
 

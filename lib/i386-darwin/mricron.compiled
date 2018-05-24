@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Compiler Value="/usr/local/bin/ppc386" Date="1511735943"/>
+  <Params Value=" -MDelphi -Scgi -CX -O3 -Xs -XX  -k-framework -kCocoa -l -vewnhibq -Fi/Users/thanayik/MRIcron/lib/i386-darwin -Fu/Users/thanayik/MRIcron/common -Fu/Users/thanayik/MRIcron/rgb -Fu/Users/thanayik/lazarus/lcl/units/i386-darwin/cocoa -Fu/Users/thanayik/lazarus/lcl/units/i386-darwin -Fu/Users/thanayik/lazarus/components/lazutils/lib/i386-darwin -Fu/Users/thanayik/lazarus/packager/units/i386-darwin -Fu/Users/thanayik/MRIcron/ -FU/Users/thanayik/MRIcron/lib/i386-darwin/ -oMRIcron -dLCL -dLCLcocoa mricron.lpr"/>
+</CONFIG>
