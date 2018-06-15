@@ -351,7 +351,8 @@ var
    lStr: string;
 begin
   {$IFDEF UNIX}
-    lStr := extractfiledir(GetAppConfigFile(false));
+  result := '';
+  lStr := extractfiledir(GetAppConfigFile(false));
     lLen := length(lStr);
     if lLen < 1 then exit;
     lP := lLen;
@@ -396,8 +397,6 @@ begin
     lTempBetName := DefaultsDirCmd+'btemp8.hdr';//lTempBetName := extractfilepath(paramstr(0))+'btemp8.hdr';
     // showmessage(lTempBetName);
     if not DoBET(lTempName8bitMask,lTempBetName,SmoothnessEdit.value) then goto 666;
-
-
     Memo1.lines.add('Shutdown Timestamp: '+DateTimeToStr(Now));
     if Fileexists(lTempBetName) then begin
        CopyFileEXoverwrite(lTempName8bitMask,lTempBetName); //the old version of BET corrupts some NIfTI information
@@ -419,7 +418,6 @@ begin
  goto 666;
 //        ImgForm.CloseImagesClick(nil);
     end;
-
     Mask8BitImg(changefileext(lTempNameOrig,'.img'),changefileext(lTempBetName,'.img'));
     ImgForm.OpenAndDisplayImg(lTempNameOrig,True);
     Memo1.lines.add('Use File/SaveAsNIfTI to save the stripped 8-bit image.');

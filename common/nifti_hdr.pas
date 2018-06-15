@@ -1096,18 +1096,23 @@ var lOutHdr: TNIFTIhdr;
 	lExt: string;
     lF: File;
     lOverwrite: boolean;
+
 begin
      lOverwrite := false; //will we overwrite existing file?
      result := false; //assume failure
-	 if lHdr.magic = kNIFTI_MAGIC_EMBEDDED_HDR then begin
-		 lExt := UpCaseExt(lFileName);
+         lExt := UpCaseExt(lFilename);
+	if (lExt='.NII') or (lExt = '.NII.GZ') or (lExt = '.VOI') then
+           lHdr.magic := kNIFTI_MAGIC_EMBEDDED_HDR;
+        if (lExt = '.HDR') then
+           lHdr.magic := kNIFTI_MAGIC_SEPARATE_HDR;
+	if lHdr.magic = kNIFTI_MAGIC_EMBEDDED_HDR then begin
 		 if (lExt = '.GZ') or (lExt = '.NII.GZ') then begin
 			ShowMessage('Unable to save .nii.gz headers (first ungzip your image if you wish to edit the header)');
 			exit;
 		 end;
 		 lFilename := changefileext(lFilename,'.nii')
 	 end else
-         lFilename := changefileext(lFilename,'.hdr');
+             lFilename := changefileext(lFilename,'.hdr');
      if ((sizeof(TNIFTIhdr))> DiskFreeEx(lFileName)) then begin
         ShowMessage('There is not enough free space on the destination disk to save the header. '+kCR+
         lFileName+ kCR+' Bytes Required: '+inttostr(sizeof(TNIFTIhdr)) );

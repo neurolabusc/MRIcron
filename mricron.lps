@@ -20,10 +20,10 @@
         <ComponentName Value="HdrForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="149"/>
-        <CursorPos X="15" Y="160"/>
+        <TopLine Value="664"/>
+        <CursorPos X="29" Y="667"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -61,13 +61,11 @@
         <ComponentName Value="RenderForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="28"/>
+        <TopLine Value="29"/>
         <CursorPos X="9" Y="38"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit4>
       <Unit5>
@@ -89,8 +87,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="1262"/>
-        <CursorPos X="4" Y="1263"/>
+        <TopLine Value="4453"/>
+        <CursorPos X="19" Y="4459"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -115,11 +113,14 @@
         <ComponentName Value="MultiSliceForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="-1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="236"/>
-        <CursorPos X="59" Y="239"/>
+        <TopLine Value="831"/>
+        <CursorPos X="20" Y="855"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit8>
       <Unit9>
@@ -128,13 +129,11 @@
         <ComponentName Value="AutoROIForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="16"/>
         <CursorPos X="16" Y="33"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit9>
       <Unit10>
@@ -143,13 +142,11 @@
         <ComponentName Value="HistogramForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="75"/>
         <CursorPos X="11" Y="96"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit10>
       <Unit11>
@@ -171,13 +168,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="CropEdges"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="81"/>
         <CursorPos X="3" Y="83"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit12>
       <Unit13>
@@ -186,11 +181,13 @@
         <ComponentName Value="BETForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="157"/>
-        <CursorPos X="39" Y="168"/>
+        <TopLine Value="417"/>
+        <CursorPos Y="421"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit13>
       <Unit14>
@@ -325,7 +322,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="286"/>
         <CursorPos X="55" Y="290"/>
-        <UsageCount Value="82"/>
+        <UsageCount Value="85"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit25>
       <Unit26>
@@ -337,11 +334,10 @@
       </Unit26>
       <Unit27>
         <Filename Value="nifti_img.pas"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="5540"/>
-        <CursorPos X="10" Y="5547"/>
+        <TopLine Value="88"/>
+        <CursorPos X="32" Y="91"/>
         <UsageCount Value="101"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -400,21 +396,22 @@
       </Unit34>
       <Unit35>
         <Filename Value="render_composite.pas"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="1"/>
         <TopLine Value="844"/>
         <CursorPos X="29" Y="854"/>
-        <UsageCount Value="79"/>
+        <UsageCount Value="80"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit35>
       <Unit36>
         <Filename Value="common/nifti_hdr.pas"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="622"/>
-        <CursorPos X="26" Y="623"/>
-        <UsageCount Value="61"/>
+        <TopLine Value="1098"/>
+        <CursorPos X="32" Y="1106"/>
+        <UsageCount Value="62"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit36>
       <Unit37>
@@ -444,11 +441,12 @@
       </Unit39>
       <Unit40>
         <Filename Value="common/nifti_types.pas"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="46"/>
-        <CursorPos X="11" Y="72"/>
-        <UsageCount Value="96"/>
+        <TopLine Value="107"/>
+        <CursorPos Y="116"/>
+        <UsageCount Value="97"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit40>
       <Unit41>
@@ -729,12 +727,11 @@
       <Unit72>
         <Filename Value="../../../lazarus/lcl/interfaces/carbon/carbonproc.pp"/>
         <UnitName Value="CarbonProc"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="553"/>
-        <CursorPos X="13" Y="563"/>
-        <UsageCount Value="14"/>
-        <Loaded Value="True"/>
+        <TopLine Value="554"/>
+        <CursorPos X="72" Y="565"/>
+        <UsageCount Value="15"/>
       </Unit72>
       <Unit73>
         <Filename Value="nifti_img_view.lfm"/>
@@ -758,135 +755,135 @@
       <Unit75>
         <Filename Value="rgb/rgbroutines.pas"/>
         <UnitName Value="RGBRoutines"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="1"/>
         <TopLine Value="49"/>
         <CursorPos X="84" Y="76"/>
-        <UsageCount Value="14"/>
+        <UsageCount Value="15"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit75>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="render_composite.pas"/>
-        <Caret Line="854" Column="29" TopLine="844"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="647" Column="36" TopLine="626"/>
       </Position1>
       <Position2>
-        <Filename Value="render.pas"/>
-        <Caret Line="733" Column="44" TopLine="733"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="650" Column="27" TopLine="630"/>
       </Position2>
       <Position3>
-        <Filename Value="render.pas"/>
-        <Caret Line="38" Column="9" TopLine="28"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="651" Column="75" TopLine="631"/>
       </Position3>
       <Position4>
-        <Filename Value="render.pas"/>
-        <Caret Line="112" Column="19" TopLine="95"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="659" Column="60" TopLine="640"/>
       </Position4>
       <Position5>
-        <Filename Value="render.pas"/>
-        <Caret Line="373" Column="27" TopLine="355"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="681" Column="47" TopLine="661"/>
       </Position5>
       <Position6>
-        <Filename Value="render.pas"/>
-        <Caret Line="390" Column="26" TopLine="372"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="682" Column="27" TopLine="662"/>
       </Position6>
       <Position7>
-        <Filename Value="render.pas"/>
-        <Caret Line="394" Column="67" TopLine="376"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="685" Column="82" TopLine="663"/>
       </Position7>
       <Position8>
-        <Filename Value="render.pas"/>
-        <Caret Line="406" Column="67" TopLine="388"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="692" Column="68" TopLine="668"/>
       </Position8>
       <Position9>
-        <Filename Value="nifti_img.pas"/>
-        <Caret Line="2547" Column="50" TopLine="2541"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="696" Column="54" TopLine="673"/>
       </Position9>
       <Position10>
-        <Filename Value="nifti_img.pas"/>
-        <Caret Line="4435" Column="13" TopLine="4419"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="719" Column="11" TopLine="699"/>
       </Position10>
       <Position11>
-        <Filename Value="nifti_img.pas"/>
-        <Caret Line="13" Column="23"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="6" Column="87"/>
       </Position11>
       <Position12>
-        <Filename Value="nifti_img.pas"/>
-        <Caret Line="3145" Column="12" TopLine="3124"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="129" Column="31" TopLine="117"/>
       </Position12>
       <Position13>
-        <Filename Value="nifti_img.pas"/>
-        <Caret Line="3227" Column="9" TopLine="3207"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="18" Column="39" TopLine="13"/>
       </Position13>
       <Position14>
-        <Filename Value="../../../lazarus/lcl/interfaces/carbon/carbonproc.pp"/>
-        <Caret Line="563" Column="13" TopLine="555"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="90" Column="44" TopLine="70"/>
       </Position14>
       <Position15>
-        <Filename Value="histoform.pas"/>
-        <Caret Line="94" Column="15" TopLine="85"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="5" Column="107" TopLine="4"/>
       </Position15>
       <Position16>
-        <Filename Value="histoform.pas"/>
-        <Caret Line="96" Column="11" TopLine="75"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="18" Column="13" TopLine="4"/>
       </Position16>
       <Position17>
-        <Filename Value="nifti_img.pas"/>
-        <Caret Line="79" Column="24" TopLine="68"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="13" Column="16" TopLine="3"/>
       </Position17>
       <Position18>
-        <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="106" Column="6" TopLine="96"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="114" Column="38" TopLine="94"/>
       </Position18>
       <Position19>
-        <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="970" Column="15" TopLine="967"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="132" Column="21" TopLine="112"/>
       </Position19>
       <Position20>
-        <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="269" Column="7" TopLine="267"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="652" Column="27" TopLine="632"/>
       </Position20>
       <Position21>
-        <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="970" Column="13" TopLine="967"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="653" Column="75" TopLine="633"/>
       </Position21>
       <Position22>
-        <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="266" Column="12" TopLine="256"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="661" Column="60" TopLine="642"/>
       </Position22>
       <Position23>
-        <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="1551" Column="13" TopLine="1545"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="683" Column="47" TopLine="663"/>
       </Position23>
       <Position24>
-        <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="11" Column="22"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="684" Column="27" TopLine="664"/>
       </Position24>
       <Position25>
-        <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="239" Column="19" TopLine="222"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="685" Column="75" TopLine="665"/>
       </Position25>
       <Position26>
-        <Filename Value="nifti_img_view.pas"/>
-        <Caret Line="921" Column="30" TopLine="919"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="695" Column="54" TopLine="675"/>
       </Position26>
       <Position27>
-        <Filename Value="nifti_img.pas"/>
-        <Caret Line="3624" Column="81" TopLine="3621"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="721" Column="29" TopLine="701"/>
       </Position27>
       <Position28>
-        <Filename Value="nifti_img.pas"/>
-        <Caret Line="4207" Column="29" TopLine="4190"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="722" Column="75" TopLine="702"/>
       </Position28>
       <Position29>
-        <Filename Value="nifti_img.pas"/>
-        <Caret Line="4213" Column="28" TopLine="4196"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="729" Column="45" TopLine="710"/>
       </Position29>
       <Position30>
-        <Filename Value="nifti_img.pas"/>
-        <Caret Line="4217" Column="28" TopLine="4200"/>
+        <Filename Value="MultiSlice.pas"/>
+        <Caret Line="749" Column="148" TopLine="729"/>
       </Position30>
     </JumpHistory>
     <RunParams>

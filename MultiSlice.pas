@@ -99,10 +99,12 @@ function MultiSliceNum2String: string;
 var
 	lSlice: integer;
 begin
- if gMulti.nSlices = 0 then begin
+ if gMulti.nSlices < 1 then begin
      gMulti.nSlices := 1;
      gMulti.SliceList[1] := 1;
  end;
+ if (gMulti.nSlices > kMaxMultiSlice) then
+    gMulti.nSlices := kMaxMultiSlice;
  result := '';
 	for lSlice := 1 to gMulti.nSlices do  begin
 		result := result+inttostr(gMulti.SliceList[lSlice]);
@@ -127,7 +129,7 @@ begin
 		if ((not (lStr[lStrPos] in  ['0'..'9'])) or (lStrPos=lStrLen)) and (lSliceStr<>'') then begin
 			inc(lSlice);
 			if lSlice <= kMaxMultiSlice then
-				gMulti.SliceList[lSlice] := strtoint(lSliceStr);
+				gMulti.SliceList[lSlice] := strtointdef(lSliceStr,1);
 			lSliceStr := '';
 		end; //if white space or eoln
 	end; //for lStrPos

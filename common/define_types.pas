@@ -20,7 +20,7 @@ interface
         {$IFDEF GUI} forms,userdir, dialogs{$ELSE}dialogsx{$ENDIF};
 const
      //kMRIcronVersDate = '3MAY2016';
-     kVers = 'v1.0.20180404';
+     kVers = 'v1.0.20180614';
      {$IFDEF LCLCocoa}
      kMRIcronAPI = 'Cocoa';
     {$ELSE}
