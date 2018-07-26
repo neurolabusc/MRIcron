@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CONFIG>
-  <Compiler Value="/usr/bin/fpc" Date="1449313866"/>
-  <Params Value=" -MDelphi -Scgi -CX -Cg -O3 -Xs -XX -l -vewnhibq -Fi/home/brain/MRIcron/lib/x86_64-linux -Fu/home/brain/MRIcron/common -Fu/home/brain/lazarus/lcl/units/x86_64-linux/gtk2 -Fu/home/brain/lazarus/lcl/units/x86_64-linux -Fu/home/brain/lazarus/components/lazutils/lib/x86_64-linux -Fu/home/brain/lazarus/packager/units/x86_64-linux -Fu/home/brain/MRIcron/ -FU/home/brain/MRIcron/lib/x86_64-linux/ -FE/home/brain/MRIcron/ -o/home/brain/MRIcron/MRIcron -dLCL -dLCLgtk2 mricron.lpr"/>
-</CONFIG>
