@@ -86,9 +86,10 @@
         <ComponentName Value="ImgForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="4453"/>
-        <CursorPos X="19" Y="4459"/>
+        <TopLine Value="3783"/>
+        <CursorPos X="60" Y="3794"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -113,11 +114,10 @@
         <ComponentName Value="MultiSliceForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="831"/>
-        <CursorPos X="20" Y="855"/>
+        <TopLine Value="820"/>
+        <CursorPos X="14" Y="840"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -767,123 +767,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="647" Column="36" TopLine="626"/>
+        <Caret Line="719" Column="11" TopLine="699"/>
       </Position1>
       <Position2>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="650" Column="27" TopLine="630"/>
+        <Caret Line="6" Column="87"/>
       </Position2>
       <Position3>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="651" Column="75" TopLine="631"/>
+        <Caret Line="129" Column="31" TopLine="117"/>
       </Position3>
       <Position4>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="659" Column="60" TopLine="640"/>
+        <Caret Line="18" Column="39" TopLine="13"/>
       </Position4>
       <Position5>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="681" Column="47" TopLine="661"/>
+        <Caret Line="90" Column="44" TopLine="70"/>
       </Position5>
       <Position6>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="682" Column="27" TopLine="662"/>
+        <Caret Line="5" Column="107" TopLine="4"/>
       </Position6>
       <Position7>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="685" Column="82" TopLine="663"/>
+        <Caret Line="18" Column="13" TopLine="4"/>
       </Position7>
       <Position8>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="692" Column="68" TopLine="668"/>
+        <Caret Line="13" Column="16" TopLine="3"/>
       </Position8>
       <Position9>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="696" Column="54" TopLine="673"/>
+        <Caret Line="114" Column="38" TopLine="94"/>
       </Position9>
       <Position10>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="719" Column="11" TopLine="699"/>
+        <Caret Line="132" Column="21" TopLine="112"/>
       </Position10>
       <Position11>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="6" Column="87"/>
+        <Caret Line="652" Column="27" TopLine="632"/>
       </Position11>
       <Position12>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="129" Column="31" TopLine="117"/>
+        <Caret Line="653" Column="75" TopLine="633"/>
       </Position12>
       <Position13>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="18" Column="39" TopLine="13"/>
+        <Caret Line="661" Column="60" TopLine="642"/>
       </Position13>
       <Position14>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="90" Column="44" TopLine="70"/>
+        <Caret Line="683" Column="47" TopLine="663"/>
       </Position14>
       <Position15>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="5" Column="107" TopLine="4"/>
+        <Caret Line="684" Column="27" TopLine="664"/>
       </Position15>
       <Position16>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="18" Column="13" TopLine="4"/>
+        <Caret Line="685" Column="75" TopLine="665"/>
       </Position16>
       <Position17>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="13" Column="16" TopLine="3"/>
+        <Caret Line="695" Column="54" TopLine="675"/>
       </Position17>
       <Position18>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="114" Column="38" TopLine="94"/>
+        <Caret Line="721" Column="29" TopLine="701"/>
       </Position18>
       <Position19>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="132" Column="21" TopLine="112"/>
+        <Caret Line="722" Column="75" TopLine="702"/>
       </Position19>
       <Position20>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="652" Column="27" TopLine="632"/>
+        <Caret Line="729" Column="45" TopLine="710"/>
       </Position20>
       <Position21>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="653" Column="75" TopLine="633"/>
+        <Caret Line="749" Column="148" TopLine="729"/>
       </Position21>
       <Position22>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="661" Column="60" TopLine="642"/>
+        <Caret Line="834" Column="48" TopLine="832"/>
       </Position22>
       <Position23>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="683" Column="47" TopLine="663"/>
+        <Caret Line="840" Column="14" TopLine="832"/>
       </Position23>
       <Position24>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="684" Column="27" TopLine="664"/>
+        <Caret Line="29" Column="7" TopLine="17"/>
       </Position24>
       <Position25>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="685" Column="75" TopLine="665"/>
+        <Caret Line="51" Column="17" TopLine="32"/>
       </Position25>
       <Position26>
         <Filename Value="MultiSlice.pas"/>
-        <Caret Line="695" Column="54" TopLine="675"/>
+        <Caret Line="212" Column="32" TopLine="192"/>
       </Position26>
       <Position27>
-        <Filename Value="MultiSlice.pas"/>
-        <Caret Line="721" Column="29" TopLine="701"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="4457" Column="7" TopLine="4453"/>
       </Position27>
       <Position28>
-        <Filename Value="MultiSlice.pas"/>
-        <Caret Line="722" Column="75" TopLine="702"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="106" Column="7" TopLine="95"/>
       </Position28>
       <Position29>
-        <Filename Value="MultiSlice.pas"/>
-        <Caret Line="729" Column="45" TopLine="710"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="269" Column="17" TopLine="250"/>
       </Position29>
       <Position30>
-        <Filename Value="MultiSlice.pas"/>
-        <Caret Line="749" Column="148" TopLine="729"/>
+        <Filename Value="nifti_img_view.pas"/>
+        <Caret Line="1764" Column="18" TopLine="1745"/>
       </Position30>
     </JumpHistory>
     <RunParams>

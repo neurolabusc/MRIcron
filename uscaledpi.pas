@@ -1,96 +1,252 @@
 unit uscaledpi;
  //http://wiki.lazarus.freepascal.org/High_DPI
-{$mode delphi}  {$H+}
+{$IFDEF FPC}{$mode delphi}  {$H+}{$ENDIF}
 
 interface
 
 uses
-   Dialogs, Forms, Graphics, Controls, SysUtils,{$IFDEF Windows} Windows {$ELSE} Types{$ENDIF} ;
+   {$IFDEF Linux} StrUtils, FileUtil, Process, Classes,SysUtils, {$ENDIF}
+   Forms, Graphics, Controls, ComCtrls, Grids, OpenGLContext;
 
 procedure HighDPI(FromDPI: integer);
 procedure ScaleDPI(Control: TControl; FromDPI: integer);
-procedure HighDPIfont(fontSize: integer);
+procedure HighDPILinux(FontSz: integer);
+procedure ScaleDPIX(Control: TControl; FromDPI: integer);
+//function getFontScale(FontSz: integer): single;
 
 implementation
 
-
-procedure ScaleForm(Control: TControl; FromDPI: integer);
-var
-{$IFDEF Windows}
-   h: THandle;
-   r: TRect;
-   TB, LR: integer;
-{$ENDIF}
-  tray : TRect;
-begin
-  if not (Control is TForm) then exit;
-  tray.Top := 0; tray.Bottom := 0; tray.Left := 0; tray.Right := 0;
-  {$IFDEF Windows}
-  h := FindWindow('Shell_traywnd','');
-  GetWindowRect(h,r);
-  //Control.caption := format('%dx%d  %d -> %d',[Control.Height, Control.Width, FromDPI, Screen.PixelsPerInch]);
-  //Control.caption := format('%dx%d %dx%d  ',[r.Top, r.Left, r.Bottom, r.Right]);
-  //Showmessage(format('%dx%d %dx%d  ',[r.Top, r.Left, r.Bottom, r.Right]));
-  TB := abs(r.Bottom - r.Top);
-  LR := abs(r.Left - r.Right);
-  if  TB < LR then begin //tray on top or bottom
-     if r.Top > (screen.height / 2) then //on bottom
-        tray.Bottom := TB
-     else
-       tray.Top := TB;
-  end else begin
-    if r.Right > (screen.width / 2) then //on right
-       tray.Right := LR
-    else
-      tray.Left := LR;
-  end;
-  tray.Bottom := tray.Bottom + GetSystemMetrics(4) + GetSystemMetrics(15); //SM_CYCCAPTION SM_CYMENU;
-  {$ENDIF}
-  // Control.caption := format('%d  %d',[tray.Bottom, GetSystemMetrics(4)]);
-  //Control.caption := format('%dx%d %dx%d  scale %d',[Control.width, Control.height, screen.width, screen.height, ScaleX(100,FromDPI)]);
-  if ((Control.Height+tray.Top+tray.Bottom) > (Screen.Height)) or (((Control.Width+tray.Left+tray.Right) > (Screen.Width)))  then begin
-     Control.Height := Screen.Height - tray.Top - tray.Bottom;
-     Control.Top := tray.Top + 1;
-     Control.Width := Screen.Width - tray.Left - tray.Right - 12;
-     Control.Left := tray.Left + 1;
-     (Control as TForm).Position:= poDesigned;
-  end;
-
-end;
-
 procedure ScaleDPI(Control: TControl; FromDPI: integer);
 var
-  i: integer;
+  i, s: integer;
   WinControl: TWinControl;
 begin
-  if Control.tag = 321 then exit;
-  with Control do begin
+  with Control do
+  begin
     Left := ScaleX(Left, FromDPI);
-    Top := ScaleY(Top, FromDPI);
-    Width := ScaleX(Width, FromDPI);
-    Height := ScaleY(Height, FromDPI);
-  end;
+    if (Control is TOpenGLControl) then begin
+      if (FromDPI < 64) then begin
+         writeln('Turning off multi-sampling [high DPI]');
+         (Control as TOpenGLControl).MultiSampling := 1; //high scaling factors exhaust video memory
+      end;
+      Top := ScaleY(Top,FromDPI);
+    end else
 
-  if Control is TWinControl then begin
+    {$IFDEF LINUX} //strange minimum size and height on Lazarus 1.6.2
+    if (Control is TTrackBar) then begin
+      //i := 22;
+      s := ScaleY(Height, FromDPI);
+      //Height := ScaleY(Height, FromDPI);
+      i := (s) div 3;
+      Top := ScaleY(Top, FromDPI) - i ;
+      Height := ScaleY(Height, FromDPI);
+    end else begin
+       Top :=ScaleY(Top, FromDPI);
+       Height := ScaleY(Height, FromDPI);
+    end;
+    {$ELSE}
+           Height := ScaleY(Height, FromDPI);
+    Top :=ScaleY(Top, FromDPI);
+
+    {$ENDIF}
+    if not (Control is TOpenGLControl) then
+       Width := ScaleX(Width, FromDPI);
+    if (Control is TStringGrid) then begin
+       (Control as TStringGrid).DefaultColWidth := ScaleY((Control as TStringGrid).DefaultColWidth, FromDPI);
+      (Control as TStringGrid).DefaultRowHeight := ScaleY((Control as TStringGrid).DefaultRowHeight, FromDPI);
+    end;
+  end;
+  if Control is TWinControl then
+  begin
     WinControl := TWinControl(Control);
     if WinControl.ControlCount = 0 then
       exit;
     for i := 0 to WinControl.ControlCount - 1 do
       ScaleDPI(WinControl.Controls[i], FromDPI);
   end;
-  if Control is TForm then
-     ScaleForm(Control, FromDPI);
 end;
 
-procedure HighDPIfont(fontSize: integer);
+{$IFDEF LINUX}
+function str2XPix(str: string): integer;
+// '1920x1080+0+0' -> 1920   1280x778+0+0
+var
+  s: string;
+begin
+     result := 0;
+     if length(str) < 1 then exit;
+     if not (str[1] in ['0'..'9']) then exit;
+     if not AnsiContainsText(str, 'x') then exit;
+     if not AnsiContainsText(str, '+') then exit;
+     s := copy(str, 1, PosEx('x',str)-1);
+     result := strtointdef(s,0);
+end;
+
+function getFontScaleXRANDR(): single;
+var
+  AProcess: TProcess;
+  Exe, mmStr: String;
+  dpi, mm: single;
+  i, k, xPix: integer;
+  AStringList, BStringList: TStringList;
+begin
+  result := 0.0;
+  Exe := FindDefaultExecutablePath('xrandr');
+  if length(Exe) < 1 then begin
+     Exe := '/opt/X11/bin/xrandr';
+     //Exe := '/Users/rorden/vx.sh';
+     if not fileexists(Exe) then
+        Exe := '';
+  end;
+  writeln('xrandr : '+Exe);
+  if length(Exe) < 1 then exit;
+  if not FileExists(Exe) then exit;
+  //result := 1;
+  AProcess := TProcess.Create(nil);
+  AProcess.Executable:=Exe;
+  AProcess.Options := AProcess.Options + [poWaitOnExit, poUsePipes];
+  AProcess.Execute;
+  if (AProcess.ExitCode = 0) then begin
+     AStringList := TStringList.Create;
+     BStringList := TStringList.Create;
+     AStringList.LoadFromStream(AProcess.Output);
+     if AStringList.Count > 0 then begin  //"uint32 2"
+        for i := 0 to (AStringList.Count-1) do begin
+            if not AnsiContainsText(AStringList.Strings[i], 'connected') then continue;
+            writeln(AStringList.Strings[i]);
+            BStringList.DelimitedText   := AStringList.Strings[i];
+            if (BStringList.Count < 5) then continue;
+            k := 0;
+            xPix := -1;
+            while (k < (BStringList.Count-1)) and (xPix < 1) do begin
+                xPix := str2XPix(BStringList.Strings[k]);
+                k := k + 1;
+            end;
+            if xPix < 1 then continue;
+            mmStr := BStringList.Strings[BStringList.Count-3];
+            if length(mmStr) < 3 then continue;  //"9mm"
+            if mmStr[length(mmStr)] <> 'm' then continue;
+            if mmStr[length(mmStr)-1] = 'c' then
+               mm := 10.0 //cm
+            else if mmStr[length(mmStr)-1] = 'm' then
+                 mm := 1.0 //mm
+            else
+                continue;
+            delete(mmStr,length(mmStr)-1,2);
+            mm := strtointdef(mmStr,0)*mm;
+            if mm <= 0 then continue;
+            dpi := xPix/( mm/25.4);
+            writeln(format(' Xpix %d Xmm %g dpi %g',[xPix, mm, dpi]));
+            //Form1.Memo1.lines.Add( inttostr(xPix)+':'+floattostr(mm)+' dpi '+floattostr(dpi));
+            if dpi > 0 then
+               result := 144 / dpi;
+               //result := 96/dpi;
+            //if (result < 1) then result := 1;
+            break;
+        end; //for i: each line of output
+     end; //if output
+     AStringList.Free;
+     BStringList.Free;
+  end;
+  AProcess.Free;
+end;
+
+
+function getFontScale(FontSz: integer): single;
+var
+  AProcess: TProcess;
+  Exe, Str: String;
+  AStringList: TStringList;
+begin
+  result := 1.0;
+  if (Screen.PixelsPerInch > 48) and (FontSz > 10) then
+     result := (FontSz/10) * (72/Screen.PixelsPerInch);
+     //result := Screen.PixelsPerInch / 96;
+  Exe := FindDefaultExecutablePath('gsettings');
+  if length(Exe) < 1 then exit;
+  if not FileExists(Exe) then exit;
+  result := 1;
+  AProcess := TProcess.Create(nil);
+  AProcess.Executable:=Exe;
+  //get scaling factor - this is an uint32, e.g. 1,2,3
+  AProcess.Parameters.Add('get');
+  AProcess.Parameters.Add('org.gnome.desktop.interface');
+  AProcess.Parameters.Add('scaling-factor');
+  AProcess.Options := AProcess.Options + [poWaitOnExit, poUsePipes];
+  AProcess.Execute;
+  if (AProcess.ExitCode = 0) then begin
+     AStringList := TStringList.Create;
+     AStringList.LoadFromStream(AProcess.Output);
+     if AStringList.Count > 0 then begin  //"uint32 2"
+    	writeln('gsettings get org.gnome.desktop.interface scaling-factor : '+AStringList.Strings[0]);
+        Str := ExtractDelimited(2, AStringList.Strings[0],[' ']); //remove "uint32 "
+        result := strtofloatdef(Str, 1.0);
+        if result <= 0 then result := 1; //some machines report "0" for 1
+     end;
+     AStringList.Free;
+  end;
+  //get fractional text-scaling-factor, range 1..1.9999, e.g. "1.5" - total zoom is scaling-factor*text-scaling-factor
+  AProcess.Parameters.Clear;
+  AProcess.Parameters.Add('get');
+  AProcess.Parameters.Add('org.gnome.desktop.interface');
+  AProcess.Parameters.Add('text-scaling-factor');
+  AProcess.Options := AProcess.Options + [poWaitOnExit, poUsePipes];
+  AProcess.Execute;
+  if (AProcess.ExitCode = 0) then begin
+     AStringList := TStringList.Create;
+     AStringList.LoadFromStream(AProcess.Output);
+     if AStringList.Count > 0 then
+        writeln('gsettings get org.gnome.desktop.interface text-scaling-factor : '+AStringList.Strings[0]);
+        result := result * strtofloatdef(AStringList.Strings[0], 1.0);
+     if result <= 0 then result := 1; //some machines report "0" for 1
+     AStringList.Free;
+  end;
+  AProcess.Free;
+  writeln(format('Detected screen scaling %g', [result]));
+end;
+
+procedure HighDPILinux(FontSz: integer);
 var
   i, FromDPI: integer;
+  scale: single = 1;
 begin
-  if (fontSize <= 13) then exit;
-  FromDPI :=  round(14/fontSize * 96);
+   writeln('Use "-D 0" for no scaling, "-D -2" for XRANDR, "-D -1" for gsettings or positive value ("-D 1.25") for custom scaling');
+   if (paramcount > 1) then begin
+     i := 1;
+     while (i < (paramcount)) do begin
+         //writeln(upcase(paramstr(i))) ;
+         if upcase(paramstr(i)) = '-D' then begin
+            scale := strtofloatdef(paramstr(i+1),1);
+            writeln(format('Custom scaling %g', [scale]));
+            if scale = 0 then exit;
+         end;
+         i := i + 1;
+     end;
+  end;
+  if (scale < -1.99) then
+     scale := getFontScaleXRANDR();
+  if (scale < 0) then begin
+    {$IFDEF LINUX}
+    scale := getFontScale(FontSz);
+    //if scale = 1 then  scale := getFontScaleXRANDR();
+    {$ENDIF}
+  end;
+  if  (scale <= 0) then exit;
+  FromDPI := round( 96/scale);
+  writeln(format('Scale .. %g dpi %d',[scale, FromDPI]));
   for i := 0 to Screen.FormCount - 1 do
     ScaleDPI(Screen.Forms[i], FromDPI);
+  writeln('Done scaling ...');
 end;
+
+procedure ScaleDPIX(Control: TControl; FromDPI: integer);
+begin
+  //writeln('Form scaling to '+inttostr(gLinuxEffectiveDPI)+' DPI from ' + inttostr(FromDPI));
+  //if ((gLinuxEffectiveDPI = FromDPI) or (gLinuxEffectiveDPI < 2)) then exit;
+  ScaleDPI(Control, FromDPI);
+end;
+{$ELSE}
+
+{$ENDIF}
 
 procedure HighDPI(FromDPI: integer);
 var
@@ -101,6 +257,5 @@ begin
   for i := 0 to Screen.FormCount - 1 do
     ScaleDPI(Screen.Forms[i], FromDPI);
 end;
-
 end.
 
