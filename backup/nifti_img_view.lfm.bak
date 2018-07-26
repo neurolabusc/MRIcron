@@ -5,6 +5,7 @@ object ImgForm: TImgForm
   Width = 1018
   ActiveControl = ControlPanel
   AllowDropFiles = True
+  AutoSize = True
   Caption = 'MRIcron'
   ClientHeight = 374
   ClientWidth = 1018

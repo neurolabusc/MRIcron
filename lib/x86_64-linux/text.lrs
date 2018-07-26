@@ -1,0 +1,15 @@
+LazarusResources.Add('TTextForm','FORMDATA',[
+  'TPF0'#9'TTextForm'#8'TextForm'#4'Left'#3#161#1#6'Height'#3#224#1#3'Top'#3#195
+  +#0#5'Width'#3#184#2#18'HorzScrollBar.Page'#3#183#2#18'VertScrollBar.Page'#3
+  +#203#1#13'ActiveControl'#7#5'MemoT'#7'Caption'#6#22'Descriptive Statistics'
+  +#12'ClientHeight'#3#224#1#11'ClientWidth'#3#184#2#11'Font.Height'#2#245#4'Me'
+  +'nu'#7#9'MainMenu1'#8'OnCreate'#7#10'FormCreate'#10'LCLVersion'#6#8'0.9.30.2'
+  +#0#5'TMemo'#5'MemoT'#4'Left'#2#0#6'Height'#3#224#1#3'Top'#2#0#5'Width'#3#184
+  +#2#5'Align'#7#8'alClient'#10'ScrollBars'#7#10'ssVertical'#8'TabOrder'#2#0#0#0
+  +#9'TMainMenu'#9'MainMenu1'#4'left'#2'p'#3'top'#2#10#0#9'TMenuItem'#5'File1'#7
+  +'Caption'#6#4'File'#0#9'TMenuItem'#5'Save1'#7'Caption'#6#4'Save'#7'OnClick'#7
+  +#10'Save1Click'#0#0#9'TMenuItem'#12'Closewindow1'#7'Caption'#6#12'Close wind'
+  +'ow'#7'OnClick'#7#17'Closewindow1Click'#0#0#0#9'TMenuItem'#5'Copy1'#7'Captio'
+  +'n'#6#4'Edit'#0#9'TMenuItem'#5'Copy2'#7'Caption'#6#4'Copy'#7'OnClick'#7#10'C'
+  +'opy2Click'#0#0#0#0#0
+]);

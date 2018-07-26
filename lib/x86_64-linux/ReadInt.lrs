@@ -1,0 +1,15 @@
+LazarusResources.Add('TReadIntForm','FORMDATA',[
+  'TPF0'#12'TReadIntForm'#11'ReadIntForm'#3'Tag'#3'A'#1#4'Left'#3'N'#1#6'Height'
+  +#2'_'#3'Top'#3#206#0#5'Width'#3'l'#2#13'ActiveControl'#7#11'ReadIntEdit'#11
+  +'BorderStyle'#7#8'bsDialog'#7'Caption'#6#16'Integer required'#12'ClientHeigh'
+  +'t'#2'_'#11'ClientWidth'#3'l'#2#21'Constraints.MaxHeight'#2'_'#20'Constraint'
+  +'s.MaxWidth'#3'l'#2#21'Constraints.MinHeight'#2'_'#20'Constraints.MinWidth'#3
+  +'l'#2#8'OnCreate'#7#10'FormCreate'#6'OnShow'#7#8'FormShow'#8'Position'#7#14
+  +'poScreenCenter'#10'LCLVersion'#6#7'1.6.0.4'#0#6'TLabel'#12'ReadIntLabel'#4
+  +'Left'#2#8#6'Height'#2#16#3'Top'#2#15#5'Width'#2'a'#9'Alignment'#7#14'taRigh'
+  +'tJustify'#7'Caption'#6#14'Enter a number'#11'ParentColor'#8#0#0#9'TSpinEdit'
+  +#11'ReadIntEdit'#4'Left'#3#208#1#6'Height'#2#16#3'Top'#2#12#5'Width'#3#136#0
+  +#8'MaxValue'#2#0#8'TabOrder'#2#1#0#0#7'TButton'#5'OKBtn'#4'Left'#3#232#1#6'H'
+  +'eight'#2#25#3'Top'#2'7'#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#4#7'C'
+  +'aption'#6#2'OK'#7'OnClick'#7#10'OKBtnClick'#8'TabOrder'#2#0#0#0#0
+]);

@@ -1,0 +1,26 @@
+LazarusResources.Add('TFilterROIform','FORMDATA',[
+  'TPF0'#14'TFilterROIform'#13'FilterROIform'#4'Left'#3'9'#2#6'Height'#3#190#0#3
+  +'Top'#2'k'#5'Width'#3#240#0#18'HorzScrollBar.Page'#3#209#0#18'VertScrollBar.'
+  +'Page'#3#196#0#13'ActiveControl'#7#10'MinROIfilt'#11'BorderIcons'#11#12'biSy'
+  +'stemMenu'#0#11'BorderStyle'#7#12'bsToolWindow'#7'Caption'#6#16'Intensity fi'
+  +'lter'#12'ClientHeight'#3#190#0#11'ClientWidth'#3#240#0#21'Constraints.MaxHe'
+  +'ight'#3#190#0#20'Constraints.MaxWidth'#3#240#0#21'Constraints.MinHeight'#3
+  +#190#0#7'OnClose'#7#9'FormClose'#6'OnShow'#7#8'FormShow'#8'Position'#7#14'po'
+  +'ScreenCenter'#10'LCLVersion'#6#7'1.6.0.2'#0#6'TLabel'#7'Label42'#4'Left'#2#4
+  +#6'Height'#2#17#3'Top'#2#14#5'Width'#2'e'#7'Caption'#6#14'Min. Threshold'#11
+  +'ParentColor'#8#0#0#12'TSpeedButton'#12'FilterROIBtn'#4'Left'#2#4#6'Height'#2
+  +#25#3'Top'#3#143#0#5'Width'#3#221#0#7'Caption'#6#27'Filter VOI with highligh'
+  +'ted'#7'OnClick'#7#17'FilterROIBtnClick'#8'ShowHint'#9#14'ParentShowHint'#8#0
+  +#0#6'TLabel'#7'Label43'#4'Left'#2#4#6'Height'#2#17#3'Top'#2'1'#5'Width'#2'h'
+  +#7'Caption'#6#14'Max. Threshold'#12'Font.CharSet'#2#13#11'ParentColor'#8#10
+  +'ParentFont'#8#0#0#12'TSpeedButton'#15'Filter2NIfTIBtn'#3'Tag'#3#128#0#4'Lef'
+  +'t'#2#4#6'Height'#2#25#3'Top'#2'k'#5'Width'#3#221#0#7'Caption'#6' Save highl'
+  +'ighted as NIfTI or VOI'#7'OnClick'#7#20'Filter2NIfTIBtnClick'#8'ShowHint'#9
+  +#14'ParentShowHint'#8#0#0#6'TLabel'#12'FiltROILabel'#4'Left'#2#8#6'Height'#2
+  +#17#3'Top'#2'Q'#5'Width'#2#28#7'Caption'#6#7'       '#11'ParentColor'#8#0#0#9
+  +'TSpinEdit'#10'MinROIfilt'#4'Left'#2'x'#6'Height'#2#27#3'Top'#2#7#5'Width'#2
+  +'@'#8'MaxValue'#3#254#0#8'OnChange'#7#16'MinROIfiltChange'#8'TabOrder'#2#0#5
+  +'Value'#2'd'#0#0#9'TSpinEdit'#10'MaxROIfilt'#4'Left'#2'x'#6'Height'#2#27#3'T'
+  +'op'#2'*'#5'Width'#2'@'#8'MaxValue'#3#255#0#8'OnChange'#7#16'MinROIfiltChang'
+  +'e'#8'TabOrder'#2#1#5'Value'#3#255#0#0#0#0
+]);

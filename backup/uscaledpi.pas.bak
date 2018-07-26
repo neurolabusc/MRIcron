@@ -49,7 +49,7 @@ begin
     Top :=ScaleY(Top, FromDPI);
 
     {$ENDIF}
-    //if not (Control is TOpenGLControl) then
+    if not (Control is TOpenGLControl) then
        Width := ScaleX(Width, FromDPI);
     if (Control is TStringGrid) then begin
        (Control as TStringGrid).DefaultColWidth := ScaleY((Control as TStringGrid).DefaultColWidth, FromDPI);

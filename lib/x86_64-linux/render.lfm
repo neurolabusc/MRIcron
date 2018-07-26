@@ -1,0 +1,517 @@
+object RenderForm: TRenderForm
+  Left = 477
+  Height = 512
+  Top = 264
+  Width = 955
+  ActiveControl = RenderBar
+  Caption = 'Volume Render'
+  ClientHeight = 512
+  ClientWidth = 955
+  Menu = MainMenu1
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnHide = FormHide
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '1.9.0.0'
+  object RenderBar: TPanel
+    Left = 0
+    Height = 32
+    Top = 0
+    Width = 955
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 32
+    ClientWidth = 955
+    ParentFont = False
+    TabOrder = 0
+    OnClick = RenderBarClick
+    object Label4: TLabel
+      Left = 152
+      Height = 16
+      Top = 5
+      Width = 57
+      Caption = 'Elevation'
+      ParentColor = False
+      ParentFont = False
+    end
+    object Label1: TLabel
+      Left = 4
+      Height = 16
+      Top = 5
+      Width = 53
+      Caption = 'Azimuth'
+      ParentColor = False
+      ParentFont = False
+    end
+    object Label5: TLabel
+      Left = 616
+      Height = 16
+      Top = 5
+      Width = 63
+      Caption = 'Shading %'
+      ParentColor = False
+      ParentFont = False
+    end
+    object AzimuthEdit: TSpinEdit
+      Left = 72
+      Height = 16
+      Top = 6
+      Width = 72
+      Constraints.MinWidth = 70
+      Increment = 30
+      MaxValue = 360
+      OnChange = EditChange
+      ParentFont = False
+      TabOrder = 0
+      Value = 120
+    end
+    object ElevationEdit: TSpinEdit
+      Left = 216
+      Height = 16
+      Top = 6
+      Width = 72
+      Constraints.MinWidth = 70
+      Increment = 30
+      MaxValue = 180
+      MinValue = -180
+      OnChange = EditChange
+      ParentFont = False
+      TabOrder = 1
+      Value = 30
+    end
+    object BiasTrack: TTrackBar
+      Left = 352
+      Height = 30
+      Top = 2
+      Width = 120
+      Max = 100
+      OnChange = BiasTrackChange
+      Position = 50
+      TickStyle = tsNone
+      ParentFont = False
+      TabOrder = 2
+    end
+    object GainTrack: TTrackBar
+      Left = 480
+      Height = 30
+      Top = 2
+      Width = 120
+      Max = 100
+      OnChange = GainTrackChange
+      Position = 50
+      TickStyle = tsNone
+      ParentFont = False
+      TabOrder = 3
+    end
+    object ShadeEdit: TSpinEdit
+      Left = 692
+      Height = 16
+      Top = 6
+      Width = 72
+      Increment = 10
+      OnChange = EditChange
+      ParentFont = False
+      TabOrder = 4
+    end
+    object ClipTrack: TTrackBar
+      Left = 780
+      Height = 30
+      Top = 2
+      Width = 120
+      Max = 999
+      OnChange = ClipTrackChange
+      Position = 0
+      TickStyle = tsNone
+      ParentFont = False
+      TabOrder = 5
+    end
+    object RefreshToolbar: TToolBar
+      Left = 300
+      Height = 34
+      Top = 0
+      Width = 33
+      Align = alNone
+      AutoSize = True
+      ButtonHeight = 32
+      ButtonWidth = 32
+      Caption = 'RefreshToolbar'
+      Images = ImgForm.ImageList1
+      ImagesWidth = 28
+      ParentFont = False
+      TabOrder = 6
+      object RefreshBtn: TToolButton
+        Left = 1
+        Hint = 'Generate high-resolution rendering'
+        Top = 2
+        Caption = 'Rx'
+        ImageIndex = 11
+        OnClick = RefreshClick
+      end
+    end
+  end
+  object RenderPanel: TScrollBox
+    Left = 0
+    Height = 480
+    Top = 32
+    Width = 955
+    HorzScrollBar.Page = 14
+    VertScrollBar.Page = 14
+    Align = alClient
+    ClientHeight = 465
+    ClientWidth = 940
+    ParentFont = False
+    TabOrder = 1
+    object RenderImage: TImage
+      Tag = 2
+      Cursor = crCross
+      Left = 2
+      Height = 12
+      Top = 2
+      Width = 12
+      AutoSize = True
+      OnMouseDown = RenderImageMouseDown
+      OnMouseMove = RenderImageMouseMove
+      Stretch = True
+    end
+  end
+  object MainMenu1: TMainMenu
+    left = 16
+    top = 32
+    object FileMenu: TMenuItem
+      Caption = 'File'
+      object Settings1: TMenuItem
+        Caption = 'Open settings'
+      end
+      object Savesettings1: TMenuItem
+        Caption = 'Save settings...'
+        OnClick = Savesettings1Click
+      end
+      object Save1: TMenuItem
+        Caption = 'Save as bitmap...'
+        ShortCut = 16467
+        OnClick = Save1Click
+      end
+      object RotationBMPMenu: TMenuItem
+        Caption = 'Save Rotation Bitmaps'
+        OnClick = RotationBMPMenuClick
+      end
+      object SaveClipMenu: TMenuItem
+        Caption = 'Save clip bitmaps'
+        OnClick = SaveClipMenuClick
+      end
+      object Close1: TMenuItem
+        Caption = 'Close window'
+        ShortCut = 16471
+        OnClick = Close1Click
+      end
+    end
+    object Edit1: TMenuItem
+      Caption = 'Edit'
+      object Copy1: TMenuItem
+        Caption = 'Copy'
+        OnClick = Copy1Click
+      end
+    end
+    object Volume1: TMenuItem
+      Caption = 'Background'
+      object RenderBGSurfaceMenu: TMenuItem
+        Caption = 'Air/Skin Threshold'
+        object N1: TMenuItem
+          Caption = '0%'
+          GroupIndex = 119
+          RadioItem = True
+          OnClick = N1Click
+        end
+        object N101: TMenuItem
+          Tag = 25
+          Caption = '10%'
+          Checked = True
+          GroupIndex = 119
+          RadioItem = True
+          OnClick = N1Click
+        end
+        object N401: TMenuItem
+          Tag = 51
+          Caption = '20%'
+          GroupIndex = 119
+          RadioItem = True
+          OnClick = N1Click
+        end
+        object N601: TMenuItem
+          Tag = 76
+          Caption = '30%'
+          GroupIndex = 119
+          RadioItem = True
+          OnClick = N1Click
+        end
+        object N801: TMenuItem
+          Tag = 101
+          Caption = '40%'
+          GroupIndex = 119
+          RadioItem = True
+          OnClick = N1Click
+        end
+        object N403: TMenuItem
+          Tag = 128
+          Caption = '50%'
+          GroupIndex = 119
+          RadioItem = True
+          OnClick = N1Click
+        end
+        object N404: TMenuItem
+          Tag = 152
+          Caption = '60%'
+          GroupIndex = 119
+          RadioItem = True
+          OnClick = N1Click
+        end
+        object N405: TMenuItem
+          Tag = 178
+          Caption = '70%'
+          GroupIndex = 119
+          RadioItem = True
+          OnClick = N1Click
+        end
+      end
+      object RenderBGDepthMenu: TMenuItem
+        Caption = 'Search Depth'
+        object N1voxel1: TMenuItem
+          Tag = 1
+          Caption = '1 voxel'
+          Checked = True
+          GroupIndex = 122
+          RadioItem = True
+          OnClick = N1voxel1Click
+        end
+        object N2voxels1: TMenuItem
+          Tag = 2
+          Caption = '2 voxels'
+          GroupIndex = 122
+          RadioItem = True
+          OnClick = N1voxel1Click
+        end
+        object N4voxels1: TMenuItem
+          Tag = 4
+          Caption = '4 voxels'
+          GroupIndex = 122
+          RadioItem = True
+          OnClick = N1voxel1Click
+        end
+        object N8voxels1: TMenuItem
+          Tag = 8
+          Caption = '8 voxels'
+          GroupIndex = 122
+          RadioItem = True
+          OnClick = N1voxel1Click
+        end
+        object N16voxels1: TMenuItem
+          Tag = 12
+          Caption = '12 voxels'
+          GroupIndex = 122
+          RadioItem = True
+          OnClick = N1voxel1Click
+        end
+        object N16voxels: TMenuItem
+          Tag = 16
+          Caption = '16 voxels'
+          GroupIndex = 122
+          RadioItem = True
+          OnClick = N1voxel1Click
+        end
+        object Infinite1: TMenuItem
+          Tag = 2147483647
+          Caption = 'Infinite'
+          GroupIndex = 122
+          RadioItem = True
+          OnClick = N1voxel1Click
+        end
+        object MIPItem: TMenuItem
+          Caption = 'MIP'
+          GroupIndex = 122
+          RadioItem = True
+          OnClick = N1voxel1Click
+        end
+      end
+    end
+    object Overlay1: TMenuItem
+      Caption = 'Overlay'
+      object RenderOverlaySurfaceMenu: TMenuItem
+        Caption = 'Air/Skin Threshold'
+        object N01: TMenuItem
+          Caption = '0%'
+          Checked = True
+          GroupIndex = 120
+          RadioItem = True
+          OnClick = N01Click
+        end
+        object N102: TMenuItem
+          Tag = 25
+          Caption = '10%'
+          GroupIndex = 120
+          RadioItem = True
+          OnClick = N01Click
+        end
+        object N201: TMenuItem
+          Tag = 51
+          Caption = '20%'
+          GroupIndex = 120
+          RadioItem = True
+          OnClick = N01Click
+        end
+        object N301: TMenuItem
+          Tag = 76
+          Caption = '30%'
+          GroupIndex = 120
+          RadioItem = True
+          OnClick = N01Click
+        end
+        object N402: TMenuItem
+          Tag = 101
+          Caption = '40%'
+          GroupIndex = 120
+          RadioItem = True
+          OnClick = N01Click
+        end
+        object N501: TMenuItem
+          Tag = 128
+          Caption = '50%'
+          GroupIndex = 120
+          RadioItem = True
+          OnClick = N01Click
+        end
+        object N602: TMenuItem
+          Tag = 152
+          Caption = '60%'
+          GroupIndex = 120
+          RadioItem = True
+          OnClick = N01Click
+        end
+        object N701: TMenuItem
+          Tag = 178
+          Caption = '70%'
+          GroupIndex = 120
+          RadioItem = True
+          OnClick = N01Click
+        end
+      end
+      object RenderOverlayDepthMenu: TMenuItem
+        Caption = 'Search Depth'
+        object N1voxel2: TMenuItem
+          Tag = 1
+          Caption = '1 voxel'
+          Checked = True
+          GroupIndex = 122
+          RadioItem = True
+          OnClick = OverlayRenderDepthItem
+        end
+        object N2voxels2: TMenuItem
+          Tag = 2
+          Caption = '2 voxels'
+          GroupIndex = 122
+          RadioItem = True
+          OnClick = OverlayRenderDepthItem
+        end
+        object N4voxels2: TMenuItem
+          Tag = 4
+          Caption = '4 voxels'
+          GroupIndex = 122
+          RadioItem = True
+          OnClick = OverlayRenderDepthItem
+        end
+        object N8voxels2: TMenuItem
+          Tag = 8
+          Caption = '8 voxels'
+          GroupIndex = 122
+          RadioItem = True
+          OnClick = OverlayRenderDepthItem
+        end
+        object N12voxels1: TMenuItem
+          Tag = 12
+          Caption = '12 voxels'
+          GroupIndex = 122
+          RadioItem = True
+          OnClick = OverlayRenderDepthItem
+        end
+        object N16voxels2: TMenuItem
+          Tag = 16
+          Caption = '16 voxels'
+          GroupIndex = 122
+          RadioItem = True
+          OnClick = OverlayRenderDepthItem
+        end
+        object Infinite2: TMenuItem
+          Tag = 2147483647
+          Caption = 'Infinite'
+          GroupIndex = 122
+          RadioItem = True
+          OnClick = OverlayRenderDepthItem
+        end
+      end
+      object Search1: TMenuItem
+        Caption = 'Search'
+        object BehindBG1: TMenuItem
+          Caption = 'Any Depth'
+          GroupIndex = 17
+          RadioItem = True
+          OnClick = SetSearch
+        end
+        object Infront1: TMenuItem
+          Tag = 1
+          Caption = 'Below BG surface [max intensity]'
+          GroupIndex = 17
+          RadioItem = True
+          OnClick = SetSearch
+        end
+        object Anydepth1: TMenuItem
+          Tag = 2
+          Caption = 'Infront/below BG surface'
+          GroupIndex = 17
+          RadioItem = True
+          OnClick = SetSearch
+        end
+      end
+    end
+    object Quality1: TMenuItem
+      Caption = 'View'
+      object CutoutMenu: TMenuItem
+        Caption = 'Cutout'
+        OnClick = Cutout1Click
+      end
+      object MenuItem1: TMenuItem
+        Caption = '-'
+      end
+      object RenderSmoothBG: TMenuItem
+        Caption = 'Smooth Background'
+        Checked = True
+        Hint = 'Blur rendering'
+        OnClick = RenderSmoothBGClick
+      end
+      object RenderSmoothOverlay: TMenuItem
+        Caption = 'Smooth Overlay'
+        Checked = True
+        Hint = 'Blur rendering'
+        OnClick = RenderSmoothBGClick
+      end
+      object RenderPreciseInterpolation: TMenuItem
+        Caption = 'Precise interpolation'
+        Hint = 'Use trilinear interpolation [slow]'
+        OnClick = RenderPreciseInterpolationClick
+      end
+      object N2: TMenuItem
+        Caption = '-'
+      end
+      object FlipLRcheck: TMenuItem
+        Caption = 'Flip L/R'
+        OnClick = RenderSmoothClick
+      end
+    end
+  end
+  object RenderRefreshTimer: TTimer
+    Enabled = False
+    Interval = 150
+    OnTimer = RenderRefreshTimerTimer
+    left = 48
+    top = 32
+  end
+end

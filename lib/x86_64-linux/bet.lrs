@@ -1,0 +1,20 @@
+LazarusResources.Add('TBETForm','FORMDATA',[
+  'TPF0'#8'TBETForm'#7'BETForm'#4'Left'#3#30#2#6'Height'#3'9'#1#3'Top'#3'I'#1#5
+  +'Width'#3'!'#2#13'ActiveControl'#7#6'Panel1'#7'Caption'#6#16'Brain extractio'
+  +'n'#12'ClientHeight'#3'9'#1#11'ClientWidth'#3'!'#2#21'Constraints.MaxHeight'
+  +#3'9'#1#20'Constraints.MaxWidth'#3'!'#2#21'Constraints.MinHeight'#3'9'#1#20
+  +'Constraints.MinWidth'#3'!'#2#8'Position'#7#14'poScreenCenter'#10'LCLVersion'
+  +#6#7'1.9.0.0'#0#5'TMemo'#5'Memo1'#4'Left'#2#0#6'Height'#3#25#1#3'Top'#2' '#5
+  +'Width'#3'!'#2#5'Align'#7#8'alClient'#8'TabOrder'#2#0#0#0#6'TPanel'#6'Panel1'
+  +#4'Left'#2#0#6'Height'#2' '#3'Top'#2#0#5'Width'#3'!'#2#5'Align'#7#5'alTop'#10
+  +'BevelOuter'#7#6'bvNone'#12'ClientHeight'#2' '#11'ClientWidth'#3'!'#2#8'TabO'
+  +'rder'#2#1#0#12'TSpeedButton'#5'GoBtn'#4'Left'#2#8#6'Height'#2#25#3'Top'#2#2
+  +#5'Width'#2'X'#7'Caption'#6#2'Go'#7'OnClick'#7#10'GoBtnClick'#0#0#12'TSpeedB'
+  +'utton'#8'AboutBtn'#4'Left'#2'd'#6'Height'#2#25#3'Top'#2#2#5'Width'#2'X'#7'C'
+  +'aption'#6#5'About'#7'OnClick'#7#17'SpeedButton2Click'#0#0#12'TSpeedButton'#7
+  +'CropBtn'#4'Left'#3#192#0#6'Height'#2#25#3'Top'#2#2#5'Width'#2'X'#7'Caption'
+  +#6#10'Crop Edges'#7'OnClick'#7#12'CropBtnClick'#0#0#14'TFloatSpinEdit'#14'Sm'
+  +'oothnessEdit'#4'Left'#3'4'#1#6'Height'#2#16#3'Top'#2#5#5'Width'#2']'#8'MaxV'
+  +'alue'#2#1#8'MinValue'#2#0#8'TabOrder'#2#0#5'Value'#5#0#0#0#0#0#0#0#128#254
+  +'?'#0#0#0#0
+]);
