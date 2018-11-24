@@ -4,9 +4,8 @@
 #    lazbuild -B filename.lpr
 
 #compile dcm2niix
-cd ~/Documents/cocoa/dcm2niix/console
-#g++ -O3 -dead_strip -I. main_console.cpp nii_foreign.cpp nii_dicom.cpp nifti1_io_core.cpp nii_ortho.cpp nii_dicom_batch.cpp jpg_0XC3.cpp ujpeg.cpp -o dcm2niix  -I/usr/local/lib -I/usr/local/include/openjpeg-2.1 /usr/local/lib/libopenjp2.a
-g++-8 -O3 -dead_strip -I. -std=c++14 -DmyEnableJPEGLS  charls/jpegls.cpp charls/jpegmarkersegment.cpp charls/interface.cpp  charls/jpegstreamwriter.cpp charls/jpegstreamreader.cpp main_console.cpp nii_foreign.cpp nii_dicom.cpp nifti1_io_core.cpp nii_ortho.cpp nii_dicom_batch.cpp jpg_0XC3.cpp ujpeg.cpp -o dcm2niix  -I/usr/local/lib -I/usr/local/include/openjpeg-2.1 /usr/local/lib/libopenjp2.a
+cd ~/dcm2niix/console
+g++ -O3 -dead_strip -I. main_console.cpp nii_foreign.cpp nii_dicom.cpp nifti1_io_core.cpp nii_ortho.cpp nii_dicom_batch.cpp jpg_0XC3.cpp ujpeg.cpp -o dcm2niix  -I/usr/local/lib -I/usr/local/include/openjpeg-2.1 /usr/local/lib/libopenjp2.a
 cp dcm2niix /Users/rorden/Documents/mricron/MRIcron/dcm2niix
 cp dcm2niix /Users/rorden/Documents/mricron/MRIcron/MRIcron.app/Contents/Resources/dcm2niix
 
@@ -47,6 +46,7 @@ SKIPNPM
 #lazbuild ./mricron.lpr --cpu=x86_64 --ws=cocoa --compiler="/usr/local/bin/ppcx64"
 #Current FPC 3.0.0 can not compile on OSX 10.11 El Capitan, so use 3.1.1
 #/Users/rorden/lazarus/lazbuild ./mricron.lpr --cpu=x86_64 --ws=cocoa --compiler="/usr/local/lib/fpc/3.1.1/ppcx64"
+
 /Users/rorden/lazarus/lazbuild ./mricron.lpr --cpu=x86_64 --ws=cocoa
 
 strip ./mricron

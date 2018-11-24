@@ -1,44 +1,61 @@
 object ReadIntForm: TReadIntForm
   Tag = 321
   Left = 334
-  Height = 95
+  Height = 68
   Top = 206
   Width = 620
   ActiveControl = ReadIntEdit
+  AutoSize = True
   BorderStyle = bsDialog
+  BorderWidth = 4
   Caption = 'Integer required'
-  ClientHeight = 95
+  ClientHeight = 68
   ClientWidth = 620
-  Constraints.MaxHeight = 95
-  Constraints.MaxWidth = 620
-  Constraints.MinHeight = 95
   Constraints.MinWidth = 620
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '2.1.0.0'
   object ReadIntLabel: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ReadIntEdit
+    AnchorSideTop.Side = asrCenter
     Left = 8
     Height = 16
-    Top = 15
-    Width = 97
+    Top = 10
+    Width = 93
     Alignment = taRightJustify
+    BorderSpacing.Left = 4
     Caption = 'Enter a number'
     ParentColor = False
+    OnClick = ReadIntLabelClick
   end
   object ReadIntEdit: TSpinEdit
-    Left = 464
-    Height = 16
-    Top = 12
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 476
+    Height = 21
+    Top = 8
     Width = 136
+    Anchors = [akTop, akRight]
+    BorderSpacing.Top = 4
+    BorderSpacing.Right = 4
     MaxValue = 0
     TabOrder = 1
   end
   object OKBtn: TButton
-    Left = 488
+    AnchorSideTop.Control = ReadIntEdit
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 537
     Height = 25
-    Top = 55
+    Top = 33
     Width = 75
+    Anchors = [akTop, akRight]
+    BorderSpacing.Top = 4
+    BorderSpacing.Right = 4
     BorderSpacing.InnerBorder = 4
     Caption = 'OK'
     OnClick = OKBtnClick

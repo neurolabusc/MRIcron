@@ -1,7 +1,7 @@
 object RenderForm: TRenderForm
-  Left = 477
+  Left = 222
   Height = 512
-  Top = 264
+  Top = 228
   Width = 955
   ActiveControl = RenderBar
   Caption = 'Volume Render'
@@ -13,51 +13,72 @@ object RenderForm: TRenderForm
   OnHide = FormHide
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.9.0.0'
+  LCLVersion = '2.1.0.0'
   object RenderBar: TPanel
     Left = 0
-    Height = 32
+    Height = 33
     Top = 0
     Width = 955
     Align = alTop
+    AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 32
+    ClientHeight = 33
     ClientWidth = 955
     ParentFont = False
     TabOrder = 0
     OnClick = RenderBarClick
     object Label4: TLabel
-      Left = 152
+      AnchorSideLeft.Control = AzimuthEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = AzimuthEdit
+      AnchorSideTop.Side = asrCenter
+      Left = 130
       Height = 16
-      Top = 5
-      Width = 57
+      Top = 8
+      Width = 55
+      BorderSpacing.Left = 4
       Caption = 'Elevation'
       ParentColor = False
       ParentFont = False
     end
     object Label1: TLabel
-      Left = 4
+      AnchorSideLeft.Control = RenderBar
+      AnchorSideTop.Control = AzimuthEdit
+      AnchorSideTop.Side = asrCenter
+      Left = 2
       Height = 16
-      Top = 5
-      Width = 53
+      Top = 8
+      Width = 50
+      BorderSpacing.Left = 2
       Caption = 'Azimuth'
       ParentColor = False
       ParentFont = False
     end
     object Label5: TLabel
-      Left = 616
+      AnchorSideLeft.Control = GainTrack
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = AzimuthEdit
+      AnchorSideTop.Side = asrCenter
+      Left = 548
       Height = 16
-      Top = 5
-      Width = 63
+      Top = 8
+      Width = 64
+      BorderSpacing.Left = 4
       Caption = 'Shading %'
       ParentColor = False
       ParentFont = False
     end
     object AzimuthEdit: TSpinEdit
-      Left = 72
-      Height = 16
+      AnchorSideLeft.Control = Label1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = RenderBar
+      AnchorSideTop.Side = asrCenter
+      Left = 54
+      Height = 21
       Top = 6
       Width = 72
+      BorderSpacing.Left = 2
+      BorderSpacing.Top = 2
       Constraints.MinWidth = 70
       Increment = 30
       MaxValue = 360
@@ -67,10 +88,15 @@ object RenderForm: TRenderForm
       Value = 120
     end
     object ElevationEdit: TSpinEdit
-      Left = 216
-      Height = 16
+      AnchorSideLeft.Control = Label4
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = AzimuthEdit
+      AnchorSideTop.Side = asrCenter
+      Left = 187
+      Height = 21
       Top = 6
       Width = 72
+      BorderSpacing.Left = 2
       Constraints.MinWidth = 70
       Increment = 30
       MaxValue = 180
@@ -81,58 +107,83 @@ object RenderForm: TRenderForm
       Value = 30
     end
     object BiasTrack: TTrackBar
-      Left = 352
+      AnchorSideLeft.Control = RefreshToolbar
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = RenderBar
+      AnchorSideTop.Side = asrCenter
+      Left = 300
       Height = 30
-      Top = 2
+      Top = 1
       Width = 120
       Max = 100
       OnChange = BiasTrackChange
       Position = 50
       TickStyle = tsNone
+      BorderSpacing.Left = 4
       ParentFont = False
       TabOrder = 2
     end
     object GainTrack: TTrackBar
-      Left = 480
+      AnchorSideLeft.Control = BiasTrack
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = RenderBar
+      AnchorSideTop.Side = asrCenter
+      Left = 424
       Height = 30
-      Top = 2
+      Top = 1
       Width = 120
       Max = 100
       OnChange = GainTrackChange
       Position = 50
       TickStyle = tsNone
+      BorderSpacing.Left = 4
       ParentFont = False
       TabOrder = 3
     end
     object ShadeEdit: TSpinEdit
-      Left = 692
-      Height = 16
+      AnchorSideLeft.Control = Label5
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = AzimuthEdit
+      AnchorSideTop.Side = asrCenter
+      Left = 614
+      Height = 21
       Top = 6
       Width = 72
+      BorderSpacing.Left = 2
       Increment = 10
       OnChange = EditChange
       ParentFont = False
       TabOrder = 4
     end
     object ClipTrack: TTrackBar
-      Left = 780
+      AnchorSideLeft.Control = ShadeEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = AzimuthEdit
+      AnchorSideTop.Side = asrCenter
+      Left = 690
       Height = 30
-      Top = 2
+      Top = 1
       Width = 120
       Max = 999
       OnChange = ClipTrackChange
       Position = 0
       TickStyle = tsNone
+      BorderSpacing.Left = 4
       ParentFont = False
       TabOrder = 5
     end
     object RefreshToolbar: TToolBar
-      Left = 300
+      AnchorSideLeft.Control = ElevationEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = RenderBar
+      AnchorSideTop.Side = asrCenter
+      Left = 263
       Height = 34
-      Top = 0
+      Top = -1
       Width = 33
       Align = alNone
       AutoSize = True
+      BorderSpacing.Left = 4
       ButtonHeight = 32
       ButtonWidth = 32
       Caption = 'RefreshToolbar'
@@ -152,14 +203,14 @@ object RenderForm: TRenderForm
   end
   object RenderPanel: TScrollBox
     Left = 0
-    Height = 480
-    Top = 32
+    Height = 479
+    Top = 33
     Width = 955
     HorzScrollBar.Page = 14
     VertScrollBar.Page = 14
     Align = alClient
-    ClientHeight = 465
-    ClientWidth = 940
+    ClientHeight = 477
+    ClientWidth = 953
     ParentFont = False
     TabOrder = 1
     object RenderImage: TImage

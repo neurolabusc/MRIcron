@@ -1,13 +1,13 @@
 object ImgForm: TImgForm
-  Left = 162
-  Height = 401
-  Top = 212
-  Width = 1018
+  Left = 145
+  Height = 480
+  Top = 158
+  Width = 1135
   ActiveControl = ControlPanel
   AllowDropFiles = True
   Caption = 'MRIcron'
-  ClientHeight = 374
-  ClientWidth = 1018
+  ClientHeight = 480
+  ClientWidth = 1135
   KeyPreview = True
   Menu = MainMenu1
   OnClose = FormClose
@@ -19,17 +19,19 @@ object ImgForm: TImgForm
   OnResize = FormResize
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.9.0.0'
+  LCLVersion = '2.1.0.0'
   object ControlPanel: TPanel
     Tag = 1
     Left = 0
-    Height = 36
+    Height = 38
     Top = 0
-    Width = 1018
+    Width = 1135
     Align = alTop
+    AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 36
-    ClientWidth = 1018
+    BorderWidth = 1
+    ClientHeight = 38
+    ClientWidth = 1135
     ParentColor = False
     ParentFont = False
     ParentShowHint = False
@@ -38,22 +40,31 @@ object ImgForm: TImgForm
     OnClick = ControlPanelClick
     OnDblClick = ControlPanelDblClick
     object LayerPanel: TPanel
-      Left = 274
+      AnchorSideLeft.Control = SlicePanel
+      AnchorSideLeft.Side = asrBottom
+      Left = 364
       Height = 36
-      Top = 0
-      Width = 410
+      Top = 1
+      Width = 454
+      AutoSize = True
+      BorderSpacing.Left = 4
       BevelOuter = bvNone
       ClientHeight = 36
-      ClientWidth = 410
+      ClientWidth = 454
       ParentColor = False
       ParentFont = False
       TabOrder = 1
       object LayerDrop: TComboBox
-        Left = 0
-        Height = 25
-        Top = 6
-        Width = 104
-        ItemHeight = 0
+        AnchorSideLeft.Control = LayerPanel
+        AnchorSideTop.Control = LayerPanel
+        AnchorSideTop.Side = asrCenter
+        Left = 4
+        Height = 20
+        Top = 8
+        Width = 128
+        BorderSpacing.Left = 4
+        BorderSpacing.Top = 4
+        ItemHeight = 26
         ItemIndex = 0
         Items.Strings = (
           'Background'
@@ -68,10 +79,15 @@ object ImgForm: TImgForm
         Text = 'Background'
       end
       object MinWindowEdit: TFloatSpinEdit
-        Left = 144
-        Height = 29
-        Top = 6
+        AnchorSideLeft.Control = AutoContrastPanel
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = LayerDrop
+        AnchorSideTop.Side = asrCenter
+        Left = 174
+        Height = 21
+        Top = 8
         Width = 80
+        BorderSpacing.Left = 4
         DecimalPlaces = 5
         MaxValue = 9999999
         MinValue = -9999999
@@ -81,10 +97,15 @@ object ImgForm: TImgForm
         Value = 3
       end
       object MaxWindowEdit: TFloatSpinEdit
-        Left = 228
-        Height = 29
-        Top = 6
+        AnchorSideLeft.Control = MinWindowEdit
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = LayerDrop
+        AnchorSideTop.Side = asrCenter
+        Left = 258
+        Height = 21
+        Top = 8
         Width = 80
+        BorderSpacing.Left = 4
         DecimalPlaces = 5
         MaxValue = 9999999
         MinValue = -9999999
@@ -94,12 +115,16 @@ object ImgForm: TImgForm
         Value = 1
       end
       object LUTdrop: TComboBox
-        Left = 308
-        Height = 29
-        Top = 6
-        Width = 100
+        AnchorSideLeft.Control = MaxWindowEdit
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = LayerDrop
+        Left = 342
+        Height = 20
+        Top = 8
+        Width = 112
+        BorderSpacing.Left = 4
         DropDownCount = 66
-        ItemHeight = 0
+        ItemHeight = 26
         OnChange = LUTdropChange
         OnSelect = LUTdropSelect
         ParentFont = False
@@ -107,12 +132,20 @@ object ImgForm: TImgForm
         ShowHint = True
         Style = csDropDownList
         TabOrder = 3
+        Text = '0'
       end
       object AutoContrastPanel: TPanel
-        Left = 104
+        AnchorSideLeft.Control = LayerDrop
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = LayerPanel
+        AnchorSideTop.Side = asrCenter
+        Left = 134
         Height = 36
         Top = 0
         Width = 36
+        AutoSize = True
+        BorderSpacing.Left = 2
+        BorderSpacing.Top = 2
         BevelOuter = bvNone
         ClientHeight = 36
         ClientWidth = 36
@@ -123,7 +156,7 @@ object ImgForm: TImgForm
           Height = 36
           Top = 0
           Width = 36
-          Align = alClient
+          Align = alNone
           ButtonHeight = 32
           ButtonWidth = 32
           Caption = 'AutoContrastToolBar'
@@ -145,13 +178,18 @@ object ImgForm: TImgForm
       end
     end
     object ToolPanel: TPanel
-      Left = 820
+      AnchorSideLeft.Control = ViewPanel
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ControlPanel
+      Left = 960
       Height = 36
-      Top = 0
-      Width = 170
+      Top = 1
+      Width = 168
+      AutoSize = True
+      BorderSpacing.Left = 4
       BevelOuter = bvNone
       ClientHeight = 36
-      ClientWidth = 170
+      ClientWidth = 168
       ParentFont = False
       TabOrder = 0
       Visible = False
@@ -228,21 +266,27 @@ object ImgForm: TImgForm
       end
     end
     object ViewPanel: TPanel
-      Left = 688
+      AnchorSideLeft.Control = LayerPanel
+      AnchorSideLeft.Side = asrBottom
+      Left = 820
       Height = 36
-      Top = 0
+      Top = 1
       Width = 136
+      AutoSize = True
+      BorderSpacing.Left = 2
       BevelOuter = bvNone
       ClientHeight = 36
       ClientWidth = 136
       ParentFont = False
       TabOrder = 2
       object ViewToolBar: TToolBar
+        AnchorSideTop.Control = ViewPanel
+        AnchorSideTop.Side = asrCenter
         Left = 0
         Height = 36
         Top = 0
         Width = 136
-        Align = alClient
+        Align = alNone
         ButtonHeight = 32
         ButtonWidth = 32
         EdgeBorders = []
@@ -261,6 +305,8 @@ object ImgForm: TImgForm
           OnClick = LutFromZeroBtnClick
         end
         object ColorBarBtn: TToolButton
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Side = asrCenter
           Left = 33
           Hint = 'Draw color range '
           Top = 0
@@ -290,49 +336,71 @@ object ImgForm: TImgForm
       end
     end
     object SlicePanel: TPanel
-      Left = 0
-      Height = 36
-      Top = 0
-      Width = 274
+      AnchorSideTop.Control = ControlPanel
+      AnchorSideTop.Side = asrCenter
+      Left = 1
+      Height = 22
+      Top = 8
+      Width = 359
+      AutoSize = True
       BevelOuter = bvNone
-      ClientHeight = 36
-      ClientWidth = 274
+      ClientHeight = 22
+      ClientWidth = 359
       ParentFont = False
       TabOrder = 3
       object LabelX: TLabel
+        AnchorSideLeft.Control = SlicePanel
+        AnchorSideTop.Control = XViewEdit
+        AnchorSideTop.Side = asrCenter
         Left = 4
-        Height = 19
-        Top = 10
-        Width = 11
+        Height = 16
+        Top = 3
+        Width = 9
+        BorderSpacing.Left = 4
         Caption = 'X'
         ParentColor = False
         ParentFont = False
       end
       object LabelY: TLabel
-        Left = 74
-        Height = 19
-        Top = 10
-        Width = 10
+        AnchorSideLeft.Control = XViewEdit
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = XViewEdit
+        AnchorSideTop.Side = asrCenter
+        Left = 103
+        Height = 16
+        Top = 3
+        Width = 8
+        BorderSpacing.Left = 6
         Caption = 'Y'
         ParentColor = False
         ParentFont = False
       end
       object LabelZ: TLabel
-        Left = 141
-        Height = 19
-        Top = 10
-        Width = 11
+        AnchorSideLeft.Control = YViewEdit
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = XViewEdit
+        AnchorSideTop.Side = asrCenter
+        Left = 201
+        Height = 16
+        Top = 3
+        Width = 9
+        BorderSpacing.Left = 6
         Caption = 'Z'
         ParentColor = False
         ParentFont = False
       end
       object ZoomDrop: TComboBox
-        Left = 212
-        Height = 25
-        Top = 6
+        AnchorSideLeft.Control = ZViewEdit
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = XViewEdit
+        AnchorSideTop.Side = asrCenter
+        Left = 300
+        Height = 20
+        Top = 1
         Width = 59
+        BorderSpacing.Left = 6
         DropDownCount = 12
-        ItemHeight = 0
+        ItemHeight = 26
         Items.Strings = (
           'Fit'
           'Int'
@@ -353,23 +421,34 @@ object ImgForm: TImgForm
         ShowHint = True
         Style = csDropDownList
         TabOrder = 0
+        Text = '0'
       end
       object XViewEdit: TSpinEdit
-        Left = 18
-        Height = 29
-        Top = 9
-        Width = 52
+        AnchorSideLeft.Control = LabelX
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = SlicePanel
+        AnchorSideTop.Side = asrCenter
+        Left = 17
+        Height = 21
+        Top = 1
+        Width = 80
+        BorderSpacing.Left = 4
         MinValue = 1
         OnChange = XViewEditChange
         ParentFont = False
         TabOrder = 1
-        Value = 100
+        Value = 98
       end
       object YViewEdit: TSpinEdit
-        Left = 86
-        Height = 29
-        Top = 9
-        Width = 52
+        AnchorSideLeft.Control = LabelY
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = XViewEdit
+        AnchorSideTop.Side = asrCenter
+        Left = 115
+        Height = 21
+        Top = 1
+        Width = 80
+        BorderSpacing.Left = 4
         MinValue = 1
         OnChange = XViewEditChange
         ParentFont = False
@@ -377,10 +456,15 @@ object ImgForm: TImgForm
         Value = 30
       end
       object ZViewEdit: TSpinEdit
-        Left = 153
-        Height = 29
-        Top = 9
-        Width = 52
+        AnchorSideLeft.Control = LabelZ
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = XViewEdit
+        AnchorSideTop.Side = asrCenter
+        Left = 214
+        Height = 21
+        Top = 1
+        Width = 80
+        BorderSpacing.Left = 4
         MinValue = 1
         OnChange = XViewEditChange
         ParentFont = False
@@ -391,28 +475,28 @@ object ImgForm: TImgForm
   end
   object MagPanel: TPanel
     Left = 0
-    Height = 20
-    Top = 354
-    Width = 1018
+    Height = 16
+    Top = 464
+    Width = 1135
     Align = alBottom
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 20
-    ClientWidth = 1018
+    ClientHeight = 16
+    ClientWidth = 1135
     ParentFont = False
     TabOrder = 1
     object StatusLabel: TLabel
       Left = 0
-      Height = 19
+      Height = 16
       Top = 0
-      Width = 170
+      Width = 127
       Caption = '  No Images Loaded  '
       ParentColor = False
       ParentFont = False
     end
     object ProgressBar1: TProgressBar
-      Left = 906
-      Height = 20
+      Left = 1023
+      Height = 16
       Top = 0
       Width = 112
       Align = alRight
@@ -423,26 +507,27 @@ object ImgForm: TImgForm
   end
   object Panel1: TPanel
     Left = 0
-    Height = 318
-    Top = 36
-    Width = 1018
+    Height = 426
+    Top = 38
+    Width = 1135
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 318
-    ClientWidth = 1018
+    ClientHeight = 426
+    ClientWidth = 1135
     ParentFont = False
     TabOrder = 2
     object TriplePanel: TScrollBox
       Tag = 666
       Left = 0
-      Height = 318
+      Height = 426
       Top = 0
-      Width = 1018
+      Width = 1135
       HorzScrollBar.Page = 584
       VertScrollBar.Page = 190
       Align = alClient
-      ClientHeight = 314
-      ClientWidth = 1014
+      BorderStyle = bsNone
+      ClientHeight = 426
+      ClientWidth = 1135
       Constraints.MinWidth = 4
       Color = clBlack
       ParentColor = False

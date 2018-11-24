@@ -3,7 +3,9 @@ object AnatForm: TAnatForm
   Height = 27
   Top = 394
   Width = 360
+  AutoSize = True
   BorderStyle = bsDialog
+  BorderWidth = 4
   Caption = 'Landmarks'
   ClientHeight = 27
   ClientWidth = 360
@@ -11,12 +13,12 @@ object AnatForm: TAnatForm
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '1.9.0.0'
+  LCLVersion = '2.1.0.0'
   object ToolBar1: TToolBar
-    Left = 0
+    Left = 4
     Height = 22
-    Top = 0
-    Width = 360
+    Top = 4
+    Width = 352
     AutoSize = True
     ButtonHeight = 21
     ButtonWidth = 23
@@ -27,16 +29,16 @@ object AnatForm: TAnatForm
       Left = 1
       Height = 20
       Top = 2
-      Width = 38
+      Width = 37
       AutoSize = True
       Caption = 'Open'
       OnClick = OpenBtnClick
     end
     object SaveBtn: TSpeedButton
-      Left = 39
+      Left = 38
       Height = 20
       Top = 2
-      Width = 32
+      Width = 33
       AutoSize = True
       Caption = 'Save'
       OnClick = SaveBtnClick
@@ -47,34 +49,35 @@ object AnatForm: TAnatForm
       Top = 2
       Width = 145
       DropDownCount = 24
-      ItemHeight = 0
+      ItemHeight = 26
       OnChange = ComboBox1Change
       Style = csDropDownList
       TabOrder = 0
+      Text = '0'
     end
     object AddBtn: TSpeedButton
       Left = 216
       Height = 20
       Top = 2
-      Width = 29
+      Width = 28
       AutoSize = True
       Caption = 'Add'
       OnClick = AddBtnClick
     end
     object UpdateBtn: TSpeedButton
-      Left = 245
+      Left = 244
       Height = 20
       Top = 2
-      Width = 49
+      Width = 48
       AutoSize = True
       Caption = 'Update'
       OnClick = UpdateBtnClick
     end
     object DeleteBtn: TSpeedButton
-      Left = 294
+      Left = 292
       Height = 20
       Top = 2
-      Width = 44
+      Width = 43
       AutoSize = True
       Caption = 'Delete'
       OnClick = DeleteBtnClick

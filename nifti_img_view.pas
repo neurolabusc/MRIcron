@@ -1,5 +1,6 @@
 unit nifti_img_view;
   {$mode delphi}
+{$DEFINE DICOMdrop} //drag and drop DICOM
 interface
 {$IFDEF UNIX}
 		{$IFNDEF ENDIAN_BIG}{$DEFINE COMPILEYOKE}{$ENDIF} //not supported on PPC
@@ -18,6 +19,7 @@ uses
 {$IFDEF COMPILEYOKE}
 yokesharemem,
 {$ENDIF}
+{$IFDEF DICOMdrop} dcm_load, {$ENDIF}
 {$IFDEF FPC} fphttpclient, strutils, {$ENDIF}
 LResources, fx8, cpucount, SysUtils, Classes, Graphics, Controls, Forms,
 Dialogs, Menus, ComCtrls, ExtCtrls, StdCtrls, GraphicsMathLibrary, ClipBrd,
@@ -715,6 +717,7 @@ end;
 procedure TImgForm.SetIniMenus;
 begin
   XBarBtn.Down := gBGImg.XBarVisible;
+  CrossHair1.Checked:= XBarBtn.Down;
   YokeMenu.Checked := gYoke;
   if (gBGImg.StretchQuality = sqLow) then
     Menu2DSmooth.checked := false
@@ -1459,11 +1462,22 @@ end;
 function TImgForm.OpenAndDisplayImg(var lFilename: string; lAdd2MRU: boolean): boolean;
 var
    lVal: integer;
+   x: string;
+   isTempNii: boolean = false;
 begin
 	 Result := false;
-
+         {$IFDEF DICOMdrop}
+         if not IsNIfTIHdrExt(lFilename) then begin
+            x := dcm2niiForm.FindDicom2niixPath('');
+            if fileexists(x) then begin
+                lFilename := dcm2Nifti(x, lFilename);
+                if fileexists(lFilename) and (lFilename <> x) then
+                   isTempNii := true;
+            end;
+         end;
+         {$ENDIF}
+         if (DirectoryExists(lFilename)) then exit;
          if (FSize(lFilename)) < 348 then exit; //to small to be a header or DICOM image
-
 	 if not HdrForm.OpenAndDisplayHdr(lFilename,gMRIcroOverlay[kBGOverlayNum]) then exit;
 
 
@@ -1517,6 +1531,8 @@ begin
   {$ENDIF}
   //showmessage(lFilename+' 666  '+ChangeFileext(lFilename,'.anat'));
    AnatForm.OpenAnat( ChangeFileextx(lFilename,'.anat'));
+  if isTempNii then
+     deletefile(lFilename);
 end; //OpenAndDisplayImg
 
 {$IFNDEF FPC}
@@ -1577,6 +1593,7 @@ begin
 	 case (Sender as TMenuItem).Tag of
 		  0: begin
                           XBarBtn.Down := not XBarBtn.Down;
+                          CrossHair1.Checked := XBarBtn.Down;
                       {$IFDEF Darwin} XBarbtnClick(nil); exit;{$ENDIF}
                   end;
 		  2: PenBtn.Down := true;
@@ -1812,7 +1829,9 @@ begin
 	 LoadMonochromeLUT(lInc,gBGImg,gMRIcroOverlay[kVOIOverlayNum]);
 	 SetBGImgDefaults(gBGImg);
 	 CloseImagesClick(nil);
-	 gColorSchemeDir := extractfilepath(paramstr(0))+'lut';
+         gColorSchemeDir := extractfilepath(paramstr(0))+'Resources'+pathdelim+'lut';
+	 if not fileexists(gColorSchemeDir) then
+            gColorSchemeDir := extractfilepath(paramstr(0))+'lut';
          {$IFDEF Darwin}
          if not fileexists(gColorSchemeDir) then
             gColorSchemeDir := AppDir + 'lut';
@@ -1836,7 +1855,9 @@ begin
          YokeMenu.visible := false;
          {$ENDIF}
 {$ENDIF}
-	 gTemplateDir := extractfilepath(paramstr(0))+'templates';
+     gTemplateDir := extractfilepath(paramstr(0))+'Resources'+pathdelim+'templates';
+	 if not fileexists(gTemplateDir) then
+            gTemplateDir := extractfilepath(paramstr(0))+'templates';
          {$IFDEF Darwin}
          if not fileexists(gTemplateDir) then
             gTemplateDir := AppDir + 'templates';
@@ -2095,6 +2116,7 @@ var
 begin
    lPanel := SelectedImageNum;
    lLayer := ImgForm.ActiveLayer;
+   if gMRIcroOverlay[lLayer].UsesCustomPaletteRandomRainbow then exit;
    XYscrn2Img (lImage,lPanel,gSelectRect.Left,gSelectRect.Top, lXout,lYOut,lZOut);
    lMinInten := ImgIntensity(gMRIcroOverlay[lLayer],lXout,lYOut,lZOut);
    lMaxInten := lMinInten;
@@ -2554,6 +2576,7 @@ end;
 procedure TImgForm.XBarBtnClick(Sender: TObject);
 begin
   gBGImg.XBarVisible := XBarBtn.Down;
+  CrossHair1.Checked := XBarBtn.Down;
   RefreshImagesTimer.Enabled := true;
 end;
 
@@ -5054,7 +5077,9 @@ end;
 {$IFDEF LCLCocoa}
 procedure TImgForm.SetDarkMode;
 begin
-  setThemeMode(Self.Handle, gBGImg.DarkMode);
+  //setThemeMode(Self.Handle, gBGImg.DarkMode);
+  setThemeMode(Self, gBGImg.DarkMode);
+
 end;
 {$ENDIF}
 

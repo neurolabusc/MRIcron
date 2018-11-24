@@ -1,38 +1,45 @@
 object voismoothform: Tvoismoothform
-  Left = 650
-  Height = 222
-  Top = 241
+  Left = 555
+  Height = 138
+  Top = 249
   Width = 272
   ActiveControl = XROIfwhm
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
+  BorderWidth = 4
   Caption = 'Blur VOI'
-  ClientHeight = 222
+  ClientHeight = 138
   ClientWidth = 272
-  Constraints.MaxHeight = 222
-  Constraints.MaxWidth = 272
-  Constraints.MinHeight = 222
-  Constraints.MinWidth = 272
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.6.0.2'
+  LCLVersion = '2.1.0.0'
   object Label37: TLabel
-    Left = 12
-    Height = 17
-    Top = 46
-    Width = 68
+    AnchorSideLeft.Control = Label38
+    AnchorSideTop.Control = XROIthresh
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 16
+    Top = 35
+    Width = 61
     Caption = 'Threshold'
     Font.CharSet = ANSI_CHARSET
     ParentColor = False
     ParentFont = False
   end
   object CancelBtn: TSpeedButton
-    Left = 94
-    Height = 25
+    AnchorSideTop.Control = OKBtn
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = OKBtn
+    Left = 128
+    Height = 20
     Hint = 'Save to small-endian [Intel] format'
-    Top = 167
+    Top = 106
     Width = 66
+    Anchors = [akTop, akRight]
+    AutoSize = True
+    BorderSpacing.Right = 4
+    Constraints.MinWidth = 66
     Caption = 'Cancel'
     OnClick = BtnClick
     ShowHint = True
@@ -40,11 +47,20 @@ object voismoothform: Tvoismoothform
   end
   object OKBtn: TSpeedButton
     Tag = 1
-    Left = 165
-    Height = 25
+    AnchorSideTop.Control = xROIoutput
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 198
+    Height = 20
     Hint = 'Save to big-endian [Sun] format'
-    Top = 167
+    Top = 106
     Width = 66
+    Anchors = [akTop, akRight]
+    AutoSize = True
+    BorderSpacing.Top = 4
+    BorderSpacing.Right = 4
+    Constraints.MinWidth = 66
     Caption = 'OK'
     OnClick = BtnClick
     ShowHint = True
@@ -52,55 +68,81 @@ object voismoothform: Tvoismoothform
   end
   object HelpBtn: TSpeedButton
     Tag = 2
-    Left = 21
-    Height = 25
-    Top = 167
+    AnchorSideTop.Control = OKBtn
+    AnchorSideRight.Control = CancelBtn
+    Left = 58
+    Height = 20
+    Top = 106
     Width = 66
+    Anchors = [akTop, akRight]
+    AutoSize = True
+    BorderSpacing.Right = 4
+    Constraints.MinWidth = 66
     Caption = 'Help'
     OnClick = HelpBtnClick
     ParentShowHint = False
   end
   object Label38: TLabel
-    Left = 12
-    Height = 17
-    Top = 9
-    Width = 162
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = XROIfwhm
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 16
+    Top = 10
+    Width = 146
+    BorderSpacing.Left = 4
     Caption = 'Smoothing (FWHM mm)'
     Font.CharSet = ANSI_CHARSET
     ParentColor = False
     ParentFont = False
   end
   object ScaleSides: TComboBox
-    Left = 12
-    Height = 31
-    Top = 84
+    AnchorSideLeft.Control = Label38
+    AnchorSideTop.Control = XROIthresh
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 20
+    Top = 58
     Width = 229
-    ItemHeight = 0
+    BorderSpacing.Top = 4
+    ItemHeight = 26
     Items.Strings = (
       'Adjust sides in Z-plane only [SPM]'
       'Adjust sides in X,Y and Z planes'
     )
     Style = csDropDownList
     TabOrder = 0
+    Text = '0'
   end
   object xROIoutput: TComboBox
-    Left = 12
-    Height = 31
-    Top = 117
+    AnchorSideLeft.Control = Label38
+    AnchorSideTop.Control = ScaleSides
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 20
+    Top = 82
     Width = 229
-    ItemHeight = 0
+    BorderSpacing.Top = 4
+    ItemHeight = 26
     Items.Strings = (
       'ROI is 1 [reslice ROI]'
       'ROI is 0 [SPM object mask]'
     )
     Style = csDropDownList
     TabOrder = 1
+    Text = '0'
   end
   object XROIthresh: TFloatSpinEdit
-    Left = 180
-    Height = 27
-    Top = 41
+    AnchorSideLeft.Control = Label37
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = XROIfwhm
+    AnchorSideTop.Side = asrBottom
+    Left = 73
+    Height = 21
+    Top = 33
     Width = 70
+    BorderSpacing.Left = 4
+    BorderSpacing.Top = 4
     DecimalPlaces = 4
     Increment = 0.00100000004749
     MaxValue = 1
@@ -109,12 +151,21 @@ object voismoothform: Tvoismoothform
     Value = 1
   end
   object XROIfwhm: TSpinEdit
-    Left = 180
-    Height = 27
-    Top = 4
+    AnchorSideLeft.Control = Label38
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 158
+    Height = 21
+    Top = 8
     Width = 70
+    BorderSpacing.Left = 4
+    BorderSpacing.Top = 4
+    BorderSpacing.Right = 4
     MaxValue = 40
     MinValue = 1
+    OnChange = XROIfwhmChange
     TabOrder = 3
     Value = 1
   end

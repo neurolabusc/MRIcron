@@ -28,6 +28,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure HelpBtnClick(Sender: TObject);
     procedure SmoothVOI_SPM5masks;
+    procedure XROIfwhmChange(Sender: TObject);
 
   private
     { private declarations }
@@ -488,6 +489,11 @@ begin
       XROIthresh.value := lorigThresh;
       ScaleSides.itemindex:=(lOrigSS);
       xROIoutput.itemindex:=(lOrigOut);
+end;
+
+procedure Tvoismoothform.XROIfwhmChange(Sender: TObject);
+begin
+
 end;
 
 initialization

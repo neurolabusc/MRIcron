@@ -604,7 +604,8 @@ var
 	lInc: integer;
 begin
   {$IFDEF LCLCocoa}
-    setThemeMode(Self.Handle, gBGImg.DarkMode);
+  //  setThemeMode(Self.Handle, gBGImg.DarkMode);
+    setThemeMode(Self, gBGImg.DarkMode);
   {$ENDIF}
 
   gRender.ClipFrac := 0;

@@ -1,37 +1,59 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('Tvoismoothform','FORMDATA',[
-  'TPF0'#14'Tvoismoothform'#13'voismoothform'#4'Left'#3#138#2#6'Height'#3#222#0
-  +#3'Top'#3#241#0#5'Width'#3#16#1#13'ActiveControl'#7#8'XROIfwhm'#11'BorderIco'
-  +'ns'#11#12'biSystemMenu'#0#11'BorderStyle'#7#8'bsDialog'#7'Caption'#6#8'Blur'
-  +' VOI'#12'ClientHeight'#3#222#0#11'ClientWidth'#3#16#1#21'Constraints.MaxHei'
-  +'ght'#3#222#0#20'Constraints.MaxWidth'#3#16#1#21'Constraints.MinHeight'#3#222
-  +#0#20'Constraints.MinWidth'#3#16#1#8'OnCreate'#7#10'FormCreate'#6'OnShow'#7#8
-  +'FormShow'#8'Position'#7#14'poScreenCenter'#10'LCLVersion'#6#7'1.6.0.2'#0#6
-  +'TLabel'#7'Label37'#4'Left'#2#12#6'Height'#2#17#3'Top'#2'.'#5'Width'#2'D'#7
-  +'Caption'#6#9'Threshold'#12'Font.CharSet'#7#12'ANSI_CHARSET'#11'ParentColor'
-  +#8#10'ParentFont'#8#0#0#12'TSpeedButton'#9'CancelBtn'#4'Left'#2'^'#6'Height'
-  +#2#25#4'Hint'#6'#Save to small-endian [Intel] format'#3'Top'#3#167#0#5'Width'
-  +#2'B'#7'Caption'#6#6'Cancel'#7'OnClick'#7#8'BtnClick'#8'ShowHint'#9#14'Paren'
-  +'tShowHint'#8#0#0#12'TSpeedButton'#5'OKBtn'#3'Tag'#2#1#4'Left'#3#165#0#6'Hei'
-  +'ght'#2#25#4'Hint'#6#31'Save to big-endian [Sun] format'#3'Top'#3#167#0#5'Wi'
-  +'dth'#2'B'#7'Caption'#6#2'OK'#7'OnClick'#7#8'BtnClick'#8'ShowHint'#9#14'Pare'
-  +'ntShowHint'#8#0#0#12'TSpeedButton'#7'HelpBtn'#3'Tag'#2#2#4'Left'#2#21#6'Hei'
-  +'ght'#2#25#3'Top'#3#167#0#5'Width'#2'B'#7'Caption'#6#4'Help'#7'OnClick'#7#12
-  +'HelpBtnClick'#14'ParentShowHint'#8#0#0#6'TLabel'#7'Label38'#4'Left'#2#12#6
-  +'Height'#2#17#3'Top'#2#9#5'Width'#3#162#0#7'Caption'#6#19'Smoothing (FWHM mm'
-  +')'#12'Font.CharSet'#7#12'ANSI_CHARSET'#11'ParentColor'#8#10'ParentFont'#8#0
-  +#0#9'TComboBox'#10'ScaleSides'#4'Left'#2#12#6'Height'#2#31#3'Top'#2'T'#5'Wid'
-  +'th'#3#229#0#10'ItemHeight'#2#0#13'Items.Strings'#1#6'"Adjust sides in Z-pla'
-  +'ne only [SPM]'#6' Adjust sides in X,Y and Z planes'#0#5'Style'#7#14'csDropD'
-  +'ownList'#8'TabOrder'#2#0#0#0#9'TComboBox'#10'xROIoutput'#4'Left'#2#12#6'Hei'
-  +'ght'#2#31#3'Top'#2'u'#5'Width'#3#229#0#10'ItemHeight'#2#0#13'Items.Strings'
-  +#1#6#22'ROI is 1 [reslice ROI]'#6#26'ROI is 0 [SPM object mask]'#0#5'Style'#7
-  +#14'csDropDownList'#8'TabOrder'#2#1#0#0#14'TFloatSpinEdit'#10'XROIthresh'#4
-  +'Left'#3#180#0#6'Height'#2#27#3'Top'#2')'#5'Width'#2'F'#13'DecimalPlaces'#2#4
-  +#9'Increment'#5#0'('#206#251#255'n'#18#131#245'?'#8'MaxValue'#5#0#0#0#0#0#0#0
-  +#128#255'?'#8'MinValue'#5#0#0#0#0#0#0#0#0#0#0#8'TabOrder'#2#2#5'Value'#5#0#0
-  +#0#0#0#0#0#128#255'?'#0#0#9'TSpinEdit'#8'XROIfwhm'#4'Left'#3#180#0#6'Height'
-  +#2#27#3'Top'#2#4#5'Width'#2'F'#8'MaxValue'#2'('#8'MinValue'#2#1#8'TabOrder'#2
-  +#3#5'Value'#2#1#0#0#0
+  'TPF0'#14'Tvoismoothform'#13'voismoothform'#4'Left'#3'+'#2#6'Height'#3#138#0#3
+  +'Top'#3#249#0#5'Width'#3#16#1#13'ActiveControl'#7#8'XROIfwhm'#11'BorderIcons'
+  +#11#12'biSystemMenu'#0#11'BorderStyle'#7#8'bsDialog'#11'BorderWidth'#2#4#7'C'
+  +'aption'#6#8'Blur VOI'#12'ClientHeight'#3#138#0#11'ClientWidth'#3#16#1#8'OnC'
+  +'reate'#7#10'FormCreate'#6'OnShow'#7#8'FormShow'#8'Position'#7#14'poScreenCe'
+  +'nter'#10'LCLVersion'#6#7'2.1.0.0'#0#6'TLabel'#7'Label37'#22'AnchorSideLeft.'
+  +'Control'#7#7'Label38'#21'AnchorSideTop.Control'#7#10'XROIthresh'#18'AnchorS'
+  +'ideTop.Side'#7#9'asrCenter'#4'Left'#2#8#6'Height'#2#16#3'Top'#2'#'#5'Width'
+  +#2'='#7'Caption'#6#9'Threshold'#12'Font.CharSet'#7#12'ANSI_CHARSET'#11'Paren'
+  +'tColor'#8#10'ParentFont'#8#0#0#12'TSpeedButton'#9'CancelBtn'#21'AnchorSideT'
+  +'op.Control'#7#5'OKBtn'#18'AnchorSideTop.Side'#7#9'asrCenter'#23'AnchorSideR'
+  +'ight.Control'#7#5'OKBtn'#4'Left'#3#128#0#6'Height'#2#20#4'Hint'#6'#Save to '
+  +'small-endian [Intel] format'#3'Top'#2'j'#5'Width'#2'B'#7'Anchors'#11#5'akTo'
+  +'p'#7'akRight'#0#8'AutoSize'#9#19'BorderSpacing.Right'#2#4#20'Constraints.Mi'
+  +'nWidth'#2'B'#7'Caption'#6#6'Cancel'#7'OnClick'#7#8'BtnClick'#8'ShowHint'#9
+  +#14'ParentShowHint'#8#0#0#12'TSpeedButton'#5'OKBtn'#3'Tag'#2#1#21'AnchorSide'
+  +'Top.Control'#7#10'xROIoutput'#18'AnchorSideTop.Side'#7#9'asrBottom'#23'Anch'
+  +'orSideRight.Control'#7#5'Owner'#20'AnchorSideRight.Side'#7#9'asrBottom'#4'L'
+  +'eft'#3#198#0#6'Height'#2#20#4'Hint'#6#31'Save to big-endian [Sun] format'#3
+  +'Top'#2'j'#5'Width'#2'B'#7'Anchors'#11#5'akTop'#7'akRight'#0#8'AutoSize'#9#17
+  +'BorderSpacing.Top'#2#4#19'BorderSpacing.Right'#2#4#20'Constraints.MinWidth'
+  +#2'B'#7'Caption'#6#2'OK'#7'OnClick'#7#8'BtnClick'#8'ShowHint'#9#14'ParentSho'
+  +'wHint'#8#0#0#12'TSpeedButton'#7'HelpBtn'#3'Tag'#2#2#21'AnchorSideTop.Contro'
+  +'l'#7#5'OKBtn'#23'AnchorSideRight.Control'#7#9'CancelBtn'#4'Left'#2':'#6'Hei'
+  +'ght'#2#20#3'Top'#2'j'#5'Width'#2'B'#7'Anchors'#11#5'akTop'#7'akRight'#0#8'A'
+  +'utoSize'#9#19'BorderSpacing.Right'#2#4#20'Constraints.MinWidth'#2'B'#7'Capt'
+  +'ion'#6#4'Help'#7'OnClick'#7#12'HelpBtnClick'#14'ParentShowHint'#8#0#0#6'TLa'
+  +'bel'#7'Label38'#22'AnchorSideLeft.Control'#7#5'Owner'#21'AnchorSideTop.Cont'
+  +'rol'#7#8'XROIfwhm'#18'AnchorSideTop.Side'#7#9'asrCenter'#4'Left'#2#8#6'Heig'
+  +'ht'#2#16#3'Top'#2#10#5'Width'#3#146#0#18'BorderSpacing.Left'#2#4#7'Caption'
+  +#6#19'Smoothing (FWHM mm)'#12'Font.CharSet'#7#12'ANSI_CHARSET'#11'ParentColo'
+  +'r'#8#10'ParentFont'#8#0#0#9'TComboBox'#10'ScaleSides'#22'AnchorSideLeft.Con'
+  +'trol'#7#7'Label38'#21'AnchorSideTop.Control'#7#10'XROIthresh'#18'AnchorSide'
+  +'Top.Side'#7#9'asrBottom'#4'Left'#2#8#6'Height'#2#20#3'Top'#2':'#5'Width'#3
+  +#229#0#17'BorderSpacing.Top'#2#4#10'ItemHeight'#2#26#13'Items.Strings'#1#6'"'
+  +'Adjust sides in Z-plane only [SPM]'#6' Adjust sides in X,Y and Z planes'#0#5
+  +'Style'#7#14'csDropDownList'#8'TabOrder'#2#0#4'Text'#6#1'0'#0#0#9'TComboBox'
+  +#10'xROIoutput'#22'AnchorSideLeft.Control'#7#7'Label38'#21'AnchorSideTop.Con'
+  +'trol'#7#10'ScaleSides'#18'AnchorSideTop.Side'#7#9'asrBottom'#4'Left'#2#8#6
+  +'Height'#2#20#3'Top'#2'R'#5'Width'#3#229#0#17'BorderSpacing.Top'#2#4#10'Item'
+  +'Height'#2#26#13'Items.Strings'#1#6#22'ROI is 1 [reslice ROI]'#6#26'ROI is 0'
+  +' [SPM object mask]'#0#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#1#4'Text'
+  +#6#1'0'#0#0#14'TFloatSpinEdit'#10'XROIthresh'#22'AnchorSideLeft.Control'#7#7
+  +'Label37'#19'AnchorSideLeft.Side'#7#9'asrBottom'#21'AnchorSideTop.Control'#7
+  +#8'XROIfwhm'#18'AnchorSideTop.Side'#7#9'asrBottom'#4'Left'#2'I'#6'Height'#2
+  +#21#3'Top'#2'!'#5'Width'#2'F'#18'BorderSpacing.Left'#2#4#17'BorderSpacing.To'
+  +'p'#2#4#13'DecimalPlaces'#2#4#9'Increment'#5#0'('#206#251#255'n'#18#131#245
+  +'?'#8'MaxValue'#5#0#0#0#0#0#0#0#128#255'?'#8'MinValue'#5#0#0#0#0#0#0#0#0#0#0
+  +#8'TabOrder'#2#2#5'Value'#5#0#0#0#0#0#0#0#128#255'?'#0#0#9'TSpinEdit'#8'XROI'
+  +'fwhm'#22'AnchorSideLeft.Control'#7#7'Label38'#19'AnchorSideLeft.Side'#7#9'a'
+  +'srBottom'#21'AnchorSideTop.Control'#7#5'Owner'#23'AnchorSideRight.Control'#7
+  +#5'Owner'#20'AnchorSideRight.Side'#7#9'asrBottom'#4'Left'#3#158#0#6'Height'#2
+  +#21#3'Top'#2#8#5'Width'#2'F'#18'BorderSpacing.Left'#2#4#17'BorderSpacing.Top'
+  +#2#4#19'BorderSpacing.Right'#2#4#8'MaxValue'#2'('#8'MinValue'#2#1#8'OnChange'
+  +#7#14'XROIfwhmChange'#8'TabOrder'#2#3#5'Value'#2#1#0#0#0
 ]);

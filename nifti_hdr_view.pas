@@ -3,29 +3,24 @@ interface
 {$H+}
 {$MODE DELPHI}
 uses
-{$IFNDEF FPC}
-  RXSpin,capmenu,
-{$ELSE}
-LResources, Spin,
 
-{$ENDIF}
-{$IFNDEF Unix} ShellAPI, {$ENDIF}
+LResources, Spin,
+ {$IFNDEF Unix} ShellAPI, {$ENDIF}
   SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, nifti_hdr, Menus, ComCtrls, Buttons, define_types, nifti_types;
+  StdCtrls, Menus, ComCtrls, Buttons, nifti_hdr, define_types, nifti_types;
 type
   { THdrForm }
   THdrForm = class(TForm)
+      OpenHdrDlg: TOpenDialog;
     Ymm: TFloatSpinEdit;
-    MainMenu1: TMainMenu;
+    HdrMenu: TMainMenu;
     File1: TMenuItem;
-    Open1: TMenuItem;
     Exit1: TMenuItem;
     Save1: TMenuItem;
-    OpenHdrDlg: TOpenDialog;
     SaveHdrDlg: TSaveDialog;
     PageControl1: TPageControl;
-    TabRequired: TTabSheet;
-    TabUnused: TTabSheet;
+    DimensionSheet: TTabSheet;
+    OptionalSheet: TTabSheet;
     intent_nameEdit: TEdit;
     data_typeEdit: TEdit;
     CommentEdit: TEdit;
@@ -36,16 +31,16 @@ type
     ses: TSpinEdit;
     ext: TSpinEdit;
     reg: TSpinEdit;
-    Label34: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label9: TLabel;
-    Label10: TLabel;
-    Label14: TLabel;
-    Label15: TLabel;
-    Label18: TLabel;
-    Label19: TLabel;
-    Label26: TLabel;
+    DataLabel: TLabel;
+    IntentStrLabel: TLabel;
+    ExtentLabel: TLabel;
+    SessErrLabel: TLabel;
+    RegLabel: TLabel;
+    GMinLabel: TLabel;
+    GMaxLabel: TLabel;
+    AuxLabel: TLabel;
+    DBLabel: TLabel;
+    NotesLabel: TLabel;
     HeaderMagicDrop: TComboBox;
     Label21: TLabel;
     Label1: TLabel;
@@ -70,41 +65,41 @@ type
     StatusBar1: TStatusBar;
     Label29: TLabel;
     Dim5Edit: TSpinEdit;
-    TabSheet1: TTabSheet;
-    Label35: TLabel;
+    StatSheet: TTabSheet;
+    IntentLabel: TLabel;
     IntentCodeDrop: TComboBox;
     intent_p1Edit: TFloatSpinEdit;
     intent_p2Edit: TFloatSpinEdit;
     intent_p3Edit: TFloatSpinEdit;
-    Label25: TLabel;
-    Label27: TLabel;
-    Label28: TLabel;
-    TabSheet2: TTabSheet;
-    Label11: TLabel;
-    Label16: TLabel;
-    Label17: TLabel;
-    Label32: TLabel;
+    Intent1Label: TLabel;
+    Intent2Label: TLabel;
+    Intent3Label: TLabel;
+    fmriSheet: TTabSheet;
+    OrderLabel: TLabel;
+    TimeLabel: TLabel;
+    DurationLabel: TLabel;
+    StartLabel: TLabel;
     slice_startEdit: TSpinEdit;
     Slice_durationEdit: TFloatSpinEdit;
     toffsetEdit: TFloatSpinEdit;
-    TabSheet3: TTabSheet;
+    IntensitySheet: TTabSheet;
     cmax: TFloatSpinEdit;
     cmin: TFloatSpinEdit;
-    Label12: TLabel;
-    Label13: TLabel;
+    MaxLabel: TLabel;
+    MinLabel: TLabel;
     Scale: TFloatSpinEdit;
-    Label23: TLabel;
+    SlopeLabel: TLabel;
     Intercept: TFloatSpinEdit;
-    Label22: TLabel;
-    Label30: TLabel;
-    Label33: TLabel;
+    InterceptLabel: TLabel;
+    CalLabel: TLabel;
+    DisplayLabel: TLabel;
     Page1: TMenuItem;
     Dimensions1: TMenuItem;
     ImageIntensity1: TMenuItem;
     Statistics1: TMenuItem;
     FunctionalMRI1: TMenuItem;
     Optional1: TMenuItem;
-    TabSheet4: TTabSheet;
+    ReorientSheet: TTabSheet;
     Rotations1: TMenuItem;
     srow_x0Edit: TFloatSpinEdit;
     srow_x1Edit: TFloatSpinEdit;
@@ -137,14 +132,14 @@ type
     PixDim6: TFloatSpinEdit;
     PixDim7: TFloatSpinEdit;
     SliceCodeDrop: TComboBox;
-    Label20: TLabel;
+    EndLabel: TLabel;
     slice_endEdit: TSpinEdit;
     FreqDimDrop: TComboBox;
     PhaseDimDrop: TComboBox;
     SliceDimDrop: TComboBox;
-    Label31: TLabel;
-    Label43: TLabel;
-    Label45: TLabel;
+    FreqLabel: TLabel;
+    PhaseLabel: TLabel;
+    SliceLabel: TLabel;
     QFacEdit: TFloatSpinEdit;
     Label46: TLabel;
     QFormDrop: TComboBox;
@@ -155,39 +150,34 @@ type
     procedure FormShow(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure SaveHdrDlgClose(Sender: TObject);
-    procedure TabRequiredContextPopup(Sender: TObject; MousePos: TPoint;
+    procedure DimensionSheetContextPopup(Sender: TObject; MousePos: TPoint;
       var Handled: Boolean);
     procedure WriteHdrForm (var lHdr: TMRIcroHdr);
     procedure ReadHdrDimensionsOnly (var lHdr: TMRIcroHdr); //reads only size dimensions: useful for computing estimated filesize
     procedure ReadHdrForm (var lHdr: TMRIcroHdr); //reads entire header
-    procedure Open1Click(Sender: TObject);
     procedure Save1Click(Sender: TObject);
     procedure TabMenuClick(Sender: TObject);
     procedure Exit1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure ImageSzChange(Sender: TObject);
     procedure HeaderMagicDropSelect(Sender: TObject);
     function OpenAndDisplayHdr (var lFilename: string; var lHdr: TMRIcroHdr): boolean;
   private
 	{ Private declarations }
-{$IFNDEF FPC}	procedure WMDropFiles(var Msg: TWMDropFiles); message WM_DROPFILES;
-{$ENDIF}
+
   public
 	{ Public declarations }
   end;
-	function OpenDialogExecute (lFilter,lCaption: string; lAllowMultiSelect: boolean): boolean;
+  function OpenDialogExecute (lFilter,lCaption: string; lAllowMultiSelect: boolean): boolean;
+
 
 var
   HdrForm: THdrForm;
 
 implementation
-
 uses nifti_img_view, render,nifti_img;
-{$IFDEF FPC}
+
+
 {$R *.lfm}
-{$ELSE}
-{$R *.DFM}
-{$ENDIF}
 
 function OpenDialogExecute (lFilter,lCaption: string; lAllowMultiSelect: boolean): boolean;
 begin
@@ -201,6 +191,27 @@ begin
 		HdrForm.OpenHdrDlg.Options := [ofAllowMultiSelect,ofFileMustExist];
 	result := HdrForm.OpenHdrDlg.Execute;
 	HdrForm.OpenHdrDlg.Options := [ofFileMustExist];
+end;
+
+function THdrForm.OpenAndDisplayHdr (var lFilename: string; var lHdr: TMRIcroHdr): boolean;
+var lFileDir: string;
+begin
+  FreeImgMemory(lHdr);
+  result := false;
+  NIFTIhdr_ClearHdr(lHdr);
+  if not NIFTIhdr_LoadHdr(lFilename, lHdr) then exit;
+  WriteHdrForm (lHdr);
+  lFileDir := extractfiledir(lFilename);
+  if lFileDir <> gTemplateDir then
+     OpenHdrDlg.InitialDir := lFileDir;
+  SaveHdrDlg.InitialDir := lFileDir;
+  SaveHdrDlg.FileName := lFilename; //make this default file to write
+  if length(lFilename) < 79 then
+     StatusBar1.Panels[1].text := lFilename
+  else
+      StatusBar1.Panels[1].text := extractfilename(lFilename);
+  StatusBar1.Panels[0].text := 'Img= '+inttostr(ComputeImageDataBytes(lHdr));
+  result := true;
 end;
 
 function DropItem2DataType(lItemIndex: integer): integer; //returns NIfTI datatype number
@@ -300,6 +311,7 @@ begin
           else result := 0; //unknown
      end; //case
 end; //func DropItem2time_units
+
 
 procedure THdrForm.WriteHdrForm (var lHdr: TMRIcroHdr); //writes a header to the various controls
 var //lCStr: string[80];
@@ -450,7 +462,6 @@ begin
 
     end;  //with lHdr
 end;
-
 (*procedure ApplySaveDlgFilter (lSaveDlg: TSaveDialog);
 var
    lLen,lPos,lPipes,lPipesReq: integer;
@@ -485,7 +496,7 @@ end;
 
 
 
-procedure THdrForm.TabRequiredContextPopup(Sender: TObject; MousePos: TPoint;
+procedure THdrForm.DimensionSheetContextPopup(Sender: TObject; MousePos: TPoint;
   var Handled: Boolean);
 begin
 
@@ -496,15 +507,14 @@ begin
       // ImgForm.OnLaunch;
 end;
 
-procedure THdrForm.FormHide(Sender: TObject);
-begin
-  {$IFDEF Darwin}Application.MainForm.SetFocus;{$ENDIF}
-end;
-
-
 procedure THdrForm.PageControl1Change(Sender: TObject);
 begin
 
+end;
+
+procedure THdrForm.FormHide(Sender: TObject);
+begin
+  {$IFDEF Darwin}Application.MainForm.SetFocus;{$ENDIF}
 end;
 
 procedure THdrForm.ReadHdrDimensionsOnly (var lHdr: TMRIcroHdr); //reads only size dimensions: useful for computing estimated filesize
@@ -528,10 +538,6 @@ begin
           vox_offset := OffsetEdit.value;
           DataType := DropItem2DataType(FTypeDrop.ItemIndex);
           bitpix := DataType2BitsPerVoxel(DataType);
-          if Endian.ItemIndex = 0 then
-             lHdr.DiskDataNativeEndian := true
-          else
-             lHdr.DiskDataNativeEndian := false;
      end; //with NIfTIhdr
 end; //proc ReadHdrDimensionsOnly
 
@@ -630,48 +636,32 @@ begin
      //zero_intercept := intercept.value;
 end;
 
-function THdrForm.OpenAndDisplayHdr (var lFilename: string; var lHdr: TMRIcroHdr): boolean;
-var lFileDir: string;
-begin
-  FreeImgMemory(lHdr);
-  result := false;
-  NIFTIhdr_ClearHdr(lHdr);
-  if not NIFTIhdr_LoadHdr(lFilename, lHdr) then exit;
-  WriteHdrForm (lHdr);
-  lFileDir := extractfiledir(lFilename);
-  if lFileDir <> gTemplateDir then
-     OpenHdrDlg.InitialDir := lFileDir;
-  SaveHdrDlg.InitialDir := lFileDir;
-  SaveHdrDlg.FileName := lFilename; //make this default file to write
-  if length(lFilename) < 79 then
-     StatusBar1.Panels[1].text := lFilename
-  else
-      StatusBar1.Panels[1].text := extractfilename(lFilename);
-  StatusBar1.Panels[0].text := 'Img= '+inttostr(ComputeImageDataBytes(lHdr));
-  result := true;
-end;
-
-procedure THdrForm.Open1Click(Sender: TObject);
-var lHdr: TMRIcroHdr;
-    lFilename: string;
-begin
-  //NIfTI (*.hdr;*.nii)|*.hdr; *.nii; *.nii.gz|NIfTI separate header (*.hdr)|*.hdr|NIfTI embedded header|*.nii|NIfTI compressed|*.nii.gz
-  //if not OpenHdrDlg.Execute then exit;
-  if not OpenDialogExecute(kImgFilter,'Select header',false) then exit;
-  lFilename := OpenHdrDlg.Filename;
-  OpenAndDisplayHdr(lFilename,lHdr);
-end;
-
 procedure THdrForm.Save1Click(Sender: TObject);
-var lHdr: TMRIcroHdr;
-    lFilename: string;
+var
+    lHdr: TMRIcroHdr;
+    lFilename,lExt: string;
 begin
   NIFTIhdr_ClearHdr(lHdr);
+  if (HeaderMagicDrop.ItemIndex >= 3) then begin
+     showmessage('Unable to save NIfTI2 headers');
+     exit;
+  end;
   if not SaveHdrDlg.Execute then exit;
-  lFilename := SaveHdrDlg.Filename;
-  OpenHdrDlg.InitialDir := extractfiledir(lFilename);
-  //999 ImgForm.SaveDialog1.InitialDir := extractfiledir(lFilename);
+  lExt := upcase(ExtractFileExt(SaveHdrDlg.Filename));
+  if (lExt = '.GZ') or (lExt = '.NII.GZ') then begin
+     showmessage('Unable to save .nii.gz headers (first ungzip your image if you wish to edit the header)');
+     exit;
+  end;
+  NIFTIhdr_ClearHdr(lHdr); //important: reset values like first 4 bytes = 348
   ReadHdrForm (lHdr);
+  if (lExt <> '.HDR') and (lExt <> '.NII') then begin
+     if lHdr.NIFTIhdr.magic = kNIFTI_MAGIC_SEPARATE_HDR then
+        SaveHdrDlg.Filename := SaveHdrDlg.Filename +'.hdr'
+     else
+         SaveHdrDlg.Filename := SaveHdrDlg.Filename +'.nii';
+  end;
+  lFilename := SaveHdrDlg.Filename;
+  //999 ImgForm.SaveDialog1.InitialDir := extractfiledir(lFilename);
   if not NIFTIhdr_SaveHdr (lFilename, lHdr,true) then exit;
   OpenHdrDlg.FileName := lFilename; //make this default file to open
   StatusBar1.Panels[1].text := 'wrote: '+lFilename;
@@ -687,25 +677,6 @@ begin
      Close;
 end;
 
-  {$IFNDEF FPC}
-procedure THdrForm.WMDropFiles(var Msg: TWMDropFiles);  //implement drag and drop
-//NOTE: requires 'ShellAPI' in uses clause
-var lHdr: TMRIcroHdr;
-  CFileName: array[0..MAX_PATH] of Char;
-  lFilename: string;
-begin
-  try
-    if DragQueryFile(Msg.Drop, 0, CFileName, MAX_PATH) > 0 then
-    begin
-         lFilename := CFilename;
-         OpenAndDisplayHdr(lFileName, lHdr);
-      Msg.Result := 0;
-    end;
-  finally
-    DragFinish(Msg.Drop);
-  end;
-end;
-  {$ENDIF}
 
 procedure THdrForm.FormCreate(Sender: TObject);
 var lHdr: TMRIcroHdr;
@@ -717,7 +688,7 @@ begin
   HdrForm.WriteHdrForm (lHdr); //show default header
   {$IFDEF Darwin}
   {$IFNDEF LCLgtk} //only for Carbon compile
-  Open1.ShortCut := ShortCut(Word('O'), [ssMeta]);
+  //Open1.ShortCut := ShortCut(Word('O'), [ssMeta]);
   Save1.ShortCut := ShortCut(Word('S'), [ssMeta]);
   Exit1.ShortCut := ShortCut(Word('W'), [ssMeta]);
   Dimensions1.ShortCut := ShortCut(Word('A'), [ssMeta]);
@@ -728,15 +699,6 @@ begin
   Optional1.ShortCut := ShortCut(Word('F'), [ssMeta]);
   {$ENDIF}
   {$ENDIF}
-end;
-
-procedure THdrForm.ImageSzChange(Sender: TObject); //report size of image data
-var
-	lHdr: TMRIcroHdr;
-begin
-	 NIFTIhdr_ClearHdr(lHdr); //important: reset values like first 4 bytes = 348
-	 ReadHdrDimensionsOnly(lHdr);
-	 StatusBar1.Panels[0].text := 'Img= '+inttostr(ComputeImageDataBytes(lHdr));
 end;
 
 procedure THdrForm.HeaderMagicDropSelect(Sender: TObject);

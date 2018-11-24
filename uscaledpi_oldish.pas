@@ -5,16 +5,13 @@ unit uscaledpi;
 interface
 
 uses
-   {$IFDEF LCLGtk2} Gtk2Def, gtk2, Gtk2Proc, {$ENDIF}
    {$IFDEF Linux} StrUtils, FileUtil, Process, Classes,SysUtils, {$ENDIF}
    Forms, Graphics, Controls, ComCtrls, Grids;
 
 procedure HighDPI(FromDPI: integer);
 procedure ScaleDPI(Control: TControl; FromDPI: integer);
-{$IFDEF UNIX}
 procedure HighDPILinux(FontSz: integer);
 procedure ScaleDPIX(Control: TControl; FromDPI: integer);
-{$ENDIF}
 //function getFontScale(FontSz: integer): single;
 
 implementation
@@ -23,9 +20,6 @@ procedure ScaleDPI(Control: TControl; FromDPI: integer);
 var
   i, s: integer;
   WinControl: TWinControl;
-  {$IFDEF LCLGtk2}
-  Widget: PGtkWidget;
-  {$ENDIF}
 begin
   with Control do
   begin
@@ -38,12 +32,6 @@ begin
       Top := ScaleY(Top,FromDPI);
     end else*)
 
-    {$IFDEF Darwin}
-    if (Control is TTrackBar) then begin
-     (Control as TTrackBar).Constraints.MaxHeight := 22;
-     (Control as TTrackBar).Height := (Control as TTrackBar).Constraints.MaxHeight;
-    end;
-    {$ENDIF}
     {$IFDEF LINUX} //strange minimum size and height on Lazarus 1.6.2
     if (Control is TTrackBar) then begin
       //i := 22;
@@ -52,15 +40,6 @@ begin
       i := (s) div 3;
       Top := ScaleY(Top, FromDPI) - i ;
       Height := ScaleY(Height, FromDPI);
-      {$IFDEF LCLGtk2}
-      if ((Control as TTrackBar).TickStyle = tsNone) then begin
-         Widget:=GetStyleWidget(lgsHScale);
-         gtk_scale_set_draw_value(GTK_SCALE(Widget), false);
-         gtk_widget_size_request(Widget,@Widget^.requisition);
-         (Control as TTrackBar).Constraints.MaxHeight := Widget^.requisition.height;
-         (Control as TTrackBar).Height := (Control as TTrackBar).Constraints.MaxHeight;
-      end;
-      {$ENDIF}
     end else begin
        Top :=ScaleY(Top, FromDPI);
        Height := ScaleY(Height, FromDPI);

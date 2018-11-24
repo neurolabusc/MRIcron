@@ -1,7 +1,7 @@
 object Graph4DForm: TGraph4DForm
-  Left = 345
+  Left = 233
   Height = 429
-  Top = 123
+  Top = 287
   Width = 1097
   ActiveControl = TREdit
   Caption = '4D Timeline Viewer'
@@ -14,73 +14,102 @@ object Graph4DForm: TGraph4DForm
   OnResize = FormResize
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.9.0.0'
+  LCLVersion = '2.1.0.0'
   object Image1: TImage
     Left = 0
-    Height = 375
-    Top = 36
+    Height = 371
+    Top = 40
     Width = 1097
     Align = alClient
   end
   object FourDBar: TPanel
     Left = 0
-    Height = 36
+    Height = 40
     Top = 0
     Width = 1097
     Align = alTop
+    AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 36
+    ClientHeight = 40
     ClientWidth = 1097
     TabOrder = 0
     object OpenDataBtn: TSpeedButton
-      Left = 11
+      AnchorSideLeft.Control = FourDBar
+      AnchorSideTop.Control = RefreshToolbar
+      AnchorSideTop.Side = asrCenter
+      Left = 4
       Height = 25
-      Top = 7
+      Top = 6
       Width = 95
+      BorderSpacing.Left = 4
       Caption = 'Open Data'
       OnClick = OpenDataClick
     end
     object TRLabel: TLabel
-      Left = 152
+      AnchorSideLeft.Control = RefreshToolbar
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = RefreshToolbar
+      AnchorSideTop.Side = asrCenter
+      Left = 149
       Height = 16
-      Top = 15
+      Top = 10
       Width = 51
+      BorderSpacing.Left = 4
       Caption = 'TR (sec)'
       ParentColor = False
     end
     object PlotBtn: TSpeedButton
-      Left = 488
+      AnchorSideLeft.Control = HSpeedDrop
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = RefreshToolbar
+      AnchorSideTop.Side = asrCenter
+      Left = 418
       Height = 25
-      Top = 7
+      Top = 6
       Width = 63
+      BorderSpacing.Left = 6
       Caption = 'Plot'
       OnClick = PSPlotClick
     end
     object TextBtn: TSpeedButton
-      Left = 560
+      AnchorSideLeft.Control = PlotBtn
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = RefreshToolbar
+      AnchorSideTop.Side = asrCenter
+      Left = 487
       Height = 25
-      Top = 7
+      Top = 6
       Width = 80
+      BorderSpacing.Left = 6
       Caption = 'Text'
       OnClick = PSTextClick
     end
     object TREdit: TFloatSpinEdit
-      Left = 240
+      AnchorSideLeft.Control = TRLabel
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = RefreshToolbar
+      AnchorSideTop.Side = asrCenter
+      Left = 204
       Height = 21
-      Top = 9
+      Top = 8
       Width = 82
+      BorderSpacing.Left = 4
       DecimalPlaces = 4
-      Increment = 1
       MaxValue = 100000000
       MinValue = 0
       TabOrder = 0
       Value = 0
     end
     object HSpeedDrop: TComboBox
-      Left = 352
-      Height = 26
-      Top = 5
+      AnchorSideLeft.Control = TREdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = RefreshToolbar
+      AnchorSideTop.Side = asrCenter
+      Left = 292
+      Height = 20
+      Top = 8
       Width = 120
+      BorderSpacing.Left = 6
       ItemHeight = 26
       Items.Strings = (
         'To Fit'
@@ -101,45 +130,60 @@ object Graph4DForm: TGraph4DForm
       Text = '0'
     end
     object MinEdit: TFloatSpinEdit
-      Left = 656
+      AnchorSideLeft.Control = TextBtn
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = RefreshToolbar
+      AnchorSideTop.Side = asrCenter
+      Left = 573
       Height = 21
-      Top = 6
+      Top = 8
       Width = 82
+      BorderSpacing.Left = 6
       DecimalPlaces = 4
-      Increment = 1
       MaxValue = 100000
       MinValue = 0
       TabOrder = 2
       Value = 0
     end
     object MaxEdit: TFloatSpinEdit
-      Left = 768
+      AnchorSideLeft.Control = MinEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = RefreshToolbar
+      AnchorSideTop.Side = asrCenter
+      Left = 659
       Height = 21
-      Top = 6
+      Top = 8
       Width = 82
+      BorderSpacing.Left = 4
       DecimalPlaces = 4
-      Increment = 1
       MaxValue = 100000
       MinValue = 0
       TabOrder = 3
       Value = 0
     end
     object TrackBar1: TTrackBar
-      Left = 864
+      AnchorSideLeft.Control = MaxEdit
+      AnchorSideLeft.Side = asrBottom
+      Left = 747
       Height = 38
       Top = 2
       Width = 204
       OnChange = TrackBar1Change
       Position = 0
+      BorderSpacing.Left = 6
       TabOrder = 4
       Visible = False
     end
     object RefreshToolbar: TToolBar
-      Left = 108
+      AnchorSideLeft.Control = OpenDataBtn
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = FourDBar
+      Left = 103
       Height = 36
       Top = 0
       Width = 42
       Align = alNone
+      BorderSpacing.Left = 4
       ButtonHeight = 32
       ButtonWidth = 32
       Caption = 'RefreshToolbar'
@@ -215,6 +259,7 @@ object Graph4DForm: TGraph4DForm
     end
   end
   object SelectDirectoryDialog1: TSelectDirectoryDialog
-    left = 184
+    left = 96
+    top = 48
   end
 end

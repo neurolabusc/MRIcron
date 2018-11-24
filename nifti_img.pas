@@ -5577,10 +5577,12 @@ begin
 	 else
 		 lFileSz := (lnVol * lMultiImgSz) + lOffset;
 	 lVol := 1; //assume 1st volume
-         if {not l4D} lBackgroundImg.Prompt4DVolume then begin
+         if  lBackgroundImg.Prompt4DVolume then begin
 	    lVol := ReadIntForm.GetInt('Multi-volume file, please select volume to view.',1,1,lnVol);
                  application.processmessages;
          end;
+         if (lVol < 1) then lVol := 1;
+         if (lVol > lnVol) then lVol := lnVol;
   end else
 	  lFileSz := lMultiImgSzOff;
   if ((lFileSz) > lFSz) and (lImg2Load.gzBytesX = K_gzBytes_headerAndImageUncompressed) then begin
@@ -5902,9 +5904,10 @@ begin
               createLutLabel (lImg2Load.LUT, 1.0);
               lImg2Load.WindowScaledMin := kMin8bit;
              lImg2Load.WindowScaledMax := 255;
-              (*lImg2Load.WindowScaledMin := 0;//kMin8bit;
+             lImg2Load.UsesCustomPaletteRandomRainbow := true;//must be done - see Inia template
+              lImg2Load.WindowScaledMin := 0;//kMin8bit;
 	      lImg2Load.WindowScaledMax := 100;//255;
-              lImg2Load.UsesCustomPaletteRandomRainbow := true; *)
+              (*lImg2Load.UsesCustomPaletteRandomRainbow := true; *)
            end else begin
              lImg2Load.WindowScaledMin := kMin8bit;
              lImg2Load.WindowScaledMax := 255;

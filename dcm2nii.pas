@@ -39,9 +39,9 @@ type
     VerboseCheck: TCheckBox;
     //bidsCheck: TCheckBox;
     VerboseLabel: TLabel;
-    VerboseLabel1: TLabel;
+    BIDSLabel: TLabel;
     bidsCheck: TCheckBox;
-    //VerboseLabel1: TLabel;
+    //BIDSLabel: TLabel;
     //verboseCheck: TCheckBox;
     //VerboseLabel: TLabel;
     procedure compressCheckClick(Sender: TObject);
@@ -63,6 +63,7 @@ type
     function getExeName : string; //return path for command line tool
     procedure readIni (ForceReset: boolean); //load preferences
     procedure writeIni; //save preferences
+    function FindDicom2niixPath(const Executable: string): string;
    // procedure WMDropFiles(var Msg: TWMDropFiles); message WM_DROPFILES;
   private
     { private declarations }
@@ -95,7 +96,10 @@ implementation
     isAppDoneInitializing : boolean = false;
 
 {$IFDEF FPC}
-function FindDefaultExecutablePathX(const Executable: string): string;
+function Tdcm2niiForm.FindDicom2niixPath(const Executable: string): string;
+//function FindDicom2niixPath(const Executable: string): string;
+var
+  s: string;
 begin
      {$IFDEF Darwin}
      result := AppDir + kExeName;
@@ -103,15 +107,21 @@ begin
      {$ENDIF}
      result := FindDefaultExecutablePath(kExeName);
      if result = '' then
+        result := FindDefaultExecutablePath(ExtractFilePath(paramstr(0))+'Resources'+pathdelim+kExeName);
+     if result = '' then
         result := FindDefaultExecutablePath(ExtractFilePath  (paramstr(0)) +kExeName);
      if result = '' then
         result := FindDefaultExecutablePath(kExeName);
+     {$IFDEF Unix}
+     if (result = '') and (fileexists('/usr/local/bin/'+kExeName)) then
+        result := '/usr/local/bin/'+kExeName;
+     {$ENDIF}
      //Env:=GetEnvironmentVariableUTF8('PATH');
      //if result = '' then
      //   showmessage('mango:'+GetEnvironmentVariableUTF8('HOME'));
 end;
 {$ELSE}
-function FindDefaultExecutablePathX(const Executable: string): string;
+function Tdcm2niiForm.FindDicom2niixPath(const Executable: string): string;
 begin
      result := extractfilepath(paramstr(0))+kExeName+'.exe';
 end;
@@ -121,7 +131,7 @@ function Tdcm2niiForm.getExeName : string;
 var
   lF: string;
 begin
-     result := FindDefaultExecutablePathX(kExeName);
+     result := FindDicom2niixPath(kExeName);
      if not fileexists(result) then begin
         lF :=  ExtractFilePath (paramstr(0));
         result := lF+kExeName;

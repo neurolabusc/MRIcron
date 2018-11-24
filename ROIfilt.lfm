@@ -1,46 +1,57 @@
 object FilterROIform: TFilterROIform
   Left = 569
-  Height = 190
+  Height = 148
   Top = 107
-  Width = 240
+  Width = 297
   HorzScrollBar.Page = 209
   VertScrollBar.Page = 196
   ActiveControl = MinROIfilt
+  AutoSize = True
   BorderIcons = [biSystemMenu]
   BorderStyle = bsToolWindow
+  BorderWidth = 4
   Caption = 'Intensity filter'
-  ClientHeight = 190
-  ClientWidth = 240
-  Constraints.MaxHeight = 190
-  Constraints.MaxWidth = 240
-  Constraints.MinHeight = 190
+  ClientHeight = 148
+  ClientWidth = 297
   OnClose = FormClose
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.6.0.2'
+  LCLVersion = '2.1.0.0'
   object Label42: TLabel
-    Left = 4
-    Height = 17
-    Top = 14
-    Width = 101
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = MinROIfilt
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 16
+    Top = 10
+    Width = 90
+    BorderSpacing.Left = 4
     Caption = 'Min. Threshold'
     ParentColor = False
   end
   object FilterROIBtn: TSpeedButton
-    Left = 4
+    AnchorSideLeft.Control = Label42
+    AnchorSideTop.Control = Filter2NIfTIBtn
+    AnchorSideTop.Side = asrBottom
+    Left = 8
     Height = 25
-    Top = 143
-    Width = 221
+    Top = 87
+    Width = 280
+    BorderSpacing.Top = 4
+    Constraints.MinWidth = 280
     Caption = 'Filter VOI with highlighted'
     OnClick = FilterROIBtnClick
     ShowHint = True
     ParentShowHint = False
   end
   object Label43: TLabel
-    Left = 4
-    Height = 17
-    Top = 49
-    Width = 104
+    AnchorSideLeft.Control = Label42
+    AnchorSideTop.Control = MaxROIfilt
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 16
+    Top = 35
+    Width = 93
     Caption = 'Max. Threshold'
     Font.CharSet = 13
     ParentColor = False
@@ -48,38 +59,56 @@ object FilterROIform: TFilterROIform
   end
   object Filter2NIfTIBtn: TSpeedButton
     Tag = 128
-    Left = 4
+    AnchorSideLeft.Control = Label42
+    AnchorSideTop.Control = MaxROIfilt
+    AnchorSideTop.Side = asrBottom
+    Left = 8
     Height = 25
-    Top = 107
-    Width = 221
+    Top = 58
+    Width = 280
+    BorderSpacing.Top = 4
+    Constraints.MinWidth = 280
     Caption = 'Save highlighted as NIfTI or VOI'
     OnClick = Filter2NIfTIBtnClick
     ShowHint = True
     ParentShowHint = False
   end
   object FiltROILabel: TLabel
+    AnchorSideLeft.Control = Label42
+    AnchorSideTop.Control = FilterROIBtn
+    AnchorSideTop.Side = asrBottom
     Left = 8
-    Height = 17
-    Top = 81
-    Width = 28
+    Height = 16
+    Top = 116
+    Width = 25
+    BorderSpacing.Top = 4
     Caption = '       '
     ParentColor = False
   end
   object MinROIfilt: TSpinEdit
-    Left = 120
-    Height = 27
-    Top = 7
+    AnchorSideLeft.Control = Label42
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    Left = 104
+    Height = 21
+    Top = 8
     Width = 64
+    BorderSpacing.Left = 6
+    BorderSpacing.Top = 4
     MaxValue = 254
     OnChange = MinROIfiltChange
     TabOrder = 0
     Value = 100
   end
   object MaxROIfilt: TSpinEdit
-    Left = 120
-    Height = 27
-    Top = 42
+    AnchorSideLeft.Control = MinROIfilt
+    AnchorSideTop.Control = MinROIfilt
+    AnchorSideTop.Side = asrBottom
+    Left = 104
+    Height = 21
+    Top = 33
     Width = 64
+    BorderSpacing.Top = 4
     MaxValue = 255
     OnChange = MinROIfiltChange
     TabOrder = 1

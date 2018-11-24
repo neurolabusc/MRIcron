@@ -54,6 +54,37 @@ begin
      result := true;
 end;
 
+{$IFDEF Windows}
+procedure riteln(S: string);
+begin
+  //showmessage(S);
+end;
+procedure RunCmd (lCmd: string);
+const
+  FSLOUTPUTTYPE = 'FSLOUTPUTTYPE=NIFTI_GZ';
+ var
+ AProcess: TProcess;
+ i: integer;
+   AStringList: TStringList;
+   //PATH,FSLDIR,lS,FULL,FSLDIRBIN: string;
+ begin
+   AProcess := TProcess.Create(nil);
+   AStringList := TStringList.Create;
+   AProcess.Environment.Add(FSLOUTPUTTYPE);
+   AProcess.CommandLine := lCmd;
+   AProcess.Options := AProcess.Options + [poNoConsole,poWaitOnExit, poStderrToOutPut, poUsePipes];
+   riteln(AProcess.CommandLine);
+   {$IFDEF GUI}application.processmessages;{$ENDIF}
+   AProcess.Execute;
+   AStringList.LoadFromStream(AProcess.Output);
+   if AStringList.Count > 0 then
+      for i := 1 to AStringList.Count do
+       riteln(AStringList.Strings[i-1]);
+   AStringList.Free;
+   AProcess.Free;
+end;
+
+{$ELSE}
 procedure RunCmd (lCmd: string);
  var
  AProcess: TProcess;
@@ -133,7 +164,7 @@ procedure RunCmd (lCmd: string);
    AStringList.Free;
    AProcess.Free;
  end;
-
+ {$ENDIF}
 (*procedure RunCmdX;
  var
    AProcess: TProcess;
@@ -165,15 +196,20 @@ var
   lCmd: string;
 begin
      result := false;
-     lCmd :=  extractfilepath(paramstr(0))+'bet';
+     {$IFNDEF Unix}
+     lCmd :=  extractfilepath(paramstr(0))+'Resources'+pathdelim+'bet2.exe';
+     if not fileexists(lCmd) then
+        lCmd :=  extractfilepath(paramstr(0))+'bet2.exe';
+      lCmd := lCmd+' "'+lInFile+'" "'+lOutFile +'" -f '+floattostr(lFrac);
+     {$ELSE}
+     lCmd :=  extractfilepath(paramstr(0))+'Resources'+pathdelim+'bet';
+     if not fileexists(lCmd) then
+        lCmd :=  extractfilepath(paramstr(0))+'bet';
      {$IFDEF Darwin}
      if not fileexists(lCmd) then
         lCmd := AppDir + 'bet';
      //showmessage(gTemplateDir);
      {$ENDIF}
-     {$IFNDEF Unix}
-         lCmd := lCmd+'.exe';
-     {$ELSE}
      if not fileexists(lCmd) then begin
         lCmd := (gBGImg.FSLBASE+'/bin/bet');
         if fileexists(lCmd) then
@@ -182,7 +218,7 @@ begin
          BETForm.Memo1.Lines.Add('Unable to find executable suggested by mricron.ini file [FSLBASE] '+lCmd)
 
      end;
-     {$ENDIF}
+
      if not PathExists (lCmd) then begin
         lCmd := '/usr/local/fsl/bin/bet_8UI';
         if not PathExists (lCmd) then begin
@@ -191,7 +227,8 @@ begin
                  exit;
         end;
      end; //no bet in home folder...
-  lCmd := lCmd+' "'+lInFile+'" "'+lOutFile +'" -R -f '+floattostr(lFrac);
+      lCmd := lCmd+' "'+lInFile+'" "'+lOutFile +'" -R -f '+floattostr(lFrac);
+     {$ENDIF}
 
   RunCmd(lCmd);
   (*AProcess := TProcess.Create(nil);

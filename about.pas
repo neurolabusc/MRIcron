@@ -15,7 +15,6 @@ type
   TAboutForm = class(TForm)
     HomepageLabel: TLabel;
     Label1: TLabel;
-    Panel2: TPanel;
     ThreadLabel: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure HomePageClick(Sender: TObject);

@@ -1,28 +1,42 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('TFilterROIform','FORMDATA',[
-  'TPF0'#14'TFilterROIform'#13'FilterROIform'#4'Left'#3'9'#2#6'Height'#3#190#0#3
-  +'Top'#2'k'#5'Width'#3#240#0#18'HorzScrollBar.Page'#3#209#0#18'VertScrollBar.'
-  +'Page'#3#196#0#13'ActiveControl'#7#10'MinROIfilt'#11'BorderIcons'#11#12'biSy'
-  +'stemMenu'#0#11'BorderStyle'#7#12'bsToolWindow'#7'Caption'#6#16'Intensity fi'
-  +'lter'#12'ClientHeight'#3#190#0#11'ClientWidth'#3#240#0#21'Constraints.MaxHe'
-  +'ight'#3#190#0#20'Constraints.MaxWidth'#3#240#0#21'Constraints.MinHeight'#3
-  +#190#0#7'OnClose'#7#9'FormClose'#6'OnShow'#7#8'FormShow'#8'Position'#7#14'po'
-  +'ScreenCenter'#10'LCLVersion'#6#7'1.6.0.2'#0#6'TLabel'#7'Label42'#4'Left'#2#4
-  +#6'Height'#2#17#3'Top'#2#14#5'Width'#2'e'#7'Caption'#6#14'Min. Threshold'#11
-  +'ParentColor'#8#0#0#12'TSpeedButton'#12'FilterROIBtn'#4'Left'#2#4#6'Height'#2
-  +#25#3'Top'#3#143#0#5'Width'#3#221#0#7'Caption'#6#27'Filter VOI with highligh'
-  +'ted'#7'OnClick'#7#17'FilterROIBtnClick'#8'ShowHint'#9#14'ParentShowHint'#8#0
-  +#0#6'TLabel'#7'Label43'#4'Left'#2#4#6'Height'#2#17#3'Top'#2'1'#5'Width'#2'h'
-  +#7'Caption'#6#14'Max. Threshold'#12'Font.CharSet'#2#13#11'ParentColor'#8#10
-  +'ParentFont'#8#0#0#12'TSpeedButton'#15'Filter2NIfTIBtn'#3'Tag'#3#128#0#4'Lef'
-  +'t'#2#4#6'Height'#2#25#3'Top'#2'k'#5'Width'#3#221#0#7'Caption'#6' Save highl'
-  +'ighted as NIfTI or VOI'#7'OnClick'#7#20'Filter2NIfTIBtnClick'#8'ShowHint'#9
-  +#14'ParentShowHint'#8#0#0#6'TLabel'#12'FiltROILabel'#4'Left'#2#8#6'Height'#2
-  +#17#3'Top'#2'Q'#5'Width'#2#28#7'Caption'#6#7'       '#11'ParentColor'#8#0#0#9
-  +'TSpinEdit'#10'MinROIfilt'#4'Left'#2'x'#6'Height'#2#27#3'Top'#2#7#5'Width'#2
-  +'@'#8'MaxValue'#3#254#0#8'OnChange'#7#16'MinROIfiltChange'#8'TabOrder'#2#0#5
-  +'Value'#2'd'#0#0#9'TSpinEdit'#10'MaxROIfilt'#4'Left'#2'x'#6'Height'#2#27#3'T'
-  +'op'#2'*'#5'Width'#2'@'#8'MaxValue'#3#255#0#8'OnChange'#7#16'MinROIfiltChang'
-  +'e'#8'TabOrder'#2#1#5'Value'#3#255#0#0#0#0
+  'TPF0'#14'TFilterROIform'#13'FilterROIform'#4'Left'#3'9'#2#6'Height'#3#148#0#3
+  +'Top'#2'k'#5'Width'#3')'#1#18'HorzScrollBar.Page'#3#209#0#18'VertScrollBar.P'
+  +'age'#3#196#0#13'ActiveControl'#7#10'MinROIfilt'#8'AutoSize'#9#11'BorderIcon'
+  +'s'#11#12'biSystemMenu'#0#11'BorderStyle'#7#12'bsToolWindow'#11'BorderWidth'
+  +#2#4#7'Caption'#6#16'Intensity filter'#12'ClientHeight'#3#148#0#11'ClientWid'
+  +'th'#3')'#1#7'OnClose'#7#9'FormClose'#6'OnShow'#7#8'FormShow'#8'Position'#7
+  +#14'poScreenCenter'#10'LCLVersion'#6#7'2.1.0.0'#0#6'TLabel'#7'Label42'#22'An'
+  +'chorSideLeft.Control'#7#5'Owner'#21'AnchorSideTop.Control'#7#10'MinROIfilt'
+  +#18'AnchorSideTop.Side'#7#9'asrCenter'#4'Left'#2#8#6'Height'#2#16#3'Top'#2#10
+  +#5'Width'#2'Z'#18'BorderSpacing.Left'#2#4#7'Caption'#6#14'Min. Threshold'#11
+  +'ParentColor'#8#0#0#12'TSpeedButton'#12'FilterROIBtn'#22'AnchorSideLeft.Cont'
+  +'rol'#7#7'Label42'#21'AnchorSideTop.Control'#7#15'Filter2NIfTIBtn'#18'Anchor'
+  +'SideTop.Side'#7#9'asrBottom'#4'Left'#2#8#6'Height'#2#25#3'Top'#2'W'#5'Width'
+  +#3#24#1#17'BorderSpacing.Top'#2#4#20'Constraints.MinWidth'#3#24#1#7'Caption'
+  +#6#27'Filter VOI with highlighted'#7'OnClick'#7#17'FilterROIBtnClick'#8'Show'
+  +'Hint'#9#14'ParentShowHint'#8#0#0#6'TLabel'#7'Label43'#22'AnchorSideLeft.Con'
+  +'trol'#7#7'Label42'#21'AnchorSideTop.Control'#7#10'MaxROIfilt'#18'AnchorSide'
+  +'Top.Side'#7#9'asrCenter'#4'Left'#2#8#6'Height'#2#16#3'Top'#2'#'#5'Width'#2
+  +']'#7'Caption'#6#14'Max. Threshold'#12'Font.CharSet'#2#13#11'ParentColor'#8
+  +#10'ParentFont'#8#0#0#12'TSpeedButton'#15'Filter2NIfTIBtn'#3'Tag'#3#128#0#22
+  +'AnchorSideLeft.Control'#7#7'Label42'#21'AnchorSideTop.Control'#7#10'MaxROIf'
+  +'ilt'#18'AnchorSideTop.Side'#7#9'asrBottom'#4'Left'#2#8#6'Height'#2#25#3'Top'
+  +#2':'#5'Width'#3#24#1#17'BorderSpacing.Top'#2#4#20'Constraints.MinWidth'#3#24
+  +#1#7'Caption'#6' Save highlighted as NIfTI or VOI'#7'OnClick'#7#20'Filter2NI'
+  +'fTIBtnClick'#8'ShowHint'#9#14'ParentShowHint'#8#0#0#6'TLabel'#12'FiltROILab'
+  +'el'#22'AnchorSideLeft.Control'#7#7'Label42'#21'AnchorSideTop.Control'#7#12
+  +'FilterROIBtn'#18'AnchorSideTop.Side'#7#9'asrBottom'#4'Left'#2#8#6'Height'#2
+  +#16#3'Top'#2't'#5'Width'#2#25#17'BorderSpacing.Top'#2#4#7'Caption'#6#7'     '
+  +'  '#11'ParentColor'#8#0#0#9'TSpinEdit'#10'MinROIfilt'#22'AnchorSideLeft.Con'
+  +'trol'#7#7'Label42'#19'AnchorSideLeft.Side'#7#9'asrBottom'#21'AnchorSideTop.'
+  +'Control'#7#5'Owner'#4'Left'#2'h'#6'Height'#2#21#3'Top'#2#8#5'Width'#2'@'#18
+  +'BorderSpacing.Left'#2#6#17'BorderSpacing.Top'#2#4#8'MaxValue'#3#254#0#8'OnC'
+  +'hange'#7#16'MinROIfiltChange'#8'TabOrder'#2#0#5'Value'#2'd'#0#0#9'TSpinEdit'
+  +#10'MaxROIfilt'#22'AnchorSideLeft.Control'#7#10'MinROIfilt'#21'AnchorSideTop'
+  +'.Control'#7#10'MinROIfilt'#18'AnchorSideTop.Side'#7#9'asrBottom'#4'Left'#2
+  +'h'#6'Height'#2#21#3'Top'#2'!'#5'Width'#2'@'#17'BorderSpacing.Top'#2#4#8'Max'
+  +'Value'#3#255#0#8'OnChange'#7#16'MinROIfiltChange'#8'TabOrder'#2#1#5'Value'#3
+  +#255#0#0#0#0
 ]);

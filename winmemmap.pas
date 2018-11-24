@@ -39,7 +39,8 @@ Uses
    Classes,Windows;
 Const
  {$IFDEF WIN64} // magic constants... http://www.viva64.com/en/b/0022/
-     hMemMap = $FFFFFFFFFFFFFFFF;
+     //hMemMap = $FFFFFFFFFFFFFFFF;
+     hMemMap : UINT64 = high(UINT64);
  {$ELSE}
     hMemMap = $FFFFFFFF;
  {$ENDIF}

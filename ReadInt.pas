@@ -19,6 +19,7 @@ type
     function GetInt(lStr: string; lMin,lDefault,lMax: integer): integer;
     procedure OKBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure ReadIntLabelClick(Sender: TObject);
 	  private
 	{ Private declarations }
   public
@@ -38,15 +39,18 @@ uses nifti_img_view,{license,} MultiSlice, render;
 {$ENDIF}
  function TReadIntForm.GetInt(lStr: string; lMin,lDefault,lMax: integer): integer;
  begin
-	  //result := lDefault;
-      ReadIntLabel.caption := lStr+' ['+inttostr(lMin)+'..'+inttostr(lMax)+']';
-	  ReadIntEdit.MinValue := lMin;
-	  ReadIntEdit.MaxValue := lMax;
-	  ReadIntEdit.Value := lDefault;
-   //ReadIntForm.OKBtn.Focused := true;
-     //ReadIntForm.OKBtn.SetFocus;
-	  ReadIntForm.ShowModal;
-	  result :=  ReadIntEdit.Value;
+    //result := lDefault;
+    ReadIntLabel.caption := lStr+' ['+inttostr(lMin)+'..'+inttostr(lMax)+']';
+    ReadIntEdit.MinValue := lMin;
+    ReadIntEdit.MaxValue := lMax;
+    ReadIntEdit.Value := lDefault;
+    //ReadIntForm.OKBtn.Focused := true;
+    //ReadIntForm.OKBtn.SetFocus;
+    ReadIntForm.ShowModal;
+    result :=  ReadIntEdit.Value;
+    if (result < lMin) then result := lMin;
+    if (result > lMax) then result := lMax;
+
  end;
 
  procedure TReadIntForm.FormShow(Sender: TObject);
@@ -69,6 +73,11 @@ begin
 		//gBGImg.LicenseID := 1626;
 		//ImgForm.Exit1Click(nil);
 	 end;
+end;
+
+procedure TReadIntForm.ReadIntLabelClick(Sender: TObject);
+begin
+
 end;
 
 {$IFDEF FPC}

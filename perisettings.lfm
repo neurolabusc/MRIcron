@@ -1,125 +1,171 @@
 object PSForm: TPSForm
-  Left = 1058
-  Height = 398
-  Top = 420
-  Width = 370
+  Left = 366
+  Height = 246
+  Top = 180
+  Width = 334
   HorzScrollBar.Page = 369
   VertScrollBar.Page = 418
   ActiveControl = BinWidthEdit
+  AutoSize = True
+  BorderWidth = 4
   Caption = 'Peristimulus Plot'
-  ClientHeight = 398
-  ClientWidth = 370
-  Constraints.MaxHeight = 398
-  Constraints.MaxWidth = 370
-  Constraints.MinHeight = 398
-  Constraints.MinWidth = 370
+  ClientHeight = 246
+  ClientWidth = 334
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '0.9.29'
+  LCLVersion = '2.1.0.0'
   object Label1: TLabel
-    Left = 40
-    Height = 14
-    Top = 25
-    Width = 71
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = BinWidthEdit
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 16
+    Top = 10
+    Width = 91
+    BorderSpacing.Left = 4
     Caption = 'Bin width (sec)'
     ParentColor = False
   end
   object Label2: TLabel
-    Left = 40
-    Height = 14
-    Top = 62
-    Width = 134
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = PreBinEdit
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 16
+    Top = 35
+    Width = 173
     Caption = 'Number of pre-stimulus bins'
     ParentColor = False
   end
   object Label3: TLabel
-    Left = 40
-    Height = 14
-    Top = 101
-    Width = 139
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = PostBinEdit
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 16
+    Top = 60
+    Width = 180
     Caption = 'Number of post-stimulus bins'
     ParentColor = False
   end
   object BinWidthEdit: TFloatSpinEdit
-    Left = 232
+    AnchorSideLeft.Control = Label3
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    Left = 194
     Height = 21
-    Top = 16
+    Top = 8
     Width = 130
+    BorderSpacing.Left = 6
+    BorderSpacing.Top = 4
     DecimalPlaces = 4
-    Increment = 1
-    MaxValue = 100
     MinValue = 0
     TabOrder = 0
     Value = 0
   end
   object PreBinEdit: TSpinEdit
-    Left = 232
+    AnchorSideLeft.Control = BinWidthEdit
+    AnchorSideTop.Control = BinWidthEdit
+    AnchorSideTop.Side = asrBottom
+    Left = 194
     Height = 21
-    Top = 53
+    Top = 33
     Width = 130
+    BorderSpacing.Top = 4
     MinValue = 1
     TabOrder = 1
     Value = 4
   end
   object PostBinEdit: TSpinEdit
-    Left = 232
+    AnchorSideLeft.Control = BinWidthEdit
+    AnchorSideTop.Control = PreBinEdit
+    AnchorSideTop.Side = asrBottom
+    Left = 194
     Height = 21
-    Top = 92
+    Top = 58
     Width = 130
+    BorderSpacing.Top = 4
     MinValue = 1
     TabOrder = 2
     Value = 14
   end
   object SliceTImeCheck: TCheckBox
-    Left = 40
-    Height = 17
-    Top = 132
-    Width = 139
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = PostBinEdit
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 18
+    Top = 83
+    Width = 167
+    BorderSpacing.Top = 4
     Caption = 'Data slice-time corrected'
     TabOrder = 3
   end
   object SavePSVolCheck: TCheckBox
-    Left = 40
-    Height = 17
-    Top = 164
-    Width = 145
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = SliceTImeCheck
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 18
+    Top = 105
+    Width = 172
+    BorderSpacing.Top = 4
     Caption = 'Save peristimulus volumes'
     TabOrder = 4
   end
   object OKBtn: TButton
-    Left = 280
+    AnchorSideTop.Control = ModelCheck
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 251
     Height = 25
-    Top = 360
+    Top = 215
     Width = 75
+    Anchors = [akTop, akRight]
+    BorderSpacing.Top = 4
+    BorderSpacing.Right = 4
     BorderSpacing.InnerBorder = 4
     Caption = 'OK'
     ModalResult = 1
     TabOrder = 5
   end
   object PctSignalCheck: TCheckBox
-    Left = 40
-    Height = 17
-    Top = 200
-    Width = 62
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = SavePSVolCheck
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 18
+    Top = 127
+    Width = 71
+    BorderSpacing.Top = 4
     Caption = '% Signal'
     Checked = True
     State = cbChecked
     TabOrder = 6
   end
   object ModelCheck: TCheckBox
-    Left = 80
-    Height = 17
-    Top = 320
-    Width = 192
+    AnchorSideLeft.Control = TDCheck
+    AnchorSideTop.Control = TDCheck
+    AnchorSideTop.Side = asrBottom
+    Left = 20
+    Height = 18
+    Top = 193
+    Width = 223
+    BorderSpacing.Top = 4
     Caption = 'Report modeled, not observed data'
     TabOrder = 7
     Visible = False
   end
   object RegressCheck: TCheckBox
-    Left = 40
-    Height = 17
-    Top = 240
-    Width = 116
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = PctSignalCheck
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 18
+    Top = 149
+    Width = 134
+    BorderSpacing.Top = 4
     Caption = 'Remove Regressors'
     Checked = True
     OnClick = RegressCheckClick
@@ -127,10 +173,15 @@ object PSForm: TPSForm
     TabOrder = 8
   end
   object TDCheck: TCheckBox
-    Left = 80
-    Height = 17
-    Top = 280
-    Width = 181
+    AnchorSideLeft.Control = RegressCheck
+    AnchorSideTop.Control = RegressCheck
+    AnchorSideTop.Side = asrBottom
+    Left = 20
+    Height = 18
+    Top = 171
+    Width = 211
+    BorderSpacing.Left = 12
+    BorderSpacing.Top = 4
     Caption = 'Also Remove Temporal Derivative'
     Checked = True
     State = cbChecked

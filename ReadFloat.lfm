@@ -1,8 +1,8 @@
 object ReadFloatForm: TReadFloatForm
   Tag = 321
-  Left = 335
+  Left = 369
   Height = 95
-  Top = 308
+  Top = 410
   Width = 620
   HorzScrollBar.Page = 464
   VertScrollBar.Page = 94
@@ -11,38 +11,51 @@ object ReadFloatForm: TReadFloatForm
   Caption = 'Real number required'
   ClientHeight = 95
   ClientWidth = 620
-  Constraints.MaxHeight = 95
-  Constraints.MaxWidth = 620
-  Constraints.MinHeight = 95
   Constraints.MinWidth = 620
   Position = poScreenCenter
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '2.1.0.0'
   object ReadFloatLabel: TLabel
-    Left = 16
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ReadFloatEdit
+    AnchorSideTop.Side = asrCenter
+    Left = 4
     Height = 16
-    Top = 15
-    Width = 97
+    Top = 6
+    Width = 93
     Alignment = taRightJustify
+    BorderSpacing.Left = 4
     Caption = 'Enter a number'
     ParentColor = False
   end
   object OKBtn: TButton
-    Left = 488
+    AnchorSideTop.Control = ReadFloatEdit
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 541
     Height = 25
-    Top = 55
+    Top = 29
     Width = 75
+    Anchors = [akTop, akRight]
+    BorderSpacing.Top = 4
+    BorderSpacing.Right = 4
     BorderSpacing.InnerBorder = 4
     Caption = 'OK'
     OnClick = OKBtnClick
     TabOrder = 0
   end
   object ReadFloatEdit: TFloatSpinEdit
-    Left = 472
-    Height = 16
-    Top = 15
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 497
+    Height = 21
+    Top = 4
     Width = 119
+    Anchors = [akTop, akRight]
+    BorderSpacing.Top = 4
+    BorderSpacing.Right = 4
     DecimalPlaces = 4
-    Increment = 1
     MaxValue = 9999999999999
     MinValue = -9999999999999
     TabOrder = 1

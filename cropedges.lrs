@@ -1,32 +1,54 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('TCropEdgeForm','FORMDATA',[
-  'TPF0'#13'TCropEdgeForm'#12'CropEdgeForm'#4'Left'#3'h'#3#6'Height'#3#142#0#3
-  +'Top'#3#203#0#5'Width'#3#142#1#13'ActiveControl'#7#5'DEdit'#11'BorderIcons'
-  +#11#12'biSystemMenu'#0#11'BorderStyle'#7#8'bsDialog'#7'Caption'#6#10'Crop Ed'
-  +'ges'#12'ClientHeight'#3#142#0#11'ClientWidth'#3#142#1#21'Constraints.MaxHei'
-  +'ght'#3'A'#1#20'Constraints.MaxWidth'#3#142#1#21'Constraints.MinHeight'#2#12
-  +#20'Constraints.MinWidth'#3#142#1#8'OnCreate'#7#10'FormCreate'#6'OnHide'#7#8
-  +'FormHide'#6'OnShow'#7#8'FormShow'#8'Position'#7#14'poScreenCenter'#10'LCLVe'
-  +'rsion'#6#7'1.9.0.0'#0#12'TSpeedButton'#9'CancelBtn'#4'Left'#3'@'#1#6'Height'
-  +#2#25#3'Top'#2'h'#5'Width'#2'A'#7'Caption'#6#6'Cancel'#7'OnClick'#7#14'Cance'
-  +'lBtnClick'#0#0#12'TSpeedButton'#8'ApplyBtn'#4'Left'#3#0#1#6'Height'#2#25#3
-  +'Top'#2'h'#5'Width'#2'A'#7'Caption'#6#5'Apply'#7'OnClick'#7#13'ApplyBtnClick'
-  +#0#0#12'TSpeedButton'#13'CropFileSzBtn'#4'Left'#3#136#0#6'Height'#2#25#3'Top'
-  +#2'h'#5'Width'#2'i'#7'Caption'#6#12'Save Cropped'#7'OnClick'#7#18'CropFileSz'
-  +'BtnClick'#0#0#9'TSpinEdit'#5'DEdit'#4'Left'#2'9'#6'Height'#2#16#3'Top'#2#8#5
-  +'Width'#2'H'#8'MaxValue'#3#15''''#8'OnChange'#7#14'CropEditChange'#8'TabOrde'
-  +'r'#2#0#5'Value'#2#8#0#0#9'TSpinEdit'#5'PEdit'#4'Left'#2#8#6'Height'#2#16#3
-  +'Top'#2')'#5'Width'#2'H'#8'MaxValue'#3#15''''#8'OnChange'#7#14'CropEditChang'
-  +'e'#8'TabOrder'#2#1#5'Value'#2#8#0#0#9'TSpinEdit'#5'AEdit'#4'Left'#2'h'#6'He'
-  +'ight'#2#16#3'Top'#2')'#5'Width'#2'H'#8'MaxValue'#3#15''''#8'OnChange'#7#14
-  +'CropEditChange'#8'TabOrder'#2#2#5'Value'#2#8#0#0#9'TSpinEdit'#5'VEdit'#4'Le'
-  +'ft'#2'9'#6'Height'#2#16#3'Top'#2'I'#5'Width'#2'H'#8'MaxValue'#3#15''''#8'On'
-  +'Change'#7#14'CropEditChange'#8'TabOrder'#2#3#5'Value'#2#8#0#0#9'TSpinEdit'#5
-  +'REdit'#4'Left'#3'7'#1#6'Height'#2#16#3'Top'#2')'#5'Width'#2'H'#8'MaxValue'#3
+  'TPF0'#13'TCropEdgeForm'#12'CropEdgeForm'#4'Left'#3'w'#2#6'Height'#3#146#0#3
+  +'Top'#3#197#0#5'Width'#3#142#1#13'ActiveControl'#7#5'DEdit'#8'AutoSize'#9#11
+  +'BorderIcons'#11#12'biSystemMenu'#0#11'BorderStyle'#7#8'bsDialog'#11'BorderW'
+  +'idth'#2#4#7'Caption'#6#10'Crop Edges'#12'ClientHeight'#3#146#0#11'ClientWid'
+  +'th'#3#142#1#8'OnCreate'#7#10'FormCreate'#6'OnHide'#7#8'FormHide'#6'OnShow'#7
+  +#8'FormShow'#8'Position'#7#14'poScreenCenter'#10'LCLVersion'#6#7'2.1.0.0'#0
+  +#12'TSpeedButton'#9'CancelBtn'#21'AnchorSideTop.Control'#7#5'VEdit'#18'Ancho'
+  +'rSideTop.Side'#7#9'asrBottom'#23'AnchorSideRight.Control'#7#5'Owner'#20'Anc'
+  +'horSideRight.Side'#7#9'asrBottom'#4'Left'#3'6'#1#6'Height'#2#20#3'Top'#2'K'
+  +#5'Width'#2'P'#7'Anchors'#11#5'akTop'#7'akRight'#0#8'AutoSize'#9#17'BorderSp'
+  +'acing.Top'#2#4#19'BorderSpacing.Right'#2#4#20'Constraints.MinWidth'#2'P'#7
+  +'Caption'#6#8' Cancel '#7'OnClick'#7#14'CancelBtnClick'#0#0#12'TSpeedButton'
+  +#8'ApplyBtn'#21'AnchorSideTop.Control'#7#9'CancelBtn'#18'AnchorSideTop.Side'
+  +#7#9'asrCenter'#23'AnchorSideRight.Control'#7#9'CancelBtn'#4'Left'#3#226#0#6
+  +'Height'#2#20#3'Top'#2'K'#5'Width'#2'P'#7'Anchors'#11#5'akTop'#7'akRight'#0#8
+  +'AutoSize'#9#19'BorderSpacing.Right'#2#4#20'Constraints.MinWidth'#2'P'#7'Cap'
+  +'tion'#6#7' Apply '#7'OnClick'#7#13'ApplyBtnClick'#0#0#12'TSpeedButton'#13'C'
+  +'ropFileSzBtn'#21'AnchorSideTop.Control'#7#9'CancelBtn'#18'AnchorSideTop.Sid'
+  +'e'#7#9'asrCenter'#23'AnchorSideRight.Control'#7#8'ApplyBtn'#4'Left'#2'~'#6
+  +'Height'#2#20#3'Top'#2'K'#5'Width'#2'`'#7'Anchors'#11#5'akTop'#7'akRight'#0#8
+  +'AutoSize'#9#19'BorderSpacing.Right'#2#4#20'Constraints.MinWidth'#2'P'#7'Cap'
+  +'tion'#6#14' Save Cropped '#7'OnClick'#7#18'CropFileSzBtnClick'#0#0#9'TSpinE'
+  +'dit'#5'DEdit'#22'AnchorSideLeft.Control'#7#5'PEdit'#19'AnchorSideLeft.Side'
+  +#7#9'asrBottom'#21'AnchorSideTop.Control'#7#5'Owner'#4'Left'#2'T'#6'Height'#2
+  +#21#3'Top'#2#8#5'Width'#2'H'#18'BorderSpacing.Left'#2#4#17'BorderSpacing.Top'
+  +#2#4#8'MaxValue'#3#15''''#8'OnChange'#7#14'CropEditChange'#8'TabOrder'#2#0#5
+  +'Value'#2#8#0#0#9'TSpinEdit'#5'PEdit'#22'AnchorSideLeft.Control'#7#5'Owner'
+  +#21'AnchorSideTop.Control'#7#5'DEdit'#18'AnchorSideTop.Side'#7#9'asrBottom'#4
+  +'Left'#2#8#6'Height'#2#21#3'Top'#2#29#5'Width'#2'H'#18'BorderSpacing.Left'#2
+  +#4#8'MaxValue'#3#15''''#8'OnChange'#7#14'CropEditChange'#8'TabOrder'#2#1#5'V'
+  +'alue'#2#8#0#0#9'TSpinEdit'#5'AEdit'#22'AnchorSideLeft.Control'#7#5'DEdit'#19
+  +'AnchorSideLeft.Side'#7#9'asrBottom'#21'AnchorSideTop.Control'#7#5'PEdit'#18
+  +'AnchorSideTop.Side'#7#9'asrCenter'#4'Left'#3#160#0#6'Height'#2#21#3'Top'#2
+  +#29#5'Width'#2'H'#18'BorderSpacing.Left'#2#4#8'MaxValue'#3#15''''#8'OnChange'
+  +#7#14'CropEditChange'#8'TabOrder'#2#2#5'Value'#2#8#0#0#9'TSpinEdit'#5'VEdit'
+  +#22'AnchorSideLeft.Control'#7#5'DEdit'#21'AnchorSideTop.Control'#7#5'PEdit'
+  +#18'AnchorSideTop.Side'#7#9'asrBottom'#4'Left'#2'T'#6'Height'#2#21#3'Top'#2
+  +'2'#5'Width'#2'H'#8'MaxValue'#3#15''''#8'OnChange'#7#14'CropEditChange'#8'Ta'
+  +'bOrder'#2#3#5'Value'#2#8#0#0#9'TSpinEdit'#5'REdit'#22'AnchorSideLeft.Contro'
+  +'l'#7#5'LEdit'#19'AnchorSideLeft.Side'#7#9'asrBottom'#21'AnchorSideTop.Contr'
+  +'ol'#7#5'PEdit'#18'AnchorSideTop.Side'#7#9'asrCenter'#4'Left'#3'F'#1#6'Heigh'
+  +'t'#2#21#3'Top'#2#29#5'Width'#2'H'#18'BorderSpacing.Left'#2#4#8'MaxValue'#3
   +#15''''#8'OnChange'#7#14'CropEditChange'#8'TabOrder'#2#4#5'Value'#2#8#0#0#9
-  +'TSpinEdit'#5'LEdit'#4'Left'#3#224#0#6'Height'#2#16#3'Top'#2')'#5'Width'#2'H'
-  +#8'MaxValue'#3#15''''#8'OnChange'#7#14'CropEditChange'#8'TabOrder'#2#5#5'Val'
-  +'ue'#2#8#0#0#6'TTimer'#6'Timer1'#7'Enabled'#8#8'Interval'#3#150#0#7'OnTimer'
-  +#7#11'Timer1Timer'#4'left'#3'H'#1#3'top'#2'H'#0#0#0
+  +'TSpinEdit'#5'LEdit'#22'AnchorSideLeft.Control'#7#5'AEdit'#19'AnchorSideLeft'
+  +'.Side'#7#9'asrBottom'#21'AnchorSideTop.Control'#7#5'PEdit'#18'AnchorSideTop'
+  +'.Side'#7#9'asrCenter'#4'Left'#3#250#0#6'Height'#2#21#3'Top'#2#29#5'Width'#2
+  +'H'#18'BorderSpacing.Left'#2#18#8'MaxValue'#3#15''''#8'OnChange'#7#14'CropEd'
+  +'itChange'#8'TabOrder'#2#5#5'Value'#2#8#0#0#6'TTimer'#6'Timer1'#7'Enabled'#8
+  +#8'Interval'#3#150#0#7'OnTimer'#7#11'Timer1Timer'#4'left'#2#24#3'top'#2'8'#0
+  +#0#0
 ]);

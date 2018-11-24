@@ -4,51 +4,55 @@ object AboutForm: TAboutForm
   Height = 174
   Top = 223
   Width = 727
+  AutoSize = True
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
+  BorderWidth = 4
   Caption = 'About...'
   ClientHeight = 174
   ClientWidth = 727
+  Constraints.MinHeight = 120
+  Constraints.MinWidth = 600
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '1.9.0.0'
-  object Panel2: TPanel
-    Left = 0
-    Height = 99
-    Top = 75
-    Width = 727
-    Align = alBottom
-    ClientHeight = 99
-    ClientWidth = 727
-    TabOrder = 0
-    object HomepageLabel: TLabel
-      Left = 16
-      Height = 16
-      Top = 8
-      Width = 46
-      Alignment = taCenter
-      Caption = 'version'
-      ParentColor = False
-      OnClick = HomePageClick
-    end
-    object ThreadLabel: TLabel
-      Left = 8
-      Height = 16
-      Top = 48
-      Width = 55
-      Alignment = taCenter
-      Caption = ' Threads'
-      ParentColor = False
-    end
-  end
+  LCLVersion = '2.1.0.0'
   object Label1: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
     Left = 8
     Height = 43
     Top = 8
-    Width = 142
+    Width = 129
+    BorderSpacing.Left = 4
+    BorderSpacing.Top = 4
     Caption = 'MRIcron'
     Font.Height = -36
     ParentColor = False
     ParentFont = False
+  end
+  object HomepageLabel: TLabel
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    Left = 5
+    Height = 16
+    Top = 55
+    Width = 44
+    BorderSpacing.Left = 4
+    BorderSpacing.Top = 4
+    Caption = 'version'
+    ParentColor = False
+    OnClick = HomePageClick
+  end
+  object ThreadLabel: TLabel
+    AnchorSideLeft.Control = HomepageLabel
+    AnchorSideTop.Control = HomepageLabel
+    AnchorSideTop.Side = asrBottom
+    Left = 5
+    Height = 16
+    Top = 75
+    Width = 53
+    BorderSpacing.Top = 4
+    Caption = ' Threads'
+    ParentColor = False
   end
 end

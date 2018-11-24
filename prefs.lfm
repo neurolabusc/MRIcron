@@ -1,71 +1,97 @@
 object PrefForm: TPrefForm
   Tag = 321
-  Left = 722
-  Height = 503
-  Top = 117
+  Left = 592
+  Height = 327
+  Top = 118
   Width = 369
   ActiveControl = ResliceCheck
+  AutoSize = True
   BorderIcons = [biSystemMenu]
+  BorderWidth = 4
   Caption = 'Preferences'
-  ClientHeight = 503
+  ClientHeight = 327
   ClientWidth = 369
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.9.0.0'
+  LCLVersion = '2.1.0.0'
   object GroupBox1: TGroupBox
-    Left = 0
-    Height = 384
-    Top = 0
-    Width = 369
+    Left = 4
+    Height = 238
+    Top = 4
+    Width = 361
     Align = alTop
+    AutoSize = True
     Caption = 'Image Display'
-    ClientHeight = 362
-    ClientWidth = 361
+    ClientHeight = 220
+    ClientWidth = 353
     ParentFont = False
     TabOrder = 0
     object Label1: TLabel
-      Left = 130
+      AnchorSideLeft.Control = MaxDimEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = MaxDimEdit
+      AnchorSideTop.Side = asrCenter
+      Left = 108
       Height = 16
-      Top = 78
-      Width = 189
+      Top = 50
+      Width = 178
+      BorderSpacing.Left = 4
       Caption = 'Maximum Dimension [Voxels]'
       ParentColor = False
       ParentFont = False
     end
     object Label2: TLabel
-      Left = 128
+      AnchorSideLeft.Control = ThreadEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ThreadEdit
+      AnchorSideTop.Side = asrCenter
+      Left = 108
       Height = 16
-      Top = 126
-      Width = 119
+      Top = 75
+      Width = 115
+      BorderSpacing.Left = 4
       Caption = 'Rendering Threads'
       ParentColor = False
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 128
+      AnchorSideLeft.Control = SigDigEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = SigDigEdit
+      AnchorSideTop.Side = asrCenter
+      Left = 108
       Height = 16
-      Top = 174
-      Width = 160
+      Top = 100
+      Width = 154
+      BorderSpacing.Left = 4
       Caption = 'Decimal places Displayed'
       ParentColor = False
       ParentFont = False
     end
     object ResliceCheck: TCheckBox
-      Left = 24
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideTop.Control = GroupBox1
+      Left = 4
       Height = 18
-      Top = 9
-      Width = 202
+      Top = 4
+      Width = 192
+      BorderSpacing.Left = 4
+      BorderSpacing.Top = 4
       Caption = 'Reorient images when loading'
       OnClick = ResliceCheckClick
       ParentFont = False
       TabOrder = 0
     end
     object MaxDimEdit: TSpinEdit
-      Left = 24
-      Height = 16
-      Top = 78
+      AnchorSideLeft.Control = ResliceCheck
+      AnchorSideTop.Control = OrthoCheck
+      AnchorSideTop.Side = asrBottom
+      Left = 4
+      Height = 21
+      Top = 48
       Width = 100
+      BorderSpacing.Top = 4
       MaxValue = 4096
       MinValue = 256
       ParentFont = False
@@ -73,10 +99,14 @@ object PrefForm: TPrefForm
       Value = 256
     end
     object ThreadEdit: TSpinEdit
-      Left = 22
-      Height = 16
-      Top = 126
+      AnchorSideLeft.Control = ResliceCheck
+      AnchorSideTop.Control = MaxDimEdit
+      AnchorSideTop.Side = asrBottom
+      Left = 4
+      Height = 21
+      Top = 73
       Width = 100
+      BorderSpacing.Top = 4
       MaxValue = 4096
       MinValue = 1
       ParentFont = False
@@ -84,47 +114,69 @@ object PrefForm: TPrefForm
       Value = 1
     end
     object SigDigEdit: TSpinEdit
-      Left = 22
-      Height = 16
-      Top = 174
+      AnchorSideLeft.Control = ResliceCheck
+      AnchorSideTop.Control = ThreadEdit
+      AnchorSideTop.Side = asrBottom
+      Left = 4
+      Height = 21
+      Top = 98
       Width = 100
+      BorderSpacing.Top = 4
       MaxValue = 32
       ParentFont = False
       TabOrder = 3
     end
     object OrthoCheck: TCheckBox
-      Left = 48
+      AnchorSideLeft.Control = ResliceCheck
+      AnchorSideTop.Control = ResliceCheck
+      AnchorSideTop.Side = asrBottom
+      Left = 16
       Height = 18
-      Top = 40
-      Width = 231
+      Top = 26
+      Width = 219
+      BorderSpacing.Left = 12
+      BorderSpacing.Top = 4
       Caption = 'Rotate to nearest orthogonal angle'
       ParentFont = False
       TabOrder = 4
     end
     object SingleRowCheck: TCheckBox
-      Left = 24
+      AnchorSideLeft.Control = ResliceCheck
+      AnchorSideTop.Control = XBarClr
+      AnchorSideTop.Side = asrBottom
+      Left = 4
       Height = 18
-      Top = 296
-      Width = 168
+      Top = 180
+      Width = 160
+      BorderSpacing.Top = 4
       Caption = 'All slices on a single row'
       OnChange = SingleRowCheckChange
       ParentFont = False
       TabOrder = 5
     end
     object Label4: TLabel
-      Left = 128
+      AnchorSideLeft.Control = FontEdit1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = FontEdit1
+      AnchorSideTop.Side = asrCenter
+      Left = 108
       Height = 16
-      Top = 215
-      Width = 57
+      Top = 125
+      Width = 55
+      BorderSpacing.Left = 4
       Caption = 'Font size'
       ParentColor = False
       ParentFont = False
     end
     object FontEdit1: TSpinEdit
-      Left = 22
-      Height = 16
-      Top = 215
+      AnchorSideLeft.Control = ResliceCheck
+      AnchorSideTop.Control = SigDigEdit
+      AnchorSideTop.Side = asrBottom
+      Left = 4
+      Height = 21
+      Top = 123
       Width = 100
+      BorderSpacing.Top = 4
       MaxValue = 128
       MinValue = 1
       ParentFont = False
@@ -132,21 +184,29 @@ object PrefForm: TPrefForm
       Value = 12
     end
     object DarkModeCheck: TCheckBox
-      Left = 24
+      AnchorSideLeft.Control = ResliceCheck
+      AnchorSideTop.Control = SingleRowCheck
+      AnchorSideTop.Side = asrBottom
+      Left = 4
       Height = 18
-      Top = 328
-      Width = 87
+      Top = 202
+      Width = 84
+      BorderSpacing.Top = 4
       Caption = 'Dark mode'
       ParentFont = False
       TabOrder = 7
       Visible = False
     end
     object XBarClr: TButton
-      Left = 24
+      AnchorSideLeft.Control = ResliceCheck
+      AnchorSideTop.Control = FontEdit1
+      AnchorSideTop.Side = asrBottom
+      Left = 4
       Height = 28
-      Top = 256
-      Width = 184
+      Top = 148
+      Width = 174
       AutoSize = True
+      BorderSpacing.Top = 4
       BorderSpacing.InnerBorder = 4
       Caption = 'Choose Cross-Bar Color'
       OnClick = XBarClrClick
@@ -155,32 +215,44 @@ object PrefForm: TPrefForm
     end
   end
   object GroupBox2: TGroupBox
-    Left = 0
-    Height = 64
-    Top = 384
-    Width = 369
+    Left = 4
+    Height = 40
+    Top = 242
+    Width = 361
     Align = alTop
+    AutoSize = True
     Caption = 'Drawing'
-    ClientHeight = 42
-    ClientWidth = 361
+    ClientHeight = 22
+    ClientWidth = 353
     ParentFont = False
     TabOrder = 1
     object ThinPenCheck: TCheckBox
-      Left = 15
+      AnchorSideLeft.Control = GroupBox2
+      AnchorSideTop.Control = GroupBox2
+      Left = 4
       Height = 18
-      Top = 16
-      Width = 73
+      Top = 4
+      Width = 72
+      BorderSpacing.Left = 4
+      BorderSpacing.Top = 4
       Caption = 'Thin Pen'
       ParentFont = False
       TabOrder = 0
     end
   end
   object OKBtn: TButton
-    Left = 280
+    AnchorSideTop.Control = GroupBox2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 307
     Height = 28
-    Top = 448
-    Width = 78
+    Top = 286
+    Width = 54
+    Anchors = [akTop, akRight]
     AutoSize = True
+    BorderSpacing.Top = 4
+    BorderSpacing.Right = 4
     BorderSpacing.InnerBorder = 4
     Caption = 'OK'
     OnClick = OKBtnClick
@@ -188,11 +260,16 @@ object PrefForm: TPrefForm
     TabOrder = 2
   end
   object CancelBtn: TButton
-    Left = 168
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = GroupBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 147
     Height = 28
-    Top = 448
-    Width = 78
+    Top = 286
+    Width = 75
     AutoSize = True
+    BorderSpacing.Top = 4
     BorderSpacing.InnerBorder = 4
     Caption = 'Cancel'
     OnClick = CancelBtnClick
@@ -200,11 +277,16 @@ object PrefForm: TPrefForm
     TabOrder = 3
   end
   object AdvancedBtn: TButton
-    Left = 24
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = GroupBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 8
     Height = 28
-    Top = 448
-    Width = 96
+    Top = 286
+    Width = 92
     AutoSize = True
+    BorderSpacing.Left = 4
+    BorderSpacing.Top = 4
     BorderSpacing.InnerBorder = 4
     Caption = 'Advanced'
     OnClick = AdvancedBtnClick
