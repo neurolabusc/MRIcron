@@ -8,7 +8,7 @@ uses
    {$IFDEF Windows} ShellAPI, Windows, {$ENDIF} //x18
     userdir, Process, FileUtil, Clipbrd,
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  Spin, Buttons;
+  Spin, Buttons, nsappkitext;
 
 type
 
@@ -150,10 +150,9 @@ begin
      SingleRowCheck.checked := gBGImg.SingleRow;
      FontEdit1.Value := gBGImg.FontSize;
      {$IFDEF LCLCocoa}
-     DarkModeCheck.visible := true;
+     DarkModeCheck.visible := isDarkModeSupported;
      DarkModeCheck.Checked := gBGImg.DarkMode;
      {$ENDIF}
-
 end;
 
 procedure TPrefForm.OKBtnClick(Sender: TObject);
