@@ -1,0 +1,242 @@
+object dcm2niiForm: Tdcm2niiForm
+  Left = 385
+  Height = 352
+  Top = 165
+  Width = 772
+  AllowDropFiles = True
+  Caption = 'dcm2niix'
+  ClientHeight = 352
+  ClientWidth = 772
+  Constraints.MinHeight = 120
+  Constraints.MinWidth = 640
+  Menu = MainMenu1
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDropFiles = FormDropFiles
+  OnResize = FormResize
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '2.1.0.0'
+  object Panel1: TPanel
+    Left = 0
+    Height = 31
+    Top = 0
+    Width = 772
+    Align = alTop
+    AutoSize = True
+    BorderWidth = 2
+    ClientHeight = 31
+    ClientWidth = 772
+    ParentFont = False
+    TabOrder = 0
+    object compressCheck: TCheckBox
+      AnchorSideLeft.Control = Label2
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 70
+      Height = 18
+      Top = 6
+      Width = 22
+      BorderSpacing.Left = 2
+      Checked = True
+      OnClick = compressCheckClick
+      ParentFont = False
+      ParentBidiMode = False
+      State = cbChecked
+      TabOrder = 0
+    end
+    object outnameLabel: TLabel
+      AnchorSideLeft.Control = bidsCheck
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 231
+      Height = 16
+      Top = 7
+      Width = 81
+      BorderSpacing.Left = 4
+      Caption = 'Output Name'
+      ParentColor = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object outnameEdit: TEdit
+      AnchorSideLeft.Control = outnameLabel
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 314
+      Height = 21
+      Hint = 'Name for NIfTI images. Special characters are %f (Folder name) %i (ID) %n (patient Name) %p (Protocol name) %s (Series number) %t (Time)'
+      Top = 5
+      Width = 176
+      BorderSpacing.Left = 2
+      OnKeyUp = outnameEditKeyUp
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      Text = 'outnameEdit'
+    end
+    object Label2: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 7
+      Height = 16
+      Hint = 'Set whether NIfTI images are compressed (.nii.gz) or not (.nii)'
+      Top = 7
+      Width = 61
+      BorderSpacing.Left = 4
+      Caption = 'Compress'
+      ParentColor = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object outputFolderLabel: TLabel
+      AnchorSideLeft.Control = outnameEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 494
+      Height = 16
+      Top = 7
+      Width = 81
+      BorderSpacing.Left = 4
+      Caption = 'Output folder'
+      ParentColor = False
+      ParentFont = False
+    end
+    object outputFolderName: TButton
+      AnchorSideLeft.Control = outputFolderLabel
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 577
+      Height = 25
+      Hint = 'NIfTI files will be saved to this folder. Press this button and click Cancel if you want files NIfTI images saved to same folder as DICOM input'
+      Top = 3
+      Width = 180
+      BorderSpacing.Left = 2
+      Caption = 'input folder'
+      OnClick = outputFolderNameClick
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+    end
+    object VerboseLabel: TLabel
+      AnchorSideLeft.Control = compressCheck
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 96
+      Height = 16
+      Hint = 'Set whether NIfTI images are compressed (.nii.gz) or not (.nii)'
+      Top = 7
+      Width = 50
+      BorderSpacing.Left = 4
+      Caption = 'Verbose'
+      ParentColor = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object verboseCheck: TCheckBox
+      AnchorSideLeft.Control = VerboseLabel
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 148
+      Height = 18
+      Top = 6
+      Width = 22
+      BorderSpacing.Left = 2
+      Checked = True
+      OnClick = compressCheckClick
+      ParentFont = False
+      ParentBidiMode = False
+      State = cbChecked
+      TabOrder = 3
+    end
+    object bidsCheck: TCheckBox
+      AnchorSideLeft.Control = BIDSLabel
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 205
+      Height = 18
+      Top = 6
+      Width = 22
+      BorderSpacing.Left = 2
+      OnClick = compressCheckClick
+      ParentFont = False
+      ParentBidiMode = False
+      TabOrder = 4
+    end
+    object BIDSLabel: TLabel
+      AnchorSideLeft.Control = verboseCheck
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 174
+      Height = 16
+      Hint = 'Create Brain Imaging Data Structure file'
+      Top = 7
+      Width = 29
+      BorderSpacing.Left = 4
+      Caption = 'BIDS'
+      ParentColor = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+    end
+  end
+  object Memo1: TMemo
+    Left = 0
+    Height = 321
+    Top = 31
+    Width = 772
+    Align = alClient
+    Lines.Strings = (    )
+    ReadOnly = True
+    ParentFont = False
+    ScrollBars = ssAutoVertical
+    TabOrder = 1
+  end
+  object MainMenu1: TMainMenu
+    left = 24
+    top = 48
+    object FileMenu: TMenuItem
+      Caption = 'File'
+      object DicomMenu: TMenuItem
+        Caption = 'DICOM to NIfTI...'
+        OnClick = DicomMenuClick
+      end
+      object ParRecMenu: TMenuItem
+        Caption = 'PAR/REC to NIfTI...'
+        OnClick = ParRecMenuClick
+      end
+      object ResetMenu: TMenuItem
+        Caption = 'Reset defaults'
+        OnClick = ResetMenuClick
+      end
+    end
+    object EditMenu: TMenuItem
+      Caption = 'Edit'
+      object CopyMenu: TMenuItem
+        Caption = 'Copy'
+        OnClick = CopyMenuClick
+      end
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    Filter = 'Philips research (*.par)|*.PAR;*.par'
+    Options = [ofAllowMultiSelect, ofEnableSizing, ofViewDetail]
+    left = 96
+    top = 48
+  end
+end

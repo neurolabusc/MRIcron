@@ -837,14 +837,14 @@ begin
      Save1.ShortCut := ShortCut(Word('S'), [ssMeta]);
      Close1.ShortCut := ShortCut(Word('W'), [ssMeta]);
      {$ENDIF}
-     gRenderDir  := DefaultsDir('render');
+     gRenderDir  := extractfilepath(paramstr(0))+'Resources'+pathdelim+'render';
      {$IFDEF Darwin}
-     if not fileexists(gRenderDir) then
+     if not direxists(gRenderDir) then
         gRenderDir := AppDir + 'render';
      {$ENDIF}
      //showmessage(gRenderDir);
      //gRenderDir := extractfiledir(paramstr(0))+pathdelim+'render'+pathdelim;
-     gRenderDefaultsFilename := gRenderDir + 'default.ini';
+     gRenderDefaultsFilename := gRenderDir +pathdelim+ 'default.ini';
      gRenderStartupFilename := gRenderDefaultsFilename;
      RenderForm.DoubleBuffered := true;
 end;

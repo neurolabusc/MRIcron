@@ -336,7 +336,7 @@ begin
   if EmptyRow(1,lM) or EmptyRow(2,lM) or EmptyRow(3,lM) then
      isUseQForm := true;
   if (isUseQForm) then begin
-    TryQuat2Matrix(lHdr.NIFTIhdr,true);
+    TryQuat2Matrix(lHdr,true);
       lM := Matrix3D (
       lHdr.NIFTIhdr.srow_x[0],lHdr.NIFTIhdr.srow_x[1],lHdr.NIFTIhdr.srow_x[2],lHdr.NIFTIhdr.srow_x[3],      // 3D "graphics" matrix
       lHdr.NIFTIhdr.srow_y[0],lHdr.NIFTIhdr.srow_y[1],lHdr.NIFTIhdr.srow_y[2],lHdr.NIFTIhdr.srow_y[3],      // 3D "graphics" matrix

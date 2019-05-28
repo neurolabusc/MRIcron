@@ -2115,7 +2115,6 @@ begin
   lBuff^[lC] := 0;
   lC := lImgOffset+1;
   //move(lImgBuffer^[1],lBuff[lC],lImgBufferItems*lImgBufferBPP);
-
   move(lImgBuffer^,lBuff^[lC],lImgBufferItems*lImgBufferBPP);
   if (lExt='.NII') then begin
 	Filemode := 1;
@@ -2131,6 +2130,17 @@ begin
   freemem(lBuff);
 end;
 
+function gz2niigz (fnm: string): string; //img.gz -> img.nii.gz
+var
+  lExt: string;
+begin
+  lExt := uppercase(extractfileext(fnm));
+  if (lExt = '.GZ') then
+     result  := changefileextX(fnm,'.nii.gz')
+  else
+      result := fnm;
+end;
+
 procedure SaveAsVOIorNIFTIcoreOrtho (var lFilename: string; var lImgBuffer: ByteP; lImgBufferItems, lImgBufferBPP,lnVol: integer; var lNiftiHdr: TNIFTIHdr);
 var
   lISize: integer;
@@ -2138,6 +2148,7 @@ var
 begin
   if not gBGImg.UseReorientHdr then
     exit;
+  lFilename := gz2niigz(lFilename);
   lTempHdr.NIFTIhdr := lNIftIHdr;
   lISize := (lImgBufferItems*lImgBufferBPP);
   GetMem(lTempHdr.ImgBufferUnaligned ,lISize + 16);
@@ -2164,6 +2175,7 @@ const
 begin
   //10/2007 - scl_slope;
   //lExt := UpCaseExt(lFileName);
+  lFilename := gz2niigz(lFilename);
   if DiskFreeEx(lFilename) < (kImgOffset+(lImgBufferItems*lImgBufferBPP)) then begin
 	case MessageDlg('Very little space on the selected drive. Attempt to save to this disk?', mtConfirmation,
 		[mbYes, mbCancel], 0) of
@@ -2441,7 +2453,7 @@ begin
 	BGTransPct := 0;
 	LicenseID := 0;
         DarkMode := false;
-    ShowDraw := false;
+        ShowDraw := false;
 	ResliceOnLoad := false;
 	OrthoReslice := true;
 	Prompt4DVolume := true;
@@ -3782,7 +3794,7 @@ begin //dsa
 			   lBlackAutoBal  := 2;
 			   lWHiteAUtoBal := kHistoBins;
 	 end;
-	 lHdr.AutoBalMaxUnscaled := ((lWhiteAutoBal/kHistoBins)*(lHdr.GlMaxUnscaledS-lHdr.GlMinUnscaledS))+lHdr.GlMinUnscaledS;
+         lHdr.AutoBalMaxUnscaled := ((lWhiteAutoBal/kHistoBins)*(lHdr.GlMaxUnscaledS-lHdr.GlMinUnscaledS))+lHdr.GlMinUnscaledS;
 	 lHdr.AutoBalMinUnscaled := ((lBlackAutoBal/kHistoBins)*(lHdr.GlMaxUnscaledS-lHdr.GlMinUnscaledS))+lHdr.GlMinUnscaledS;
 	 //only apply rounding if there is a large difference - e.g. if range is 0..1 then rounding will hurt
          if (lHdr.ImgBufferBPP  < 4) and ((lHdr.AutoBalMaxUnscaled-lHdr.AutoBalMinUnscaled) > 50) then begin //round integer values
@@ -5506,6 +5518,7 @@ var
    lW: Wordp;
   lFName,lParseName: String;
   F: file;
+  l8Buf :  int8p;
   l16Buf : SmallIntP;
   l32Buf,l32TempBuf : SingleP;
   l64Buf : DoubleP;
@@ -5608,11 +5621,11 @@ begin
 	  Seek (F,lOffset + (lMultiImgSz *(lVol-1)) );
 
   case lDataType of
-	  kDT_SIGNED_SHORT,kDT_UINT16: lImg2Load.ImgBufferBPP := 2;
+	  kDT_INT8,kDT_UNSIGNED_CHAR : lImg2Load.ImgBufferBPP := 1;
+          kDT_SIGNED_SHORT,kDT_UINT16: lImg2Load.ImgBufferBPP := 2;
 	  kDT_SIGNED_INT,kDT_FLOAT, kDT_UINT32:  lImg2Load.ImgBufferBPP := 4;
           kDT_DOUBLE: lImg2Load.ImgBufferBPP := 8;
-	  kDT_UNSIGNED_CHAR : lImg2Load.ImgBufferBPP := 1;
-          kDT_RGB: lImg2Load.ImgBufferBPP := 1;//rgb
+	  kDT_RGB: lImg2Load.ImgBufferBPP := 1;//rgb
 	  else begin
 			  showmessage('Unable to read this image format '+inttostr(lDataType));
 		  goto 456;
@@ -5657,6 +5670,13 @@ begin
   //Next: prepare image : byte swap, check for special..
   case lDataType of
     kDT_RGB:  ParseRGB(lImg2Load);//RGB
+    kDT_INT8: begin //int8 -> uint8
+      l8Buf := int8p(lImg2Load.ImgBuffer );
+      for lInc := 1 to lImgSamples do
+          lImg2Load.ImgBuffer^[lInc] := l8Buf[lInc] + 128;;
+      lImg2Load.NIFTIhdr.scl_inter := lImg2Load.NIFTIhdr.scl_inter - (128*lImg2Load.NIFTIhdr.scl_slope);
+      lImg2Load.NIFTIhdr.datatype:= kDT_UINT8;
+    end;
          {$IFDEF UINT16ASFLOAT}
         kDT_UINT16: begin
                     //showmessage(format('%d ', [12]));
@@ -5821,13 +5841,12 @@ begin
 	   1: begin
 		FindImgMinMax8 (lImg2Load, lMini,lMaxi);
 		lImg2Load.GlMaxUnscaledS := lMaxI;
-		lImg2Load.GlMinUnscaledS := lMinI;;
+		lImg2Load.GlMinUnscaledS := lMinI;
 	   end;
 	   2: begin
 		FindImgMinMax16 (lImg2Load, lMini,lMaxi);
 		lImg2Load.GlMaxUnscaledS := lMaxI;
 		lImg2Load.GlMinUnscaledS := lMinI;
-
 	   end;
 	   4:
 		FindImgMinMax32 (lImg2Load,lImg2Load.GlMinUnscaledS,lImg2Load.GlMaxUnscaledS);
@@ -5939,6 +5958,15 @@ begin
 
   end;
   lParseName := parsefilename(extractfilename(lImg2Load.HdrFileName));
+
+  if (lImg2Load.NIFTIhdr.cal_min < lImg2Load.NIFTIhdr.cal_max) and (lImg2Load.NIFTIhdr.cal_min > lImg2Load.GlMinUnscaledS) and (lImg2Load.NIFTIhdr.cal_max < lImg2Load.GlMaxUnscaledS) then begin
+	  lImg2Load.WindowScaledMin := lImg2Load.NIFTIhdr.cal_min;
+	  lImg2Load.WindowScaledMax := lImg2Load.NIFTIhdr.cal_max;
+
+	  lImg2Load.AutoBalMinUnscaled := lImg2Load.WindowScaledMin;
+	  lImg2Load.AutoBalMaxUnscaled := lImg2Load.WindowScaledMax;
+  end;
+
   if (lParsename = 'ch2bet') or (lParseName = 'ch2better') then begin
 	  lImg2Load.WindowScaledMin := 45;
 	  lImg2Load.WindowScaledMax := 120;

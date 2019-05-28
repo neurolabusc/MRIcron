@@ -3,12 +3,14 @@
 #  to build your own version you typically run
 #    lazbuild -B filename.lpr
 
-#compile dcm2niix
-cd ~/dcm2niix/console
-g++ -O3 -dead_strip -I. main_console.cpp nii_foreign.cpp nii_dicom.cpp nifti1_io_core.cpp nii_ortho.cpp nii_dicom_batch.cpp jpg_0XC3.cpp ujpeg.cpp -o dcm2niix  -I/usr/local/lib -I/usr/local/include/openjpeg-2.1 /usr/local/lib/libopenjp2.a
-cp dcm2niix /Users/rorden/Documents/mricron/MRIcron/dcm2niix
-cp dcm2niix /Users/rorden/Documents/mricron/MRIcron/MRIcron.app/Contents/Resources/dcm2niix
-
+: <<'SKIPDCM2NIIX'
+	#compile dcm2niix
+	#warning: recent versions of macOS do not include libstdc++
+	cd ~/dcm2niix/console
+	g++ -O3 -dead_strip -I. main_console.cpp nii_foreign.cpp nii_dicom.cpp nifti1_io_core.cpp nii_ortho.cpp nii_dicom_batch.cpp jpg_0XC3.cpp ujpeg.cpp -o dcm2niix  -I/usr/local/lib -I/usr/local/include/openjpeg-2.1 /usr/local/lib/libopenjp2.a
+	cp dcm2niix /Users/rorden/Documents/mricron/MRIcron/dcm2niix
+	cp dcm2niix /Users/rorden/Documents/mricron/MRIcron/MRIcron.app/Contents/Resources/dcm2niix
+SKIPDCM2NIIX
 
 cd /Users/rorden/Documents/pas/mricron
 
@@ -29,7 +31,6 @@ chmod 777 ./_xclean.bat
 	/Users/rorden/lazarus/lazbuild ./dcm2nii/dcm2niigui.lpr --cpu=x86_64 --ws=cocoa --compiler="/usr/local/lib/fpc/3.1.1/ppcx64"
 	strip ./dcm2nii/dcm2niigui
 	cp ./dcm2nii/dcm2niigui /Users/rorden/Documents/mricron/MRIcron/dcm2niigui.app/Contents/MacOS/dcm2niigui
-
 SKIPDCM2NII
 : <<'SKIPNPM'
 	/Users/rorden/lazarus/lazbuild ./npm/npm.lpr --cpu=x86_64 --ws=cocoa --compiler="/usr/local/lib/fpc/3.1.1/ppcx64"
@@ -51,7 +52,7 @@ SKIPNPM
 
 strip ./mricron
 
-cp ./mricron /Users/rorden/Documents/mricron/MRIcron/mricron.app/Contents/MacOS/mricron
+cp ./mricron /Users/rorden/Documents/mricron/MRIcron/MRIcron.app/Contents/MacOS/MRIcron
 
 awk '{gsub(/Active="MacOS"/,"Active=\"Default\"");}1' mricron.lps > mricron.tmp && mv mricron.tmp mricron.lps
 

@@ -1,7 +1,7 @@
 object ImgForm: TImgForm
   Left = 145
   Height = 480
-  Top = 158
+  Top = 121
   Width = 1135
   ActiveControl = ControlPanel
   AllowDropFiles = True
@@ -16,6 +16,7 @@ object ImgForm: TImgForm
   OnDropFiles = FormDropFiles
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
+  OnMouseWheel = FormMouseWheel
   OnResize = FormResize
   OnShow = FormShow
   Position = poScreenCenter
@@ -27,7 +28,6 @@ object ImgForm: TImgForm
     Top = 0
     Width = 1135
     Align = alTop
-    AutoSize = True
     BevelOuter = bvNone
     BorderWidth = 1
     ClientHeight = 38
@@ -401,6 +401,7 @@ object ImgForm: TImgForm
         BorderSpacing.Left = 6
         DropDownCount = 12
         ItemHeight = 26
+        ItemIndex = 0
         Items.Strings = (
           'Fit'
           'Int'
@@ -421,7 +422,7 @@ object ImgForm: TImgForm
         ShowHint = True
         Style = csDropDownList
         TabOrder = 0
-        Text = '0'
+        Text = 'Fit'
       end
       object XViewEdit: TSpinEdit
         AnchorSideLeft.Control = LabelX
@@ -522,9 +523,10 @@ object ImgForm: TImgForm
       Height = 426
       Top = 0
       Width = 1135
-      HorzScrollBar.Page = 584
-      VertScrollBar.Page = 190
+      HorzScrollBar.Page = 583
+      VertScrollBar.Page = 189
       Align = alClient
+      AutoSize = True
       BorderStyle = bsNone
       ClientHeight = 426
       ClientWidth = 1135
@@ -534,12 +536,13 @@ object ImgForm: TImgForm
       ParentFont = False
       TabOrder = 0
       OnClick = ImgPanelClick
+      OnMouseWheel = TriplePanelMouseWheel
       object PGImageCor: TImage
         Tag = 2
         Cursor = crCross
-        Left = 1
+        Left = 0
         Height = 12
-        Top = 1
+        Top = 0
         Width = 12
         AutoSize = True
         OnDblClick = PGImageCorDblClick
@@ -551,9 +554,9 @@ object ImgForm: TImgForm
       object PGImageSag: TImage
         Tag = 3
         Cursor = crCross
-        Left = 24
+        Left = 23
         Height = 12
-        Top = 1
+        Top = 0
         Width = 12
         AutoSize = True
         OnDblClick = PGImageCorDblClick
@@ -565,9 +568,9 @@ object ImgForm: TImgForm
       object PGImageAx: TImage
         Tag = 1
         Cursor = crCross
-        Left = 572
+        Left = 571
         Height = 12
-        Top = 178
+        Top = 177
         Width = 12
         AutoSize = True
         OnDblClick = PGImageCorDblClick
@@ -579,8 +582,8 @@ object ImgForm: TImgForm
     end
   end
   object MainMenu1: TMainMenu
-    left = 112
-    top = 212
+    left = 152
+    top = 128
     object AppleMenu: TMenuItem
       Caption = ''
       Visible = False
@@ -642,6 +645,13 @@ object ImgForm: TImgForm
         Caption = 'Undo'
         ShortCut = 16474
         OnClick = Undo1Click
+      end
+    end
+    object ImportMenu: TMenuItem
+      Caption = 'Import'
+      object dcm2niiMenu: TMenuItem
+        Caption = 'Convert DICOM to NIfTI'
+        OnClick = dcm2niiMenuClick
       end
     end
     object OverlayMenu: TMenuItem
@@ -1179,13 +1189,6 @@ object ImgForm: TImgForm
         Caption = 'Information'
         ShortCut = 16457
         OnClick = Header1Click
-      end
-    end
-    object ImportMenu: TMenuItem
-      Caption = 'Import'
-      object dcm2niiMenu: TMenuItem
-        Caption = 'Convert DICOM to NIfTI'
-        OnClick = dcm2niiMenuClick
       end
     end
     object Help1: TMenuItem

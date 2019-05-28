@@ -40,8 +40,10 @@ begin
         repeat
 	             lCh := lInStr[lPos]; inc(lPos);
 	             if (lCh >= '0') and (lCh <= '9') then
-		        lStr1 := lStr1 + lCh;
-        until (lPos > lLength) or (lCh=kCR) or (lCh=UNIXeoln) or (((lCh=kTab)or (lCh=' ')) and (length(lStr1)>0));
+		        lStr1 := lStr1 + lCh
+                     else
+                       lCh := kTab;
+        until (lPos > lLength) or ((lCh=kTab) and (length(lStr1)>0));
         if (length(lStr1) > 0) and (lPos <= lLength) then begin
 		      lIndex := strtoint(lStr1);
           if lPass = 1 then begin

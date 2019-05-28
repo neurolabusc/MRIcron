@@ -5,10 +5,11 @@ unit prefs;
 interface
 
 uses
+{$IFDEF LCLCocoa}nsappkitext, {$ENDIF}
    {$IFDEF Windows} ShellAPI, Windows, {$ENDIF} //x18
     userdir, Process, FileUtil, Clipbrd,
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  Spin, Buttons, nsappkitext;
+  Spin, Buttons;
 
 type
 

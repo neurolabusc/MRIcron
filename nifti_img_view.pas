@@ -26,7 +26,7 @@ Dialogs, Menus, ComCtrls, ExtCtrls, StdCtrls, GraphicsMathLibrary, ClipBrd,
 define_types, Spin, Buttons, nifti_hdr, nifti_hdr_view, nifti_img, voismooth,
 IniFiles, ReadInt,  stat, Distr, bet, mni, prefs, CropEdges,nifti_types,
 draw_interpolate_slices,
-userdir, graphx, GraphType, IntfGraphics, landmarks,fastsmooth, nii_label, dcm2nii, ImgList;//registry
+userdir, graphx, GraphType, IntfGraphics, landmarks,fastsmooth, nii_label, dcm2nii, ImgList, Types;//registry
 
 
 type
@@ -214,6 +214,8 @@ MNIMenu: TMenuItem;
         procedure dcm2niiMenuClick(Sender: TObject);
         procedure DilateVOI1Click(Sender: TObject);
         procedure Extract1Click(Sender: TObject);
+        procedure FormMouseWheel(Sender: TObject; Shift: TShiftState;
+          WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
         procedure GetWidthForPPI(Sender: TCustomImageList; AImageWidth,
           APPI: Integer; var AResultWidth: Integer);
         procedure Interpolate1Click(Sender: TObject);
@@ -259,6 +261,8 @@ procedure SaveasNIfTI1Click(Sender: TObject);
 procedure SaveDialog1Close(Sender: TObject);
 procedure ToolBar2Click(Sender: TObject);
 procedure ToolPanelClick(Sender: TObject);
+procedure TriplePanelMouseWheel(Sender: TObject; Shift: TShiftState;
+  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
 procedure UpdateColorSchemes;
 	procedure UpdateTemplates;
 	procedure UpdateMRU;
@@ -623,6 +627,7 @@ begin
   lIniFile.WriteString('STR', 'FSLOUTPUTTYPE',gBGImg.FSLOUTPUTTYPE);
   //Booleans
   lIniFile.WriteString('BOOL', 'LoadUInt16asFloat32',Bool2Char(gBGImg.LoadUInt16asFloat32));
+  lIniFile.WriteString('BOOL', 'DarkMode',Bool2Char(gBGImg.DarkMode));
   lIniFile.WriteString('BOOL', 'Reslice',Bool2Char(gBGImg.ResliceOnLoad));
   lIniFile.WriteString('BOOL', 'ResliceOrtho',Bool2Char(gBGImg.OrthoReslice));
   lIniFile.WriteString('BOOL', 'ShowDraw',Bool2Char(gBGImg.ShowDraw));
@@ -757,7 +762,7 @@ begin
   //gBGImg.FSLBETEXE := lIniFile.ReadString('STR', 'FSLBETEXE', gBGImg.FSLBETEXE);
   gBGImg.FSLBASE := lIniFile.ReadString('STR', 'FSLBASE', gBGImg.FSLBASE);
   gBGImg.LoadUInt16asFloat32 := IniBool(lIniFile,'LoadUInt16asFloat32', gBGImg.LoadUInt16asFloat32);
-
+  gBGImg.DarkMode := IniBool(lIniFile,'DarkMode',gBGImg.DarkMode);
   gBGImg.ResliceOnLoad := IniBool(lIniFile,'Reslice',gBGImg.ResliceOnLoad);
   gBGImg.OrthoReslice := IniBool(lIniFile,'ResliceOrtho',gBGImg.OrthoReslice);
   gBGImg.ThinPen := IniBool(lIniFile, 'ThinPen',True);
@@ -1289,6 +1294,12 @@ begin
 
 end;
 
+procedure TImgForm.TriplePanelMouseWheel(Sender: TObject; Shift: TShiftState;
+  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+begin
+    //LabelX.caption := inttostr(random(888));
+end;
+
 
 procedure Add2MRU (var lNewFilename: string); //add new file to most-recent list
 var
@@ -1468,7 +1479,7 @@ begin
 	 Result := false;
          {$IFDEF DICOMdrop}
          if not IsNIfTIHdrExt(lFilename) then begin
-            x := dcm2niiForm.FindDicom2niixPath('');
+            x := dcm2niiForm.getCustomDcm2niix();
             if fileexists(x) then begin
                 lFilename := dcm2Nifti(x, lFilename);
                 if fileexists(lFilename) and (lFilename <> x) then
@@ -1569,6 +1580,9 @@ var
 	lLayer:integer;
 begin
   	lLayer := ActiveLayer;
+        {$IFDEF LCLCocoa}
+        setThemeMode(HdrForm, gBGImg.DarkMode);
+        {$ENDIF}
 	HdrForm.SaveHdrDlg.Filename := gMRIcroOverlay[lLayer].HdrFilename;
 	HdrForm.WriteHdrForm (gMRIcroOverlay[lLayer]);
 	//HdrForm.ShowModal;
@@ -1830,7 +1844,7 @@ begin
 	 SetBGImgDefaults(gBGImg);
 	 CloseImagesClick(nil);
          gColorSchemeDir := extractfilepath(paramstr(0))+'Resources'+pathdelim+'lut';
-	 if not fileexists(gColorSchemeDir) then
+	 if not direxists(gColorSchemeDir) then
             gColorSchemeDir := extractfilepath(paramstr(0))+'lut';
          {$IFDEF Darwin}
          if not fileexists(gColorSchemeDir) then
@@ -1856,7 +1870,7 @@ begin
          {$ENDIF}
 {$ENDIF}
      gTemplateDir := extractfilepath(paramstr(0))+'Resources'+pathdelim+'templates';
-	 if not fileexists(gTemplateDir) then
+	 if not direxists(gTemplateDir) then
             gTemplateDir := extractfilepath(paramstr(0))+'templates';
          {$IFDEF Darwin}
          if not fileexists(gTemplateDir) then
@@ -3538,6 +3552,12 @@ begin
    end;
 end;
 
+procedure TImgForm.FormMouseWheel(Sender: TObject; Shift: TShiftState;
+  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+begin
+  //LabelX.caption := inttostr(random(888));
+end;
+
 procedure TImgForm.GetWidthForPPI(Sender: TCustomImageList; AImageWidth,
   APPI: Integer; var AResultWidth: Integer);
 begin
@@ -5042,29 +5062,9 @@ begin
      strs.Free;
 end;
 
-procedure CheckForUpdatesDcm2niix;
-const
-     kBase = '/rordenlab/dcm2niix/releases/latest';
-     kUrl = 'https://github.com' + kBase;
-     kApi = 'https://api.github.com/repos' + kBase;
-var
-  exe, cmd, line1, localVer: string;
-begin
-    exe := dcm2niiForm.getExeName;
-    if not fileexists(exe) then begin
-       showmessage('Unable to find dcm2niix installed '+ exe);
-       exit;
-    end;
-    cmd := '"'+exe +'" -h';
-    dcm2niiForm.RunCmd(cmd, false, line1);
-    localVer := delimStr(line1, line1, 5);
-    ReportGitVer(localVer, kApi, kUrl, exe);
-end;
-
 procedure TImgForm.CheckForUpdates(Sender: TObject);
 begin
      CheckForUpdatesMRIcron;
-     CheckForUpdatesDcm2niix;
 end;
 {$ELSE}
 procedure TImgForm.CheckForUpdates(Sender: TObject);
@@ -5079,7 +5079,6 @@ procedure TImgForm.SetDarkMode;
 begin
   //setThemeMode(Self.Handle, gBGImg.DarkMode);
   setThemeMode(Self, gBGImg.DarkMode);
-
 end;
 {$ENDIF}
 
