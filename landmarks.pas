@@ -216,8 +216,8 @@ end;
 
 procedure TAnatForm.OpenBtnClick(Sender: TObject);
 begin
-     if not OpenDialogExecute(kAnatFilter,'Select background image',false) then exit;
-   OpenAnat(HdrForm.OpenHdrDlg.Filename) ;
+     if not ImgForm.OpenDialogExecute(kAnatFilter,'Select background image',false) then exit;
+   OpenAnat(ImgForm.OpenHdrDlg.Filename) ;
 end;
 
 procedure TAnatForm.Update(lIndex: integer);

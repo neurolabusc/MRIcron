@@ -329,7 +329,7 @@ begin
            showmessage('You need to open a 4D image.');
            goto 666;
     end;
-    if not HdrForm.OpenAndDisplayHdr(lFilename,g4DHdr) then goto 666;
+    if not ImgForm.OpenAndDisplayHdr(lFilename,g4DHdr) then goto 666;
     if not OpenImg(gBGImg,g4DHdr,false,false,false,false,true {4D!}) then goto 666;
     TrackBar1.Max := lnVol;
     if gMRIcroOverlay[kBGOverlayNum].NIFTIhdr.PixDim[4] = 0 then begin
@@ -457,32 +457,32 @@ begin
      PSPlotClick(nil);
      exit;
 {$ENDIF}
-     if not OpenDialogExecute(kImgFilter,'Select 4D image',false) then exit;
-     if not ReadGraf(HdrForm.OpenHdrDlg.Filename,false,true) then exit;
+     if not ImgForm.OpenDialogExecute(kImgFilter,'Select 4D image',false) then exit;
+     if not ReadGraf(ImgForm.OpenHdrDlg.Filename,false,true) then exit;
      ImgForm.XViewEdit.value := gMRIcroOverlay[kBGOverlayNum].NIFTIhdr.dim[1] div 2;
      ImgForm.YViewEdit.value := gMRIcroOverlay[kBGOverlayNum].NIFTIhdr.dim[2] div 2;
      ImgForm.ZViewEdit.value := gMRIcroOverlay[kBGOverlayNum].NIFTIhdr.dim[3] div 2;
-     if OpenDialogExecute(kTxtFilter,'Select 3-column event onset time files [optional]',true) then begin
-        if HdrForm.OpenHdrDlg.Files.Count > 0 then begin
-           lCnt := HdrForm.OpenHdrDlg.Files.Count;
+     if ImgForm.OpenDialogExecute(kTxtFilter,'Select 3-column event onset time files [optional]',true) then begin
+        if ImgForm.OpenHdrDlg.Files.Count > 0 then begin
+           lCnt := ImgForm.OpenHdrDlg.Files.Count;
            if lCnt > kMaxCond then begin
                showmessage('Can only load '+inttostr(kMaxCond)+'conditions');
                lCnt := kMaxCond;
            end;
            for lI := 1 to lCnt do
-               ReadCond(HdrForm.OpenHdrDlg.Files[lI-1],g4Ddata,lI);
+               ReadCond(ImgForm.OpenHdrDlg.Files[lI-1],g4Ddata,lI);
         end;//if count > 1
      end; //if opendialog
-     if OpenDialogExecute(kImgPlusVOIFilter,'Select regions of interest',true) then begin
-        if HdrForm.OpenHdrDlg.Files.Count > 0 then begin
-           lCnt := HdrForm.OpenHdrDlg.Files.Count;
+     if ImgForm.OpenDialogExecute(kImgPlusVOIFilter,'Select regions of interest',true) then begin
+        if ImgForm.OpenHdrDlg.Files.Count > 0 then begin
+           lCnt := ImgForm.OpenHdrDlg.Files.Count;
            //Apr07
            if lCnt > (knMaxOverlay-2) then begin
                showmessage('Can only load '+inttostr(knMaxOverlay-2)+'conditions');
                lCnt := knMaxOverlay;
            end;
            for lI := 1 to lCnt do begin
-               lStr := HdrForm.OpenHdrDlg.Files[lI-1];
+               lStr := ImgForm.OpenHdrDlg.Files[lI-1];
                ImgForm.OverlayOpenCore(lStr,lI+kBGOverlayNum);
            end;
         end;//if count > 1
@@ -626,16 +626,16 @@ var
 begin
      Close4DTrace(g4Ddata,true);
      FreeImgMemory(g4DHdr);
-     if not OpenDialogExecute(kImgFilter,'Select 4D image',false) then exit;
-     if not ReadGraf(HdrForm.OpenHdrDlg.Filename,false,true) then exit;
+     if not ImgForm.OpenDialogExecute(kImgFilter,'Select 4D image',false) then exit;
+     if not ReadGraf(ImgForm.OpenHdrDlg.Filename,false,true) then exit;
      ImgForm.XViewEdit.value := gMRIcroOverlay[kBGOverlayNum].NIFTIhdr.dim[1] div 2;
      ImgForm.YViewEdit.value := gMRIcroOverlay[kBGOverlayNum].NIFTIhdr.dim[2] div 2;
      ImgForm.ZViewEdit.value := gMRIcroOverlay[kBGOverlayNum].NIFTIhdr.dim[3] div 2;
      lVolSz :=  gMRIcroOverlay[kBGOverlayNum].NIFTIhdr.dim[1]*gMRIcroOverlay[kBGOverlayNum].NIFTIhdr.dim[2]*gMRIcroOverlay[kBGOverlayNum].NIFTIhdr.dim[3];
-     if not OpenDialogExecute(kImgPlusVOIFilter,'Select regions of interest',false) then
+     if not ImgForm.OpenDialogExecute(kImgPlusVOIFilter,'Select regions of interest',false) then
         exit;
      lROInum :=  1+kBGOverlayNum;
-     lStr := HdrForm.OpenHdrDlg.Filename;
+     lStr := ImgForm.OpenHdrDlg.Filename;
      ImgForm.OverlayOpenCore(lStr,lROInum);
      if gMRIcroOverlay[lROInum].ImgBufferBPP  <> 1 then begin
         showmessage('Overlay must be 8-bit image');
@@ -726,25 +726,25 @@ begin
      ImgForm.CloseImagesClick(nil);
      Close4DTrace(g4Ddata,true);
      FreeImgMemory(g4DHdr);
-     if not OpenDialogExecute(kImgFilter,'Select 4D images',true) then exit;
+     if not ImgForm.OpenDialogExecute(kImgFilter,'Select 4D images',true) then exit;
      l4D := TStringList.Create;
      lVectors := TStringList.Create;//empty
      lVOI := TStringList.Create;
-     l4D.AddStrings(HdrForm.OpenHdrDlg.Files);
-     if  OpenDialogExecute(kTxtFilter,'Select 3-column event onset time files',true) then begin
-         if HdrForm.OpenHdrDlg.Files.Count > kMaxCond then begin
+     l4D.AddStrings(ImgForm.OpenHdrDlg.Files);
+     if  ImgForm.OpenDialogExecute(kTxtFilter,'Select 3-column event onset time files',true) then begin
+         if ImgForm.OpenHdrDlg.Files.Count > kMaxCond then begin
                showmessage('Can only load '+inttostr(kMaxCond)+'conditions');
                goto 111;
          end;
-         lVectors.AddStrings(HdrForm.OpenHdrDlg.Files);
+         lVectors.AddStrings(ImgForm.OpenHdrDlg.Files);
      end;
-     if not OpenDialogExecute(kImgPlusVOIFilter,'Select region[s] of interest',true) then
+     if not ImgForm.OpenDialogExecute(kImgPlusVOIFilter,'Select region[s] of interest',true) then
         goto 111;
-     if HdrForm.OpenHdrDlg.Files.Count > (knMaxOverlay-2) then begin
+     if ImgForm.OpenHdrDlg.Files.Count > (knMaxOverlay-2) then begin
         showmessage('Can only load '+inttostr(knMaxOverlay-2)+'conditions');
         goto 111;
      end;
-     lVOI.AddStrings(HdrForm.OpenHdrDlg.Files);
+     lVOI.AddStrings(ImgForm.OpenHdrDlg.Files);
      if not ReadGraf(l4D[0],false, (lVectors.count > 0) ) then
         goto 111; //read first dataset to set TR!
      //get plot settings....
@@ -900,22 +900,22 @@ lFeatDirs.AddStrings(lFeatDirs);
         lUseFSLEVs := OKMsg('Use event vectors from the .FEAT'+pathdelim+'custom_timing_files folder?'); //shows dialog with OK/Cancel returns true if user presses OK
      if not lUseFSLEVs then begin
         lVectors.clear;
-        if  OpenDialogExecute(kTxtFilter,'Select 3-column event onset time files',true) then begin
-         if HdrForm.OpenHdrDlg.Files.Count > kMaxCond then begin
+        if  ImgForm.OpenDialogExecute(kTxtFilter,'Select 3-column event onset time files',true) then begin
+         if ImgForm.OpenHdrDlg.Files.Count > kMaxCond then begin
                showmessage('Can only load '+inttostr(kMaxCond)+'conditions');
                goto 111;
          end;
-         lVectors.AddStrings(HdrForm.OpenHdrDlg.Files);
+         lVectors.AddStrings(ImgForm.OpenHdrDlg.Files);
         end;
      end; //manually select EVs
 
-     if not OpenDialogExecute(kImgPlusVOIFilter,'Select volume[s] of interest [2mm MNI space]',true) then
+     if not ImgForm.OpenDialogExecute(kImgPlusVOIFilter,'Select volume[s] of interest [2mm MNI space]',true) then
         goto 111;
-     if HdrForm.OpenHdrDlg.Files.Count > (knMaxOverlay-2) then begin
+     if ImgForm.OpenHdrDlg.Files.Count > (knMaxOverlay-2) then begin
         showmessage('Can only load '+inttostr(knMaxOverlay-2)+'conditions');
         goto 111;
      end;
-     lVOI.AddStrings(HdrForm.OpenHdrDlg.Files);
+     lVOI.AddStrings(ImgForm.OpenHdrDlg.Files);
      {$ENDIF}
      if not ResliceFSLVOIs(lFeatDirs,lVOI) then begin
         showmessage('Unable to reslice VOIs!');

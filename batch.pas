@@ -126,11 +126,11 @@ begin
         ImgForm.UpdateLayerMenu;
         lBGStrings := TStringList.Create;
         if (ssShift in KeyDataToShiftState(vk_Shift)) then begin
-                GetFilesInDir(ExtractFileDir(HdrForm.OpenHdrDlg.Filename),lBGStrings)
+                GetFilesInDir(ExtractFileDir(ImgForm.OpenHdrDlg.Filename),lBGStrings)
         end else begin
-            if not OpenDialogExecute(kImgFilter,'Select background images (stat maps)',true) then
+            if not ImgForm.OpenDialogExecute(kImgFilter,'Select background images (stat maps)',true) then
                exit;
-            lBGStrings.AddStrings(HdrForm.OpenHdrDlg.Files);
+            lBGStrings.AddStrings(ImgForm.OpenHdrDlg.Files);
         end;
         lNumberofP:= lBGStrings.Count;
         if  lNumberofP < 1 then begin
@@ -139,8 +139,8 @@ begin
 
         end;
 
-	if not OpenDialogExecute(kImgFilter,'Select overlay images (ROIs)',true) then exit;
-	lNumberofFiles:= HdrForm.OpenHdrDlg.Files.Count;
+	if not ImgForm.OpenDialogExecute(kImgFilter,'Select overlay images (ROIs)',true) then exit;
+	lNumberofFiles:= ImgForm.OpenHdrDlg.Files.Count;
         if  lNumberofFiles < 1 then
 		exit;
     TextForm.MemoT.Lines.Clear;
@@ -165,11 +165,11 @@ begin
                  lStr := 'max10pct'
             else
                 lStr := 'mean';
-            lStr := lStr +kTextSep+ (HdrForm.OpenHdrDlg.Files[lInc-1]);
+            lStr := lStr +kTextSep+ (ImgForm.OpenHdrDlg.Files[lInc-1]);
             for lP := 1 to lNumberofP do begin
                 lFilename := lBGStrings.Strings[lP-1];
                 ImgForm.OpenAndDisplayImg(lFilename,True);
-                lFilename := HdrForm.OpenHdrDlg.Files[lInc-1];
+                lFilename := ImgForm.OpenHdrDlg.Files[lInc-1];
 	              ImgForm.OverlayOpenCore ( lFilename, 2);
                 if lP = 1 then
                    lStr := lStr + kTextSep+ inttostr(VOIVol(2) );

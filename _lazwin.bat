@@ -15,11 +15,11 @@ copy /Y mricron.exe d:\neuro\mricron
 call _clean.bat
 del d:\neuro\MRIcron\mricron.ini
 REM compress MRIcron
-c:\Progra~1\7-Zip\7z a -tzip d:\neuro\MRIcron_Windows.zip d:\neuro\MRIcron
+c:\Progra~1\7-Zip\7z a -tzip d:\neuro\MRIcron_windows.zip d:\neuro\MRIcron
 REM copy /Y c:\pas\wincron.zip Y:\mcbi\MCBI\CRNL\sw\mricron\win.zip
 
 REM compress Source
-# c:\Progra~1\7-Zip\7z a -tzip c:\pas\mricron_windows.zip c:\pas\mricron 
+# c:\Progra~1\7-Zip\7z a -tzip c:\pas\mricron_windows_src.zip c:\pas\mricron 
 REM copy c:\pas\srccron.zip Y:\mcbi\MCBI\CRNL\sw\mricron\source.zip
 
 

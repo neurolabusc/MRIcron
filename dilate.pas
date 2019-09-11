@@ -397,18 +397,18 @@ begin
 		mrYes: lMaskBG := true;
 	end; //case
   if lMaskBG then begin
-    if not OpenDialogExecute(kImgFilter,'Select background image (mask, e.g. gray matter mask)',false) then exit;
-    lBGname:= HdrForm.OpenHdrDlg.Filename;
+    if not ImgForm.OpenDialogExecute(kImgFilter,'Select background image (mask, e.g. gray matter mask)',false) then exit;
+    lBGname:= ImgForm.OpenHdrDlg.Filename;
   end else
     lBGName := '';
   lPref := gBGImg.ResliceOnLoad;
   gBGImg.ResliceOnLoad := false;
   TextForm.MemoT.Lines.clear;
 repeat
-  if not OpenDialogExecute(kImgPlusVOIFilter,'Select VOI',false) then goto 888;
-  lVOIname := HdrForm.OpenHdrDlg.Filename;
-  if not OpenDialogExecute(kImgFilter,'Select PERF image',false) then goto 888;
-  lPerfName :=  HdrForm.OpenHdrDlg.Filename;
+  if not ImgForm.OpenDialogExecute(kImgPlusVOIFilter,'Select VOI',false) then goto 888;
+  lVOIname := ImgForm.OpenHdrDlg.Filename;
+  if not ImgForm.OpenDialogExecute(kImgFilter,'Select PERF image',false) then goto 888;
+  lPerfName :=  ImgForm.OpenHdrDlg.Filename;
   if lMaskBG then
     lBaseName := lBGname
   else
@@ -536,7 +536,7 @@ begin
   lDilateMM[1] := 6;
   lDilateMM[2] := 12;
   {$ELSE}
-  if not OpenDialogExecute(kImgPlusVOIFilter,'Select VOI[s] to dilate',true) then
+  if not ImgForm.OpenDialogExecute(kImgPlusVOIFilter,'Select VOI[s] to dilate',true) then
     exit;
   lnDilate := ReadIntForm.GetInt('Number of dilation shells ', 2,3,kMaxDilate);
   if (lnDilate < 2 ) or (lnDilate > kMaxDilate) then
@@ -546,11 +546,11 @@ begin
     lDilateMM[lInc] := ReadFloatForm.GetFloat('Dilated shell '+inttostr(lInc)+'s outer edge (mm). ', 0,lDilateMM[lInc-1]+3,9999);
 
   {$ENDIF}
-  if HdrForm.OpenHdrDlg.Files.Count < 1 then
+  if ImgForm.OpenHdrDlg.Files.Count < 1 then
     exit;
 
-  for lV := 1 to HdrForm.OpenHdrDlg.Files.Count do begin //vcx
-    lFilename := HdrForm.OpenHdrDlg.Files[lV-1];
+  for lV := 1 to ImgForm.OpenHdrDlg.Files.Count do begin //vcx
+    lFilename := ImgForm.OpenHdrDlg.Files[lV-1];
     ImgForm.OpenAndDisplayImg(lFileName,false);
 
     for lInc := 1 to lnDilate do begin

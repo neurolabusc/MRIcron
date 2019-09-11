@@ -1,6 +1,9 @@
 #!/bin/sh
 
 find . -name \*.dcu -type f -delete
+rm -rf lib
+rm -rf backup
+rm  -r .DS_Store
 rm  -r *.a
 rm  -r *.o
 rm  -r *.ppu
@@ -27,6 +30,7 @@ rm  -r *.o
 rm  -r *.ppu
 rm -r *.bak
 cd ..
+rm -rf ./common/backup
 
 
 cd ./dcm2nii

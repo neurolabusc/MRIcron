@@ -158,7 +158,7 @@ var
    lByteSwap: boolean;
 begin
     gBGImg.Prompt4DVolume := false;
-    if not HdrForm.OpenAndDisplayHdr(lFilename,gMRIcroOverlay[kBGOverlayNum]) then exit;
+    if not ImgForm.OpenAndDisplayHdr(lFilename,gMRIcroOverlay[kBGOverlayNum]) then exit;
      gBGImg.Prompt4DVolume := true;
     if not OpenImg(gBGImg,gMRIcroOverlay[kBGOverlayNum],false,false,false,false,true {4D!}) then exit;
      lInHdr := gMRIcroOverlay[kBGOverlayNum].NIFTIHdr;
@@ -260,4 +260,4 @@ begin
 end;
 
 
-end.
+end.

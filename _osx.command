@@ -12,7 +12,10 @@
 	cp dcm2niix /Users/rorden/Documents/mricron/MRIcron/MRIcron.app/Contents/Resources/dcm2niix
 SKIPDCM2NIIX
 
-cd /Users/rorden/Documents/pas/mricron
+cp /usr/local/bin/dcm2niix /Users/chris/Neuro/MRIcron/MRIcron.app/Contents/Resources/dcm2niix
+
+
+cd /Users/chris/src/MRIcron
 
 chmod 777 ./_xclean.bat
 ./_xclean.bat
@@ -48,11 +51,11 @@ SKIPNPM
 #Current FPC 3.0.0 can not compile on OSX 10.11 El Capitan, so use 3.1.1
 #/Users/rorden/lazarus/lazbuild ./mricron.lpr --cpu=x86_64 --ws=cocoa --compiler="/usr/local/lib/fpc/3.1.1/ppcx64"
 
-/Users/rorden/lazarus/lazbuild ./mricron.lpr --cpu=x86_64 --ws=cocoa
+/Users/chris/src/lazarus/lazbuild ./mricron.lpr --cpu=x86_64 --ws=cocoa
 
 strip ./mricron
 
-cp ./mricron /Users/rorden/Documents/mricron/MRIcron/MRIcron.app/Contents/MacOS/MRIcron
+cp ./mricron /Users/chris/Neuro/MRIcron/MRIcron.app/Contents/MacOS/MRIcron
 
 awk '{gsub(/Active="MacOS"/,"Active=\"Default\"");}1' mricron.lps > mricron.tmp && mv mricron.tmp mricron.lps
 
@@ -61,11 +64,10 @@ awk '{gsub(/Active="MacOS"/,"Active=\"Default\"");}1' mricron.lps > mricron.tmp 
 rm -rf lib
 rm -rf backup
 
-cd /Users/rorden/Documents/pas/
-zip -r /Users/rorden/Documents/mricron_source.zip mricron
+cd /Users/chris/src
+zip -r /Users/chris/src/mricron_source.zip mricron
 
-cd /Users/rorden/Documents/
-zip -r /Users/rorden/Documents/mricron_osx.zip mricron
-
-
+cd /Users/chris/Neuro
+hdiutil create -volname MRIcron -srcfolder /Users/chris/Neuro/MRIcron -ov -format UDZO -layout SPUD -fs HFS+J  mricron_macOS.dmg
+codesign -s "Developer ID Application: Christopher Rorden" mricron_macOS.dmg
 

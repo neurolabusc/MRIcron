@@ -20,16 +20,16 @@ var
   lStrings : TStringList;
 begin
 	 ImgForm.CloseImagesClick(nil);
-	  if not OpenDialogExecute(kImgFilter,'Select source image[s]',true) then exit;
-	  lNumberofFiles:= HdrForm.OpenHdrDlg.Files.Count;
+	  if not ImgForm.OpenDialogExecute(kImgFilter,'Select source image[s]',true) then exit;
+	  lNumberofFiles:= ImgForm.OpenHdrDlg.Files.Count;
     if  lNumberofFiles < 1 then
 		  exit;
     lStrings := TStringList.Create;
-    lStrings.AddStrings(HdrForm.OpenHdrDlg.Files);
-	  if not OpenDialogExecute('FSL (*.mat)|*.mat','Select FSL source-to-target matrix',false) then goto 666;
-    lSrc2TargetMatName :=  HdrForm.OpenHdrDlg.Filename;
-	  if not OpenDialogExecute(kImgFilter,'Select target image (source image will be warped to this)',false) then goto 666;
-    lTargetImgName :=  HdrForm.OpenHdrDlg.Filename;
+    lStrings.AddStrings(ImgForm.OpenHdrDlg.Files);
+	  if not ImgForm.OpenDialogExecute('FSL (*.mat)|*.mat','Select FSL source-to-target matrix',false) then goto 666;
+    lSrc2TargetMatName :=  ImgForm.OpenHdrDlg.Filename;
+	  if not ImgForm.OpenDialogExecute(kImgFilter,'Select target image (source image will be warped to this)',false) then goto 666;
+    lTargetImgName :=  ImgForm.OpenHdrDlg.Filename;
 
     TextForm.MemoT.Lines.Clear;
     for lInc:= 1 to lNumberofFiles do begin

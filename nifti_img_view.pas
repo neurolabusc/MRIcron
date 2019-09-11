@@ -69,6 +69,7 @@ ImportMenu: TMenuItem;
 dcm2niiMenu: TMenuItem;
 CheckUpdatesMenu: TMenuItem;
 Interpolate1: TMenuItem;
+OpenHdrDlg: TOpenDialog;
 VOImaskCustom: TMenuItem;
 NewWindow1: TMenuItem;
 ColorBarBtn: TToolButton;
@@ -241,6 +242,7 @@ procedure C(Sender: TObject);
 procedure CropMenuClick(Sender: TObject);
 procedure ExportasRGBAnalyzeimage1Click(Sender: TObject);
 procedure FormDropFiles(Sender: TObject; const FileNames: array of String);
+function OpenAndDisplayHdr (var lFilename: string; var lHdr: TMRIcroHdr): boolean;
 //procedure DropFilesOSX(Sender: TObject; const FileNames: array of String);
 procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 procedure FormKeyPress(Sender: TObject; var Key: char);
@@ -374,6 +376,7 @@ procedure UpdateColorSchemes;
         procedure SaveOrCopyImages(lCopy: boolean);
         function ImgIntensityString(var lHdr: TMRIcroHdr; lVox: integer): string;  overload;
         function ImgIntensityString(var lHdr: TMRIcroHdr; lX,lY,lZ: integer): string;  overload;
+        function OpenDialogExecute (lFilter,lCaption: string; lAllowMultiSelect: boolean): boolean;
             {$IFDEF LCLCocoa}
     procedure SetDarkMode;
     {$ENDIF}
@@ -428,6 +431,21 @@ uses statclustertable,batch,imgutil, reslice_fsl,render,ROIfilt,autoroi, MultiSl
 {$ELSE}
 {$R *.DFM}
 {$ENDIF}
+
+function TImgForm.OpenDialogExecute (lFilter,lCaption: string; lAllowMultiSelect: boolean): boolean;
+begin
+  OpenHdrDlg.Filter := lFilter;
+  {$IFDEF Darwin}
+  OpenHdrDlg.Filter := '';
+  {$ENDIF}
+  OpenHdrDlg.FilterIndex := 1;
+  OpenHdrDlg.Title := lCaption;
+  if lAllowMultiSelect then
+    OpenHdrDlg.Options := [ofAllowMultiSelect,ofFileMustExist];
+  result := OpenHdrDlg.Execute;
+  OpenHdrDlg.Options := [ofFileMustExist];
+end;
+
 procedure TImgForm.XBarColor;
 begin
     		ColorDialog1.Color := gBGImg.XBarClr;
@@ -884,14 +902,14 @@ var
 begin
 	CloseImagesClick(nil);
 	if not OpenDialogExecute(kImgFilter,'Select NIfTI format images to convert',true) then exit;
-	lNumberofFiles:= HdrForm.OpenHdrDlg.Files.Count;
+	lNumberofFiles:= ImgForm.OpenHdrDlg.Files.Count;
     lClusterSz := ReadIntForm.GetInt('Minimum cluster size [in voxels]: ', 1,32,9999);
     lThresh := ReadFloatForm.GetFloat('Include voxels with an intensity above: ', 0,2,9999);
 	ProgressBar1.Min := 0;
 	ProgressBar1.Max :=lNumberofFiles;
 	ProgressBar1.Position := 0;
 	for lC:= 1 to lNumberofFiles do begin
-		lFilename := HdrForm.OpenHdrDlg.Files[lC-1];
+		lFilename := ImgForm.OpenHdrDlg.Files[lC-1];
 		ImgForm.OpenAndDisplayImg(lFilename,True);
 		//lFilename := changefileextX(lFilename,'I'+inttostr(round(lThresh))+'C'+inttostr(lClusterSz)+'.nii.gz');
   		lFilename := changefileprefix(lFilename,'I'+inttostr(round(lThresh))+'C'+inttostr(lClusterSz));
@@ -899,7 +917,7 @@ begin
                 if ImgVaries(gMRIcroOverlay[kBGOverlayNum]) then
                           SaveAsVOIorNIFTIcore (lFilename, gMRIcroOverlay[kBGOverlayNum].ImgBuffer,gMRIcroOverlay[kBGOverlayNum].ImgBufferItems,gMRIcroOverlay[kBGOverlayNum].ImgBufferBPP,1,gMRIcroOverlay[kBGOverlayNum].NiftiHdr)
                 else
-                    showmessage('No clusters survive filter '+ HdrForm.OpenHdrDlg.Files[lC-1]);
+                    showmessage('No clusters survive filter '+ ImgForm.OpenHdrDlg.Files[lC-1]);
                 ProgressBar1.Position := lC;
 	end;
         if fileexistsEX(lFilename) then
@@ -927,20 +945,71 @@ begin
      gBGImg.Mirror := lFlip;
 end;
 
+function isNifti(fnm: string): boolean;
+var
+ lExt: string;
+begin
+     result := true;
+     lExt := uppercase(extractfileext(fnm));
+     if (lExt = '.NII') or (lExt = '.HDR') or (lExt = '.VOI') then exit;
+     if (lExt = '.GZ') then begin
+        lExt := uppercase(extractfileext(changefileext(fnm,'')));
+        if (lExt = '.NII') then exit;
+     end;
+     result := false;
+end;
+
+function isDICOM(fnm: string): boolean;
+var
+   f: file;
+   sz: integer;
+   magic: array [0..3] of char; //signature of DICOM = 'DICM'
+begin
+     if (isNifti(fnm)) then
+        exit(false);
+     result := true;
+     if DirectoryExists(fnm) then exit;
+     AssignFile(f, fnm);
+     FileMode := fmOpenRead;
+     Reset(f,1);
+     sz := FileSize(f);
+     if sz < 256 then begin
+        CloseFile(f);
+        exit(false);
+     end;
+     Seek(f, 128);
+     magic[0] := 'x'; //just to hide compiler warning
+     blockread(f, magic[0],  sizeof(magic));
+     //showmessage(magic); //will report DICM for DICOM images, but not DICOM meta objects
+     if (magic[0] <> 'D') or (magic[1] <> 'I') or (magic[2] <> 'C') or (magic[3] <> 'M') then
+        result := false;
+end;
+
 procedure TImgForm.FormDropFiles(Sender: TObject; const FileNames: array of String);
 var
-   lFilename: string;
+   fnm: string;
    ss: TShiftState;
 begin
   ss:=getKeyshiftstate;
   if length(FileNames) < 1 then
      exit;
-  lFilename := Filenames[0];
-  if (ssMeta in ss) or (ssCtrl in ss) then begin
-     LoadOverlay(lFilename);
+  fnm := Filenames[0];
+  if isDICOM(fnm) then begin //part-10 compliant DICOM images should have "DICM" signature, but this is missing for some DICOM meta data
+     //if (not isNifti(Filenames[0])) then begin
+     //printf('>drop:'+fnm);
+     fnm := dcm2Nifti(dcm2niiForm.getCurrentDcm2niix, fnm);
+     //printf('>got:'+fnm);
+     if fnm = '' then exit;
+     OpenAndDisplayImg(fnm,true);
+     if fnm <> Filenames[0] then
+        deletefile(fnm);
      exit;
   end;
-  OpenAndDisplayImg(lFilename,true);
+  if (ssMeta in ss) or (ssCtrl in ss) then begin
+     LoadOverlay(fnm);
+     exit;
+  end;
+  OpenAndDisplayImg(fnm,true);
 end;
 
 procedure TImgForm.FormKeyDown(Sender: TObject; var Key: Word;
@@ -1090,12 +1159,12 @@ procedure TImgForm.NIIVOIClick(Sender: TObject);
 begin
 	CloseImagesClick(nil);
 	if not OpenDialogExecute(kImgFilter {10/2007},'Select NIfTI format images to convert',true) then exit;
-	lNumberofFiles:= HdrForm.OpenHdrDlg.Files.Count;
+	lNumberofFiles:= ImgForm.OpenHdrDlg.Files.Count;
 	ProgressBar1.Min := 0;
 	ProgressBar1.Max :=lNumberofFiles;
 	ProgressBar1.Position := 0;
 	for lC:= 1 to lNumberofFiles do begin
-		lFilename := HdrForm.OpenHdrDlg.Files[lC-1];
+		lFilename := ImgForm.OpenHdrDlg.Files[lC-1];
 		ImgForm.OpenAndDisplayImg(lFilename,True);
 		lFilename := changefileextx(lFilename,'.voi'); ////Xversion 10/2007 - removes .nii.gz not just gz
 		//SaveAsVOIorNIFTIcore (lFilename, lByteP, lVoxels, 1, gMRIcroOverlay[kBGOverlayNum].NiftiHdr);
@@ -1171,6 +1240,28 @@ begin
 end;
 
 
+function TImgForm.OpenAndDisplayHdr (var lFilename: string; var lHdr: TMRIcroHdr): boolean;
+var lFileDir: string;
+begin
+  FreeImgMemory(lHdr);
+  result := false;
+  NIFTIhdr_ClearHdr(lHdr);
+  if not NIFTIhdr_LoadHdr(lFilename, lHdr) then exit;
+  HdrForm.WriteHdrForm(lHdr.NIFTIhdr, lHdr.DiskDataNativeEndian, lFilename);
+  lFileDir := extractfiledir(lFilename);
+  if lFileDir <> gTemplateDir then
+     OpenHdrDlg.InitialDir := lFileDir;
+  HdrForm.SaveHdrDlg.InitialDir := lFileDir;
+  HdrForm.SaveHdrDlg.FileName := lFilename; //make this default file to write
+  if length(lFilename) < 79 then
+     HdrForm.StatusBar1.Panels[1].text := lFilename
+  else
+      HdrForm.StatusBar1.Panels[1].text := extractfilename(lFilename);
+  HdrForm.StatusBar1.Panels[0].text := 'Img= '+inttostr(ComputeImageDataBytes(lHdr));
+  result := true;
+end;
+
+
 procedure TImgForm.RescaleMenuClick(Sender: TObject);
 var ldTE,lScale,lTE1,lTE2: double;
     //lStr: string;
@@ -1180,7 +1271,7 @@ begin
 		exit;
 	end;
         if gBGImg.Resliced then begin
-           if not HdrForm.OpenAndDisplayHdr(gMRIcroOverlay[kBGOverlayNum].HdrFileName,gMRIcroOverlay[kBGOverlayNum]) then exit;
+           if not OpenAndDisplayHdr(gMRIcroOverlay[kBGOverlayNum].HdrFileName,gMRIcroOverlay[kBGOverlayNum]) then exit;
            if not OpenImg(gBGImg,gMRIcroOverlay[0],true,false,false,false,false) then exit;
         end;
         if (gMRIcroOverlay[kBGOverlayNum].GlMinUnscaledS < 0) or (gMRIcroOverlay[kBGOverlayNum].GlMaxUnscaledS > 4096) then begin
@@ -1489,7 +1580,7 @@ begin
          {$ENDIF}
          if (DirectoryExists(lFilename)) then exit;
          if (FSize(lFilename)) < 348 then exit; //to small to be a header or DICOM image
-	 if not HdrForm.OpenAndDisplayHdr(lFilename,gMRIcroOverlay[kBGOverlayNum]) then exit;
+	 if not OpenAndDisplayHdr(lFilename,gMRIcroOverlay[kBGOverlayNum]) then exit;
 
 
          //if (ssShift in KeyDataToShiftState(vk_Shift)) then begin
@@ -1584,7 +1675,7 @@ begin
         setThemeMode(HdrForm, gBGImg.DarkMode);
         {$ENDIF}
 	HdrForm.SaveHdrDlg.Filename := gMRIcroOverlay[lLayer].HdrFilename;
-	HdrForm.WriteHdrForm (gMRIcroOverlay[lLayer]);
+	HdrForm.WriteHdrForm (gMRIcroOverlay[lLayer].NIFTIhdr, gMRIcroOverlay[lLayer].DiskDataNativeEndian, gMRIcroOverlay[lLayer].HdrFilename);
 	//HdrForm.ShowModal;
         HdrForm.Show;
         //HdrForm.BringToFront;
@@ -1597,7 +1688,7 @@ var
 begin
      CloseImagesClick(nil);
      if not OpenDialogExecute(kImgFilterPlusAny,'Select background image',false) then exit;
-     lFilename := HdrForm.OpenHdrDlg.Filename;
+     lFilename := OpenHdrDlg.Filename;
      OpenAndDisplayImg(lFilename,True);
 end;
 
@@ -2684,7 +2775,7 @@ end;
 
 procedure TImgForm.OverlayOpenCore (var lFilename: string; lOverlayNum: integer);
 begin
-     if not HdrForm.OpenAndDisplayHdr(lFilename,gMRIcroOverlay[lOverlayNum]) then exit;
+     if not OpenAndDisplayHdr(lFilename,gMRIcroOverlay[lOverlayNum]) then exit;
      //if not OpenImg(gBGImg,gMRIcroOverlay[lOverlayNum],false,false,false) then exit;
          //if (ssShift in KeyDataToShiftState(vk_Shift)) then begin
          //    if not OpenImg(gBGImg,gMRIcroOverlay[lOverlayNum],false,false,false,not gBGImg.ResliceOnLoad,false) then exit;
@@ -3074,12 +3165,12 @@ begin
 	    FreeImgMemory(gMRIcroOverlay[lInc]);
         UpdateLayerMenu;
 	if not OpenDialogExecute(kImgFilter,'Select images you wish to analyze',true) then exit;
-	lNumberofFiles:= HdrForm.OpenHdrDlg.Files.Count;
+	lNumberofFiles:= OpenHdrDlg.Files.Count;
         if  lNumberofFiles < 1 then
 		exit;
         TextForm.MemoT.Lines.Clear;
         for lInc:= 1 to lNumberofFiles do begin
-		lFilename := HdrForm.OpenHdrDlg.Files[lInc-1];
+		lFilename := OpenHdrDlg.Files[lInc-1];
 	        OverlayOpenCore ( lFilename, 2);
                 ShowDescriptive(2,true);
  	        //LayerDrop.SetItemIndex(LayerDrop.Items.Count-1);
@@ -3118,10 +3209,10 @@ begin
 		exit;
 	end;
 	if not OpenDialogExecute(kImgFilter,'Select overlay image[s]',true) then exit;
-  if HdrForm.OpenHdrDlg.Files.Count < 1 then
+  if OpenHdrDlg.Files.Count < 1 then
     exit;
-  for lInc := 1 to HdrForm.OpenHdrDlg.Files.Count do begin //vcx
-    lFilename := HdrForm.OpenHdrDlg.Files[lInc-1];
+  for lInc := 1 to OpenHdrDlg.Files.Count do begin //vcx
+    lFilename := OpenHdrDlg.Files[lInc-1];
     LoadOverlayIncludingRGB(lFilename);
     {$IFNDEF FPC}
  	LayerDrop.SetItemIndex(LayerDrop.Items.Count-1);
@@ -3428,7 +3519,7 @@ begin
 		ImgForm.RefreshImagesTimer.Enabled := true;
 		exit;
 	end;
-        if not HdrForm.OpenAndDisplayHdr(lFilename,gMRIcroOverlay[kVOIOverlayNum]) then exit;
+        if not OpenAndDisplayHdr(lFilename,gMRIcroOverlay[kVOIOverlayNum]) then exit;
         isOverlaySmooth := gBGImg.OverlaySmooth;
         gBGImg.OverlaySmooth := false;
 	if not OpenImg(gBGImg,gMRIcroOverlay[kVOIOverlayNum],false,true,false,gBGImg.ResliceOnLoad,false) then begin
@@ -3450,7 +3541,7 @@ begin
 		exit;
 	end;
 	 if not OpenDialogExecute(kVOIFilter,'Select Volume of Interest drawing',false) then exit;
-	lFilename := HdrForm.OpenHdrDlg.Filename;
+	lFilename := OpenHdrDlg.Filename;
 	OpenVOICore(lFilename);
 end;//OpenVOIClick
 
@@ -4286,7 +4377,7 @@ begin
 		exit;
 	 end;
 	if not OpenDialogExecute(kVOIFilter,'Select VOIs you wish to combine',true) then exit;
-	lNumberofFiles:= HdrForm.OpenHdrDlg.Files.Count;
+	lNumberofFiles:= OpenHdrDlg.Files.Count;
 	if  lNumberofFiles < 2 then begin
 		Showmessage('Error: This function is designed to overlay MULTIPLE images. You selected less than two images.');
 		exit;
@@ -4297,10 +4388,10 @@ begin
 	getmem(lOverlapBuffer,gMRIcroOverlay[kBGOverlayNum].ScrnBufferItems);
 	fillchar(lOverlapBuffer^,gMRIcroOverlay[kBGOverlayNum].ScrnBufferItems,0);
 	for lC:= 1 to lNumberofFiles do begin
-		lFilename := HdrForm.OpenHdrDlg.Files[lC-1];
+		lFilename := OpenHdrDlg.Files[lC-1];
 		lExt := UpCaseExt(lFileName);
 		gBGImg.VOIchanged := false;
-		if not HdrForm.OpenAndDisplayHdr(lFilename,gMRIcroOverlay[lOverlay]) then exit;
+		if not OpenAndDisplayHdr(lFilename,gMRIcroOverlay[lOverlay]) then exit;
 		if not OpenImg(gBGImg,gMRIcroOverlay[lOverlay],false,false,false,gBGImg.ResliceOnLoad,false) then exit;
 		ProgressBar1.Position := lC;
 		for lPos := 1 to gMRIcroOverlay[kBGOverlayNum].ScrnBufferItems do
@@ -4349,8 +4440,8 @@ begin
 		end else begin
 			if not OpenDialogExecute(kImgFilter,'Select NEGATIVE overlap image',false) then exit;
 		end;
-		lFilename := HdrForm.OpenHdrDlg.Filename;
-		if not HdrForm.OpenAndDisplayHdr(lFilename,gMRIcroOverlay[lLoop]) then exit;
+		lFilename := OpenHdrDlg.Filename;
+		if not OpenAndDisplayHdr(lFilename,gMRIcroOverlay[lLoop]) then exit;
 		if not OpenImg(gBGImg,gMRIcroOverlay[lLoop],false,false,true,gBGImg.ResliceOnLoad,false) then exit;
 		lTotal[lLoop] := round(gMRIcroOverlay[lLoop].NIFTIhdr.glmax);
 		if (gMRIcroOverlay[lLoop].NIFTIhdr.intent_code <> kNIFTI_INTENT_ESTIMATE) then
@@ -4457,19 +4548,19 @@ begin
 		exit;
 	end;
         if gBGImg.Resliced then begin
-           if not HdrForm.OpenAndDisplayHdr(gMRIcroOverlay[kBGOverlayNum].HdrFileName,gMRIcroOverlay[kBGOverlayNum]) then exit;
+           if not OpenAndDisplayHdr(gMRIcroOverlay[kBGOverlayNum].HdrFileName,gMRIcroOverlay[kBGOverlayNum]) then exit;
            if not OpenImg(gBGImg,gMRIcroOverlay[0],true,false,false,false,false) then exit;
         end;
 	showmessage('Warning: the currently open background image must have the dimensions (size, space between slices, etc) as the image used when creating the ROIs.');
 	if gMRIcroOverlay[kVOIOverlayNum].ScrnBufferItems > 0 then
 		CloseVOIClick(nil);
 	if not OpenDialogExecute('MRIcro ROI (.roi)|*.roi','Select MRIcro format ROIs to convert',true) then exit;
-	lNumberofFiles:= HdrForm.OpenHdrDlg.Files.Count;
+	lNumberofFiles:= OpenHdrDlg.Files.Count;
 	ProgressBar1.Min := 0;
 	ProgressBar1.Max :=lNumberofFiles;
 	ProgressBar1.Position := 0;
 	for lC:= 1 to lNumberofFiles do begin
-		lFilename := HdrForm.OpenHdrDlg.Files[lC-1];
+		lFilename := OpenHdrDlg.Files[lC-1];
 		OpenMRIcroROI (lFileName);
 		lFilename := changefileextX(lFilename,'.voi');
 		SaveAsVOIorNIFTIcore (lFilename, gMRIcroOverlay[kVOIOverlayNum].ScrnBuffer,gMRIcroOverlay[kVOIOverlayNum].ScrnBufferItems, 1,1,gMRIcroOverlay[kBGOverlayNum].NiftiHdr);
@@ -5335,12 +5426,12 @@ var
 begin
 	CloseImagesClick(nil);
 	if not OpenDialogExecute('VOI Drawings (.VOI)|*.VOI','Select VOI format images to convert',true) then exit;
-	lNumberofFiles:= HdrForm.OpenHdrDlg.Files.Count;
+	lNumberofFiles:= OpenHdrDlg.Files.Count;
 	ProgressBar1.Min := 0;
 	ProgressBar1.Max :=lNumberofFiles;
 	ProgressBar1.Position := 0;
 	for lC:= 1 to lNumberofFiles do begin
-		lFilename := HdrForm.OpenHdrDlg.Files[lC-1];
+		lFilename := OpenHdrDlg.Files[lC-1];
 		OpenAndDisplayImg(lFilename,True);
 		lFilename := changefileextx(lFilename,'.nii');
 		//SaveAsVOIorNIFTIcore (lFilename, lByteP, lVoxels, 1, gMRIcroOverlay[kBGOverlayNum].NiftiHdr);
@@ -5502,12 +5593,12 @@ begin
         Showmessage('WARNING: This will flip the images in the Left-Right dimension: this has serious consequences');
 	CloseImagesClick(nil);
 	if not OpenDialogExecute(kImgFilter,'Select NIfTI format images to convert',true) then exit;
-	lNumberofFiles:= HdrForm.OpenHdrDlg.Files.Count;
+	lNumberofFiles:= OpenHdrDlg.Files.Count;
 	ProgressBar1.Min := 0;
 	ProgressBar1.Max :=lNumberofFiles;
 	ProgressBar1.Position := 0;
 	for lC:= 1 to lNumberofFiles do begin
-		lFilename := HdrForm.OpenHdrDlg.Files[lC-1];
+		lFilename := OpenHdrDlg.Files[lC-1];
 		ImgForm.OpenAndDisplayImg(lFilename,True);
 		lFilename := changefileextX(lFilename,'lr.nii.gz');
                 //zap

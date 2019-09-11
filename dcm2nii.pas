@@ -4,13 +4,14 @@ unit dcm2nii;
 {$IFDEF Darwin}
   {$modeswitch objectivec1}
 {$ENDIF}
+//{$DEFINE isGL}
 
 interface
 
 uses
   {$IFDEF Darwin} CocoaAll, MacOSAll, {$ENDIF}
-  strutils, Process, Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  lclintf, IniFiles, ComCtrls, Types;
+  lclintf, strutils, Process, Classes, SysUtils, Forms, Controls, Graphics,
+  Dialogs, ExtCtrls, StdCtrls, IniFiles, ComCtrls, Types;
 
 type
 
@@ -18,7 +19,9 @@ type
 
   Tdcm2niiForm = class(TForm)
     BidsDrop: TComboBox;
+    MergeDrop: TComboBox;
     BidsLabel: TLabel;
+    VerboseCheck: TCheckBox;
     UpdateBtn: TButton;
     CropCheck: TCheckBox;
     FormatDrop: TComboBox;
@@ -27,7 +30,6 @@ type
     AdvancedGroup: TGroupBox;
     IgnoreCheck: TCheckBox;
     LosslessScaleCheck: TCheckBox;
-    MergeCheck: TCheckBox;
     OutDirDrop: TComboBox;
     OutDirLabel: TLabel;
     OutNameEdit: TEdit;
@@ -54,6 +56,7 @@ type
     procedure UpdateBtnClick(Sender: TObject);
     procedure UpdateCommand(Sender: TObject);
     function TerminalCommand: string;
+    function getCurrentDcm2niix(): string;
     function getCustomDcm2niix(): string;
     procedure setCustomDcm2niix(fnm: string);
     //procedure findCustomDcm2niix();
@@ -69,6 +72,11 @@ var
   dcm2niiForm: Tdcm2niiForm;
 
 implementation
+
+{$ifdef LCLCocoa}{$IFDEF isGL}
+uses mainunit; //darkmode
+{$ENDIF}{$ENDIF}
+
 {$R *.lfm}
 const kExeName = 'dcm2niix';
   {$IFDEF Unix}
@@ -78,8 +86,8 @@ const kExeName = 'dcm2niix';
   {$ENDIF}
 Type
 TPrefs = record
-  UseOutDir, Ignore, LosslessScale,Merge,PhilipsPrecise, Crop: boolean;
-  Bids,Format: integer;
+  UseOutDir, Ignore, LosslessScale,PhilipsPrecise, Crop, Verbose: boolean;
+  SeriesMerge,Bids,Format: integer;
   OutDir,OutName: String;
 end;
 var
@@ -116,7 +124,7 @@ begin
 end;
 {$ENDIF}
 
-function getDefaultDcm2niix(): string;
+function getDefaultDcm2niix2(): string;
 begin
   {$IFDEF UNIX}
   result := ResourceDir + pathdelim + kExeName;
@@ -125,10 +133,18 @@ begin
   {$ENDIF}
 end;
 
+
+function Tdcm2niiForm.getCurrentDcm2niix(): string;
+begin
+  result := gCustomDcm2niix;
+  if (result  = '') or (not fileexists(result)) then
+     result := getDefaultDcm2niix2();
+end;
+
 function Tdcm2niiForm.getCustomDcm2niix(): string;
 begin
-  if (gCustomDcm2niix  = '') or (not fileexists(gCustomDcm2niix)) then
-     gCustomDcm2niix := getDefaultDcm2niix();
+  //if (gCustomDcm2niix  = '') or (not fileexists(gCustomDcm2niix)) then
+  //   gCustomDcm2niix := getDefaultDcm2niix();
   result := gCustomDcm2niix;
 end;
 
@@ -142,9 +158,10 @@ begin
      with result do begin
           Ignore := false;
           LosslessScale := false;
-          Merge := false;
+          SeriesMerge := 0;
           PhilipsPrecise := true;
           Crop := false;
+          Verbose := false;
           UseOutDir := false;
           Bids := 1;
           Format := 1;
@@ -158,9 +175,10 @@ begin
      with gPrefs do begin
           IgnoreCheck.Checked := Ignore;
           LosslessScaleCheck.Checked := LosslessScale;
-          MergeCheck.Checked := Merge;
+          MergeDrop.ItemIndex := SeriesMerge;
           PhilipsPreciseCheck.Checked := PhilipsPrecise;
           CropCheck.Checked := Crop;
+          VerboseCheck.Checked := Verbose;
           if (UseOutDir) then
              OutDirDrop.ItemIndex := 2
           else
@@ -177,9 +195,10 @@ begin
      with gPrefs do begin
           Ignore := IgnoreCheck.Checked;
           LosslessScale := LosslessScaleCheck.Checked;
-          Merge := MergeCheck.Checked;
+          SeriesMerge := MergeDrop.ItemIndex;
           PhilipsPrecise := PhilipsPreciseCheck.Checked;
           Crop := CropCheck.Checked;
+          Verbose := VerboseCheck.Checked;
           UseOutDir := (OutDirDrop.ItemIndex = 2);
           OutDir := OutDirDrop.Items[2];
           Format := FormatDrop.ItemIndex;
@@ -268,9 +287,10 @@ begin
   IniBool(lRead,lIniFile, 'UseOutDir',lPrefs.UseOutDir);
   IniBool(lRead,lIniFile, 'Ignore',lPrefs.Ignore);
   IniBool(lRead,lIniFile, 'LosslessScale',lPrefs.LosslessScale);
-  IniBool(lRead,lIniFile, 'Merge',lPrefs.Merge);
   IniBool(lRead,lIniFile, 'PhilipsPrecise',lPrefs.PhilipsPrecise);
   IniBool(lRead,lIniFile, 'Crop',lPrefs.Crop);
+  IniBool(lRead,lIniFile, 'Verbose',lPrefs.Verbose);
+  IniInt(lRead,lIniFile, 'SeriesMerge',lPrefs.SeriesMerge);
   IniInt(lRead,lIniFile, 'Bids', lPrefs.Bids);
   IniInt(lRead,lIniFile, 'Format', lPrefs.Format);
   IniStr(lRead, lIniFile, 'OutDir', lPrefs.OutDir);
@@ -286,14 +306,16 @@ begin
        result := result + ' -f "'+OutNameEdit.Text+'"';
     if IgnoreCheck.Checked then result := result + ' -i y';
     if LosslessScaleCheck.Checked then result := result + ' -l y';
-    if MergeCheck.Checked then result := result + ' -m y';
+    if MergeDrop.ItemIndex = 1 then result := result + ' -m y';
+    if MergeDrop.ItemIndex = 2 then result := result + ' -m n';
     if PhilipsPreciseCheck.Checked then
        result := result + ' -p y'
     else
        result := result + ' -p n';
     if CropCheck.Checked then result := result + ' -x y';
+    if VerboseCheck.Checked then result := result + ' -v y';
     if odd(FormatDrop.ItemIndex) then
-       result := result + ' -z y'
+           result := result + ' -z y'
     else
       result := result + ' -z n';
     if (FormatDrop.ItemIndex > 1) then
@@ -318,6 +340,7 @@ end;
 procedure Tdcm2niiForm.ResetBtnClick(Sender: TObject);
 begin
     gPrefs := SetDefaultPrefs();
+    gCustomDcm2niix := '';
     ShowPrefs;
     UpdateCommand(Sender);
 end;
@@ -337,6 +360,7 @@ begin
   ShowPrefs;
   UpdateCommand(Sender);
   InputDirDialog.InitialDir := GetUserDir;
+  {$IFDEF LCLCocoa} {$IFDEF isGL} GLForm1.SetFormDarkMode(dcm2niiForm); {$ENDIF}{$ENDIF}
 end;
 
 procedure Tdcm2niiForm.OutDirDropChange(Sender: TObject);
@@ -391,7 +415,7 @@ const
 begin
      result := ''; //EXIT_FAILURE
    //if (not isAppDoneInitializing) then exit;
-   exe := getCustomDcm2niix();
+   exe := getCurrentDcm2niix();
    if not fileexists(exe) then begin
       OutputMemo.Lines.Clear;
       OutputMemo.Lines.Add('Error: unable to find '+exe);
@@ -470,13 +494,15 @@ begin
   //label
   promptLabel:=TLabel.create(PrefForm);
   currentDcm2niix := getCustomDcm2niix();
-  defaultDcm2niix := getDefaultDcm2niix();
+  defaultDcm2niix := getCurrentDcm2niix();
+  if (currentDcm2niix  = '') or (not fileexists(currentDcm2niix)) then
+     currentDcm2niix := defaultDcm2niix;
   isCurrentAlsoDefault := CompareStr(currentDcm2niix, defaultDcm2niix) = 0;
   if (not fileexists(defaultDcm2niix)) and (not isCurrentAlsoDefault) then
      isCurrentAlsoDefault := true; //default does not exist: do not show "Select Default")
   if versionMsg = '' then begin
      if fileexists(currentDcm2niix) then
-        promptLabel.Caption:= format('dcm2niix path: "%s"', [gCustomDcm2niix])
+        promptLabel.Caption:= format('dcm2niix path: "%s"', [currentDcm2niix])
      else
          promptLabel.Caption:= 'Unable to find dcm2niix';
   end else
@@ -571,6 +597,7 @@ begin
   else
   {$ENDIF}
   UpdateDialog('');
+  UpdateCommand(Sender);
 end;
 
 end.

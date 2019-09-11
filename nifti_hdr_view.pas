@@ -2,16 +2,22 @@ unit nifti_hdr_view;
 interface
 {$H+}
 {$MODE DELPHI}
+{$DEFINE MRIcron}
+
 uses
 
 LResources, Spin,
- {$IFNDEF Unix} ShellAPI, {$ENDIF}
-  SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Menus, ComCtrls, Buttons, nifti_hdr, define_types, nifti_types;
+{$IFNDEF MRIcron} SimdUtils, {$ENDIF}
+{$IFNDEF Unix} ShellAPI, {$ENDIF}
+  SysUtils, Classes, Graphics, Controls, Forms, Dialogs, math,
+
+  StdCtrls, Menus, ComCtrls, Buttons, nifti_types;
 type
   { THdrForm }
   THdrForm = class(TForm)
-      OpenHdrDlg: TOpenDialog;
+    UnitLabel: TLabel;
+    SpacingLabel: TLabel;
+    LengthLabel: TLabel;
     Ymm: TFloatSpinEdit;
     HdrMenu: TMainMenu;
     File1: TMenuItem;
@@ -24,7 +30,7 @@ type
     intent_nameEdit: TEdit;
     data_typeEdit: TEdit;
     CommentEdit: TEdit;
-    db_: TEdit;
+    db_nameEdit: TEdit;
     aux: TEdit;
     gmax: TSpinEdit;
     gmin: TSpinEdit;
@@ -43,7 +49,7 @@ type
     NotesLabel: TLabel;
     HeaderMagicDrop: TComboBox;
     Label21: TLabel;
-    Label1: TLabel;
+    DimLabel: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
@@ -152,67 +158,29 @@ type
     procedure SaveHdrDlgClose(Sender: TObject);
     procedure DimensionSheetContextPopup(Sender: TObject; MousePos: TPoint;
       var Handled: Boolean);
-    procedure WriteHdrForm (var lHdr: TMRIcroHdr);
-    procedure ReadHdrDimensionsOnly (var lHdr: TMRIcroHdr); //reads only size dimensions: useful for computing estimated filesize
-    procedure ReadHdrForm (var lHdr: TMRIcroHdr); //reads entire header
+    procedure WriteHdrForm (lHdr: TNIFTIhdr; IsNativeEndian: boolean; filename: string); overload;
+    procedure WriteHdrForm (lHdr: TNIFTIhdr; IsNativeEndian: boolean; filename: string; DisplayDims: TVec3i); overload;
+    procedure ReadHdrDimensionsOnly (var lHdr: TNIFTIhdr); //reads only size dimensions: useful for computing estimated filesize
+    procedure ReadHdrForm (var lHdr: TNIFTIhdr); //reads entire header
     procedure Save1Click(Sender: TObject);
     procedure TabMenuClick(Sender: TObject);
     procedure Exit1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure HeaderMagicDropSelect(Sender: TObject);
-    function OpenAndDisplayHdr (var lFilename: string; var lHdr: TMRIcroHdr): boolean;
+    //function OpenAndDisplayHdr (var lFilename: string; var lHdr: TNIFTIhdr): boolean;
   private
 	{ Private declarations }
 
   public
 	{ Public declarations }
   end;
-  function OpenDialogExecute (lFilter,lCaption: string; lAllowMultiSelect: boolean): boolean;
-
 
 var
   HdrForm: THdrForm;
 
 implementation
-uses nifti_img_view, render,nifti_img;
-
 
 {$R *.lfm}
-
-function OpenDialogExecute (lFilter,lCaption: string; lAllowMultiSelect: boolean): boolean;
-begin
-	HdrForm.OpenHdrDlg.Filter := lFilter;
-        {$IFDEF Darwin}
-         HdrForm.OpenHdrDlg.Filter := '';
-        {$ENDIF}
-        HdrForm.OpenHdrDlg.FilterIndex := 1;
-	HdrForm.OpenHdrDlg.Title := lCaption;
-	if lAllowMultiSelect then
-		HdrForm.OpenHdrDlg.Options := [ofAllowMultiSelect,ofFileMustExist];
-	result := HdrForm.OpenHdrDlg.Execute;
-	HdrForm.OpenHdrDlg.Options := [ofFileMustExist];
-end;
-
-function THdrForm.OpenAndDisplayHdr (var lFilename: string; var lHdr: TMRIcroHdr): boolean;
-var lFileDir: string;
-begin
-  FreeImgMemory(lHdr);
-  result := false;
-  NIFTIhdr_ClearHdr(lHdr);
-  if not NIFTIhdr_LoadHdr(lFilename, lHdr) then exit;
-  WriteHdrForm (lHdr);
-  lFileDir := extractfiledir(lFilename);
-  if lFileDir <> gTemplateDir then
-     OpenHdrDlg.InitialDir := lFileDir;
-  SaveHdrDlg.InitialDir := lFileDir;
-  SaveHdrDlg.FileName := lFilename; //make this default file to write
-  if length(lFilename) < 79 then
-     StatusBar1.Panels[1].text := lFilename
-  else
-      StatusBar1.Panels[1].text := extractfilename(lFilename);
-  StatusBar1.Panels[0].text := 'Img= '+inttostr(ComputeImageDataBytes(lHdr));
-  result := true;
-end;
 
 function DropItem2DataType(lItemIndex: integer): integer; //returns NIfTI datatype number
 begin
@@ -312,16 +280,22 @@ begin
      end; //case
 end; //func DropItem2time_units
 
+procedure THdrForm.WriteHdrForm (lHdr: TNIFTIhdr; IsNativeEndian: boolean; filename: string; DisplayDims: TVec3i); overload; //writes a header to the various controls
+begin
+     WriteHdrForm (lHdr, IsNativeEndian, filename);
+     if (DisplayDims.X <> lHdr.dim[1]) or (DisplayDims.Y <> lHdr.dim[2]) or (DisplayDims.Z <> lHdr.dim[3]) then
+        StatusBar1.Panels[0].text := format('Resliced: %dx%dx%d', [DisplayDims.X,DisplayDims.Y,DisplayDims.Z]) ;
 
-procedure THdrForm.WriteHdrForm (var lHdr: TMRIcroHdr); //writes a header to the various controls
+end;
+
+procedure THdrForm.WriteHdrForm (lHdr: TNIFTIhdr; IsNativeEndian: boolean; filename: string); overload;//writes a header to the various controls
 var //lCStr: string[80];
     lInc: Integer;
-    s: string;
 begin
-     //showmessage(format('%g %g %g', [lHdr.NIFTIhdr.qoffset_x, lHdr.NIFTIhdr.qoffset_y, lHdr.NIFTIhdr.qoffset_z]));
-
-     with lHdr.NIFTIhdr do begin
-		  //numDimEdit.value := dim[0];
+     StatusBar1.Panels[0].text := '';
+     //caption := 'xx'+inttostr(lHdr.intent_code);
+     StatusBar1.Panels[1].text := filename;
+     with lHdr do begin
           XDim.Value := dim[1];
           YDim.Value := dim[2];
           ZDim.Value := dim[3];
@@ -339,47 +313,26 @@ begin
           OffsetEdit.value := round(vox_offset);
           Scale.value := scl_slope;
           Intercept.value := scl_inter;
-          {$IFNDEF FPC}
-          fTypeDrop.SetItemIndex(  DataType2DropItem( datatype));
-          if lHdr.NativeEndian then
-             Endian.SetItemIndex(0)
-          else
-              Endian.SetItemIndex(1);
-          //caption := inttohex(Magic);
-          if Magic = kNIFTI_MAGIC_EMBEDDED_HDR then
-			 HeaderMagicDrop.SetItemIndex(2)
-		  else if Magic = kNIFTI_MAGIC_SEPARATE_HDR then
-			 HeaderMagicDrop.SetItemIndex(1)
-		  else if Magic = kswapNIFTI_MAGIC_EMBEDDED_HDR then
-			 HeaderMagicDrop.SetItemIndex(2)
-		  else if Magic = kswapNIFTI_MAGIC_SEPARATE_HDR then
-			 HeaderMagicDrop.SetItemIndex(1)
-		  else
-             HeaderMagicDrop.SetItemIndex(0);
-          xyzt_sizeDrop.SetItemIndex(xyzt_units and 3);
-          xyzt_timeDrop.SetItemIndex(time_units2DropItem(xyzt_units));
-          {$ELSE}
           fTypeDrop.ItemIndex := (  DataType2DropItem( datatype));
-          if lHdr.DiskDataNativeEndian then
-             Endian.ItemIndex:=(0)
+          if IsNativeEndian then
+             Endian.ItemIndex := 0
           else
-              Endian.ItemIndex:=(1);
-          if Magic = kNIFTI_MAGIC_EMBEDDED_HDR then
-			 HeaderMagicDrop.ItemIndex:=(2)
-		  else if Magic = kNIFTI_MAGIC_SEPARATE_HDR then
-			 HeaderMagicDrop.ItemIndex:=(1)
-		  else if Magic = kswapNIFTI_MAGIC_EMBEDDED_HDR then
-			 HeaderMagicDrop.ItemIndex:=(2)
-		  else if Magic = kswapNIFTI_MAGIC_SEPARATE_HDR then
-			 HeaderMagicDrop.ItemIndex:=(1)
-		  else
-             HeaderMagicDrop.ItemIndex:=(0);
+              Endian.ItemIndex:= 1;
+          if (Magic = kNIFTI_MAGIC_SEPARATE_HDR) or (Magic = kswapNIFTI_MAGIC_SEPARATE_HDR) then
+	     HeaderMagicDrop.ItemIndex := 1
+	  else if (Magic = kNIFTI_MAGIC_EMBEDDED_HDR) or (Magic = kswapNIFTI_MAGIC_EMBEDDED_HDR) then
+	     HeaderMagicDrop.ItemIndex := 2
+	  else if (Magic = kNIFTI2_MAGIC_SEPARATE_HDR) then
+             HeaderMagicDrop.ItemIndex := 3
+          else  if (Magic = kNIFTI2_MAGIC_EMBEDDED_HDR) then
+             HeaderMagicDrop.ItemIndex := 4
+          else
+              HeaderMagicDrop.ItemIndex:=(0);
           xyzt_sizeDrop.ItemIndex:=(xyzt_units and 3);
           xyzt_timeDrop.ItemIndex:=(time_units2DropItem(xyzt_units));
-          {$ENDIF}
           CommentEdit.text := descrip;
           data_typeEdit.text := data_type;
-          db_.text := db_name;
+          db_nameEdit.text := db_name;
           aux.text := aux_file;
           intent_nameEdit.text := intent_name;
 	  ext.value := extents;
@@ -426,7 +379,8 @@ begin
           QFormDrop.ItemIndex:= (qform_code);
           SFormDrop.ItemIndex :=(sform_code);
   {$ENDIF}
-          //showmessage(format('%g %g %g', [lHdr.NIFTIhdr.qoffset_x, lHdr.NIFTIhdr.qoffset_y, lHdr.NIFTIhdr.qoffset_z]));
+          //caption := format('%d %d', [qform_code, sform_code]);
+          //showmessage(format('%g %g %g', [lHdr.qoffset_x, lHdr.qoffset_y, lHdr.qoffset_z]));
           //showmessage(format('%g %g %g', [qoffset_x, qoffset_y, qoffset_z]));
 
           quatern_bEdit.value := quatern_b;
@@ -462,32 +416,6 @@ begin
 
     end;  //with lHdr
 end;
-(*procedure ApplySaveDlgFilter (lSaveDlg: TSaveDialog);
-var
-   lLen,lPos,lPipes,lPipesReq: integer;
-   lExt: string;
-begin
-     lPipesReq := (lSaveDlg.FilterIndex * 2)-1;
-     if lPipesReq < 1 then exit;
-     lLen := length(lSaveDlg.Filter);
-     lPos := 1;
-     lPipes := 0;
-     while (lPos < lLen) and (lPipes < lPipesReq) do begin
-           if lSaveDlg.Filter[lPos] = '|' then
-              inc(lPipes);
-           inc(lPos);
-     end;
-     if (lPos >= lLen) or (lPipes < lPipesReq) then
-        exit;
-     lExt := '';
-     while (lPos <= lLen) and (lSaveDlg.Filter[lPos] <> '|') do begin
-           if lSaveDlg.Filter[lPos] <> '*' then
-              lExt := lExt + lSaveDlg.Filter[lPos];
-           inc(lPos);
-     end;
-     if lExt <> '' then
-        lSaveDlg.Filename := ChangeFileExt(lSaveDlg.Filename,lExt);
-end;   *)
 
 procedure THdrForm.SaveHdrDlgClose(Sender: TObject);
 begin
@@ -505,6 +433,11 @@ end;
 procedure THdrForm.FormShow(Sender: TObject);
 begin
       // ImgForm.OnLaunch;
+     {$IFDEF Darwin}
+     //HdrForm.BorderStyle:= bsSingle;
+     //HdrForm.BorderStyle:= bsDialog;
+     HdrForm.Constraints.MinHeight := 340;
+     {$ENDIF}
 end;
 
 procedure THdrForm.PageControl1Change(Sender: TObject);
@@ -517,11 +450,11 @@ begin
   {$IFDEF Darwin}Application.MainForm.SetFocus;{$ENDIF}
 end;
 
-procedure THdrForm.ReadHdrDimensionsOnly (var lHdr: TMRIcroHdr); //reads only size dimensions: useful for computing estimated filesize
+procedure THdrForm.ReadHdrDimensionsOnly (var lHdr: TNIFTIhdr); //reads only size dimensions: useful for computing estimated filesize
 var
     lInc: Integer;
 begin
-     with lHdr.NIFTIhdr do begin
+     with lHdr do begin
           dim[1] := round(XDim.Value);
           dim[2] := round(YDim.Value);
           dim[3] := round(ZDim.Value);
@@ -541,14 +474,33 @@ begin
      end; //with NIfTIhdr
 end; //proc ReadHdrDimensionsOnly
 
-procedure THdrForm.ReadHdrForm (var lHdr: TMRIcroHdr); //read the values the user has entered
+type
+  kStr255 = string[255];
+
+function getStr(inStr: string; len: integer): kStr255;
 var
-    lInc: Integer;
+    i, n: integer;
 begin
-     NIFTIhdr_ClearHdr(lHdr); //important: reset values like first 4 bytes = 348
+     result := '';
+     for i := 1 to len do
+         result[i] := chr(0);
+     //showmessage(format('%d %d', [len, length(inStr)]));
+     n := min(len, length(inStr));
+     if n < 1 then exit;
+     for i := 1 to n do
+         result[i]  := inStr[i];
+end;
+
+procedure THdrForm.ReadHdrForm (var lHdr: TNIFTIhdr); //read the values the user has entered
+var
+    i: Integer;
+    str: kStr255;
+begin
+     NII_Clear(lHdr); //important: reset values like first 4 bytes = 348
      ReadHdrDimensionsOnly(lHdr);
+
      //StatusBar1.Panels[0].text := 'ImageData (bytes)= '+inttostr(ComputeImageDataBytes(lHdr));
-     with lHdr.NIFTIhdr do begin
+     with lHdr do begin
           pixdim[1] := Xmm.Value;
           pixdim[2] := Ymm.Value;
           pixdim[3] := Zmm.Value;
@@ -564,37 +516,33 @@ begin
              Magic := kNIFTI_MAGIC_SEPARATE_HDR
           else
              Magic := 0; //not saed as NIFTI
-          for lInc := 1 to 80 do
-              descrip[lInc] := chr(0);
-          for lInc := 1 to length(CommentEdit.text) do
-              descrip[lInc]  := CommentEdit.text[lInc];
-          for lInc := 1 to 10 do
-              data_type[lInc] := chr(0);
-          for lInc := 1 to length(data_typeEdit.text) do
-              data_type[lInc] := data_typeEdit.text[lInc];
-          for lInc := 1 to 18 do
-              db_name[lInc] := chr(0);
-          for lInc := 1 to length(db_.text) do
-              db_name[lInc]  := db_.text[lInc];
-          for lInc := 1 to 24 do
-              aux_file[lInc] := chr(0);
-          for lInc := 1 to length(aux.text) do
-              aux_file[lInc]  := aux.text[lInc];
-          for lInc := 1 to 16 do
-              intent_name[lInc] := chr(0);
-          for lInc := 1 to length(intent_nameEdit.text) do
-              intent_name[lInc]  := intent_nameEdit.text[lInc];
+          str := getStr(CommentEdit.text, 80);
+          for i := 1 to 80 do
+              descrip[i] := str[i];
+          str := getStr(data_typeEdit.text, 10);
+          for i := 1 to 10 do
+              data_type[i] := str[i];
+          str := getStr(db_nameEdit.text, 18);
+          for i := 1 to 18 do
+              db_name[i] := str[i];
+          str := getStr(aux.text, 24);
+          for i := 1 to 24 do
+              aux_file[i] := str[i];
+          str := getStr(intent_nameEdit.text, 16);
+          for i := 1 to 16 do
+              intent_name[i] := str[i];
+
           xyzt_units := xyzt_sizeDrop.ItemIndex;
           xyzt_units := xyzt_units+ (DropItem2time_units(xyzt_timeDrop.ItemIndex));
-		  lInc := IntentCodeDrop.ItemIndex;
-		  if (lInc > 0) and (lInc < kNIFTI_LAST_STATCODE) then
-			 lInc := lInc + 1 //intent_codes start from 2 not 1
-		  else if (lInc >= kNIFTI_LAST_STATCODE)  then //add gap in numbers between last stat code and misc codes
-			 lInc := (lInc - kNIFTI_LAST_STATCODE)+kNIFTI_FIRST_NONSTATCODE
-		  else
-			  lInc := 0; //unknown
-		  intent_code := lInc;
-		  intent_p1 := intent_p1Edit.value;
+	  i := IntentCodeDrop.ItemIndex;
+	  if (i > 0) and (i < kNIFTI_LAST_STATCODE) then
+		 i := i + 1 //intent_codes start from 2 not 1
+	  else if (i >= kNIFTI_LAST_STATCODE)  then //add gap in numbers between last stat code and misc codes
+		 i := (i - kNIFTI_LAST_STATCODE)+kNIFTI_FIRST_NONSTATCODE
+	  else
+		  i := 0; //unknown
+	  intent_code := i;
+	  intent_p1 := intent_p1Edit.value;
           intent_p2 := intent_p2Edit.value;
           intent_p3 := intent_p3Edit.value;
           extents:= round(ext.value);
@@ -636,12 +584,71 @@ begin
      //zero_intercept := intercept.value;
 end;
 
-procedure THdrForm.Save1Click(Sender: TObject);
+function NIFTIhdr_SaveHdr(var lFilename: string; var lHdr: TNIFTIhdr; lAllowOverwrite, lIsNativeEndian: boolean): boolean;
 var
-    lHdr: TMRIcroHdr;
-    lFilename,lExt: string;
+    lExt: string;
+    lOutHdr: TNIFTIhdr;
+    lF: File;
+    lOverwrite: boolean;
 begin
-  NIFTIhdr_ClearHdr(lHdr);
+     lOverwrite := false; //will we overwrite existing file?
+     lExt := upcase(ExtractFileExt(lFilename));
+     if (lExt = '.NII') then lHdr.magic := kNIFTI_MAGIC_EMBEDDED_HDR;
+     if (lExt = '.HDR') then lHdr.magic := kNIFTI_MAGIC_SEPARATE_HDR;
+     result := false; //assume failure
+	 if lHdr.magic = kNIFTI_MAGIC_EMBEDDED_HDR then begin
+
+		 if (lExt = '.GZ') or (lExt = '.NII.GZ') then begin
+			showmessage('Unable to save .nii.gz headers (first ungzip your image if you wish to edit the header)');
+			exit;
+		 end;
+		 lFilename := changefileext(lFilename,'.nii')
+	 end else
+         lFilename := changefileext(lFilename,'.hdr');
+     (*if ((sizeof(TNIFTIhdr))> DiskFree(lFileName)) then begin
+        ShowMessage('There is not enough free space on the destination disk to save the header. '+kCR+
+        lFileName+ kCR+' Bytes Required: '+inttostr(sizeof(TNIFTIhdr)) );
+        exit;
+     end;*)
+     (*if Fileexists(lFileName) then begin
+         if lAllowOverwrite then begin
+            case MessageDlg('Do you wish to modify the existing file '+lFilename+'?', mtConfirmation,[mbYes, mbNo], 0) of	{ produce the message dialog box }
+             6: lOverwrite := true; //6= mrYes, 7=mrNo... not sure what this is for Linux. Hardcoded as we do not include Form values
+        end;//case
+         end else
+             showmessage('Error: the file '+lFileName+' already exists.');
+         if not lOverwrite then Exit;
+     end;*)
+     if Fileexists(lFileName) and (not lAllowOverwrite) then begin
+    	showmessage('Error: the file '+lFileName+' already exists.');
+        exit;
+     end;
+     if Fileexists(lFileName) then
+        lOverwrite := true;
+     if lHdr.magic = kNIFTI_MAGIC_EMBEDDED_HDR then
+        if lHdr.vox_offset < sizeof(TNIFTIHdr) then
+           lHdr.vox_offset := sizeof(TNIFTIHdr); //embedded images MUST start after header
+     if lHdr.magic = kNIFTI_MAGIC_SEPARATE_HDR then
+           lHdr.vox_offset := 0; //embedded images MUST start after header
+     result := true;
+     move(lHdr, lOutHdr, sizeof(lOutHdr));
+     if lIsNativeEndian = false then
+        NIFTIhdr_SwapBytes (lOutHdr);{swap to big-endianformat}
+     Filemode := 1;
+     AssignFile(lF, lFileName); {WIN}
+     if lOverwrite then //this allows us to modify just the 348byte header of an existing NII header without touching image data
+         Reset(lF,sizeof(TNIFTIhdr))
+     else
+         Rewrite(lF,sizeof(TNIFTIhdr));
+     BlockWrite(lF,lOutHdr, 1  {, NumWritten});
+     CloseFile(lF);
+     Filemode := 2;
+end; //func NIFTIhdr_SaveHdr
+
+procedure THdrForm.Save1Click(Sender: TObject);
+var lHdr: TNIFTIhdr;
+    lFilename, lExt: string;
+begin
   if (HeaderMagicDrop.ItemIndex >= 3) then begin
      showmessage('Unable to save NIfTI2 headers');
      exit;
@@ -652,18 +659,18 @@ begin
      showmessage('Unable to save .nii.gz headers (first ungzip your image if you wish to edit the header)');
      exit;
   end;
-  NIFTIhdr_ClearHdr(lHdr); //important: reset values like first 4 bytes = 348
+  NII_Clear(lHdr);
   ReadHdrForm (lHdr);
+
   if (lExt <> '.HDR') and (lExt <> '.NII') then begin
-     if lHdr.NIFTIhdr.magic = kNIFTI_MAGIC_SEPARATE_HDR then
+     if lHdr.magic = kNIFTI_MAGIC_SEPARATE_HDR then
         SaveHdrDlg.Filename := SaveHdrDlg.Filename +'.hdr'
      else
          SaveHdrDlg.Filename := SaveHdrDlg.Filename +'.nii';
   end;
   lFilename := SaveHdrDlg.Filename;
   //999 ImgForm.SaveDialog1.InitialDir := extractfiledir(lFilename);
-  if not NIFTIhdr_SaveHdr (lFilename, lHdr,true) then exit;
-  OpenHdrDlg.FileName := lFilename; //make this default file to open
+  if not NIFTIhdr_SaveHdr (lFilename, lHdr, true, HdrForm.Endian.ItemIndex = 0) then exit;
   StatusBar1.Panels[1].text := 'wrote: '+lFilename;
 end;
 
@@ -679,16 +686,13 @@ end;
 
 
 procedure THdrForm.FormCreate(Sender: TObject);
-var lHdr: TMRIcroHdr;
+var lHdr: TNIFTIhdr;
+    v: TVec3i;
 begin
-  //DecimalSeparator := '.'; //important for reading DICOM data: e.g. Germans write '12,00' but DICOM is '12.00'
-  {$IFNDEF Unix}	DragAcceptFiles(Handle, True); //engage drag and drop
-  {$ENDIF}
-  NIFTIhdr_ClearHdr(lHdr);
-  HdrForm.WriteHdrForm (lHdr); //show default header
+  NII_Clear(lHdr);
+  v.x := lHdr.dim[1]; v.y := lHdr.dim[2]; v.z := lHdr.dim[3];
+  HdrForm.WriteHdrForm (lHdr, true,'', v); //show default header
   {$IFDEF Darwin}
-  {$IFNDEF LCLgtk} //only for Carbon compile
-  //Open1.ShortCut := ShortCut(Word('O'), [ssMeta]);
   Save1.ShortCut := ShortCut(Word('S'), [ssMeta]);
   Exit1.ShortCut := ShortCut(Word('W'), [ssMeta]);
   Dimensions1.ShortCut := ShortCut(Word('A'), [ssMeta]);
@@ -697,7 +701,6 @@ begin
   Statistics1.ShortCut := ShortCut(Word('D'), [ssMeta]);
   FunctionalMRI1.ShortCut := ShortCut(Word('E'), [ssMeta]);
   Optional1.ShortCut := ShortCut(Word('F'), [ssMeta]);
-  {$ENDIF}
   {$ENDIF}
 end;
 
@@ -722,6 +725,5 @@ begin
 		   OffsetEdit.value := 0;
      end;
 end;
-
 
 end.

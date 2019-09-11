@@ -1,7 +1,7 @@
 object dcm2niiForm: Tdcm2niiForm
-  Left = 315
+  Left = 475
   Height = 525
-  Top = 253
+  Top = 54
   Width = 965
   ActiveControl = SelectFilesBtn
   AllowDropFiles = True
@@ -27,14 +27,14 @@ object dcm2niiForm: Tdcm2niiForm
     TabOrder = 0
     object GeneralGroup: TGroupBox
       Left = 1
-      Height = 215
+      Height = 216
       Top = 1
       Width = 338
       Align = alTop
       AutoSize = True
       Caption = 'General'
       ClientHeight = 197
-      ClientWidth = 330
+      ClientWidth = 328
       TabOrder = 0
       object BidsLabel: TLabel
         AnchorSideLeft.Control = OutNameLabel
@@ -55,8 +55,9 @@ object dcm2niiForm: Tdcm2niiForm
         AnchorSideRight.Side = asrBottom
         Left = 4
         Height = 20
+        Hint = 'Create a BIDS text file with sequence details.'
         Top = 177
-        Width = 326
+        Width = 324
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Top = 4
         BorderSpacing.Right = 4
@@ -68,6 +69,8 @@ object dcm2niiForm: Tdcm2niiForm
           'Yes, with Personal Identifiers'
         )
         OnChange = UpdateCommand
+        ParentShowHint = False
+        ShowHint = True
         Style = csDropDownList
         TabOrder = 3
         Text = 'Yes, Anonymized'
@@ -80,7 +83,7 @@ object dcm2niiForm: Tdcm2niiForm
         Left = 4
         Height = 20
         Top = 133
-        Width = 326
+        Width = 324
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Top = 4
         BorderSpacing.Right = 4
@@ -117,7 +120,7 @@ object dcm2niiForm: Tdcm2niiForm
         Left = 4
         Height = 20
         Top = 89
-        Width = 326
+        Width = 324
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Top = 4
         BorderSpacing.Right = 5
@@ -167,7 +170,7 @@ object dcm2niiForm: Tdcm2niiForm
         Height = 21
         Hint = 'Special values: %a=antenna (coil) name, %b=basename, %c=comments, %d=description, %e=echo number, %f=folder name, %i=ID of patient, %j=seriesInstanceUID, %k=studyInstanceUID, %m=manufacturer, %n=name of patient, %p=protocol, %r=instance number, %s=series number, %t=time, %u=acquisition number, %v=vendor, %x=study ID; %z=sequence name'
         Top = 24
-        Width = 322
+        Width = 320
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Left = 4
         BorderSpacing.Top = 4
@@ -191,14 +194,14 @@ object dcm2niiForm: Tdcm2niiForm
     end
     object AdvancedGroup: TGroupBox
       Left = 1
-      Height = 128
-      Top = 216
+      Height = 153
+      Top = 217
       Width = 338
       Align = alTop
       AutoSize = True
       Caption = 'Advanced'
-      ClientHeight = 110
-      ClientWidth = 330
+      ClientHeight = 134
+      ClientWidth = 328
       TabOrder = 1
       object IgnoreCheck: TCheckBox
         Left = 4
@@ -230,37 +233,21 @@ object dcm2niiForm: Tdcm2niiForm
         ShowHint = True
         TabOrder = 1
       end
-      object MergeCheck: TCheckBox
+      object PhilipsPreciseCheck: TCheckBox
         AnchorSideLeft.Control = IgnoreCheck
         AnchorSideTop.Control = LosslessScaleCheck
         AnchorSideTop.Side = asrBottom
         Left = 4
         Height = 18
-        Hint = 'Merge 2D slices from same series regardless of study time, echo, coil, orientation, etc.'#10
-        Top = 48
-        Width = 140
-        BorderSpacing.Top = 4
-        Caption = 'Always Merge Series'
-        OnChange = UpdateCommand
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 2
-      end
-      object PhilipsPreciseCheck: TCheckBox
-        AnchorSideLeft.Control = IgnoreCheck
-        AnchorSideTop.Control = MergeCheck
-        AnchorSideTop.Side = asrBottom
-        Left = 4
-        Height = 18
         Hint = 'Use Philips precise float scaling (not display) scaling.'#10
-        Top = 70
+        Top = 48
         Width = 149
         BorderSpacing.Top = 4
         Caption = 'Precise Philips Scaling'
         OnChange = UpdateCommand
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 3
+        TabOrder = 2
       end
       object CropCheck: TCheckBox
         AnchorSideLeft.Control = IgnoreCheck
@@ -269,14 +256,56 @@ object dcm2niiForm: Tdcm2niiForm
         Left = 4
         Height = 18
         Hint = 'Remove excess neck from anatomical (e.g. T1) scans. This can improve spatial registration.'
-        Top = 92
+        Top = 70
         Width = 114
         BorderSpacing.Top = 4
         Caption = 'Crop 3D Images'
         OnChange = UpdateCommand
         ParentShowHint = False
         ShowHint = True
+        TabOrder = 3
+      end
+      object VerboseCheck: TCheckBox
+        AnchorSideLeft.Control = IgnoreCheck
+        AnchorSideTop.Control = CropCheck
+        AnchorSideTop.Side = asrBottom
+        Left = 4
+        Height = 18
+        Hint = 'Provide detailed notes on conversion'
+        Top = 92
+        Width = 69
+        BorderSpacing.Top = 4
+        Caption = 'Verbose'
+        OnChange = UpdateCommand
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 4
+      end
+      object MergeDrop: TComboBox
+        AnchorSideTop.Control = VerboseCheck
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Left = 4
+        Height = 20
+        Hint = 'merge 2D slices from same series regardless of echo, exposure, etc.'
+        Top = 114
+        Width = 324
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 4
+        BorderSpacing.Right = 4
+        ItemHeight = 26
+        ItemIndex = 0
+        Items.Strings = (
+          'Automatic Series Merging'
+          'Always Merge Series Regardless of Differences'
+          'Never Merge Series with Differences'
+        )
+        OnChange = UpdateCommand
+        ParentShowHint = False
+        ShowHint = True
+        Style = csDropDownList
+        TabOrder = 5
+        Text = 'Automatic Series Merging'
       end
     end
     object UpdateBtn: TButton
@@ -287,7 +316,7 @@ object dcm2niiForm: Tdcm2niiForm
       AnchorSideRight.Side = asrBottom
       Left = 5
       Height = 25
-      Top = 348
+      Top = 374
       Width = 330
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Left = 4
@@ -305,7 +334,7 @@ object dcm2niiForm: Tdcm2niiForm
       AnchorSideRight.Side = asrBottom
       Left = 5
       Height = 25
-      Top = 377
+      Top = 403
       Width = 330
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Left = 4
@@ -323,14 +352,14 @@ object dcm2niiForm: Tdcm2niiForm
       AnchorSideRight.Side = asrBottom
       Left = 5
       Height = 20
-      Top = 406
+      Top = 432
       Width = 330
       Anchors = [akTop, akLeft, akRight]
       AutoSize = True
       BorderSpacing.Left = 4
       BorderSpacing.Top = 4
       BorderSpacing.Right = 4
-      Caption = 'Select Files To Convert...'
+      Caption = 'Select Folder To Convert...'
       OnClick = SelectFilesBtnClick
       TabOrder = 4
     end

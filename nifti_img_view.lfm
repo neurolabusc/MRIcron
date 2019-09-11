@@ -2243,4 +2243,8 @@ object ImgForm: TImgForm
       1970FDAB7AB9F2F57F6152AAD1
     }
   end
+  object OpenHdrDlg: TOpenDialog
+    left = 253
+    top = 107
+  end
 end

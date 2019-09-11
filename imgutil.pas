@@ -50,17 +50,17 @@ begin
 	    FreeImgMemory(gMRIcroOverlay[lInc]);
   ImgForm.UpdateLayerMenu;
 
-  if not OpenDialogExecute(kImgPlusVOIFilter,'Select volume of interest',false) then exit;
-  lVOIName := HdrForm.OpenHdrDlg.FileName;
-  if not OpenDialogExecute(kImgFilter,'Select perfusion images',true) then exit;
-  lNumberofFiles:= HdrForm.OpenHdrDlg.Files.Count;
+  if not ImgForm.OpenDialogExecute(kImgPlusVOIFilter,'Select volume of interest',false) then exit;
+  lVOIName := ImgForm.OpenHdrDlg.FileName;
+  if not ImgForm.OpenDialogExecute(kImgFilter,'Select perfusion images',true) then exit;
+  lNumberofFiles:= ImgForm.OpenHdrDlg.Files.Count;
   if  lNumberofFiles < 1 then
     exit;
   TextForm.MemoT.Lines.Clear;
   lPref := gBGImg.ResliceOnLoad;
   gBGImg.ResliceOnLoad := false;
   for lInc:= 1 to lNumberofFiles do begin
-            lFilename := HdrForm.OpenHdrDlg.Files[lInc-1];
+            lFilename := ImgForm.OpenHdrDlg.Files[lInc-1];
             ImgForm.OpenAndDisplayImg(lFilename,false);
             ImgForm.OverlayOpenCore ( lVOIname, kVOIOverlayNum);
             lMean := UnscaledMean(kVOIOverlayNum);
@@ -72,6 +72,8 @@ begin
               lZeroHdr.scl_inter := lZeroHdr.scl_inter - lMean;
 		          lFilename := changefileprefix(lFilename,'z');
               SaveAsVOIorNIFTIcore (lFilename, gMRIcroOverlay[kBGOverlayNum].ImgBuffer,gMRIcroOverlay[kBGOverlayNum].ImgBufferItems,gMRIcroOverlay[kBGOverlayNum].ImgBufferBPP,1,lZeroHdr)
+              //SaveAsVOIorNIFTIcore (lFilename, lImgBuffer: ByteP; lImgBufferItems, lImgBufferBPP,lnVol: integer; var lNiftiHdr: TNIFTIHdr);
+
             end else
               TextForm.MemoT.Lines.Add(lFilename+'  UNCHANGED (mean of VOI is already zero) ');
 
@@ -82,4 +84,4 @@ begin
 end;
 
 
-end.
+end.

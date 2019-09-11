@@ -287,11 +287,11 @@ begin
   lMinClusterSz := ReadIntForm.GetInt('Minimum cluster size [in voxels]: ', 1,4,9999);
   lThresh := ReadFloatForm.GetFloat('Please enter statistical threshold. ', -9999,2.3,9999);
   lTemplateName := '';
-  if  OpenDialogExecute(kImgFilter,'Select anatomical template (optional)',false) then begin
-      lTemplateName := HdrForm.OpenHdrDlg.Filename;
+  if  ImgForm.OpenDialogExecute(kImgFilter,'Select anatomical template (optional)',false) then begin
+      lTemplateName := ImgForm.OpenHdrDlg.Filename;
   end;
-  if not OpenDialogExecute(kImgFilter,'Select statistical maps',true) then exit;
-	  lNumberofFiles:= HdrForm.OpenHdrDlg.Files.Count;
+  if not ImgForm.OpenDialogExecute(kImgFilter,'Select statistical maps',true) then exit;
+	  lNumberofFiles:= ImgForm.OpenHdrDlg.Files.Count;
     if  lNumberofFiles < 1 then
 		  exit;
     if not fileexists(lTemplateName) then
@@ -300,7 +300,7 @@ begin
     lPref := gBGImg.ResliceOnLoad;
     gBGImg.ResliceOnLoad := false;
     for lInc:= 1 to lNumberofFiles do begin
-            lFilename := HdrForm.OpenHdrDlg.Files[lInc-1];
+            lFilename := ImgForm.OpenHdrDlg.Files[lInc-1];
 
             ImgForm.OpenAndDisplayImg(lFilename,false);
             if lTemplateName <> '' then
@@ -311,4 +311,4 @@ begin
     TextForm.Show;
 end;
 
-end.
+end.

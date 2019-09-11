@@ -69,6 +69,8 @@ uses
 {$IFDEF GUI} dialogs,{$ENDIF}
 dicomhdr;//2/2208
 
+
+
 function CopyNiftiHdr (var lInHdr,lOutHdr: TNIFTIhdr): boolean;
 begin
      move(lInHdr,lOutHdr,sizeof(TNIFTIhdr));
@@ -809,7 +811,7 @@ var
   lBuff: Bytep;
   lAHdr: TAnalyzeHdrSection;
   lFileSz : int64;
-  swapEndian, isNativeNIfTI: boolean;
+  swapEndian, isNativeNIfTI, isDimPermute2341: boolean;
   lReportedSz, lSwappedReportedSz,lHdrSz: Longint;
   lExt: string; //1494
 begin
@@ -835,8 +837,10 @@ begin
 
   FileMode := fmOpenRead;  //Set file access to read only
   isNativeNIfTI := true;
-  if (lExt = '.MGH') or (lExt = '.MGZ') or (lExt = '.MHD') or (lExt = '.MHA') or (lExt = '.NRRD') or (lExt = '.NHDR') or (lExt = '.HEAD') then begin
-    result := readForeignHeader( lFilename, lHdr.NIFTIhdr,lHdr.gzBytesX, swapEndian);  //we currently ignore result!
+  if (lExt = '.BVOX') or (lExt = '.MGH') or (lExt = '.MGZ') or (lExt = '.MHD') or (lExt = '.MHA') or (lExt = '.NRRD') or (lExt = '.NHDR') or (lExt = '.HEAD') or (lExt = '.V') or (lExt = '.VTK') then begin
+    //result := readForeignHeader( lFilename, lHdr.NIFTIhdr,lHdr.gzBytesX, swapEndian);  //we currently ignore result!
+    result := readForeignHeader( lFilename, lHdr.NIFTIhdr,lHdr.gzBytesX, swapEndian, isDimPermute2341);  //we currently ignore result!
+    //function readForeignHeader (var lFilename: string; var lHdr: TNIFTIhdr; var gzBytes: int64; var swapEndian, isDimPermute2341: boolean): boolean;
     lHdr.ImgFileName := lFilename;
     isNativeNIfTI := false;
   end else begin //native NIfTI
@@ -873,7 +877,9 @@ begin
   if (IOResult <> 0) then exit;
   lReportedSz := lHdr.niftiHdr.HdrSz;
   lSwappedReportedSz := lReportedSz;
+
   swap4(lSwappedReportedSz);
+  //showmessage(format('%d -> %d', [lReportedSz, lSwappedReportedSz]));
   lHdr.NIFTIVersion := 1;
   if lReportedSz = lHdrSz then begin
 	 lHdr.DiskDataNativeEndian := true;
