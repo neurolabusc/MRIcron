@@ -1,0 +1,1 @@
+./mricron ./templates/aal.nii.gz -o ./example/attention.nii.gz -c -0 -l 1.96 -h 5 -z  -b 40 -t 50 -r ./example/fmri3r.ini
