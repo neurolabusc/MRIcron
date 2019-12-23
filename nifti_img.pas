@@ -3226,10 +3226,14 @@ begin
          {$ENDIF}
          exit;
   end;*)
-  {$IFNDEF LCLCocoa}  //With Cocoa, saved bitmaps will not show lineto/textout if bitmap drawn as pf32bit
-  lImage.Picture.Bitmap.PixelFormat := pf24bit; //gtk2 qt5
+  {$IFDEF UNIX}
+    {$IFNDEF LCLCocoa}  //With Cocoa, saved bitmaps will not show lineto/textout if bitmap drawn as pf32bit
+    lImage.Picture.Bitmap.PixelFormat := pf24bit; //gtk2, gtk3, qt5
+    {$ELSE}
+    lImage.Picture.Bitmap.PixelFormat := pf32bit; //Cocoa MacOS
+    {$ENDIF}
   {$ELSE}
-  lImage.Picture.Bitmap.PixelFormat := pf32bit; //if pf32bit the background color is wrong, e.g. when alpha = 0
+  lImage.Picture.Bitmap.PixelFormat := pf32bit; //Windows
   {$ENDIF}
   if lBuff = nil then exit;
   lImage.Picture.Bitmap.BeginUpdate(False);

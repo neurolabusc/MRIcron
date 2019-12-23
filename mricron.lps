@@ -314,7 +314,6 @@
         <ComponentName Value="dcm2niiForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="53"/>
@@ -333,10 +332,11 @@
       </Unit26>
       <Unit27>
         <Filename Value="nifti_img.pas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="3216"/>
-        <CursorPos X="59" Y="3230"/>
+        <TopLine Value="3221"/>
+        <CursorPos X="64" Y="3231"/>
         <UsageCount Value="101"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
