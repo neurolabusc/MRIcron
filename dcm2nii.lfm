@@ -1,7 +1,7 @@
 object dcm2niiForm: Tdcm2niiForm
-  Left = 475
+  Left = 610
   Height = 525
-  Top = 54
+  Top = 197
   Width = 965
   ActiveControl = SelectFilesBtn
   AllowDropFiles = True

@@ -13,7 +13,7 @@ RXSpin,capmenu,PNGImage,SSE,ShellAPI,Spin,
     {$ENDIF}
 {$ENDIF}
 {$DEFINE UINT16ASFLOAT}
-nifti_types,
+nifti_types, bzip2stream,
 SysUtils, Classes, Graphics, Controls, Forms, Dialogs, GraphType,
   Menus, ExtCtrls, NIFTI_hdr,nii_label,
 Math,ClipBrd,define_types,
@@ -3226,11 +3226,11 @@ begin
          {$ENDIF}
          exit;
   end;*)
-  //{$IFNDEF LCLCocoa}  //With Cocoa, saved bitmaps will not show lineto/textout if bitmap drawn as pf32bit
+  {$IFNDEF LCLCocoa}  //With Cocoa, saved bitmaps will not show lineto/textout if bitmap drawn as pf32bit
+  lImage.Picture.Bitmap.PixelFormat := pf24bit; //gtk2 qt5
+  {$ELSE}
   lImage.Picture.Bitmap.PixelFormat := pf32bit; //if pf32bit the background color is wrong, e.g. when alpha = 0
-  //{$ELSE}
-  //lImage.Picture.Bitmap.PixelFormat := pf32bit; //if pf32bit the background color is wrong, e.g. when alpha = 0
-  //{$ENDIF}
+  {$ENDIF}
   if lBuff = nil then exit;
   lImage.Picture.Bitmap.BeginUpdate(False);
   i := 1;
@@ -5502,6 +5502,34 @@ begin
   NonReslicedGB(lBackgroundImg,lImg2Load);
 end;
 
+function UnBZip2 (var FileName: string; var lBuf: ByteP; offset,volBytes: int64): boolean;
+label
+     123;
+var
+  Decompressed: TDecompressBzip2Stream;
+  InFile: TFileStream;
+  i: int64;
+begin
+  result := false;
+  InFile:=TFileStream.Create(FileName, fmOpenRead);
+  Decompressed:=TDecompressBzip2Stream.Create(InFile);
+  if (offset > 0) then begin
+      i:=Decompressed.Read(lBuf^,volBytes);
+      if i <> offset then begin
+	      showmessage(format('BZip2 error: unable to skip header for %s', [FileName]));
+	      goto 123;
+      end;
+  end;
+  //i:=Decompressed.Read(Pointer(@rawData[0])^,volBytes);
+  i:=Decompressed.Read(lBuf^,volBytes);
+  result := (i = volBytes);
+  if not result then
+     showmessage(format('BZip2 error: read %d but expected %d bytes for %s', [i, volBytes, FileName]));
+  123:
+  Decompressed.Free;
+  InFile.Free;
+end;
+
 function OpenImg(var lBackgroundImg: TBGImg; var lImg2Load: TMRIcroHdr; lLoadBackground,lVOILoadAsBinary,lNoScaling8bit,lResliceIn,l4D: boolean): boolean;
 //lReslice: use orientation matrix to transform image -> do not use if l4D = true
 //l4D: load all slices of a 4D volume
@@ -5659,7 +5687,9 @@ begin
   //Next Load Image
     if (lImg2Load.gzBytesX <> K_gzBytes_headerAndImageUncompressed) then begin
 	lP := ByteP(lImg2Load.ImgBuffer);
-        if lImg2Load.gzBytesX = K_gzBytes_headerAndImageCompressed then
+        if lImg2Load.gzBytesX = K_bz2Bytes_headerAndImageCompressed then
+           UnBZip2(lFName,lP,lOffset,lMultiImgSz)
+        else if lImg2Load.gzBytesX = K_gzBytes_headerAndImageCompressed then
            UnGZip(lFName,lP,lOffset,lMultiImgSz)
         else
              UnGZip2 (lFName,lP,lOffset,lMultiImgSz, round(lImg2Load.NIFTIhdr.vox_offset)); //unzip

@@ -1456,7 +1456,6 @@ begin
   if FindFirst(gTemplateDir+pathdelim+'*.*', faAnyFile, lSearchRec) = 0 then begin
 	 repeat
 	       lFName := lSearchRec.Name;
-
 	       if IsNIfTIHdrExt (lFName) then begin
                 Templates1.Items[lN].Caption :=ExtractFileName(lFName);//(ParseFileName(ExtractFileName(lFName)));
 		   Templates1.Items[lN].Tag := 0;
@@ -1541,7 +1540,9 @@ procedure TImgForm.OpenTemplateMRU(Sender: TObject);//open template or MRU
 //Templates have tag set to 0, Most-Recently-Used items have tag set to position in gMRUstr
 var
 	lFilename: string;
+        ss: TShiftState;
 begin
+  ss:=getKeyshiftstate;
      if sender = nil then begin
         //autolaunch with last image, or last template image in list
         lFilename :=  gMRUstr[0];
@@ -1553,10 +1554,16 @@ begin
         OpenAndDisplayImg(lFilename,true); //open but do not add templates to MRU
      end else if (Sender as TMenuItem).tag = 0 then begin
 		lFilename := gTemplateDir+pathdelim+(Sender as TMenuItem).caption ;//+ '.hdr';
-		  OpenAndDisplayImg(lFilename,false); //open but do not add templates to MRU
+                if (ssMeta in ss) or (ssCtrl in ss) then
+                   LoadOverlay(lFilename)
+                else
+                    OpenAndDisplayImg(lFilename,false); //open but do not add templates to MRU
 	 end else if (Sender as TMenuItem).tag <= knMRU then begin
 		 lFilename := gMRUstr[(Sender as TMenuItem).tag];
-		 OpenAndDisplayImg(lFilename,true);
+                 if (ssMeta in ss) or (ssCtrl in ss) then
+                   LoadOverlay(lFilename)
+                else
+		    OpenAndDisplayImg(lFilename,true);
 	 end else
 		 Showmessage('OpenTemplateMRU error.');
 end;
@@ -1991,7 +1998,6 @@ var
 	l16Buf : SmallIntP;
 	l32Buf : SingleP;
 begin
-
   result := 0;
   if (lPos > lHdr.ImgBufferItems) or (lPos < 1) then exit;
   if (lHdr.ImgBufferBPP  = 4) then begin
@@ -2009,11 +2015,21 @@ begin
   result := Raw2ScaledIntensity (lHdr,result);
 end;
 
+function XYZ2Vox(lX,lY,lZ: integer): integer;
+begin
+  if (gBGImg.Mirror) then //2019
+      result := (gBGImg.ScrnDim[1]- lX + 1) + ((lY-1)*gBGImg.ScrnDim[1])+((lZ-1)*gBGImg.ScrnDim[1]*gBGImg.ScrnDim[2])
+  else
+      result := lX + ((lY-1)*gBGImg.ScrnDim[1])+((lZ-1)*gBGImg.ScrnDim[1]*gBGImg.ScrnDim[2]);
+
+end;
+
 function ImgIntensity(var lHdr: TMRIcroHdr; lX,lY,lZ: integer): single; overload;
 var
 	lPos: integer;
 begin
-  lPos := lX + ((lY-1)*gBGImg.ScrnDim[1])+((lZ-1)*gBGImg.ScrnDim[1]*gBGImg.ScrnDim[2]);
+   lPos := XYZ2Vox(lX,lY,lZ);
+   //lPos := lX + ((lY-1)*gBGImg.ScrnDim[1])+((lZ-1)*gBGImg.ScrnDim[1]*gBGImg.ScrnDim[2]);
   result := ImgIntensity(lHdr,lPos);
 end;
 
@@ -2021,6 +2037,7 @@ function TImgForm.ImgIntensityString(var lHdr: TMRIcroHdr; lVox: integer): strin
 var
    lV: integer;
 begin
+  result := '';
   if (lVox > lHdr.ImgBufferItems) or (lVox < 1) then exit;
   if lHdr.UsesLabels  then begin
     lV := round(ImgIntensity(lHdr,lVox));
@@ -2038,7 +2055,8 @@ function TImgForm.ImgIntensityString(var lHdr: TMRIcroHdr; lX,lY,lZ: integer): s
 var
    lVox: integer;
 begin
-  lVox := lX + ((lY-1)*gBGImg.ScrnDim[1])+((lZ-1)*gBGImg.ScrnDim[1]*gBGImg.ScrnDim[2]);
+  //lVox := lX + ((lY-1)*gBGImg.ScrnDim[1])+((lZ-1)*gBGImg.ScrnDim[1]*gBGImg.ScrnDim[2]);
+  lVox := XYZ2Vox(lX,lY,lZ);
   result := ImgIntensityString(lHdr,lVox);
 end;
 
@@ -2191,6 +2209,7 @@ begin
 	  lYin := lImage.Height-lYinRaw;
 	  case lPanel of
 		   2: begin
+                      // ImgForm.LabelX.Caption := '2Sag';
                       if gBGImg.FlipSag then
 	                 lXin := lImage.Width-lXinRaw;
 		      lXOut := ImgForm.XViewEdit.value;
@@ -2198,17 +2217,19 @@ begin
 		      lZOut := round((lYin*100) / lZoom +lOffset);
 		   end;
 		   3: begin
+                      //ImgForm.LabelX.Caption := '3Cor';
 				lXOut := round((lXin*100) / lZoom +lOffset);
 				lYOut := ImgForm.YViewEdit.value;
 				lZOut := round((lYin*100) / lZoom +lOffset);
 
 		   end;
 		   else begin
+
                         if gBGImg.FlipAx then
 	                                 lYin := lYinRaw;
-         				lXOut := round((lXin*100) / lZoom +lOffset);
-				lYOut := round((lYin*100) / lZoom +lOffset);
-				lZOut := ImgForm.ZViewEdit.value;
+         		lXOut := round((lXin*100) / lZoom +lOffset);
+			lYOut := round((lYin*100) / lZoom +lOffset);
+			lZOut := ImgForm.ZViewEdit.value;
 		   end; //else
 	  end;//case lPanel
 	  //ImgForm.Caption := inttostr(lXOut)+' '+inttostr(lYOut)+'  '+Inttostr(lZOut);
@@ -5388,6 +5409,7 @@ var
 	lStr: string;
 begin
 	(sender as TMenuItem).checked := not (sender as TMenuItem).checked;
+        Caption := 'MRIcron';
 	 gBGImg.Mirror := (sender as TMenuItem).checked ;
 	 gBGImg.VOImirrored := true;
 	 for lC := 0 to knMaxOverlay do

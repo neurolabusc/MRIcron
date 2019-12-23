@@ -432,11 +432,10 @@ end;
 
 procedure THdrForm.FormShow(Sender: TObject);
 begin
-      // ImgForm.OnLaunch;
      {$IFDEF Darwin}
-     //HdrForm.BorderStyle:= bsSingle;
-     //HdrForm.BorderStyle:= bsDialog;
-     HdrForm.Constraints.MinHeight := 340;
+     DimensionSheet.Constraints.MinHeight := fTypeDrop.Top+fTypeDrop.Height;
+     {$ELSE}
+     HdrForm.Constraints.MinHeight := (2*HdrMenu.Height)+ fTypeDrop.Top+fTypeDrop.Height;
      {$ENDIF}
 end;
 

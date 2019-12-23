@@ -1,7 +1,7 @@
 object ImgForm: TImgForm
-  Left = 145
+  Left = 523
   Height = 480
-  Top = 121
+  Top = 106
   Width = 1135
   ActiveControl = ControlPanel
   AllowDropFiles = True

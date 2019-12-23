@@ -804,6 +804,26 @@ begin
   //showmessage(inttostr(esize));
 end;*)
 
+function extractfileextX(fnm: string): string; //treat ".nii.gz" as single extension, return .NII.GZ
+var
+  s: string;
+begin
+ result := upcase(extractfileext(fnm));
+ if  (result <> '.GZ') and (result <> '.BZ2')  then exit;
+ s := changefileext(fnm,'');
+ result := upcase(extractfileext(s))+result;
+end;
+
+function ChangeFileExtX2(fnm, ext: string): string; //treat "brik.gz" and ".nii.gz" as single extension
+var
+   lExt: string;
+begin
+     lExt := uppercase(extractfileext(fnm));
+     result := changefileext(fnm,'');
+     if (lExt = '.GZ') or (lExt = '.BZ2') then
+        result := changefileext(result,'');
+     result := result + ext;
+end;
 function NIFTIhdr_LoadHdr (var lFilename: string; var lHdr: TMRIcroHdr): boolean;
 var
   lHdrFile: file;
@@ -813,15 +833,21 @@ var
   lFileSz : int64;
   swapEndian, isNativeNIfTI, isDimPermute2341: boolean;
   lReportedSz, lSwappedReportedSz,lHdrSz: Longint;
-  lExt: string; //1494
+  lExt, lExt2: string; //1494
 begin
   Result := false; //assume error
+  isNativeNIfTI := true;
   if lFilename = '' then exit;
   lExt := UpCaseExt(lFilename);
+  lExt2 := extractfileextX(lFilename);
   if lExt = '.IMG' then
-	lFilename := changeFileExt(lFilename,'.hdr');
-  if (lExt = '.BRIK') or  (lExt = '.BRIK.GZ') then
-     lFilename := changeFileExtX(lFilename,'.HEAD');
+	lFilename := changeFileExtX(lFilename,'.hdr');
+  if (lExt = '.BRIK') or  (lExt2 = '.BRIK.GZ') or  (lExt2 = '.BRIK.BZ2') then
+     lFilename := changeFileExtX2(lFilename,'.HEAD');
+  if not fileexists(lFilename) then begin
+    ShowMsg('Unable to find NIFTI header named '+lFilename);
+    exit;
+  end;
   lExt := UpCaseExt(lFilename);
   lHdrSz := sizeof(TniftiHdr);
   lFileSz := FSize (lFilename);
@@ -836,7 +862,6 @@ begin
   //xx lHdr.ECodeText:= '';
 
   FileMode := fmOpenRead;  //Set file access to read only
-  isNativeNIfTI := true;
   if (lExt = '.BVOX') or (lExt = '.MGH') or (lExt = '.MGZ') or (lExt = '.MHD') or (lExt = '.MHA') or (lExt = '.NRRD') or (lExt = '.NHDR') or (lExt = '.HEAD') or (lExt = '.V') or (lExt = '.VTK') then begin
     //result := readForeignHeader( lFilename, lHdr.NIFTIhdr,lHdr.gzBytesX, swapEndian);  //we currently ignore result!
     result := readForeignHeader( lFilename, lHdr.NIFTIhdr,lHdr.gzBytesX, swapEndian, isDimPermute2341);  //we currently ignore result!
