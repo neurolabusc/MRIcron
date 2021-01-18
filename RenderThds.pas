@@ -65,7 +65,7 @@ uses Render;
 
 var
   {$IFDEF UNIX}
-     {$ifdef cpux86_64}
+     {$ifdef CPU64}
      CritSect : QWord;
      {$else}
      CritSect : LongWord;
@@ -547,4 +547,4 @@ initialization
 
 finalization
   DeleteCriticalSection(CritSect);
-end.
+end.

@@ -1,11 +1,13 @@
 unit prefs;
 
 {$mode objfpc}{$H+}
-
+{$IFDEF LCLCocoa}
+//{$DEFINE DARKMODE}
+{$ENDIF}
 interface
 
 uses
-{$IFDEF LCLCocoa}nsappkitext, {$ENDIF}
+{$IFDEF DARKMODE}nsappkitext, {$ENDIF}
    {$IFDEF Windows} ShellAPI, Windows, {$ENDIF} //x18
     userdir, Process, FileUtil, Clipbrd,
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, StdCtrls,
@@ -150,7 +152,7 @@ begin
      SigDigEdit.value := gBGImg.SigDig;
      SingleRowCheck.checked := gBGImg.SingleRow;
      FontEdit1.Value := gBGImg.FontSize;
-     {$IFDEF LCLCocoa}
+     {$IFDEF DARKMODE}
      DarkModeCheck.visible := isDarkModeSupported;
      DarkModeCheck.Checked := gBGImg.DarkMode;
      {$ENDIF}
@@ -175,7 +177,7 @@ begin
 
      end;
      gBGImg.SigDig := SigDigEdit.value;
-     {$IFDEF LCLCocoa}
+     {$IFDEF DARKMODE}
      if gBGImg.DarkMode <> DarkModeCheck.Checked then begin
         gBGImg.DarkMode := DarkModeCheck.Checked;
         ImgForm.SetDarkMode;

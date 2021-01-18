@@ -4,14 +4,14 @@ unit dcm2nii;
 {$IFDEF Darwin}
   {$modeswitch objectivec1}
 {$ENDIF}
-//{$DEFINE isGL}
+{$DEFINE isGL}
 
 interface
 
 uses
-  {$IFDEF Darwin} CocoaAll, MacOSAll, {$ENDIF}
+  {$IFDEF Darwin} CocoaAll, {$ENDIF}
   lclintf, strutils, Process, Classes, SysUtils, Forms, Controls, Graphics,
-  Dialogs, ExtCtrls, StdCtrls, IniFiles, ComCtrls, Types;
+  Dialogs, ExtCtrls, StdCtrls, IniFiles, ComCtrls; //'Types' not used by Darwin
 
 type
 
@@ -74,7 +74,7 @@ var
 implementation
 
 {$ifdef LCLCocoa}{$IFDEF isGL}
-uses mainunit; //darkmode
+//uses mainunit; //darkmode
 {$ENDIF}{$ENDIF}
 
 {$R *.lfm}
@@ -128,6 +128,10 @@ function getDefaultDcm2niix2(): string;
 begin
   {$IFDEF UNIX}
   result := ResourceDir + pathdelim + kExeName;
+  if fileexists(result) then exit;
+  result := '/usr/bin/' + kExeName;
+  if fileexists(result) then exit;
+  result := '/usr/local/bin/' + kExeName;
   {$ELSE}
   result := ResourceDir + pathdelim + kExeName+'.exe';
   {$ENDIF}
@@ -360,7 +364,7 @@ begin
   ShowPrefs;
   UpdateCommand(Sender);
   InputDirDialog.InitialDir := GetUserDir;
-  {$IFDEF LCLCocoa} {$IFDEF isGL} GLForm1.SetFormDarkMode(dcm2niiForm); {$ENDIF}{$ENDIF}
+  {$IFDEF LCLCocoa} {$IFDEF DARKMODE} GLForm1.SetFormDarkMode(dcm2niiForm); {$ENDIF}{$ENDIF}
 end;
 
 procedure Tdcm2niiForm.OutDirDropChange(Sender: TObject);

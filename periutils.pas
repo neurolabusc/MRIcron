@@ -128,20 +128,20 @@ const
   //kMax = 1000;
   kCR = chr (13);
 Var
-  gx : Array[1..4] of extended;
-  gy : Array[1..4] of extended;
-  Exy : Array[1..4] of extended;
-  Ex : Array[1..4] of extended;
-  Ey : Array[1..4] of extended;
-  Ex2 : Array[1..4] of extended;
-  Ey2 : Array[1..4] of extended;
-  a : Array[1..4] of extended;
-  b : Array[1..4] of extended;
-  r : Array[1..4] of extended;
-  chtX: Array[1..4] of extended;
-  chtY: Array[1..4] of extended;
+  gx : Array[1..4] of double;
+  gy : Array[1..4] of double;
+  Exy : Array[1..4] of double;
+  Ex : Array[1..4] of double;
+  Ey : Array[1..4] of double;
+  Ex2 : Array[1..4] of double;
+  Ey2 : Array[1..4] of double;
+  a : Array[1..4] of double;
+  b : Array[1..4] of double;
+  r : Array[1..4] of double;
+  chtX: Array[1..4] of double;
+  chtY: Array[1..4] of double;
   no : Integer;
-  gInter, gSlope,gRSqr : extended;
+  gInter, gSlope,gRSqr : double;
 
 function calcit: string;
 Var
@@ -163,7 +163,7 @@ result := result + (',  Exp  Y=' + RealToStr(a[2],8) + ' * e ^' + RealToStr(b[2]
 result := result + (',  Log  Y=' + RealToStr(a[3],8) + ' +' + RealToStr(b[3],8) + ' * LOG(X)'+' R=' + RealToStr(r[3],8)+' R^2=' + RealToStr(r[3]*r[3],8));
 result := result +(',  Power  Y=' + RealToStr(a[4],8) + ' * X ^' + RealToStr(b[4],8)+' R=' + RealToStr(r[4],8)+' R^2=' + RealToStr(r[4]*r[4],8));
 End; // nested calcit()
-Procedure inpcalc (lX, lY: extended);
+Procedure inpcalc (lX, lY: double);
 Var
   q : Integer;
 Begin

@@ -749,10 +749,10 @@ end; //volume render without depth buffer
       //lrgbLUT[lPixel].rgbGreen:= lPixel;
       //lrgbLUT[lPixel].rgbBlue:= lPixel;
   end;  *)
-  if (lHdr.NIFTIhdr.intent_code <> kNIFTI_INTENT_LABEL) then
+  (*if (lHdr.NIFTIhdr.intent_code <> kNIFTI_INTENT_LABEL) then
    RenderForm.caption := '-'
   else
-      RenderForm.caption := 'i';
+      RenderForm.caption := 'i'; *)
   if (lHdr.NIFTIhdr.intent_code <> kNIFTI_INTENT_LABEL) then
       LUTGainX(lrgbLUT,gRender.Bias,gRender.Gain ); //Mar2007
 

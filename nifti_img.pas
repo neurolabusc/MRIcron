@@ -103,7 +103,7 @@ procedure DrawSag(lSlice,lMultiSlice: integer);
 procedure DrawCor(lSlice,lMultiSlice: integer);
 procedure DrawLabel(var lImage: TImage; lValue,lXCenterIn,lXWidthIn: integer);
 procedure  ImgCoordToMM(var lX,lY,lZ: integer; var lXmm,lYmm,lZmm: single);
-procedure  MMToImgCoord(var lX,lY,lZ: integer; var lXmm,lYmm,lZmm: single);
+procedure  MMToImgCoord(out lX,lY,lZ: integer; var lXmm,lYmm,lZmm: single);
 //function DimToMM (lIn, lDim: integer): integer;
 function DimToMM (lX,lY,lZ, lDim: integer): integer;
 function DimToMMx (lDim: integer): integer;
@@ -254,7 +254,7 @@ begin
 	end;
 end;
 
-procedure  MMToImgCoord(var lX,lY,lZ: integer; var lXmm,lYmm,lZmm: single);
+procedure  MMToImgCoord(out lX,lY,lZ: integer; var lXmm,lYmm,lZmm: single);
 var
   lXx,lYy,lZz: single;
 begin

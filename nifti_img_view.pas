@@ -7,9 +7,12 @@ interface
 {$ELSE}
  {$DEFINE COMPILEYOKE} //windows supports yoking
 {$ENDIF}
+{$IFDEF LCLCocoa}
+//{$DEFINE DARKMODE}
+{$ENDIF}
 uses
 {$H+}
-{$IFDEF LCLCocoa} nsappkitext, {$ENDIF}
+{$IFDEF DARKMODE} nsappkitext, {$ENDIF}
 {$IFDEF Darwin}Process,{$ENDIF}  //CarbonOpenDoc,
 {$IFDEF Unix}
   lclintf,LCLType,fileutil,//gettickcount ,LMessages
@@ -377,7 +380,7 @@ procedure UpdateColorSchemes;
         function ImgIntensityString(var lHdr: TMRIcroHdr; lVox: integer): string;  overload;
         function ImgIntensityString(var lHdr: TMRIcroHdr; lX,lY,lZ: integer): string;  overload;
         function OpenDialogExecute (lFilter,lCaption: string; lAllowMultiSelect: boolean): boolean;
-            {$IFDEF LCLCocoa}
+            {$IFDEF DARKMODE}
     procedure SetDarkMode;
     {$ENDIF}
  private
@@ -1678,7 +1681,7 @@ var
 	lLayer:integer;
 begin
   	lLayer := ActiveLayer;
-        {$IFDEF LCLCocoa}
+        {$IFDEF DARKMODE}
         setThemeMode(HdrForm, gBGImg.DarkMode);
         {$ENDIF}
 	HdrForm.SaveHdrDlg.Filename := gMRIcroOverlay[lLayer].HdrFilename;
@@ -5186,10 +5189,9 @@ end;
 
 {$ENDIF}
 
-{$IFDEF LCLCocoa}
+{$IFDEF DARKMODE}
 procedure TImgForm.SetDarkMode;
 begin
-  //setThemeMode(Self.Handle, gBGImg.DarkMode);
   setThemeMode(Self, gBGImg.DarkMode);
 end;
 {$ENDIF}
@@ -5215,7 +5217,7 @@ begin
 end; //nested ReadCmdVal
 begin
   //CheckForUpdates;
-     {$IFDEF LCLCocoa}
+     {$IFDEF DARKMODE}
    SetDarkMode;
    {$ENDIF}
   DrawMenu.Visible := ToolPanel.visible;

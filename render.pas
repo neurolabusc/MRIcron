@@ -2,6 +2,9 @@ unit render;
 interface
 {$include isthreaded.inc}
 {$mode delphi}
+{$IFDEF LCLCocoa}
+//{$DEFINE DARKMODE}
+{$ENDIF}
 uses
 {$IFDEF Unix}
 lclintf, //gettickcount
@@ -13,7 +16,7 @@ Windows,
 {$ELSE}
 rendernothreads,
 {$ENDIF}
-{$IFDEF LCLCocoa} nsappkitext, {$ENDIF}
+{$IFDEF DARKMODE} nsappkitext, {$ENDIF}
  LResources,SysUtils, GraphicsMathLibrary,Classes, Graphics, Controls, Forms, Dialogs,ExtCtrls,Buttons,
  nifti_img, nifti_hdr,define_types,nifti_img_view,StdCtrls, Spin, Menus,ClipBrd,ReadInt,IniFiles,
  ComCtrls,userdir,render_composite;
@@ -603,7 +606,7 @@ procedure TRenderForm.FormShow(Sender: TObject);
 var
 	lInc: integer;
 begin
-  {$IFDEF LCLCocoa}
+  {$IFDEF DARKMODE}
   //  setThemeMode(Self.Handle, gBGImg.DarkMode);
     setThemeMode(Self, gBGImg.DarkMode);
   {$ENDIF}

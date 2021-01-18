@@ -22,7 +22,7 @@ object AboutForm: TAboutForm
     Left = 8
     Height = 43
     Top = 8
-    Width = 129
+    Width = 128
     BorderSpacing.Left = 4
     BorderSpacing.Top = 4
     Caption = 'MRIcron'

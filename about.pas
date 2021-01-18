@@ -52,6 +52,13 @@ str := '32-bit';
 {$IFDEF LCLGTK3}str := str + ' (GTK3) '; {$ENDIF}
 {$IFDEF LCLCocoa}str := str + ' (Cocoa) ';{$ENDIF}
 {$IFDEF LCLCarbon}str := str + ' (Carbon) '; {$ENDIF}
+{$IFDEF CPUX86_64}
+str := str + 'x86-64 ';
+{$ENDIF}
+{$IFDEF CPUAARCH64}
+str := str + 'ARM64 ';
+{$ENDIF}
+{$IFDEF CPULLVM}str := str + 'LLVM '; {$ENDIF}
       HomepageLabel.caption := 'www.mricro.com :: '+str+kVers ;
 end;
 

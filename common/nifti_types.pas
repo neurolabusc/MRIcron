@@ -83,6 +83,8 @@ kDT_UINT64               =1280;     // unsigned long long (64 bits)
 kDT_FLOAT128             =1536;     // long double (128 bits)
 kDT_COMPLEX128           =1792;     // double pair (128 bits)
 kDT_COMPLEX256           =2048;     // long double pair (256 bits)
+kDT_RGBA32               =2304;     // 4 byte RGBA (32 bits/voxel)
+
 //   slice_code values
  kNIFTI_SLICE_SEQ_UNKNOWN = 0;
  kNIFTI_SLICE_SEQ_INC = 1;
