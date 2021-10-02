@@ -1,0 +1,6 @@
+Package: mricron-data
+Version: <ver>
+Architecture: all
+Maintainer: NeuroDebian Team <team@neuro.debian.net>
+Description: data files for MRIcron
+ MRIcron GUI-based visualization for medical imaging data 

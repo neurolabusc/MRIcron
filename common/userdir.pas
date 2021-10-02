@@ -59,6 +59,10 @@ end;
 function AppDir: string; //e.g. c:\folder\ for c:\folder\myapp.exe, but /folder/myapp.app/ for /folder/myapp.app/app
 begin
  result := extractfilepath(paramstr(0));
+ {$IFDEF Linux}
+ if not DirExists(result) then
+    result := '/usr/share/mricron/';
+{$ENDIF}
 end;
 
 function AppDir2: string;

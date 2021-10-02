@@ -65,13 +65,15 @@ HideDrawMenuItem: TMenuItem;
 DrawHiddenMenu: TMenuItem;
 MenuItem2: TMenuItem;
 AppleMenu: TMenuItem;
-MenuItem3: TMenuItem;
+ApplePrefMenu: TMenuItem;
 DilateVOI1: TMenuItem;
 DilateShellsMenu1: TMenuItem;
 ImportMenu: TMenuItem;
 dcm2niiMenu: TMenuItem;
 CheckUpdatesMenu: TMenuItem;
 Interpolate1: TMenuItem;
+AppleUpdateCheckMenu: TMenuItem;
+MenuItem4: TMenuItem;
 OpenHdrDlg: TOpenDialog;
 VOImaskCustom: TMenuItem;
 NewWindow1: TMenuItem;
@@ -416,7 +418,6 @@ var
   gSelectOrigin: TPoint;
   gSelectRect: TRect;
   gOrigBGTransPct : integer= 50;
-  //gMaxCPUThreads : integer = 8;
   gnCPUThreads : integer = 1;
   gUndoImg,gDrawImg: Tfx8;
 
@@ -1889,6 +1890,7 @@ begin
        //InitOpenDocHandler;//allows files to be associated...
         {$IFNDEF LCLgtk} //for Carbon or Cocoa
         AppleMenu.Visible:= true;
+        Help1.Visible := false;
         NewWindow1.Visible := true;
             Open1.ShortCut := ShortCut(Word('O'), [ssMeta]);
             SaveasNIfTI1.ShortCut := ShortCut(Word('S'), [ssMeta,ssAlt]);
@@ -1947,7 +1949,7 @@ begin
          gColorSchemeDir := extractfilepath(paramstr(0))+'Resources'+pathdelim+'lut';
 	 if not direxists(gColorSchemeDir) then
             gColorSchemeDir := extractfilepath(paramstr(0))+'lut';
-         {$IFDEF Darwin}
+         {$IFDEF Unix}
          if not fileexists(gColorSchemeDir) then
             gColorSchemeDir := AppDir + 'lut';
          //showmessage(gTemplateDir);
@@ -1973,7 +1975,7 @@ begin
      gTemplateDir := extractfilepath(paramstr(0))+'Resources'+pathdelim+'templates';
 	 if not direxists(gTemplateDir) then
             gTemplateDir := extractfilepath(paramstr(0))+'templates';
-         {$IFDEF Darwin}
+         {$IFDEF Unix}
          if not fileexists(gTemplateDir) then
             gTemplateDir := AppDir + 'templates';
          //showmessage(gTemplateDir);

@@ -69,13 +69,51 @@ end;
 
 function MsgDlg(const Msg: string; DlgType: TMsgDlgType; Buttons: TMsgDlgButtons; HelpCtx: Longint): Word;
 {$IFDEF GUI}
+{
+Michalis Kamburelis <michalis.kambi@gmail.com>
+Bug-Debian: https://bugs.debian.org/813718
+ Convert our TMsgDlgButtons type to Dialogs.TMsgDlgButtons type
+  in a type-safe manner. Do not assume that memory layout matches between
+  - TMsgDlgButtons and Dialogs.TMsgDlgButtons, or
+  - TMsgDlgBtn and Dialogs.TMsgDlgBtn. 
+}
+function MsgDlgButtonsConvertToStandard(
+  const Buttons: TMsgDlgButtons): Dialogs.TMsgDlgButtons;
+var
+  B: TMsgDlgBtn;
+begin
+  Result := [];
+  for B := Low(B) to High(B) do
+    if B in Buttons then
+      { convert our TMsgDlgBtn to Dialogs.TMsgDlgBtn type }
+      case B of
+        mbYes     : Include(Result, Dialogs.mbYes     );
+        mbNo      : Include(Result, Dialogs.mbNo      );
+        mbOK      : Include(Result, Dialogs.mbOK      );
+        mbCancel  : Include(Result, Dialogs.mbCancel  );
+        mbAbort   : Include(Result, Dialogs.mbAbort   );
+        mbRetry   : Include(Result, Dialogs.mbRetry   );
+        mbIgnore  : Include(Result, Dialogs.mbIgnore  );
+        mbAll     : Include(Result, Dialogs.mbAll     );
+        mbNoToAll : Include(Result, Dialogs.mbNoToAll );
+        mbYesToAll: Include(Result, Dialogs.mbYesToAll);
+        mbHelp    : Include(Result, Dialogs.mbHelp    );
+        else raise Exception.Create('Unsupported TMsgDlgBtn value');
+      end;
+end;
+
 var
    lDlgType : Dialogs.TMsgDlgType;
    lButtons: Dialogs.TMsgDlgButtons;
 
 begin
   lDlgType :=  Dialogs.TMsgDlgType(DlgType);
-  lButtons:= Dialogs.TMsgDlgButtons(Buttons);
+  {$IFDEF LINUX}
+  //lButtons:= MsgDlgButtonsConvertToStandard(Buttons);
+  {$ELSE}
+  //lButtons:= Dialogs.TMsgDlgButtons(Buttons);
+  {$ENDIF}
+  lButtons:= MsgDlgButtonsConvertToStandard(Buttons);
   result := MessageDlg(Msg, lDlgType, lButtons,HelpCtx);
 {$ELSE}
 begin

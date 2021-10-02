@@ -128,6 +128,7 @@ type
 	  Shift: TShiftState; X, Y: Integer);
     procedure Cutout1Click(Sender: TObject);
     procedure Savesettings1Click(Sender: TObject);
+    procedure Settings1Click(Sender: TObject);
     procedure UpdateRenderMRU;
     procedure OpenRenderMRU(Sender:TObject);
     procedure UpdateRenderDisplay;
@@ -820,6 +821,11 @@ begin
   UpdateRenderMRU;
 end;
 
+procedure TRenderForm.Settings1Click(Sender: TObject);
+begin
+
+end;
+
 procedure TRenderForm.FormHide(Sender: TObject);
 begin
 	WriteRenderIniFile (gRenderDefaultsFilename);
@@ -841,7 +847,7 @@ begin
      Close1.ShortCut := ShortCut(Word('W'), [ssMeta]);
      {$ENDIF}
      gRenderDir  := extractfilepath(paramstr(0))+'Resources'+pathdelim+'render';
-     {$IFDEF Darwin}
+     {$IFDEF UNIX}
      if not direxists(gRenderDir) then
         gRenderDir := AppDir + 'render';
      {$ENDIF}

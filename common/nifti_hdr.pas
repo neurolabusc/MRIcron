@@ -923,6 +923,8 @@ begin
   end;
   FixBadStrs(lHdr.NIFTIhdr);
   FixDataType(lHdr);
+  if (specialsingle(lHdr.NIFTIhdr.scl_slope)) or (lHdr.NIFTIhdr.scl_slope = 1) then lHdr.NIFTIhdr.scl_slope := 1;
+  if (specialsingle(lHdr.NIFTIhdr.scl_inter)) then lHdr.NIFTIhdr.scl_inter := 0.0;
   result := true;
   if  IsNifTiMagic(lHdr.niftiHdr) then begin  //must match MAGMA in nifti_img
 	 lOri[1] := (lHdr.NIFTIhdr.dim[1]+1) div 2;

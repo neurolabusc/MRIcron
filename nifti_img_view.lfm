@@ -1,7 +1,7 @@
 object ImgForm: TImgForm
-  Left = 305
+  Left = 145
   Height = 480
-  Top = 106
+  Top = 386
   Width = 1135
   ActiveControl = ControlPanel
   AllowDropFiles = True
@@ -20,7 +20,7 @@ object ImgForm: TImgForm
   OnResize = FormResize
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '2.1.0.0'
+  LCLVersion = '2.3.0.0'
   object ControlPanel: TPanel
     Tag = 1
     Left = 0
@@ -358,7 +358,6 @@ object ImgForm: TImgForm
         Width = 9
         BorderSpacing.Left = 4
         Caption = 'X'
-        ParentColor = False
         ParentFont = False
       end
       object LabelY: TLabel
@@ -372,7 +371,6 @@ object ImgForm: TImgForm
         Width = 8
         BorderSpacing.Left = 6
         Caption = 'Y'
-        ParentColor = False
         ParentFont = False
       end
       object LabelZ: TLabel
@@ -386,7 +384,6 @@ object ImgForm: TImgForm
         Width = 9
         BorderSpacing.Left = 6
         Caption = 'Z'
-        ParentColor = False
         ParentFont = False
       end
       object ZoomDrop: TComboBox
@@ -438,7 +435,7 @@ object ImgForm: TImgForm
         OnChange = XViewEditChange
         ParentFont = False
         TabOrder = 1
-        Value = 98
+        Value = 1
       end
       object YViewEdit: TSpinEdit
         AnchorSideLeft.Control = LabelY
@@ -454,7 +451,7 @@ object ImgForm: TImgForm
         OnChange = XViewEditChange
         ParentFont = False
         TabOrder = 2
-        Value = 30
+        Value = 1
       end
       object ZViewEdit: TSpinEdit
         AnchorSideLeft.Control = LabelZ
@@ -470,7 +467,7 @@ object ImgForm: TImgForm
         OnChange = XViewEditChange
         ParentFont = False
         TabOrder = 3
-        Value = 14
+        Value = 1
       end
     end
   end
@@ -492,7 +489,6 @@ object ImgForm: TImgForm
       Top = 0
       Width = 127
       Caption = '  No Images Loaded  '
-      ParentColor = False
       ParentFont = False
     end
     object ProgressBar1: TProgressBar
@@ -587,9 +583,17 @@ object ImgForm: TImgForm
     object AppleMenu: TMenuItem
       Caption = ''
       Visible = False
-      object MenuItem3: TMenuItem
+      object MenuItem4: TMenuItem
+        Caption = 'About'
+        OnClick = About1Click
+      end
+      object ApplePrefMenu: TMenuItem
         Caption = 'Preferences'
         OnClick = Preferences1Click
+      end
+      object AppleUpdateCheckMenu: TMenuItem
+        Caption = 'Check for updates'
+        OnClick = CheckForUpdates
       end
     end
     object File1: TMenuItem

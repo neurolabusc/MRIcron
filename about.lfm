@@ -2,7 +2,7 @@ object AboutForm: TAboutForm
   Tag = 321
   Left = 498
   Height = 174
-  Top = 223
+  Top = 503
   Width = 727
   AutoSize = True
   BorderIcons = [biSystemMenu]
@@ -15,7 +15,7 @@ object AboutForm: TAboutForm
   Constraints.MinWidth = 600
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '2.1.0.0'
+  LCLVersion = '2.3.0.0'
   object Label1: TLabel
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
@@ -27,7 +27,6 @@ object AboutForm: TAboutForm
     BorderSpacing.Top = 4
     Caption = 'MRIcron'
     Font.Height = -36
-    ParentColor = False
     ParentFont = False
   end
   object HomepageLabel: TLabel
@@ -40,7 +39,6 @@ object AboutForm: TAboutForm
     BorderSpacing.Left = 4
     BorderSpacing.Top = 4
     Caption = 'version'
-    ParentColor = False
     OnClick = HomePageClick
   end
   object ThreadLabel: TLabel
@@ -53,6 +51,5 @@ object AboutForm: TAboutForm
     Width = 53
     BorderSpacing.Top = 4
     Caption = ' Threads'
-    ParentColor = False
   end
 end

@@ -1,0 +1,8 @@
+Package: mricron
+Version: <ver>
+Architecture: amd64
+Maintainer: NeuroDebian Team <team@neuro.debian.net>
+Depends: libqt5pas1, libc6 (>= 2.14), mricron-data (= <ver>)
+Recommends: dcm2niix
+Description: MRIcron
+ MRIcron GUI-based visualization for medical imaging data (using QT5)

@@ -33,7 +33,7 @@ interface
 uses
   SysUtils, Classes, LCLType,
 {$IFDEF LCLgtk2}
-   gtkDef,     //<- uncomment for older versions of Lazarus
+   //gtkDef,     //<- uncomment for older versions of Lazarus
    glib2, gdk2,gtk2Def, gtk2Proc,
 {$ELSE}  //LCLgtk1
   glib, gdk, gtkDef, gtkProc,

@@ -301,7 +301,7 @@ begin
 		ser := 1.0 + 76.18009173 / (x + 1.0) - 86.50532033 /
 		 (x + 2.0) + 24.01409822 / (x + 3.0) - 1.231739516 / (x + 4.0) + 0.120858003e-2 / (x + 5.0) - 0.536382e-5 / (x + 6.0);
 		gammln := tmp + ln(stp * ser)
-end; {procedure gammln}
+end;
 
 FUNCTION betacf(a,b,x: double): double;
 LABEL 1;
@@ -490,75 +490,6 @@ begin
 		result := -z;
 end;    //End of inversez Function
 
-
-(*function zprob(p : double {; VAR errorstate : boolean}) : double;
-VAR
-   z, xp, lim, p0, p1, p2, p3, p4, q0, q1, q2, q3, q4, Y : double;
-begin
-	 // value of probability between approx. 0 and .5 entered in p and the
-	 // z value is returned  z
-	 //errorstate := true;
-	 lim := 1E-19;
-	 p0 := -0.322232431088;
-	 p1 := -1.0;
-	 p2 := -0.342242088547;
-	 p3 := -0.0204231210245;
-	 p4 := -4.53642210148E-05;
-	 q0 := 0.099348462606;
-	 q1 := 0.588581570495;
-	 q2 := 0.531103462366;
-	 q3 := 0.10353775285;
-	 q4 := 0.0038560700634;
-	 xp := 0.0;
-	 if (p > 0.5) then p := 1 - p;
-	 if (p < lim) then z := xp
-	 else
-	 begin
-		  //errorstate := false;
-		  if (p = 0.5) then z := xp
-		  else
-		  begin
-			   Y := sqrt(ln(1.0 / (p * p)));
-			   xp := Y + ((((Y * p4 + p3) * Y + p2) * Y + p1) * Y + p0) /
-					((((Y * q4 + q3) * Y + q2) * Y + q1) * Y + q0);
-			   if (p < 0.5) then xp := -xp;
-			   z := xp;
-		  end;
-	 end;
-	 zprob := z;
-end;  // End function zprob
-
-function pNormalInvQuickApprox(p	 : double) : double;
-var
-   z, px : double;
-//   flag : boolean;
-begin
-	// obtains the inverse of z, that is, the z for a probability associated
-		// with a normally distributed z score.
-		px := p;
-		if (p > 0.5) then px := 1.0 - p;
-		z := zprob(px{,flag});
-		if (p > 0.5) then z := abs(z);
-		result := -z;
-end;    //End of inversez Function
-*)
-(*function pNormalInvOld;
-
-var  pp,y,a,b,y0       :extended;
-
-begin
-y:= 0;  y0:=1;
-pp:=0.5;
-while y0>1E-10 do
-	begin y0:=y;
-	a:=-ln(2*pi)/2-y*y/2;
-	b:=y;
-	if abs(b)<1E-2 then y:=y+(pp-p)*exp(-a)
-	else y:=y+ln(1+b*(pp-p)*exp(-a))/b;
-	pp:=pNormalOld(y);  y0:=abs(y-y0);
-	end;
-result:=y;
-end;   (**)
 function pGammaInv(f:longint;p:extended):extended;
 var  pp,y,y0,a,b,a0       :extended;
 
@@ -681,4 +612,4 @@ begin BinCL:= pBetaInv(2*x,2+2*(n-x),pp);
 end;
 {---------------------------------------------------------------------------}
 
-end.
+end.
