@@ -436,6 +436,10 @@ uses statclustertable,batch,imgutil, reslice_fsl,render,ROIfilt,autoroi, MultiSl
 {$R *.DFM}
 {$ENDIF}
 
+procedure printf(s: string);
+begin
+{$IFDEF UNIX} writeln(s); {$ENDIF}
+end;
 function TImgForm.OpenDialogExecute (lFilter,lCaption: string; lAllowMultiSelect: boolean): boolean;
 begin
   OpenHdrDlg.Filter := lFilter;
@@ -1973,13 +1977,14 @@ begin
          {$ENDIF}
 {$ENDIF}
      gTemplateDir := extractfilepath(paramstr(0))+'Resources'+pathdelim+'templates';
-	 if not direxists(gTemplateDir) then
+         if not direxists(gTemplateDir) then
             gTemplateDir := extractfilepath(paramstr(0))+'templates';
          {$IFDEF Unix}
-         if not fileexists(gTemplateDir) then
+         if not direxists(gTemplateDir) then
             gTemplateDir := AppDir + 'templates';
          //showmessage(gTemplateDir);
          {$ENDIF}
+         printf('Loading templates from Templates: '+gTemplateDir);
 	 UpdateTemplates;
 	 for lInc := 1 to knMRU do
 		 gMRUstr[lInc] := '';
