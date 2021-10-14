@@ -9,11 +9,13 @@
   <key>CFBundleName</key>
   <string>MRIcron</string>
   <key>CFBundleIdentifier</key>
-  <string>com.company.MRIcron</string>
+  <string>com.mricro.MRIcron</string>
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundlePackageType</key>
   <string>APPL</string>
+  <key>CFBundleIconFile</key>
+  <string>mricron.icns</string>
   <key>CFBundleSignature</key>
   <string>MRIc</string>
   <key>CFBundleShortVersionString</key>
@@ -24,20 +26,36 @@
   <true/>
   <key>CFBundleDocumentTypes</key>
   <array>
-    <dict>
-      <key>CFBundleTypeRole</key>
-      <string>Viewer</string>
-      <key>CFBundleTypeExtensions</key>
-      <array>
-        <string>*</string>
-      </array>
-      <key>CFBundleTypeOSTypes</key>
-      <array>
-        <string>fold</string>
-        <string>disk</string>
-        <string>****</string>
-      </array>
-    </dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>nii</string>
+				<string>hdr</string>
+				<string>nii.gz</string>
+				<string>gz</string>
+				<string>voi</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>NIfTI image</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>mricron_doc.icns</string>
+		</dict>
+		<dict>
+		  <key>CFBundleTypeRole</key>
+		  <string>Viewer</string>
+		  <key>CFBundleTypeExtensions</key>
+		  <array>
+			<string>*</string>
+		  </array>
+		  <key>CFBundleTypeOSTypes</key>
+		  <array>
+			<string>fold</string>
+			<string>disk</string>
+			<string>****</string>
+		  </array>
+		</dict>
   </array>
   <key>NSHighResolutionCapable</key>
   <true/>
