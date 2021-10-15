@@ -59,11 +59,11 @@ const
      kDel = #127 ; // Delete
      UNIXeoln = chr(10);
         kTextSep = kTab;//','; //',' for CSV, kTab for Tab-delimited values
-     {$IFDEF Darwin}
-       kLUTalpha = 255; //255
-     {$ELSE}
-        kLUTalpha = 0; //255
-     {$ENDIF}
+     //{$IFDEF UNIX}
+       kLUTalpha = 255;
+     //{$ELSE}
+     //kLUTalpha = 0; //Windows
+     //{$ENDIF}
      kVOI8bit = 1;//May07 100;
 {$IFDEF unix}
 	   PathDelim = '/';

@@ -2504,6 +2504,7 @@ begin
 //this routine would be ~25% faster if we use a compiler-switch for the OS,
 //but I do not want to do this until the Compiler code settles a bit more...
 	lBGp := ByteP(lBGQuad);
+        if (lOverlayTransPct = 100) then exit; //completely transparent: no influence
 	lOverlayP := ByteP(lOverlayQuad);
 	lOverlayDWordp := DWordp(lOverlayQuad);
 	lBGDWordp := DWordp(lBGQuad);

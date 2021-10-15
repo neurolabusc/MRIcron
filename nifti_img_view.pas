@@ -224,6 +224,7 @@ MNIMenu: TMenuItem;
           WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
         procedure GetWidthForPPI(Sender: TCustomImageList; AImageWidth,
           APPI: Integer; var AResultWidth: Integer);
+
         procedure Interpolate1Click(Sender: TObject);
         procedure NewWindow1Click(Sender: TObject);
         procedure ToggleDrawMenu(Sender: TObject);

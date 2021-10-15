@@ -611,7 +611,9 @@ begin
   //  setThemeMode(Self.Handle, gBGImg.DarkMode);
     setThemeMode(Self, gBGImg.DarkMode);
   {$ENDIF}
-
+  {$IFDEF Linux}
+  SaveSettings1.Visible := false;//Debian does not let us write to shared directory
+  {$ENDIF}
   gRender.ClipFrac := 0;
       gRender.Bias := 50;
      gRender.Gain := 50;
@@ -854,6 +856,9 @@ begin
      //showmessage(gRenderDir);
      //gRenderDir := extractfiledir(paramstr(0))+pathdelim+'render'+pathdelim;
      gRenderDefaultsFilename := gRenderDir +pathdelim+ 'default.ini';
+     {$IFDEF LINUX}
+      gRenderDefaultsFilename := changeFileExt(IniName,'_Render.ini');
+     {$ENDIF}
      gRenderStartupFilename := gRenderDefaultsFilename;
      RenderForm.DoubleBuffered := true;
 end;
