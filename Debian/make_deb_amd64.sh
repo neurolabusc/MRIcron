@@ -23,9 +23,9 @@ cd $SCRIPT_DIR
 
 if [ -z "$wigetset" ]
 then
-      echo vers #lazbuild --ws=qt5 ../MRIcron.lpi
+      lazbuild --ws=qt5 ../mricron.lpi
 else
-      lazbuild --ws=gtk2 ../MRIcron.lpi
+      lazbuild --ws=gtk2 ../mricron.lpi
 fi
 
 #remove previous package files
